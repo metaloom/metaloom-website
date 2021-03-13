@@ -4,6 +4,9 @@ title = "MetaLoom"
 theme = "meghna-hugo"
 # post pagination
 paginate = "6"
+
+publishDir = "docs"
+
 # post excerpt
 summaryLength = "15"
 # disqus short name
