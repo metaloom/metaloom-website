@@ -7,6 +7,8 @@
 	<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}">
 	{{ with site.Params.author }}
 	<meta name="author" content="{{ . }}">{{ end }}
+{{ partial "card.html" . }}
+
 	{{ hugo.Generator }}
 
 	{{ "<!-- plugins -->" | safeHTML }}

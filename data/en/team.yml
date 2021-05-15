@@ -6,7 +6,7 @@ team:
     - name : Johannes Schüth
       image : images/team/js.jpg
       designation : Developer
-      content : Johannes main focus is backend development. But he does not mind devops and the occasional frontend development. He recharges his coding battery by outdoor photography or working on his IBM 5150. Besides retro computing his hobbies also include electronics and astronomy.
+      content : Johannes main focus is backend development but he does not mind devops and the occasional frontend development. He recharges his coding battery by outdoor photography or working on his IBM 5150. Besides retro computing his hobbies also include electronics and astronomy.
       social :
         - icon : ti-twitter-alt
           link : "https://twitter.com/jotschi"

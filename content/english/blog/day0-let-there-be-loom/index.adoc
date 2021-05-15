@@ -3,6 +3,7 @@ title: "Day0 - Let there be Loom"
 date: 2021-05-14T14:51:12+06:00
 image: banner_square.svg
 image_credit: Jotschi
+twitter_author: jotschi
 author: jotschi
 description : "What is Loom? This post will address all these questions."
 ---
