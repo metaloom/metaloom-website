@@ -1,7 +1,7 @@
 ############################### Banner ################################
 banner:
   enable : true
-  bg_image : "images/logo.svg"
+  bg_image : "images/banner_narrow.jpg"
   #bg_image_webp : "images/logo.svg"
   icon : "" # themify icon pack : https://themify.me/themify-icons
   #title : "Coming soon"

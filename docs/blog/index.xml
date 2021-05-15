@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on MetaLoom</title>
+    <link>https://metaloom.io/blog/</link>
+    <description>Recent content in Blogs on MetaLoom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 May 2021 14:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day0 - Let there be Loom</title>
+      <link>https://metaloom.io/blog/day0-let-there-be-loom/</link>
+      <pubDate>Fri, 14 May 2021 14:51:12 +0600</pubDate>
+      
+      <guid>https://metaloom.io/blog/day0-let-there-be-loom/</guid>
+      <description>What is Loom? Loom is a headless media asset management server platform. It provides a tools to inventory your media assets and extract the most information from them in order to provide you with a server that can be used to query the data in a structured way.</description>
+    </item>
+    
+    <item>
+      <title>Day2 - Project Setup</title>
+      <link>https://metaloom.io/blog/day2-project-setup/</link>
+      <pubDate>Fri, 14 May 2021 14:51:12 +0600</pubDate>
+      
+      <guid>https://metaloom.io/blog/day2-project-setup/</guid>
+      <description>Disclaimer   Coke vs. Sprite
+  Ketchup vs. Majo
+  Eclipse vs. IntelliJ</description>
+    </item>
+    
+  </channel>
+</rss>

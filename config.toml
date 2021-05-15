@@ -17,6 +17,8 @@ disableLanguages = []
 ############################# Plugins ##########################
 # css plugins
 [[params.plugins.css]]
+link = "plugins/fontawesome5/css/all.min.css"
+[[params.plugins.css]]
 link = "plugins/bootstrap/bootstrap.min.css"
 [[params.plugins.css]]
 link = "plugins/themify-icons/themify-icons.css"
@@ -26,6 +28,8 @@ link = "plugins/magnific-popup/magnific-popup.css"
 link = "plugins/slick/slick.css"
 [[params.plugins.css]]
 link = "https://fonts.googleapis.com/css?family=Anaheim|Quattrocento+Sans:400,700&display=swap"
+
+
 
 # js plugins
 [[params.plugins.js]]
@@ -62,11 +66,18 @@ link = "plugins/google-map/map.js"
 #url = "portfolio"
 #weight = 3
 
-#[[Languages.en.menu.main]]
-#name = "team"
-#pre = "#"
-#url = "team"
-#weight = 4
+
+[[Languages.en.menu.main]]
+name = "features"
+pre = "#"
+url = "feature"
+weight = 3
+
+[[Languages.en.menu.main]]
+name = "developer"
+pre = "#"
+url = "team"
+weight = 4
 
 #[[Languages.en.menu.main]]
 #name = "pricing"
@@ -74,11 +85,11 @@ link = "plugins/google-map/map.js"
 #url = "pricing"
 #weight = 5
 
-#[[Languages.en.menu.main]]
-#name = "blog"
-#pre = "#"
-#url = "blog"
-#weight = 6
+[[Languages.en.menu.main]]
+name = "blog"
+pre = "#"
+url = "blog"
+weight = 6
 
 #[[Languages.en.menu.main]]
 #name = "contact"
@@ -88,7 +99,7 @@ link = "plugins/google-map/map.js"
 
 ############################# Default Parameters ##########################
 [params]
-logo = "images/logo.png"
+logo = "images/logo_word_big.svg"
 # Meta data
 description = "MetaLoom 2021"
 author = "Jotschi"
@@ -100,7 +111,7 @@ post_share = true
 # preloader
 [params.preloader]
 enable = false
-preloader = "images/logo.png"
+preloader = "images/logo_word_big.svg"
 
 # cookies
 [params.cookies]

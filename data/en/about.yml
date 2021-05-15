@@ -1,16 +1,27 @@
 ############################# About ###################################
 about:
-  enable : false
-  title : About Us
+  enable : true
+  title : About MetaLoom
+  content: >-
+    Loom is a Headless Media Asset Management System which is still in __early development__.
+
+    At the moment there are no public sources or binaries available for download. If you are however interested in the development process you are welcome to checkout the [blog](#blog).
+
+    
+    Loom is a private project which is not backed by a company. The design, development is done by [Johannes Schüth](https://jotschi.de).
+
+
+    Although Loom is a new development it will inherit code and concepts of [Gentics Mesh](https://github.com/gentics/mesh). Mesh is a headless CMS project which Johannes helped to design and develop from 2006 until leaving Gentics in early 2021.
+
   about_item :
-  - icon : ti-ruler-pencil # themify icon pack : https://themify.me/themify-icons
-    title : We're Creative
-    content : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, perspiciatis eos provident laborum eum dignissimos.
+  - icon : ti-file
+    title : Assets
+    content : Assets of any sort can be feed into Loom. Stored assets will be processed and made available via S3 and REST API.
 
-  - icon : ti-cup # themify icon pack : https://themify.me/themify-icons
-    title : We're Professional
-    content : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, perspiciatis eos provident laborum eum dignissimos.
+  - icon : ti-package
+    title : Contents
+    content : Additional contents (e.g. metadata, tags, ratings, text, numbers, free JSON) can also be stored in Loom along with your assets.
 
-  - icon : ti-thought # themify icon pack : https://themify.me/themify-icons
-    title : We're Genius
-    content : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, perspiciatis eos provident laborum eum dignissimos.
+  - icon : ti-cloud
+    title : API
+    content : The REST and GraphQL API allows you to retrieve and update the assets and their connected contents.
