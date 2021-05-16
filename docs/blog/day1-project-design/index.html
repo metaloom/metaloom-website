@@ -136,7 +136,62 @@
 <div class="sect2">
 <h3 id="_assets">Assets</h3>
 <div class="paragraph">
-<p>Around the <code>Assets</code> which are the key component of Loom are various other elements arranged.</p>
+<p>The assets are the key component of Loom around various other elements are arranged.</p>
+</div>
+<div class="paragraph">
+<p>Properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>uuid</code></p>
+</li>
+<li>
+<p><code>filename</code></p>
+</li>
+<li>
+<p><code>hashes.sha512</code>, <code>hashes.sha256</code>, <code>hashes.md5</code></p>
+</li>
+<li>
+<p><code>mimeType</code></p>
+</li>
+<li>
+<p><code>dominantColor</code></p>
+</li>
+<li>
+<p><code>duration</code></p>
+</li>
+<li>
+<p><code>timeline.from</code>, <code>timeline.to</code></p>
+</li>
+<li>
+<p><code>timeline.thumbnail</code></p>
+</li>
+<li>
+<p><code>timeline.meta</code></p>
+</li>
+<li>
+<p><code>timeline.tags</code></p>
+</li>
+<li>
+<p><code>timeline.description</code></p>
+</li>
+<li>
+<p><code>location.lon</code>, <code>location.lat</code></p>
+</li>
+<li>
+<p><code>meta</code></p>
+</li>
+<li>
+<p><code>creator.username</code>, <code>creator.uuid</code></p>
+</li>
+<li>
+<p><code>editor.username</code>, <code>editor.uuid</code></p>
+</li>
+<li>
+<p><code>cdate</code>, <code>edate</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -144,11 +199,48 @@
 <div class="paragraph">
 <p>Additionally an <code>ACL</code> system is needed which consists of <code>User</code>, <code>Group</code>, <code>Role</code> and permission management.</p>
 </div>
+<div class="sect3">
+<h4 id="_sso">SSO</h4>
+<div class="paragraph">
+<p>Loom does not directly participate a typical OAuth flow since it is only a third party consumer of OAuth tokens.</p>
+</div>
+<div class="paragraph">
+<p>Instead a frontend app must handle the OAuth flow and process the SSO authentication. After that has been done the generated API token can be used for Loom requests as well.</p>
+</div>
+<div class="paragraph">
+<p>Loom can now validate the token using the public keys from the SSO provider.
+Next the <code>JWT</code> public claims can be utilized to map the information to a Loom user which is needed to perform the request.</p>
+</div>
+<div class="paragraph">
+<p>For all options it is a good idea to prepared the domain model in order to support <a href="https://en.wikipedia.org/wiki/Single_sign-on">Single-Sign-On</a>. For Loom this means that a user also has a <code>sso</code> flag which indicates that the user was created via SSO process.</p>
+</div>
+<div class="sect4">
+<h5 id="_option_1_in_memory_user_mapping">Option 1 - In-memory user mapping</h5>
+<div class="paragraph">
+<p>In order to avoid cluttering the Loom database with SSO users it would be one option to use an in-memory user instead of creating and persisting the user in the database. Downside of this approach is that newly created or edited resources can’t store the user reference.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_option_2_surrogate_user_mapping">Option 2 - Surrogate user mapping</h5>
+<div class="paragraph">
+<p>Another approach is to map the SSO user to a surrogate user which acts as a stand-in for SSO users. This approach however only works if the users don’t need dedicated permissions.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_option_3_dedicate_mapping">Option 3 - Dedicate mapping</h5>
+<div class="paragraph">
+<p>Finally the SSO token information can be mapped directly to a dedicated Loom users. This way individual permissions and creator/editor references can be stored in Loom.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_tagging">Tagging</h3>
 <div class="paragraph">
-<p>Tags can be stored in the system which can be used to tag elements.</p>
+<p>Taggings can be applied to assets, contents, namespaces.</p>
+</div>
+<div class="paragraph">
+<p>Often taggings are user based and thus it is a good choice to store tags globally and on a per-user basis.</p>
 </div>
 </div>
 <div class="sect2">
@@ -269,7 +361,7 @@ paths:
 <div class="sect2">
 <h3 id="_rest_models">REST Models</h3>
 <div class="paragraph">
-<p>The OpenAPI spec also contains</p>
+<p>The OpenAPI spec also contains the response and request format.</p>
 </div>
 <div class="listingblock">
 <div class="title">openapi.xml</div>
@@ -330,8 +422,194 @@ UserResponse:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_paging">Paging</h3>
-
+<h3 id="_pagination">Pagination</h3>
+<div class="paragraph">
+<p>Implementing an efficient paging solution can be a challenge in itself. Often many parameters need to be taken into account when retrieving a page of elements for a specific resource.</p>
+</div>
+<div class="paragraph">
+<p>For loom the result of a page request can be affected by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>applied filters</p>
+</li>
+<li>
+<p>user permissions</p>
+</li>
+<li>
+<p>page selection</p>
+</li>
+<li>
+<p>sort order</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It is thus desired to generate database queries which all include these factors. The database can in turn cache the query and return the resulting page of elements.</p>
+</div>
+<div class="paragraph">
+<p>There are two different paging options that are common:</p>
+</div>
+<div class="sect3">
+<h4 id="_limit_offset_based_usersoffset10limit2">Limit &amp; offset based - <code>/users?offset=10&amp;limit=2</code></h4>
+<div class="paragraph">
+<p>In this option you need to manually specify how many items you want to skip and afterwards select.
+It is easy to map these parameters to the needed SQL query. This option is however not very convenient when using the REST API for a web frontend which usually exposes pages to the users.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_page_size_based_usersperpage10page2">Page size based - <code>/users?perPage=10&amp;page=2</code></h4>
+<div class="paragraph">
+<p>In this option page size and selected page need to be specified by the user.
+The offset and limit can derived from these parameters.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>perPage * page = offset</code></p>
+</li>
+<li>
+<p><code>perPage = limit</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_response_caching_etag_handling">Response Caching / eTag Handling</h3>
+<div class="paragraph">
+<p>Caching is an important aspect that is rarely mentioned when designing a REST API.
+In this section I’ll mention a few aspects that influence caching.</p>
+</div>
+<div class="sect3">
+<h4 id="_foreign_values">Foreign values</h4>
+<div class="paragraph">
+<p>Whenever the response of a resource contains fields from foreign elements it can negatively affect the cacheability.</p>
+</div>
+<div class="paragraph">
+<p>The element needs to be flushed from the cache whenever an included value of a foreign element is altered in the response. This not only affects client side caches but also the eTag generation for responses.</p>
+</div>
+<div class="listingblock">
+<div class="title">group-response</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">{
+  &#34;uuid&#34; : &#34;fbfd0632-7d10-464f-ada4-ebe5511d226d&#34;,
+  &#34;creator&#34; : {
+    &#34;firstName&#34; : &#34;Joe&#34;,
+    &#34;lastName&#34; : &#34;Doe&#34;,
+    &#34;uuid&#34; : &#34;89389d87-6af3-43ed-8374-23cda00c3750&#34;
+  },
+…
+  &#34;name&#34; : &#34;Admin Group&#34;,
+  &#34;roles&#34; : [ {
+    &#34;name&#34; : &#34;admin&#34;,
+    &#34;uuid&#34; : &#34;8cb8c1c0-7a32-4b27-a15b-d28819ae5952&#34;
+  } ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Including foreign values can’t or should not always be avoided. This is mainly a design and usability decision.
+In this example the role names and uuid are included. Whenever the role name changes the cached group response needs to be invalidated / the eTag in the response needs to change.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inclusion_of_immutable_foreign_values">Inclusion of immutable foreign values</h4>
+<div class="paragraph">
+<p>Another option is to omit the mutable value from the referenced resource. This reduces the probability that the cache needs to be updated. It however may also increase the <strong>burden on the API user</strong> since additional resources may need to be manually fetched afterwards. This aspect is called <a href="https://stackoverflow.com/a/44568365/644326">underfetching</a>.</p>
+</div>
+<div class="paragraph">
+<p>Needless to say that <a href="https://graphql.org/">GraphQL</a> does solve the fetching aspect in a great way.</p>
+</div>
+<div class="listingblock">
+<div class="title">group-response</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">…
+  &#34;roles&#34; : [ {
+    &#34;uuid&#34; : &#34;8cb8c1c0-7a32-4b27-a15b-d28819ae5952&#34;
+  } ]
+…</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_etag_handling">ETag handling</h4>
+<div class="paragraph">
+<p>Returning an <a href="https://en.wikipedia.org/wiki/HTTP_ETag">ETag</a> is a good practice for REST APIs as it with helps client and proxy caching.</p>
+</div>
+<div class="paragraph">
+<p>The ETag itself is a hash which needs to be computed for the requested resource.</p>
+</div>
+<div class="paragraph">
+<p>Adding a <code>version</code> column on each resource table can help a lot with the generation of the ETag.
+The value of the column for the element needs to be incremented whenever it gets updated.
+Using this value it is easy to compute a hash by selecting all <code>version</code> values that influence the response.
+A group response which also returns the role names must thus also include the role version’s in the ETag.
+Server side caching can be used to store computed hashes in order to avoid database queries.
+For Mesh I created an event aware caching implementation which could invalidate server-side caches across a clustered setup. For Loom this might also be a good option.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_caching_of_page_responses">Caching of page responses</h4>
+<div class="paragraph">
+<p>Including the <code>totalCount</code> and <code>pageCount</code> values in the response can also negatively affect caching since the response needs to be invalidated when ever new elements get added/removed which may alter the counts.</p>
+</div>
+<div class="listingblock">
+<div class="title">page-response</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">{
+  &#34;data&#34; : [ … ],
+  &#34;_metainfo&#34; : {
+    &#34;currentPage&#34; : 1,
+    &#34;perPage&#34; : 2,
+    &#34;pageCount&#34; : 10,
+    &#34;totalCount&#34; : 20
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively it is also possible to just include information whether there are further pages. This may limit the effect of newly added elements to the resource on caching. The needed SQL select may in theory also be faster since a <a href="https://en.wikipedia.org/wiki/Full_table_scan">full table scan</a> can be avoided in this case. The scan would otherwise needed to return the count values.</p>
+</div>
+<div class="listingblock">
+<div class="title">page-response</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">{
+  &#34;data&#34; : [ … ],
+  &#34;_metainfo&#34; : {
+    &#34;currentPage&#34; : 1,
+    &#34;perPage&#34; : 2,
+    &#34;hasNext&#34; : true,
+    &#34;hasPrev&#34; : true
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_streaming_time_to_first_byte">Streaming / Time to first byte</h3>
+<div class="paragraph">
+<p>Reducing the time to first byte can be a desired feature.</p>
+</div>
+<div class="sect3">
+<h4 id="_progressive_media">Progressive Media</h4>
+<div class="paragraph">
+<p>A very typical usecase is the handling of progressive images.
+Images which are for example encoded in <a href="https://en.wikipedia.org/wiki/WebP">WebP</a> can already be displayed by the client when only a part of the full image data has been loaded.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_json_streaming">JSON Streaming</h4>
+<div class="paragraph">
+<p>Streaming JSON data which was formatted in <a href="http://ndjson.org/">NDJSON</a> can also desired when handling large bulk responses. The server side response handling gets a bit more complicated since individual entries need to be encoded and flushed to the connected client.</p>
+</div>
+<div class="paragraph">
+<p>Returning paged response data in this way could improve the responsiveness of client applications.
+A reactive server design in combination with result streaming from a source database can allow this kind of streaming in an efficient way. Streaming the data also reduces the memory footprint of request processing since the full result in not kept in memory at one time. Instead only the currently retrieved database entry needs to be processed at one time.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
