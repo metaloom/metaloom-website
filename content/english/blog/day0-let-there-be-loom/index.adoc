@@ -11,7 +11,6 @@ description : "What is Loom? This post will address all these questions."
 
 :icons: font
 :source-highlighter: prettify
-:toc:
 
 ## What is Loom?
 

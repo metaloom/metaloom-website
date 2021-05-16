@@ -21,9 +21,7 @@ This time I'll however decided to handle things differently. First I want to def
 
 Let's take a look at the building blocks first.
 
-## Step 1 - Building Blocks
-
-### Assets
+## Assets
 
 The assets are the key component of Loom around various other elements are arranged.
 
@@ -46,11 +44,11 @@ Properties:
 * `editor.username`, `editor.uuid`
 * `cdate`, `edate`
         
-### ACL
+## ACL
 
 Additionally an `ACL` system is needed which consists of `User`, `Group`, `Role` and permission management.
 
-#### SSO
+### SSO
 
 Loom does not directly participate a typical OAuth flow since it is only a third party consumer of OAuth tokens.
 
@@ -59,41 +57,43 @@ Instead a frontend app must handle the OAuth flow and process the SSO authentica
 Loom can now validate the token using the public keys from the SSO provider.
 Next the `JWT` public claims can be utilized to map the information to a Loom user which is needed to perform the request.
 
-For all options it is a good idea to prepared the domain model in order to support link:https://en.wikipedia.org/wiki/Single_sign-on[Single-Sign-On]. For Loom this means that a user also has a `sso` flag which indicates that the user was created via SSO process.
+For all options it is a good idea to prepared the domain model in order to support link:https://en.wikipedia.org/wiki/Single_sign-on[Single-Sign-On]. For Loom this means that a user model also has a `sso` flag which indicates that the user was created via SSO process.
 
-##### Option 1 - In-memory user mapping
+#### Option 1 - In-memory user mapping
 
 In order to avoid cluttering the Loom database with SSO users it would be one option to use an in-memory user instead of creating and persisting the user in the database. Downside of this approach is that newly created or edited resources can't store the user reference.
 
-##### Option 2 - Surrogate user mapping
+#### Option 2 - Surrogate user mapping
 
 Another approach is to map the SSO user to a surrogate user which acts as a stand-in for SSO users. This approach however only works if the users don't need dedicated permissions.
 
-##### Option 3 - Dedicate mapping
+#### Option 3 - Dedicate mapping
 
 Finally the SSO token information can be mapped directly to a dedicated Loom users. This way individual permissions and creator/editor references can be stored in Loom.
 
-### Tagging
+### Permissions
+
+## Tagging
 
 Taggings can be applied to assets, contents, namespaces.
 
 Often taggings are user based and thus it is a good choice to store tags globally and on a per-user basis.
 
-### Namespaces
+## Namespaces
 
 `Namespaces` are used to scope content and asset elements.
 
-### Content Models
+## Content Models
 
 `Content Models` are used to define the structure of your content elements.
 A model defines a list of fields which can hold the content information.
 `Field` types can be numbers, dates, JSON, text, booleans.
 
-### Contents
+## Contents
 
 The `Content` are elements which can be created in order to supplement the information from the assets.
 
-## Step 2 - API Functions / OpenAPI
+## API Functions / OpenAPI
 
 https://editor.swagger.io/
 
@@ -155,17 +155,50 @@ paths:
 
 link:openapi.yaml[Full OpenAPI Spec]
 
-### UUID
+### Resource Identifier
 
-For the resource identifier I choose link:https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)[UUIDv4].
+For the resource identifier in API paths (`/users/:uuid`) I choose link:https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)[UUIDv4].
+
+In some situations using UUIDs can be complicated for the client. Tags are a good example for this.
+A frontend may interact with the Loom backend using tag names instead of UUIDs.
+
+A resource path that matches `/tagsByName/:tagName` would thus be more convenient.
 
 ### HTTP Methods
 
-* `POST`   - Partial update / Create new resource
-* `GET`    - Load the resource
-* `HEAD`   - Check the resource without returning the content
-* `PUT`    - Create resource with id
-* `DELETE` - Delete the resource
+The REST API CRUD methods should not be be directly mapped to HTTP methods. The usage of the method must match the link:https://datatracker.ietf.org/doc/html/rfc2616#section-9.3[RFC2616].
+
+A good resource on this topic is link:https://restfulapi.net/http-methods/[restfulapi.net].
+
+[options="header",cols="1,2"]
+|======
+
+| Method
+| Description
+
+| `GET`
+| Load the resource/s (idempotent)
+
+| `POST`
+| Create a new resource 
+
+| `PATCH` 
+| Partial update of a resource
+
+| `HEAD`
+| Check the resource/s without returning the content
+
+| `PUT`
+| Update / create resource with id
+
+| `DELETE`
+| Delete the resource
+
+|======
+
+Note that POST requests are not idempotent and thus may create multiple elements when invoked multiple times.
+
+For Loom I'm however considering to omit `PATCH` and use `POST` for partial updates. This does not validate the RFC and simplifies the API.
 
 ### REST Models
 
@@ -368,10 +401,10 @@ Streaming JSON data which was formatted in link:http://ndjson.org/[NDJSON] can a
 Returning paged response data in this way could improve the responsiveness of client applications.
 A reactive server design in combination with result streaming from a source database can allow this kind of streaming in an efficient way. Streaming the data also reduces the memory footprint of request processing since the full result in not kept in memory at one time. Instead only the currently retrieved database entry needs to be processed at one time.
 
-## Step 3 - Domain Model / Database Design
+## Domain Model / Database Design
 
 Each main building block gets a dedicated table `group`, `role`, `user`.
 
 Relations between elements are stored in individual cross tables (e.g. `user_role`, `user_group`)
 
-image:schema_v1.png[500,900,link="schema_v1.png"]
+image:schema_v1.png[500,600,link="schema_v1.png"]
