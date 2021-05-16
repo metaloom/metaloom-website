@@ -1,0 +1,195 @@
+---
+title: "Day1 - Project Design"
+date: 2021-05-14T14:51:12+06:00
+image: eleventh-wave-JsjtrixOiWc-unsplash.jpg
+image_webp: eleventh-wave-JsjtrixOiWc-unsplash.webp
+image_credit: Photo by Eleventh Wave on Unsplash
+author: jotschi
+description : "In this post I would like to share how I approach the design for Loom."
+---
+
+:icons: font
+:source-highlighter: prettify
+:toc:
+
+## Basics
+
+For Loom I knew what kind of building blocks were required since it is basically just a continuation of my work on Mesh.
+
+In the past I choose the approach to generate the spec and database schema from code. At least for the database that seemed a good choice at the time since the embedded DB of Mesh could be directly controlled via Java.
+
+This time I'll however decided to handle things differently. First I want to define the API specification and from that information I would derive the needed domain model.
+
+Let's take a look at the building blocks first.
+
+## Step 1 - Building Blocks
+
+### Assets
+Around the `Assets` which are the key component of Loom are various other elements arranged.
+
+### ACL
+Additionally an `ACL` system is needed which consists of `User`, `Group`, `Role` and permission management.
+
+### Tagging
+
+Tags can be stored in the system which can be used to tag elements.
+
+### Namespaces
+
+`Namespaces` are used to scope content and asset elements.
+
+### Content Models
+
+`Content Models` are used to define the structure of your content elements.
+A model defines a list of fields which can hold the content information.
+`Field` types can be numbers, dates, JSON, text, booleans.
+
+### Contents
+
+The `Content` are elements which can be created in order to supplement the information from the assets.
+
+## Step 2 - API Functions / OpenAPI
+
+https://editor.swagger.io/
+
+.openapi.xml
+[source,xml]
+----
+openapi: '3.0.2'
+info:
+  description: "Central Loom REST API"
+  version: "1.0.0"
+  title: "MetaLoom Loom API"
+  termsOfService: "https://metaloom.io/terms/"
+  contact:
+    email: "api@metaloom.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url: https://demo.metaloom.io/v1
+tags:
+- name: "namespace"
+  description: "The namespace within a loom instance."
+  externalDocs:
+    description: "Find out more"
+    url: "https://metaloom/docs/namespaces"
+
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  # User
+  /users:
+    summary: "Endpoint to access users."
+    head:
+      tags: ["User"]
+      operationId: "checkUsers"
+      responses:
+        '204':
+          description: "Users checked"
+    get:
+      parameters: 
+        - $ref: "#/components/parameters/perPage"
+        - $ref: "#/components/parameters/page"
+      tags: ["User"]
+      operationId: "loadUsers"
+      responses:
+        '200':
+          description: "Users loaded"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+              examples:
+                UserListResponse:
+                  $ref: '#/components/schemas/UserListResponse/example'
+…
+----
+
+link:openapi.yaml[Full OpenAPI Spec]
+
+
+### UUID
+
+For the resource identifier I choose link:https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)[UUIDv4].
+
+### HTTP Methods
+
+* `POST`   - Partial update / Create new resource
+* `GET`    - Load the resource
+* `HEAD`   - Check the resource without returning the content
+* `PUT`    - Create resource with id
+* `DELETE` - Delete the resource
+
+### REST Models
+
+The OpenAPI spec also contains 
+
+.openapi.xml
+[source,xml]
+----
+…
+UserResponse:
+    allOf:
+    - $ref: "#/components/schemas/EditableElement"
+    required:
+    - username
+    properties:
+    uuid:
+        type: string
+        description: "UUID of the user."
+    username:
+        type: string
+        description: "Username of the user."
+    firstname:
+        type: string
+        description: "Firstname of the user."
+    lastname:
+        type: string
+        description: "Lastname of the user."
+    email:
+        type: string
+        description: "E-Mail address of the user."
+    enabled:
+        type: boolean
+        description: "Flag which indicates that the user is enabled."
+    admin:
+        type: boolean
+        description: "Flag which indicates that the user has admin permissions."
+    meta:
+        type: object
+        description: "Additional user properties."
+    example:
+    uuid: "217f8c981ada4642bf8c981adaa642c3"
+    username: "joedoe"
+    email: "joedoe@metaloom.io"
+    firstName: "Joe"
+    lastName: "Doe"
+    enabled: true
+    admin: false
+    meta:
+        birthday: "02-04-1987"
+        favoriteColor: "blue"
+        securityQuestionAnswer: "42"
+    creator:
+        username: "joedoe"
+        uuid: "eaf23fea-f6b2-46a7-84af-a7335471df5e"
+    editor:
+        username: "joedoe"
+        uuid: "2e20fca1-dbe7-4f28-99d7-15bf366b4a82"
+    cdate: "2021-03-20T20:12:01.084Z"
+    edate: "2021-03-20T21:12:01.084Z"
+…
+----
+
+### Paging
+
+## Step 3 - Domain Model / Database Design
+
+Each main building block gets a dedicated table `group`, `role`, `user`.
+
+Relations between elements are stored in individual cross tables (e.g. `user_role`, `user_group`)
+
+image:schema_v1.png[500,900,link="schema_v1.png"]
