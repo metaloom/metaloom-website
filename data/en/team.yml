@@ -5,6 +5,7 @@ team:
   team_member :
     - name : Johannes Schüth
       image : images/team/js.jpg
+      image_webp : images/team/js.webp
       designation : Developer
       content : Johannes main focus is backend development but he does not mind devops and the occasional frontend development. He recharges his coding battery by outdoor photography or working on his IBM 5150. Besides retro computing his hobbies also include electronics and astronomy.
       social :

@@ -33,7 +33,6 @@ link = "plugins/toc/bootstrap-toc.min.css"
 
 
 
-
 # js plugins
 [[params.plugins.js]]
 link = "plugins/jquery/jquery.min.js"
@@ -47,14 +46,12 @@ link = "plugins/shuffle/shuffle.min.js"
 link = "plugins/magnific-popup/jquery.magnific-popup.min.js"
 [[params.plugins.js]]
 link = "plugins/lazy-load/lozad.min.js"
-[[params.plugins.js]]
-link = "plugins/google-map/map.js"
+#[[params.plugins.js]]
+#link = "plugins/google-map/map.js"
 [[params.plugins.js]]
 link = "plugins/toc/bootstrap-toc.min.js"
 [[params.plugins.js]]
 link = "plugins/toc/toc.js"
-#[[params.plugins.js]]
-#link = "plugins/sidebar/sidebar.js"
 
 ################### English Navigation ########################
 #[[Languages.en.menu.main]]

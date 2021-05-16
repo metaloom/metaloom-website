@@ -1,10 +1,3 @@
-/* ========================================================================= */
-/*	Page Preloader
-/* ========================================================================= */
-
-$(window).on('load', function () {
-	$('.preloader').fadeOut(100);
-});
 
 jQuery(function ($) {
 	"use strict";
@@ -87,8 +80,8 @@ jQuery(function ($) {
 			target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
 			if (target.length) {
 				html_body.animate({
-					scrollTop: target.offset().top - 50
-				}, 1500, 'easeInOutExpo');
+					scrollTop: target.offset().top
+				}, 1000, 'easeInOutExpo');
 				return false;
 			}
 		}
