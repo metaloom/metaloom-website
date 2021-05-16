@@ -10,7 +10,6 @@ description : "In this post I would like to share how I approach the design for 
 
 :icons: font
 :source-highlighter: prettify
-:toc:
 
 ## Basics
 

@@ -5,7 +5,10 @@
 <section class="section">
   <div class="container">
     <div class="row">
-      <div class="col-lg-10 offset-lg-1 text-center">
+      <div class="col-lg-3 d-none d-lg-block toc-sticky-top">
+        <nav id="toc"></nav>
+      </div>
+      <div class="col-lg-9  text-center">
         <h1>{{ .Title }}</h1>
         <ul class="list-inline mb-50">
           <li class="list-inline-item"><a href="{{ `author/` | relLangURL }}{{ .Params.Author | urlize }}/">{{ .Params.Author }}</a></li>
@@ -16,7 +19,7 @@
           Credit: {{ .Params.Image_Credit }}
         </div>
       </div>
-      <div class="col-lg-10 offset-lg-1">
+      <div class="col-lg-9 offset-lg-3">
         <div class="post-single-content">
           {{ .Content }}
         </div>

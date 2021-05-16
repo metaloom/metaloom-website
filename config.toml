@@ -28,6 +28,9 @@ link = "plugins/magnific-popup/magnific-popup.css"
 link = "plugins/slick/slick.css"
 [[params.plugins.css]]
 link = "https://fonts.googleapis.com/css?family=Anaheim|Quattrocento+Sans:400,700&display=swap"
+[[params.plugins.css]]
+link = "plugins/toc/bootstrap-toc.min.css"
+
 
 
 
@@ -46,6 +49,12 @@ link = "plugins/magnific-popup/jquery.magnific-popup.min.js"
 link = "plugins/lazy-load/lozad.min.js"
 [[params.plugins.js]]
 link = "plugins/google-map/map.js"
+[[params.plugins.js]]
+link = "plugins/toc/bootstrap-toc.min.js"
+[[params.plugins.js]]
+link = "plugins/toc/toc.js"
+#[[params.plugins.js]]
+#link = "plugins/sidebar/sidebar.js"
 
 ################### English Navigation ########################
 #[[Languages.en.menu.main]]
