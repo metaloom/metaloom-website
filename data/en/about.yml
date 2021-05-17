@@ -5,10 +5,10 @@ about:
   content: >-
     Loom is a Headless Media Asset Management System which is still in __early development__.
 
-    At the moment there are no public sources or binaries available for download. If you are however interested in the development process you are welcome to checkout the [blog](#blog).
+    At the moment there are no public sources or binaries available for download. If you are however interested in the development process or have general question I recommend to checkout my [blog](/blog/day0-let-there-be-loom).
 
     
-    Loom is a private project which is not backed by a company. The design, development is done by [Johannes Schüth](https://jotschi.de).
+    Loom is a private project which is not backed by a company. The design, development is done by [Johannes Schüth](#team).
 
 
     Although Loom is a new development it will inherit code and concepts of [Gentics Mesh](https://github.com/gentics/mesh). Mesh is a headless CMS project which Johannes helped to design and develop from 2006 until leaving Gentics in early 2021.

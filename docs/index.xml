@@ -6,34 +6,43 @@
     <description>Recent content on MetaLoom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 May 2021 14:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 May 2021 14:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Day0 - Let there be Loom</title>
-      <link>https://metaloom.io/blog/day0-let-there-be-loom/</link>
-      <pubDate>Fri, 14 May 2021 14:51:12 +0600</pubDate>
+      <title>Day3 - Vert.x Dagger PoC</title>
+      <link>https://metaloom.io/blog/day3-vertx-dagger-poc/</link>
+      <pubDate>Mon, 17 May 2021 14:51:12 +0600</pubDate>
       
-      <guid>https://metaloom.io/blog/day0-let-there-be-loom/</guid>
-      <description>What is Loom? Loom is a headless media asset management server platform. It provides a tools to inventory your media assets and extract the most information from them in order to provide you with a server that can be used to query the data in a structured way.</description>
+      <guid>https://metaloom.io/blog/day3-vertx-dagger-poc/</guid>
+      <description>Dagger / Vert.x In this post I want to show a proof of concept project that makes use of Eclipse Vert.</description>
+    </item>
+    
+    <item>
+      <title>Day2 - Project Setup</title>
+      <link>https://metaloom.io/blog/day2-project-setup/</link>
+      <pubDate>Sun, 16 May 2021 14:51:12 +0600</pubDate>
+      
+      <guid>https://metaloom.io/blog/day2-project-setup/</guid>
+      <description>Disclaimer   Coke vs. Sprite
+  Ketchup vs. Majo
+  Eclipse vs. IntelliJ</description>
     </item>
     
     <item>
       <title>Day1 - Project Design</title>
       <link>https://metaloom.io/blog/day1-project-design/</link>
-      <pubDate>Fri, 14 May 2021 14:51:12 +0600</pubDate>
+      <pubDate>Thu, 13 May 2021 14:51:12 +0600</pubDate>
       
       <guid>https://metaloom.io/blog/day1-project-design/</guid>
       <description>Basics For Loom I knew what kind of building blocks were required since it is basically just a continuation of my work on Mesh.</description>
     </item>
     
     <item>
-      <title>Day2 - Project Setup</title>
-      <link>https://metaloom.io/blog/day2-project-setup/</link>
-      <pubDate>Fri, 14 May 2021 14:51:12 +0600</pubDate>
+      <title>Day0 - Let there be Loom</title>
+      <link>https://metaloom.io/blog/day0-let-there-be-loom/</link>
+      <pubDate>Wed, 12 May 2021 14:51:12 +0600</pubDate>
       
-      <guid>https://metaloom.io/blog/day2-project-setup/</guid>
-      <description>Disclaimer   Coke vs. Sprite
-  Ketchup vs. Majo
-  Eclipse vs. IntelliJ</description>
+      <guid>https://metaloom.io/blog/day0-let-there-be-loom/</guid>
+      <description>What is Loom? Loom is a headless media asset management server platform. It provides tools to inventory your media assets and extract the most information from them.</description>
     </item>
     
     <item>

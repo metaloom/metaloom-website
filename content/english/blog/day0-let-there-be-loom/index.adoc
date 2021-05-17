@@ -1,6 +1,6 @@
 ---
 title: "Day0 - Let there be Loom"
-date: 2021-05-14T14:51:12+06:00
+date: 2021-05-12T14:51:12+06:00
 image: banner_square.svg
 image_webp: banner_square.webp
 image_credit: Jotschi
@@ -14,7 +14,7 @@ description : "What is Loom? This post will address all these questions."
 
 ## What is Loom?
 
-Loom is a headless media asset management server platform. It provides a tools to inventory your media assets and extract the most information from them in order to provide you with a server that can be used to query the data in a structured way.
+Loom is a headless media asset management server platform. It provides tools to inventory your media assets and extract the most information from them. The Loom Sever can be used to query the data in a structured way with either REST or GraphQL. Additional metadata can be stored in Loom alongside to your assets.
 
 ## What is MetaLoom?
 
@@ -36,6 +36,16 @@ Once it is ready™
 ## Will it be open source?
 
 Yes - Apache 2 License
+
+## How can I learn more about the development process?
+
+I plan to cover the development process in a series of blogpost.
+
+* Design - link:/blog/day1-project-design[Day1]
+* Project Setup - link:/blog/day2-project-setup[Day2]
+* Vert.x Dagger PoC - link:/blog/day3-vertx-dagger-poc/[Day3]
+
+Further topics will cover Database implementation, REST API setup, Media processing.
 
 ## I know/like/use Mesh - What will be the differences?
 
@@ -61,9 +71,14 @@ New:
 
 * Vert.x - For the core
 * Dagger - For the glue
-* RxJava2 - For the reactiveness
+* RxJava - For the reactiveness
 * Vertx-Jooq - For persistence
 * Elasticsearch - You Know, for Search!
 * OpenCV - Media processing
 * Tika - Metadata extraction
 * TwelveMonkeys - Image decoding/encoding
+
+## Do you plan to add feature XYZ?
+
+Perhaps! Drop me a mail `ideas@metaloom.io`
+

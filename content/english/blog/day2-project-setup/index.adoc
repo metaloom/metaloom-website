@@ -1,6 +1,6 @@
 ---
 title: "Day2 - Project Setup"
-date: 2021-05-14T14:51:12+06:00
+date: 2021-05-16T14:51:12+06:00
 image: terry-vlisidis-WsEbnsnKbUE-unsplash.jpg
 image_webp: terry-vlisidis-WsEbnsnKbUE-unsplash.webp
 image_credit: Photo by Terry Vlisidis on Unsplash
