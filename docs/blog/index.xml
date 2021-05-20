@@ -6,7 +6,16 @@
     <description>Recent content in Blogs on MetaLoom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 May 2021 14:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 May 2021 21:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day4 - Vert.x jOOQ PoC</title>
+      <link>https://metaloom.io/blog/day4-vertx-jooq-poc/</link>
+      <pubDate>Wed, 19 May 2021 21:51:12 +0600</pubDate>
+      
+      <guid>https://metaloom.io/blog/day4-vertx-jooq-poc/</guid>
+      <description>Intro In this post I want to present a reactive database layer proof of concept implementation I did which will hopefully make its way into my MetaLoom project.</description>
+    </item>
+    
     <item>
       <title>Day3 - Vert.x Dagger PoC</title>
       <link>https://metaloom.io/blog/day3-vertx-dagger-poc/</link>
