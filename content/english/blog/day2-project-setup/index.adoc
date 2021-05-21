@@ -110,7 +110,7 @@ Model Overview:
 | Flyway database migration mechanism
 
 | db/jooq
-| JOOQ specific DAO implementation
+| jOOQ specific DAO implementation
 
 | db/memory
 | In-Memory specific DAO implementation

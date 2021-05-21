@@ -280,7 +280,63 @@ A model defines a list of fields which can hold the content information.
 <h2 id="_api_functions_openapi">API Functions / OpenAPI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://editor.swagger.io/" class="bare">https://editor.swagger.io/</a></p>
+<p>This time I wanted to follow the design first approach as it would give me time to rethink and plan the API upfront.
+The <a href="https://swagger.io/specification/">OpenAPI</a> spec can be utilized to create a full REST API specification.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://editor.swagger.io/">Swagger Editor</a> is a great tool when verifying and visualizing the written spec.</p>
+</div>
+<div class="paragraph">
+<p>There are many resources out there on the net that cover good practices when creating an API. I thus won’t go into detail about those topics here.</p>
+</div>
+<div class="paragraph">
+<p>A good summary can for example be found <a href="https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>My bulletpoint list:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Don’t use verbs in your path - use http methods instead</p>
+</li>
+<li>
+<p>Use plural for resources</p>
+</li>
+<li>
+<p>Be consistent (e.g. same patterns, same identifier format)</p>
+</li>
+<li>
+<p>Plan on how the API can be seen by humans <strong>and</strong> software</p>
+</li>
+<li>
+<p>Keep caching in mind</p>
+</li>
+<li>
+<p>Try to find a good middleground when returning information (<code>overfetching</code>,<code>underfetching</code>)</p>
+</li>
+<li>
+<p>Use JSON where possible</p>
+</li>
+<li>
+<p>Enable server-side compression</p>
+</li>
+<li>
+<p>Enable prettyprinting of JSON</p>
+</li>
+<li>
+<p>Add options to hide server tokens</p>
+</li>
+<li>
+<p>Use meaningful http error codes for server errors</p>
+</li>
+<li>
+<p>Return <code>204</code> on delete</p>
+</li>
+<li>
+<p>Include error messages</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="title">openapi.xml</div>
@@ -673,6 +729,17 @@ A reactive server design in combination with result streaming from a source data
 </div>
 <div class="paragraph">
 <p><span class="image"><a class="image" href="schema_v1.png"><img src="schema_v1.png" alt="500" width="600"/></a></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_final_words">Final words</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I hope you liked this post. It certainly gave me an option to reflect on the whole design and to summarize it.</p>
+</div>
+<div class="paragraph">
+<p>Things might change in the future. I welcome any feedback/ideas via <code>feedback@metaloom.io</code></p>
 </div>
 </div>
 </div>
