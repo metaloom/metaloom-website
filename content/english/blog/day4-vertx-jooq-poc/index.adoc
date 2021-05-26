@@ -6,7 +6,7 @@ image_webp: jan-antonin-kolar-lRoX0shwjUQ-unsplash.webp
 image_credit: Photo by Jan Antonin Kolar on Unsplash
 author: jotschi
 description : "In this post I want to walk you through a PoC I created that covers database handling with Vert.x and jOOQ."
-hidden: true
+hidden: false
 ---
 
 :icons: font
@@ -37,9 +37,7 @@ Having your database schema as the source of truth directly appealed to me since
 
 ### Comparison to Hibernate
 
-Handling database schema migrations was another important aspect. I knew that I wanted to use link:https://flywaydb.org/[Flyway] for database migrations. Hibernate can do automatic database migrations but process always seemed very elusive to me since it is mostly done automatically. I should add that it is link:https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#best-practices-schema[recommended in the Hibernate docs] that this process is done manually (e.g. using Flyway). Having a detailed understanding of the database schema that is in-use would thus also be required when managing those changes.
-
-I also did not want to reach the point where Hibernate queries would need to be analyzed and optimized. Having a much finer and directer control on how the layer would interact with the database seems desireable for my project.
+Handling database schema migrations was another important aspect. I knew that I wanted to use link:https://flywaydb.org/[Flyway] for database migrations. Hibernate can do automatic database migrations but process always seemed very elusive to me since it is mostly done automatically. I should add that it is link:https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#best-practices-schema[recommended in the Hibernate docs] that this process is done manually (e.g. using Flyway). Having a detailed understanding of the database schema that is in-use would thus also be recommended when managing those changes.
 
 Hibernate does however support a much larger range of database servers. The `vertx-jooq` project does currently only support MariaDB and PostgreSQL.
 
@@ -320,20 +318,15 @@ The `jooq` module also contains the high level API implementation for the DAO an
 .PocGroupDaoImpl.java
 [source,java]
 ----
-public class PocGroupDaoImpl extends
-	AbstractReactiveVertxDAO<GroupRecord, io.metaloom.poc.db.jooq.tables.pojos.Group, UUID, Single<List<io.metaloom.poc.db.jooq.tables.pojos.Group>>, Single<Optional<io.metaloom.poc.db.jooq.tables.pojos.Group>>, Single<Integer>, Single<UUID>>
-	implements PocGroupDao {
-
-	private final UserGroupDao userGroupDao;
+public class PocGroupDaoImpl extends GroupDao implements PocGroupDao {
 
 	private final UserDao userDao;
+	private final UserGroupDao userGroupDao;
 
-	public PocGroupDaoImpl(Configuration configuration, io.vertx.reactivex.sqlclient.SqlClient delegate, UserGroupDao userGroupDao, UserDao userDao) {
-		super(io.metaloom.poc.db.jooq.tables.Group.GROUP, io.metaloom.poc.db.jooq.tables.pojos.Group.class,
-			new ReactiveRXQueryExecutor<GroupRecord, io.metaloom.poc.db.jooq.tables.pojos.Group, UUID>(configuration, delegate,
-				io.metaloom.poc.db.jooq.tables.mappers.RowMappers.getGroupMapper()));
-		this.userGroupDao = userGroupDao;
+	public PocGroupDaoImpl(Configuration configuration, io.vertx.reactivex.sqlclient.SqlClient delegate, UserDao userDao, UserGroupDao userGroupDao) {
+		super(configuration, delegate);
 		this.userDao = userDao;
+		this.userGroupDao = userGroupDao;
 	}
 
 	@Override
@@ -425,15 +418,10 @@ public class PocGroupDaoImpl extends
 			return JooqWrapperHelper.wrap(jooq, PocUserImpl.class);
 		});
 	}
-
-	@Override
-	protected UUID getId(Group object) {
-		return object.getUuid();
-	}
 }
 ----
 
-The DAO implements the needed PocGroupDao. The `AbstractReactiveVertxDAO` class provides the needed low-level reactive methods to manage the database access. This class is part of `vertx-jooq`.
+The DAO implements the needed PocGroupDao. The `GroupDao` class provides the needed low-level reactive methods to manage the database access. This class is part of `vertx-jooq`.
 
 The `PocGroupDaoImpl` constructor also requires the low-level DAO's to enable the implementation to manage the `user_group` crosstable elements.
 
@@ -626,52 +614,58 @@ The `PocGroupDaoImpl#addTwoUsers` method shows how transactional operations can 
 …
 @Override
 public Observable<PocUser> addTwoUsers() {
-    Observable<User> txOperation = userDao.queryExecutor().beginTransaction()
-        .flatMapObservable(tx -> {
-            Single<List<User>> existingUsers = tx.findMany(ctx -> {
-                ResultQuery<UserRecord> userRecords = ctx.select().from(USER).coerce(USER);
-                return userRecords;
-            });
+	Observable<User> txOperation = userDao.queryExecutor().beginTransaction()
+		.flatMapObservable(tx -> {
+			// Load elements conveniently via the findMany method
+			Single<List<User>> existingUsers = tx.findMany(ctx -> {
+				ResultQuery<UserRecord> userRecords = ctx.select().from(USER).coerce(USER);
+				return userRecords;
+			});
 
-            User userPojo = new User();
-            userPojo.setUsername("ABCD");
+			User userPojo = new User();
+			userPojo.setUsername("ABCD");
 
-            User userPojo2 = new User();
-            userPojo2.setUsername("ABCD2");
+			User userPojo2 = new User();
+			userPojo2.setUsername("ABCD2");
 
-            Single<User> createdUser1 = DaoOps.insertUser(tx, userPojo, keyConverter());
-            Single<User> createdUser2 = DaoOps.insertUser(tx, userPojo2, keyConverter());
+			// Inserts can be executed within the given transaction
+			Single<User> createdUser1 = tx.executeAny(ctx -> {
+				UserRecord record = ctx.newRecord(userDao.getTable(), userPojo);
+				return ctx.insertInto(userDao.getTable())
+					.set(record)
+					.returning(USER.getPrimaryKey().getFieldsArray());
+			}).map(rows -> rows.iterator().next())
+				.map(io.vertx.reactivex.sqlclient.Row::getDelegate)
+				.map(keyConverter()::apply)
+				.map(pk -> userPojo.setUuid(pk));
 
-            Single<List<User>> s = Single.zip(existingUsers, createdUser1, createdUser2, 
-                (u1, c1, c2) -> {
-                System.out.println("Adding users");
-                u1.add(c1);
-                u1.add(c2);
-                return u1;
-            });
+			// The operation can also be encapsulated within a dedicated method
+			Single<User> createdUser2 = DaoOps.insertUser(tx, userPojo2, keyConverter());
+			
+			// Lets combine the created users with the previously loaded users
+			Single<List<User>> s = Single.zip(existingUsers, createdUser1, createdUser2,
+				(u1, c1, c2) -> {
+					System.out.println("Adding users");
+					u1.add(c1);
+					u1.add(c2);
+					return u1;
+				});
 
-            Observable<User> obs = s.flatMapObservable(Observable::fromIterable);
+			Observable<User> obs = s.flatMapObservable(Observable::fromIterable);
+			// Now commit the tx and return the results
+			return tx.commit().andThen(obs);
+		});
 
-            return tx.commit().andThen(obs);
-        });
-
-    return txOperation.map(jooq -> {
-        return JooqWrapperHelper.wrap(jooq, PocUserImpl.class);
-    });
+	return txOperation.map(jooq -> {
+		return JooqWrapperHelper.wrap(jooq, PocUserImpl.class);
+	});
 }
 …
 ----
 
 It is important to note that transactions can't be controlled by the caller of the DAO methods. Instead the DAO implementation controls the use of transactions. This pattern is required since the DAO methods are all reactive/async.
+I moved the atomic transactional operations to the `DaoOps` class which can be referenced when combining operations.
 
+## Conclusion
 
-## Further Ideas
-
-Maybe it would be possible to create custom transactional code via
-
-[source,java]
-----
-public Completable multiOp(DaoOps...ops);
-----
-
-The provides list of operations could be executed within the scope of a single transaction.
+I hope this PoC and blogpost was informative to you. If you have feedback or want to improve the PoC you can always do so. I welcome any pull-request for the link:https://github.com/metaloom/poc-vertx-jooq[PoC Github repository].
