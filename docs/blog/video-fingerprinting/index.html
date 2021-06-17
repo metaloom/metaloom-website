@@ -198,7 +198,8 @@ Additional information can of course also be included in the vectors to search f
 <h2 id="_process">Process</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For video you of course need to deal with image data. The process I came up with works as following:</p>
+<p>For video you of course need to deal with image data.
+The process I came up with works as following:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -227,6 +228,10 @@ Additional information can of course also be included in the vectors to search f
 <p>Convert to hex</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>I decided to try the stacking approach in order to get generate fingerprints which were less prone to slight changes in framerate and start offset.
+In order to speedup the process some of the frames after a taken frame will be omitted.</p>
 </div>
 </div>
 </div>
@@ -344,6 +349,17 @@ As far as I recall it uses edge detection to find specific areas of the video wh
 <p>Chromaprint is mainly designed for audio but shares some concepts to video fingerprinting.
 The main aspect is that fourier transformation is applied to the audio data to prepare it for processing. Checkout the authors detailed explanation on how <a href="https://oxygene.sk/2011/01/how-does-chromaprint-work/">Chromaprint</a> works.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_final_thoughts">Final thoughts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My initial implementation of this process works as expected but there still some cases in which the fingerprint process will not yield a meaningful stacked image / generated hash.</p>
+</div>
+<div class="paragraph">
+<p>I hope this post was interesting to you. I may create a follow-up post in the fututre which will cover the actual storage and query processes for the generated fingerprints.</p>
 </div>
 </div>
 </div>
