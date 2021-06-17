@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>Video Fingerprinting</title>
+      <link>https://metaloom.io/blog/video-fingerprinting/</link>
+      <pubDate>Wed, 19 May 2021 21:51:12 +0600</pubDate>
+      
+      <guid>https://metaloom.io/blog/video-fingerprinting/</guid>
+      <description>Intro In this post I want to share my experiments on how to generate video fingerprints.</description>
+    </item>
+    
+    <item>
       <title>Day3 - Vert.x Dagger PoC</title>
       <link>https://metaloom.io/blog/day3-vertx-dagger-poc/</link>
       <pubDate>Mon, 17 May 2021 14:51:12 +0600</pubDate>
