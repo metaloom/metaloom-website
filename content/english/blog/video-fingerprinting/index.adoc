@@ -128,7 +128,7 @@ The result image content gets converted into hex which forms the final fingerpri
 
 This video shows the stacking process in action using a sample video from big buck bunny.
 
-video::processing.mp4[]
+video::processing.mp4[width="100%",opts="autoplay,loop"]
 
 ## Other sources
 
