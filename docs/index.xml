@@ -6,7 +6,16 @@
     <description>Recent content on MetaLoom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 May 2021 21:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Jun 2021 21:51:12 +0600</lastBuildDate><atom:link href="https://metaloom.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Video Fingerprinting</title>
+      <link>https://metaloom.io/blog/video-fingerprinting/</link>
+      <pubDate>Mon, 21 Jun 2021 21:51:12 +0600</pubDate>
+      
+      <guid>https://metaloom.io/blog/video-fingerprinting/</guid>
+      <description>Intro In this post I want to share my experiments on how to generate video fingerprints.</description>
+    </item>
+    
     <item>
       <title>Day4 - Vert.x jOOQ PoC</title>
       <link>https://metaloom.io/blog/day4-vertx-jooq-poc/</link>
@@ -14,15 +23,6 @@
       
       <guid>https://metaloom.io/blog/day4-vertx-jooq-poc/</guid>
       <description>Intro In this post I want to present a reactive database layer proof of concept implementation I did which will hopefully make its way into my MetaLoom project.</description>
-    </item>
-    
-    <item>
-      <title>Video Fingerprinting</title>
-      <link>https://metaloom.io/blog/video-fingerprinting/</link>
-      <pubDate>Wed, 19 May 2021 21:51:12 +0600</pubDate>
-      
-      <guid>https://metaloom.io/blog/video-fingerprinting/</guid>
-      <description>Intro In this post I want to share my experiments on how to generate video fingerprints.</description>
     </item>
     
     <item>

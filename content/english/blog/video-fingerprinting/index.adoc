@@ -1,6 +1,6 @@
 ---
 title: "Video Fingerprinting"
-date: 2021-05-19T21:51:12+06:00
+date: 2021-06-21T21:51:12+06:00
 image: "photo-1585079374502-415f8516dcc3.jpg"
 image_webp: "photo-1585079374502-415f8516dcc3.webp"
 image_credit: Photo by George Prentzas on Unsplash
