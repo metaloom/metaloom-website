@@ -15,6 +15,24 @@ disqusShortname = "" # get your shortname form here : https://disqus.com
 disableLanguages = []
 discordLink = "https://discord.gg/NFdnFcSbfA"
 
+enableRobotsTXT = true
+
+
+[security]
+  enableInlineShortcodes = false
+
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$', 'asciidoctor']
+    osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\w+)$']
+
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
+
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']
+
+
 ############################# Plugins ##########################
 # css plugins
 [[params.plugins.css]]
@@ -31,6 +49,8 @@ link = "plugins/slick/slick.css"
 link = "https://fonts.googleapis.com/css?family=Anaheim|Quattrocento+Sans:400,700&display=swap"
 [[params.plugins.css]]
 link = "plugins/toc/bootstrap-toc.min.css"
+[[params.plugins.css]]
+link = "plugins/swagger/swagger-ui.css"
 
 
 
@@ -53,6 +73,12 @@ link = "plugins/lazy-load/lozad.min.js"
 link = "plugins/toc/bootstrap-toc.min.js"
 [[params.plugins.js]]
 link = "plugins/toc/toc.js"
+[[params.plugins.js]]
+link = "plugins/swagger/swagger-ui-bundle.js"
+[[params.plugins.js]]
+link = "plugins/swagger/swagger-ui-standalone-preset.js"
+[[params.plugins.js]]
+link = "plugins/swagger/swagger.js"
 
 ################### English Navigation ########################
 #[[Languages.en.menu.main]]
@@ -97,6 +123,13 @@ name = "blog"
 pre = "#"
 url = "blog"
 weight = 6
+
+[[Languages.en.menu.main]]
+name = "docs"
+pre = ""
+url = "docs"
+weight = 6
+
 
 #[[Languages.en.menu.main]]
 #name = "contact"

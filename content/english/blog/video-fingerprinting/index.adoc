@@ -116,7 +116,6 @@ image::stage-5.jpg[]
 
 Convert grey values to one bit precision.
 
-
 .Result
 image::stage-6.jpg[]
 

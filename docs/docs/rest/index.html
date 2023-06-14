@@ -2,24 +2,24 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Day0 - Let there be Loom</title>
+	<title>REST API</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="What is Loom? This post will address all these questions.">
+	<meta name="description" content="MetaLoom 2021">
 	
 	<meta name="author" content="Jotschi">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@metaloom" />
-    <meta name="twitter:creator" content="jotschi" />
-    <meta name="twitter:title" content="Day0 - Let there be Loom" />
-    <meta name="twitter:description" content="What is Loom? This post will address all these questions." />
-    <meta name="twitter:image:src" content="https://metaloom.io/blog/day0-let-there-be-loom/banner_square.webp" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="REST API" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
     
-    <meta property="og:title" content="Day0 - Let there be Loom">
-    <meta property="og:url" content="https://metaloom.io/blog/day0-let-there-be-loom/">
-    <meta property="og:description" content="What is Loom? This post will address all these questions.">
-    <meta property="og:image" content="https://metaloom.io/blog/day0-let-there-be-loom/banner_square.webp">
+    <meta property="og:title" content="REST API">
+    <meta property="og:url" content="https://metaloom.io/docs/rest/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.110.0">
 
@@ -105,182 +105,64 @@
         <nav id="toc"></nav>
       </div>
       <div class="col-lg-9 text-center">
-        <h1>Day0 - Let there be Loom</h1>
-        <ul class="list-inline mb-50">
-          <li class="list-inline-item"><a href="/author/jotschi/">jotschi</a></li>
-          <li class="list-inline-item">Wednesday, May 12, 2021</li>
-        </ul>
-        <img class="img-fluid lozad" src="banner_square.svg" data-src="banner_square.svg" alt="blog-image">
-        <div class="image-credit">
-          Credit: Jotschi
-        </div>
+        <h1>REST API</h1>
       </div>
       <div class="col-lg-9 offset-lg-3">
         <div class="post-single-content">
-          <div class="sect1">
-<h2 id="_what_is_loom">What is Loom?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom is a headless media asset management server platform. It provides tools to inventory your media assets and extract the most information from them. The Loom Sever can be used to query the data in a structured way with either REST or GraphQL. Additional metadata can be stored in Loom alongside to your assets.</p>
+          <div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="title">Try the example</div>
+<a href="https://demo.metaloom.io/api/v1/demo/assets" class="bare">https://demo.metaloom.io/api/v1/demo/assets</a>
+</td>
+</tr>
+</tbody></table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_what_is_metaloom">What is MetaLoom?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>MetaLoom is the umbrella which provides a home for all Loom related side projects and components.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_why_developing_loom">Why developing Loom?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>From 2006 till 2021 I helped design and develop Gentics Mesh which is an open source headless CMS.
-It is a great tool but has some very serious design flaws. With Loom I plan to take the &#34;good parts&#34; of Mesh and give them a new home.</p>
-</div>
-<div class="paragraph">
-<p>Additionally I have already experimented on some media asset processing a while back and would like to share these tools / processes in a consistent manner. Creating a dedicated server which provides a home for this seems a good solution.</p>
-</div>
-<div class="paragraph">
-<p>While working on Mesh I really liked the idea to put all my skills to use on a single project. With Loom I plan to continue this.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_when_can_we_use_it">When can we use it?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Once it is ready™</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_will_it_be_open_source">Will it be open source?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Yes - Apache 2 License</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_how_can_i_learn_more_about_the_development_process">How can I learn more about the development process?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>I plan to cover the development process in a series of blogpost.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Design - <a href="/blog/day1-project-design">Day1</a></p>
-</li>
-<li>
-<p>Project Setup - <a href="/blog/day2-project-setup">Day2</a></p>
-</li>
-<li>
-<p>Vert.x Dagger PoC - <a href="/blog/day3-vertx-dagger-poc/">Day3</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Further topics will cover Database implementation, REST API setup, Media processing.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_i_knowlikeuse_mesh_what_will_be_the_differences">I know/like/use Mesh - What will be the differences?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>No branches</p>
-</li>
-<li>
-<p>Limited versioning</p>
-</li>
-<li>
-<p>No tag families</p>
-</li>
-<li>
-<p>No binary fields</p>
-</li>
-<li>
-<p>No plugins</p>
-</li>
-<li>
-<p>No dedicated schema migration</p>
-</li>
-<li>
-<p>No OrientDB</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>New:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>S3 support</p>
-</li>
-<li>
-<p>Native SSO support (Keycloak, Auth0)</p>
-</li>
-<li>
-<p>Asset System</p>
-</li>
-<li>
-<p>Media Fingerprinting</p>
-</li>
-<li>
-<p>Overhauled permission system</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_what_stack_do_you_plan_to_use">What stack do you plan to use?</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Vert.x - For the core</p>
-</li>
-<li>
-<p>Dagger - For the glue</p>
-</li>
-<li>
-<p>RxJava - For the reactiveness</p>
-</li>
-<li>
-<p>Vertx-Jooq - For persistence</p>
-</li>
-<li>
-<p>Elasticsearch - You Know, for Search!</p>
-</li>
-<li>
-<p>OpenCV - Media processing</p>
-</li>
-<li>
-<p>Tika - Metadata extraction</p>
-</li>
-<li>
-<p>TwelveMonkeys - Image decoding/encoding</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_do_you_plan_to_add_feature_xyz">Do you plan to add feature XYZ?</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Perhaps! Drop me a mail <code>ideas@metaloom.io</code></p>
+<div class="sect2">
+<h3 id="_api_endpoints">API endpoints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">API endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the asset with the given UUID.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>GET {apiLatest}/:projectName/assets/:assetUuid</code></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">---
+database:
+  host: &#34;127.0.0.1&#34;
+  port: 5432
+  username: &#34;postgres&#34;
+  password: &#34;finger&#34;
+  databaseName: &#34;loom&#34;
+  minPoolSize: 5
+  acquireIncrement: 5
+  maxPoolSize: 20
+  jdbcUrl: &#34;jdbc:postgresql://127.0.0.1:5432/loom&#34;
+server:
+  grpcPort: 8091
+  bindAddress: &#34;0.0.0.0&#34;
+  restPort: 8092
+  monitoringPort: 8989
+auth:
+  keystorePath: &#34;keystore.jceks&#34;
+  keystorePassword: &#34;D9guazY873Kv&#34;</code></pre>
 </div>
 </div>
 </div>
@@ -293,7 +175,7 @@ It is a great tool but has some very serious design flaws. With Loom I plan to t
 	<h4>Share:</h4>
 
 	
-	<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Day0%20-%20Let%20there%20be%20Loom&amp;url=https%3a%2f%2fmetaloom.io%2fblog%2fday0-let-there-be-loom%2f"
+	<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=REST%20API&amp;url=https%3a%2f%2fmetaloom.io%2fdocs%2frest%2f"
 		target="_blank" rel="noopener" aria-label="">
 		<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
 			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
@@ -306,7 +188,7 @@ It is a great tool but has some very serious design flaws. With Loom I plan to t
 	</a>
 
 	
-	<a class="resp-sharing-button__link" href="mailto:?subject=Day0%20-%20Let%20there%20be%20Loom&amp;body=https%3a%2f%2fmetaloom.io%2fblog%2fday0-let-there-be-loom%2f" target="_self"
+	<a class="resp-sharing-button__link" href="mailto:?subject=REST%20API&amp;body=https%3a%2f%2fmetaloom.io%2fdocs%2frest%2f" target="_self"
 		rel="noopener" aria-label="">
 		<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
 			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
@@ -320,7 +202,7 @@ It is a great tool but has some very serious design flaws. With Loom I plan to t
 
 	
 	<a class="resp-sharing-button__link"
-		href="https://reddit.com/submit/?url=https%3a%2f%2fmetaloom.io%2fblog%2fday0-let-there-be-loom%2f&amp;resubmit=true&amp;title=Day0%20-%20Let%20there%20be%20Loom" target="_blank"
+		href="https://reddit.com/submit/?url=https%3a%2f%2fmetaloom.io%2fdocs%2frest%2f&amp;resubmit=true&amp;title=REST%20API" target="_blank"
 		rel="noopener" aria-label="">
 		<div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small">
 			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
@@ -333,10 +215,6 @@ It is a great tool but has some very serious design flaws. With Loom I plan to t
 	</a>
 </div>
         
-        
-        <div class="mt-5">
-          
-        </div>
       </div>
     </div>
   </div>
