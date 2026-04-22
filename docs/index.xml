@@ -6,14 +6,14 @@
     <description>Recent content on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jan 2025 14:51:12 +0600</lastBuildDate>
+    <lastBuildDate>Mon, 21 Jun 2021 21:51:12 +0600</lastBuildDate>
     <atom:link href="https://metaloom.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Java FFM - Graph Storage PoC</title>
-      <link>https://metaloom.io/blog/java-ffm-graph-storage-poc/</link>
-      <pubDate>Tue, 28 Jan 2025 14:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/java-ffm-graph-storage-poc/</guid>
-      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_graph_storage_poc&#34;&gt;Graph Storage PoC&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_ffm_basics_memory&#34;&gt;FFM Basics - Memory&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The main building blocks for foreign memory handling are &lt;code&gt;Arena&lt;/code&gt;, &lt;code&gt;MemoryLayout&lt;/code&gt; and &lt;code&gt;MemorySegmet&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <title>Getting Started</title>
+      <link>https://metaloom.io/docs/getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/getting-started/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This guide gets a full MetaLoom stack running locally in a few minutes using the demo container.&#xA;No build tools or configuration files are required.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Video Fingerprinting</title>

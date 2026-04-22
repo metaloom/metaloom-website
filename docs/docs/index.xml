@@ -8,6 +8,13 @@
     <language>en-us</language>
     <atom:link href="https://metaloom.io/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Getting Started</title>
+      <link>https://metaloom.io/docs/getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/getting-started/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This guide gets a full MetaLoom stack running locally in a few minutes using the demo container.&#xA;No build tools or configuration files are required.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Administration Guide</title>
       <link>https://metaloom.io/docs/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -135,13 +135,13 @@ If not set, a random password is generated and printed to the log.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>POST /api/v1/auth/login
+<pre class="highlight"><code class="language-http" data-lang="http">POST /api/v1/auth/login
 Content-Type: application/json
 
 {
   &#34;username&#34;: &#34;admin&#34;,
   &#34;password&#34;: &#34;your-password&#34;
-}</pre>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -164,7 +164,7 @@ Content-Type: application/json
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Authorization: Bearer &lt;token&gt;</pre>
+<pre class="highlight"><code class="language-http" data-lang="http">Authorization: Bearer &lt;token&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -222,6 +222,10 @@ Configure the OAuth2 provider in the <code>auth.oauth2</code> section of <code>l
 <div class="paragraph">
 <p>Long-lived API keys can be created and managed via the <code>/api/v1/tokens</code> endpoint.
 API keys behave like JWT tokens and are passed the same way in the <code>Authorization</code> header.</p>
+</div>
+<div class="paragraph">
+<p>API keys can also be managed through the <a href="../../getting-started/#loom-ui">Loom UI</a> without touching the API directly.
+Navigate to <strong>Settings → API Keys</strong> in the UI to generate, label and revoke tokens.</p>
 </div>
 </div>
 </div>

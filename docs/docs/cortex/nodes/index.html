@@ -118,25 +118,6 @@
 Each node has a unique name that is used to reference it in CLI <code>--actions</code> flags and pipeline definitions.</p>
 </div>
 <div class="paragraph">
-<p>Every node extends <code>AbstractMediaNode</code> and follows the same lifecycle:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>enabled?</strong> — is the node active in this run?</p>
-</li>
-<li>
-<p><strong>exists?</strong> — has this asset already been processed by this node (cached result)?</p>
-</li>
-<li>
-<p><strong>processable?</strong> — does the media type match (e.g. video only)?</p>
-</li>
-<li>
-<p><strong>compute()</strong> — perform the actual processing.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
 <p>Results are stored in the local metadata cache (<code>--meta-path</code>) and optionally forwarded to Loom via the <code>loom</code> node.</p>
 </div>
 <div class="sect1">
