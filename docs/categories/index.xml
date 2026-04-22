@@ -4,7 +4,8 @@
     <title>Categories on MetaLoom</title>
     <link>https://metaloom.io/categories/</link>
     <description>Recent content in Categories on MetaLoom</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://metaloom.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://metaloom.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
