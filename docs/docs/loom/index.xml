@@ -78,6 +78,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Loom artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_bom_pom&#34;&gt;BOM POM&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Use the BOM to align versions across Loom and Cortex modules:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Metrics</title>
+      <link>https://metaloom.io/docs/loom/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/metrics/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on a dedicated monitoring&#xA;port. All Loom meters are prefixed &lt;code&gt;loom_&lt;/code&gt;. For Cortex worker metrics see&#xA;&lt;a href=&#34;../../cortex/metrics/&#34;&gt;Cortex Metrics&lt;/a&gt;; for health and readiness endpoints see&#xA;&lt;a href=&#34;../../cortex/monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>REST API</title>
       <link>https://metaloom.io/docs/loom/rest-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

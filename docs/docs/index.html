@@ -150,6 +150,7 @@
 				<a href="loom/configuration/" class="docs-card-link">Configuration</a>
 				<a href="loom/chat/" class="docs-card-link">Chat &amp; AI Agent</a>
 				<a href="loom/features/" class="docs-card-link">Features</a>
+				<a href="loom/metrics/" class="docs-card-link">Metrics</a>
 				<a href="loom/examples/" class="docs-card-link">Examples</a>
 			</div>
 		</div>
@@ -162,9 +163,9 @@
 			</div>
 			<div class="docs-card-body">
 				<a href="nodes/" class="docs-card-link">Pipeline Nodes</a>
-				<a href="cortex/features/" class="docs-card-link">Features</a>
 				<a href="cortex/configuration/" class="docs-card-link">Configuration</a>
 				<a href="cortex/monitoring/" class="docs-card-link">Monitoring API</a>
+				<a href="cortex/metrics/" class="docs-card-link">Metrics</a>
 				<a href="cortex/containers/" class="docs-card-link">Containers</a>
 				<a href="cortex/examples/" class="docs-card-link">Custom Nodes (Java/Python)</a>
 			</div>
@@ -185,6 +186,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="ui/">Loom UI</a></h2>
+				<p>The browser-based management interface bundled in the Loom server. Browse assets, chat with the AI agent, edit pipelines, and manage users, roles and API keys — all from the browser, with a screenshot tour of every area.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="ui/" class="docs-card-link">Overview &amp; Screenshots</a>
+				<a href="ui/#chat" class="docs-card-link">Chat &amp; AI Agent</a>
+				<a href="ui/#assets" class="docs-card-link">Asset Management</a>
+				<a href="ui/#pipeline-editing" class="docs-card-link">Pipeline Editor</a>
+				<a href="ui/#administration" class="docs-card-link">Users, Roles &amp; API Keys</a>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="sect1">
 <h2 id="_start_here">Start Here</h2>
@@ -198,7 +214,7 @@
 <p>Start with <a href="getting-started/">Getting Started</a> to run a local demo in minutes.</p>
 </li>
 <li>
-<p>Read <a href="interaction/">Loom and Cortex Interaction</a> to understand the system boundary.</p>
+<p>Read <a href="operation/">Operation</a> to understand the system boundary.</p>
 </li>
 <li>
 <p>Read <a href="pipeline/">Pipeline Mechanism</a> to understand how processing is modeled.</p>
@@ -240,9 +256,9 @@
 	</div>
 	<div class="col-md-6 col-xl-4 mb-4">
 		<div class="note p-4 h-100">
-			<h3>Online vs Offline</h3>
-			<p>Cortex can run standalone against local files, or connected to Loom as a worker daemon that registers, receives node tasks, and persists results remotely.</p>
-			<p><a href="interaction/">See interaction model</a></p>
+			<h3>Operation</h3>
+			<p>Cortex runs as a worker daemon that registers with Loom, receives the node tasks Loom dispatches, and persists its results back over the REST API.</p>
+			<p><a href="operation/">See how it operates</a></p>
 		</div>
 	</div>
 	<div class="col-md-6 col-xl-4 mb-4">
@@ -294,18 +310,18 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Understand how media gets processed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="interaction/">Loom and Cortex Interaction</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="operation/">Operation</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline/">Pipeline Mechanism</a>, <a href="nodes/">Nodes</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deploy or operate the system</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/artifacts/">Loom Artifacts</a>, <a href="cortex/artifacts/">Cortex Artifacts</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cortex/monitoring/">Monitoring</a>, <a href="cortex/configuration/">Cortex Configuration</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cortex/monitoring/">Monitoring</a>, <a href="loom/metrics/">Loom Metrics</a>, <a href="cortex/metrics/">Cortex Metrics</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Learn the data model and feature surface</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/features/">Loom Features</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cortex/features/">Cortex Features</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="nodes/">Nodes</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use or deploy the AI assistant</p></td>
@@ -336,7 +352,7 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>For the full interaction model, continue with <a href="interaction/">Loom and Cortex Interaction</a>.</p>
+<p>For the full runtime model, continue with <a href="operation/">Operation</a>.</p>
 </div>
 </div>
 </div>
@@ -406,7 +422,7 @@
 
 <!-- Main Script -->
 
-<script src="/js/script.min.ef558ab60e181d3d6e423237a73e635357660ad269aaf394b450c69972f92a96dd457107aab6b5e167d70fc55cb53636.js" integrity="sha384-71WKtg4YHT1uQjI3pz5jU1dmCtJpqvOUtFDGmXL5KpbdRXEHqra14WfXD8VctTY2"></script>
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
 
 <!-- Highlight Script -->
 <link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">

@@ -36,13 +36,6 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;examples/&lt;/code&gt; directory of the source repository contains three customer-facing examples showing how&#xA;to extend Cortex with your own processing logic. They are deliberately lightweight: your code depends&#xA;only on the slim Cortex node API (or, for Python, nothing but the wire protocol) and the Loom REST&#xA;client — never on the Loom database, jOOQ or Postgres.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Features</title>
-      <link>https://metaloom.io/docs/cortex/features/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/features/</guid>
-      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_media_processing&#34;&gt;Media Processing&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex can process any media file type — images, videos, audio, and documents.&#xA;The specific analyses performed depend on which nodes are active in a pipeline.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
       <title>Maven Artifacts</title>
       <link>https://metaloom.io/docs/cortex/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -50,11 +43,18 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Cortex artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group and should generally be consumed with the shared BOM.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Metrics</title>
+      <link>https://metaloom.io/docs/cortex/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/cortex/metrics/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on its monitoring port —&#xA;the same server that serves the health and readiness probes. All Cortex meters are prefixed&#xA;&lt;code&gt;cortex_&lt;/code&gt;. For the server-side counterpart see &lt;a href=&#34;../../loom/metrics/&#34;&gt;Loom Metrics&lt;/a&gt;; for liveness&#xA;and readiness see &lt;a href=&#34;../monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Monitoring API</title>
       <link>https://metaloom.io/docs/cortex/monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/cortex/monitoring/</guid>
-      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt; and &lt;strong&gt;readiness&lt;/strong&gt;&#xA;endpoints, designed for Kubernetes probes and load balancers. Loom exposes its own health check on the&#xA;REST API.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt;, &lt;strong&gt;readiness&lt;/strong&gt; and&#xA;&lt;strong&gt;Prometheus metrics&lt;/strong&gt; endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.&#xA;Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated&#xA;monitoring port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

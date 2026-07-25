@@ -113,9 +113,12 @@ has a unique <strong>kind</strong> (name) used to reference it in a pipeline def
 worker that can run it.</p>
 </div>
 <div class="paragraph">
-<p>When online, a node writes its result back to Loom over the REST API — a typed component plus a
-<code>asset_node_result</code> ledger row; offline, results stay in the worker’s local cache. Downstream nodes
-read a dependency’s <strong>output keys</strong>.</p>
+<p>A node writes its result back to Loom over the REST API — a typed component plus an
+<code>asset_node_result</code> ledger row. Downstream nodes read a dependency’s <strong>output keys</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Between them the built-in nodes cover any media file type — images, videos, audio and documents. What
+is actually analysed for a given asset depends entirely on which nodes the pipeline contains.</p>
 </div>
 <div class="paragraph">
 <p>The built-in nodes fall into four categories.</p>
@@ -344,11 +347,86 @@ read a dependency’s <strong>output keys</strong>.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_processing_capabilities">Processing Capabilities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What the built-in node set gives you, and which node provides it:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Asset hashing</dt>
+<dd>
+<p><a href="hash/"><code>md5</code>, <code>sha256</code>, <code>sha512</code>, <code>chunk-hash</code></a> run in parallel over any file. Hashes are the
+basis for exact deduplication and for skipping already-processed assets.</p>
+</dd>
+<dt class="hdlist1">Video fingerprinting</dt>
+<dd>
+<p><a href="fingerprint/"><code>fingerprint</code></a> computes a perceptual multi-sector fingerprint using the
+<code>video4j-fingerprint</code> library. It survives transcoding, resolution changes and minor edits, which
+makes near-duplicate detection possible at scale via vector similarity search.</p>
+</dd>
+<dt class="hdlist1">Face detection</dt>
+<dd>
+<p><a href="facedetect/"><code>facedetect</code></a> finds faces in images and video with the InspireFace library, returning
+bounding boxes, facial embeddings and the optimal focal point for cropped thumbnails.
+<a href="facedescription/"><code>facedescription</code></a> then describes those faces with a vision model.</p>
+</dd>
+<dt class="hdlist1">Thumbnail generation</dt>
+<dd>
+<p><a href="thumbnail/"><code>thumbnail</code></a> renders contact-sheet previews from video frames and source images and
+uploads them to Loom as asset binaries.</p>
+</dd>
+<dt class="hdlist1">Metadata extraction</dt>
+<dd>
+<p><a href="tika/"><code>tika</code></a> uses Apache Tika to pull structured and unstructured metadata out of any supported
+format — EXIF from images, codec information from video, full text from documents.</p>
+</dd>
+<dt class="hdlist1">Scene detection</dt>
+<dd>
+<p><a href="scene-detection/"><code>scene-detection</code></a> splits video into scenes with an optical-flow detector,
+producing cut timestamps that can drive per-scene thumbnails or clips.</p>
+</dd>
+<dt class="hdlist1">OCR and speech-to-text</dt>
+<dd>
+<p><a href="ocr/"><code>ocr</code></a> extracts text from images and document pages with Tesseract;
+<a href="whisper/"><code>whisper</code></a> transcribes audio and video soundtracks with the Whisper model.</p>
+</dd>
+<dt class="hdlist1">AI captioning and enrichment</dt>
+<dd>
+<p><a href="captioning/"><code>captioning</code></a> generates natural-language descriptions with a vision-language model
+(SmolVLM), and <a href="llm/"><code>llm</code></a> enriches metadata through an LLM provider such as Ollama.</p>
+</dd>
+<dt class="hdlist1">Consistency checking</dt>
+<dd>
+<p><a href="consistency/"><code>consistency</code></a> validates that stored metadata — hashes, dimensions, codec
+information — still matches the file on disk, flagging inconsistencies for review or remediation.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_authoring_your_own_node">Authoring Your Own Node</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Custom nodes are written in Java (extending <code>AbstractMediaNode</code>) or as a Python worker that speaks the
-wire protocol. See <a href="../cortex/examples/">Cortex Examples</a>.</p>
+<p>Cortex is designed to be extended. A custom node in Java is three steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Extend <code>AbstractMediaNode&lt;YourOptions&gt;</code>.</p>
+</li>
+<li>
+<p>Implement <code>name()</code>, <code>isProcessable()</code> and <code>compute()</code>.</p>
+</li>
+<li>
+<p>Register the node via a Dagger module.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Alternatively, write a worker in Python that speaks the wire protocol directly. Both routes have a
+complete working example in <a href="../cortex/examples/">Cortex Examples</a>.</p>
 </div>
 </div>
 </div>
@@ -418,7 +496,7 @@ wire protocol. See <a href="../cortex/examples/">Cortex Examples</a>.</p>
 
 <!-- Main Script -->
 
-<script src="/js/script.min.ef558ab60e181d3d6e423237a73e635357660ad269aaf394b450c69972f92a96dd457107aab6b5e167d70fc55cb53636.js" integrity="sha384-71WKtg4YHT1uQjI3pz5jU1dmCtJpqvOUtFDGmXL5KpbdRXEHqra14WfXD8VctTY2"></script>
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
 
 <!-- Highlight Script -->
 <link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">

@@ -112,9 +112,14 @@
           <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A Cortex worker runs a lightweight monitoring HTTP server exposing <strong>liveness</strong> and <strong>readiness</strong>
-endpoints, designed for Kubernetes probes and load balancers. Loom exposes its own health check on the
-REST API.</p>
+<p>A Cortex worker runs a lightweight monitoring HTTP server exposing <strong>liveness</strong>, <strong>readiness</strong> and
+<strong>Prometheus metrics</strong> endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.
+Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated
+monitoring port.</p>
+</div>
+<div class="paragraph">
+<p>This page covers health and readiness. The full metric catalogs live on their own pages:
+<a href="../../loom/metrics/">Loom Metrics</a> and <a href="../metrics/">Cortex Metrics</a>.</p>
 </div>
 </div>
 </div>
@@ -186,8 +191,9 @@ existing probes.
 </div>
 </div>
 <div class="paragraph">
-<p>In offline mode (<code>configured: false</code>) the worker reports <code>up</code> for liveness but stays <code>not_ready</code>, since
-there is no Loom to register with.</p>
+<p>Until the worker has both connected and registered, it reports <code>up</code> for liveness but stays
+<code>not_ready</code> — the <code>loom</code> object tells you which step is missing (<code>connected</code>, <code>registered</code>,
+<code>reconnectAttempts</code>, <code>error</code>).</p>
 </div>
 <div class="sect2">
 <h3 id="_kubernetes_probe_configuration">Kubernetes Probe Configuration</h3>
@@ -250,13 +256,83 @@ becomes <code>DEGRADED</code>. See <a href="../../loom/rest-api/">REST API</a>.<
 </div>
 </div>
 <div class="sect1">
-<h2 id="_metrics_planned">Metrics (planned)</h2>
+<h2 id="_prometheus_metrics">Prometheus Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A dedicated <strong>Prometheus metrics</strong> endpoint and a separate Loom monitoring port
-(<code>LOOM_SERVER_MON_PORT</code>, default <code>8989</code>) are reserved for future use — the Loom <code>monitoring</code> module is
-currently a placeholder and neither Loom nor Cortex serves a <code>/metrics</code> endpoint yet. Until then, use
-the health/readiness endpoints above for probing and availability checks.</p>
+<p>Both components expose a <strong>Prometheus scrape endpoint</strong> at <code>GET /metrics</code> on their <strong>monitoring
+port</strong> — never on the REST API port. The response is standard Prometheus text format and includes JVM
+and process metrics (memory, GC, threads, CPU) alongside MetaLoom’s own application metrics.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cortex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET /metrics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8093</code> (<code>CORTEX_MONITORING_PORT</code>) — shared with the health server</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET /metrics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8989</code> (<code>LOOM_SERVER_MON_PORT</code>) — a dedicated monitoring server</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The endpoints are unauthenticated and intended for an internal Prometheus scraper; restrict access to
+the monitoring ports at the network layer. A scrape of Loom’s REST port (<code>8092</code>) returns <code>404</code> — metrics
+live only on the monitoring port.</p>
+</div>
+<div class="sect2">
+<h3 id="_example_prometheus_scrape_config">Example Prometheus scrape config</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">scrape_configs:
+  - job_name: metaloom-loom
+    static_configs:
+      - targets: [&#34;loom.internal:8989&#34;]
+  - job_name: metaloom-cortex
+    static_configs:
+      - targets: [&#34;cortex-1.internal:8093&#34;, &#34;cortex-2.internal:8093&#34;]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metric_catalogs">Metric catalogs</h3>
+<div class="paragraph">
+<p>The individual meters, their labels and example PromQL queries are documented per component:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../../loom/metrics/">Loom Metrics</a> — pipeline runs, task dispatch, results, worker fleet,
+leases, event fan-out and auth failures (<code>loom_*</code>).</p>
+</li>
+<li>
+<p><a href="../metrics/">Cortex Metrics</a> — Loom connection state, tasks, node operations, result egress,
+AI-model calls and worker resources (<code>cortex_*</code>).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_changing_the_loom_monitoring_port">Changing the Loom monitoring port</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">LOOM_SERVER_MON_PORT=9091</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -326,7 +402,7 @@ the health/readiness endpoints above for probing and availability checks.</p>
 
 <!-- Main Script -->
 
-<script src="/js/script.min.ef558ab60e181d3d6e423237a73e635357660ad269aaf394b450c69972f92a96dd457107aab6b5e167d70fc55cb53636.js" integrity="sha384-71WKtg4YHT1uQjI3pz5jU1dmCtJpqvOUtFDGmXL5KpbdRXEHqra14WfXD8VctTY2"></script>
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
 
 <!-- Highlight Script -->
 <link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">

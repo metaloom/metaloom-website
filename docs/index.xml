@@ -185,13 +185,6 @@
     </item>
     <item>
       <title>Features</title>
-      <link>https://metaloom.io/docs/cortex/features/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/features/</guid>
-      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_media_processing&#34;&gt;Media Processing&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex can process any media file type — images, videos, audio, and documents.&#xA;The specific analyses performed depend on which nodes are active in a pipeline.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Features</title>
       <link>https://metaloom.io/docs/loom/features/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/features/</guid>
@@ -254,18 +247,18 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, each producing its own output.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Loom &amp; Cortex Interaction</title>
-      <link>https://metaloom.io/docs/interaction/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/interaction/</guid>
-      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom is the brain; Cortex is the muscle. Loom stores assets, owns pipeline definitions and &lt;strong&gt;drives&lt;/strong&gt;&#xA;processing runs; Cortex is a fleet of worker daemons that register with Loom and execute the individual&#xA;tasks Loom hands them.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
       <title>Loom Sync</title>
       <link>https://metaloom.io/docs/nodes/loom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/loom/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom sync node is a &lt;strong&gt;sink&lt;/strong&gt;: it accumulates hash results from upstream nodes and writes them back&#xA;to the Loom backend in batches, keeping the number of REST calls low on large runs.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Loom UI</title>
+      <link>https://metaloom.io/docs/ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/ui/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Loom UI&lt;/strong&gt; is the browser-based management interface for a Loom server. It is a single-page&#xA;application (React, Vite and Material UI) that is &lt;strong&gt;bundled into the Loom server itself&lt;/strong&gt; — no separate&#xA;deployment is required. Everything you can do through the &lt;a href=&#34;../loom/rest-api/&#34;&gt;REST API&lt;/a&gt; — browsing&#xA;assets, chatting with the AI agent, authoring pipelines, managing users, roles and API keys — is&#xA;available from the UI.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Maven Artifacts</title>
@@ -282,11 +275,25 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Loom artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_bom_pom&#34;&gt;BOM POM&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Use the BOM to align versions across Loom and Cortex modules:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Metrics</title>
+      <link>https://metaloom.io/docs/cortex/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/cortex/metrics/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on its monitoring port —&#xA;the same server that serves the health and readiness probes. All Cortex meters are prefixed&#xA;&lt;code&gt;cortex_&lt;/code&gt;. For the server-side counterpart see &lt;a href=&#34;../../loom/metrics/&#34;&gt;Loom Metrics&lt;/a&gt;; for liveness&#xA;and readiness see &lt;a href=&#34;../monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Metrics</title>
+      <link>https://metaloom.io/docs/loom/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/metrics/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on a dedicated monitoring&#xA;port. All Loom meters are prefixed &lt;code&gt;loom_&lt;/code&gt;. For Cortex worker metrics see&#xA;&lt;a href=&#34;../../cortex/metrics/&#34;&gt;Cortex Metrics&lt;/a&gt;; for health and readiness endpoints see&#xA;&lt;a href=&#34;../../cortex/monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Monitoring API</title>
       <link>https://metaloom.io/docs/cortex/monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/cortex/monitoring/</guid>
-      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt; and &lt;strong&gt;readiness&lt;/strong&gt;&#xA;endpoints, designed for Kubernetes probes and load balancers. Loom exposes its own health check on the&#xA;REST API.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt;, &lt;strong&gt;readiness&lt;/strong&gt; and&#xA;&lt;strong&gt;Prometheus metrics&lt;/strong&gt; endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.&#xA;Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated&#xA;monitoring port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>OCR</title>
@@ -294,6 +301,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/ocr/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OCR node extracts text from images and document scans using &lt;strong&gt;Tesseract&lt;/strong&gt; (via Tess4J). The&#xA;recognized text is stored so it can be indexed and searched.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Operation</title>
+      <link>https://metaloom.io/docs/operation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/operation/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;How Loom and Cortex operate together at runtime.&#xA;Loom is the brain; Cortex is the muscle. Loom stores assets, owns pipeline definitions and &lt;strong&gt;drives&lt;/strong&gt;&#xA;processing runs; Cortex is a fleet of worker daemons that register with Loom and execute the individual&#xA;tasks Loom hands them.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Pipeline Mechanism</title>

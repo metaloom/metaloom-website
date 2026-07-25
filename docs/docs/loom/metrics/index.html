@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Metrics</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Metrics" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Metrics">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/metrics/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <nav id="toc"></nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Metrics</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Loom server exposes a <strong>Prometheus scrape endpoint</strong> at <code>GET /metrics</code> on a dedicated monitoring
+port. All Loom meters are prefixed <code>loom_</code>. For Cortex worker metrics see
+<a href="../../cortex/metrics/">Cortex Metrics</a>; for health and readiness endpoints see
+<a href="../../cortex/monitoring/">Monitoring API</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_endpoint">Endpoint</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/metrics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard Prometheus text exposition format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8989</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Env <code>LOOM_SERVER_MON_PORT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal monitoring surface — restrict at the network layer</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The metrics server is separate from the REST API server. A scrape of the REST port (<code>8092</code>) returns
+<code>404</code> by design; the same applies to the gRPC (<code>8091</code>) and MCP (<code>4041</code>) ports.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl http://loom.internal:8989/metrics</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_changing_the_port">Changing the port</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">LOOM_SERVER_MON_PORT=9091</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pipeline_runs">Pipeline Runs</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Metric</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Labels</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_runs_started_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline runs dispatched by the engine.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_runs_completed_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code> = <code>success</code> | <code>partial</code> | <code>failed</code> | <code>cancelled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs that reached a terminal state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_run_duration_seconds</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wall-clock duration of a complete run.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_runs_rejected_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reason</code> = <code>no_processor</code> | <code>invalid_graph</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs refused up-front (no capable worker, or a graph that does not validate).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_runs_recovered_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs re-adopted after a server restart.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A rising <code>loom_pipeline_runs_rejected_total{reason=&#34;no_processor&#34;}</code> is the clearest signal that your
+Cortex fleet does not advertise a node kind the pipeline needs.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_node_tasks">Node Tasks</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Metric</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Labels</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_node_tasks_dispatched_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node tasks pushed to a worker, by node kind.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_node_tasks_dispatch_failed_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reason</code> = <code>no_processor</code> | <code>socket_gone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dispatch attempts that found no live worker.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_node_results_received_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kind</code>, <code>state</code> = <code>success</code> | <code>failed</code> | <code>skipped</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Results reported back over the processor WebSocket.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_source_items_received_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Items enumerated by a source node and reported to Loom.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_asset_node_results_written_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kind</code>, <code>state</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Durable <code>asset_node_result</code> ledger rows persisted.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_workers_processors">Workers (Processors)</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Metric</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Labels</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_processors_connected</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Currently connected Cortex workers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_processor_registrations_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful worker registrations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_processor_disconnects_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Worker disconnects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_processor_heartbeats_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Heartbeats received.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Per-worker CPU and memory are reported by the workers themselves — scrape those from each Cortex
+instance (<code>cortex_cpu_load</code>, <code>cortex_memory_used_bytes</code>, see <a href="../../cortex/metrics/">Cortex Metrics</a>)
+rather than from Loom.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_leases_and_events">Leases and Events</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Metric</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Labels</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_leases_reclaimed_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Task leases reclaimed by the reaper after a worker went away.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_orphans_deadlettered_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Orphaned tasks moved to the dead-letter path.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_event_subscribers</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UI clients subscribed to the pipeline event stream.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_events_broadcast_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tracking events fanned out to subscribers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_pipeline_events_dropped_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Events dropped because a subscriber could not keep up.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom_auth_failures_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code> = <code>jwt</code> | <code>ws</code> | <code>permission</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rejected authentication / authorization attempts.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_runtime_metrics">Runtime Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vert.x built-in metrics and the Micrometer JVM binders share the same registry, so the scrape also
+carries:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>vertx_http_server_*</code>, <code>vertx_eventbus_*</code>, <code>vertx_pool_*</code> — HTTP server, event bus and pool metrics.</p>
+</li>
+<li>
+<p><code>jvm_memory_used_bytes</code>, <code>jvm_gc_*</code>, <code>jvm_threads_*</code>, <code>process_cpu_usage</code> — JVM and process metrics.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The jOOQ database connection pool is a c3p0 pool and is <strong>not</strong> covered by the Vert.x pool
+metrics. Use the JVM and query-level signals rather than assuming <code>vertx_pool_*</code> reflects database
+connections.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prometheus_configuration">Prometheus Configuration</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">scrape_configs:
+  - job_name: metaloom-loom
+    static_configs:
+      - targets: [&#34;loom.internal:8989&#34;]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In Kubernetes, expose the monitoring port on the Loom <code>Service</code> and annotate the pod:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">metadata:
+  annotations:
+    prometheus.io/scrape: &#34;true&#34;
+    prometheus.io/port: &#34;8989&#34;
+    prometheus.io/path: &#34;/metrics&#34;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_useful_queries">Useful Queries</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-promql" data-lang="promql"># Pipeline run failure ratio over 5 minutes
+sum(rate(loom_pipeline_runs_completed_total{status=&#34;failed&#34;}[5m]))
+  / sum(rate(loom_pipeline_runs_completed_total[5m]))
+
+# Node task throughput by kind
+sum by (kind) (rate(loom_node_tasks_dispatched_total[5m]))
+
+# Alert when the worker fleet is empty
+loom_processors_connected == 0
+
+# Dropped UI events (subscriber backpressure)
+rate(loom_pipeline_events_dropped_total[5m]) &gt; 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_naming_conventions">Naming Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Metric names follow Prometheus conventions: counters carry a <code>_total</code> suffix, timers are exported in
+base units as <code>_seconds</code>, and labels are deliberately low-cardinality — node kind, status, message
+type or a stable worker id. Asset UUIDs, file paths, run UUIDs and user ids are <strong>never</strong> used as
+label values.</p>
+</div>
+<div class="paragraph">
+<p>Timers are exported without a percentile histogram, so each one yields <code>_seconds_count</code>,
+<code>_seconds_sum</code> and <code>_seconds_max</code> series. Derive averages from <code>sum / count</code>; <code>histogram_quantile()</code>
+is not available for these meters.</p>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://metaloom.io/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

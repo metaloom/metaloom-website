@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Loom UI</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Loom UI" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Loom UI">
+    <meta property="og:url" content="https://metaloom.io/docs/ui/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <nav id="toc"></nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Loom UI</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The <strong>Loom UI</strong> is the browser-based management interface for a Loom server. It is a single-page
+application (React, Vite and Material UI) that is <strong>bundled into the Loom server itself</strong> — no separate
+deployment is required. Everything you can do through the <a href="../loom/rest-api/">REST API</a> — browsing
+assets, chatting with the AI agent, authoring pipelines, managing users, roles and API keys — is
+available from the UI.</p>
+</div>
+<div class="paragraph">
+<p>The screenshots below are taken from the <a href="../getting-started/">demo container</a>, which ships with a
+pre-seeded database so every screen has real content.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Start the demo container and open <strong><a href="http://localhost:8092/ui/" class="bare">http://localhost:8092/ui/</a></strong> in your browser. Sign in with the default
+demo credentials <strong>admin</strong> / <strong>finger</strong>. See <a href="../getting-started/">Getting Started</a> for the one-line
+<code>docker run</code> command.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect1">
+<h2 id="_what_the_ui_offers">What the UI Offers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The interface is split into a <strong>user</strong> area (day-to-day media work) and an <strong>admin</strong> area (governance and
+operations), reachable from the collapsible left navigation.</p>
+</div>
+<div class="paragraph">
+<p><strong>User area</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Chat &amp; AI Agent</strong> — a conversational assistant with live references to your assets, tasks and pipelines</p>
+</li>
+<li>
+<p><strong>Library</strong> — browse assets grouped into libraries</p>
+</li>
+<li>
+<p><strong>Assets</strong> — grid/list browser with search, status and type filters, plus a rich per-asset detail view</p>
+</li>
+<li>
+<p><strong>Collections</strong> — organise assets into colour-coded collections</p>
+</li>
+<li>
+<p><strong>Tasks</strong> — a Kanban-style task board with priority, status and assignees</p>
+</li>
+<li>
+<p><strong>Detection</strong> — review face, object and LLM detections; manage face clusters and persons</p>
+</li>
+<li>
+<p><strong>Tags</strong> — manage tags grouped by collection</p>
+</li>
+<li>
+<p><strong>Workflow</strong> — fullscreen, keyboard-driven bulk review</p>
+</li>
+<li>
+<p><strong>Skills</strong> — reusable instruction packages the chat agent can apply per conversation</p>
+</li>
+<li>
+<p><strong>Agent Memory</strong> — browse and edit the scoped markdown notes the agent reads and writes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Admin area</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Asset Pools</strong> — storage pool management and replication</p>
+</li>
+<li>
+<p><strong>Pipelines</strong> — a visual pipeline editor with versioning and side-by-side version diffs</p>
+</li>
+<li>
+<p><strong>Cortex</strong> — live monitoring of connected Cortex worker daemons</p>
+</li>
+<li>
+<p><strong>Monitoring</strong> — rolling metrics dashboards</p>
+</li>
+<li>
+<p><strong>Spaces, Users, Groups &amp; Permissions</strong> — full access-control administration (ACL)</p>
+</li>
+<li>
+<p><strong>API Keys</strong> — generate and revoke long-lived API tokens</p>
+</li>
+<li>
+<p><strong>Blacklist &amp; Memory Denylist</strong> — security and agent-guardrail rules</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="chat">Chat &amp; AI Agent</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The landing screen is the Loom Agent chat. Ask questions in natural language and the agent works across
+your assets, collections, tasks and pipelines. A context panel on the right surfaces recent assets,
+active tasks and collections, and past conversations are listed for quick recall.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="chat.png" alt="Loom Agent chat interface"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_skills">Skills</h3>
+<div class="paragraph">
+<p>Skills are versioned, publishable instruction packages that the agent can apply on a per-conversation
+basis. Your own skills live under <strong>My skills</strong>; shared skills are installed from the <strong>Library</strong>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="skills.png" alt="Skill management overview"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_agent_memory">Agent Memory</h3>
+<div class="paragraph">
+<p>The agent keeps a scoped, markdown-based memory bank that it can read and write across conversations.
+The memory view lets an administrator browse and edit those notes; the agent sees it as a read-only
+<code>/memory</code> folder.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="memory.png" alt="Agent memory view"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="assets">Assets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The asset browser shows every asset with search, status and type filters and switchable grid/list and
+card-size views. Videos, images, audio and documents are all represented.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="assets.png" alt="Asset browser"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Opening an asset reveals the detail view: media preview, a timeline with markers, tags and metadata, and
+tabs for comments, annotations and reactions.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="asset-detail.png" alt="Asset detail view"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_library">Library</h3>
+<div class="paragraph">
+<p>Assets can be organised into libraries. The library view provides a per-library selector and asset grid.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="library.png" alt="Library management"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tags">Tags</h3>
+<div class="paragraph">
+<p>Tags are managed in a tree grouped by collection, with drag-to-move and inline creation.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="tags.png" alt="Tag management"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_face_detection">Face Detection</h3>
+<div class="paragraph">
+<p>The Detection view aggregates face, object and LLM detections. The <strong>Faces</strong> tab manages face clusters and
+lets you assign them to persons in the person database.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="face-detection.png" alt="Face detection and cluster management"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pipeline-editing">Pipeline Editing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pipelines are authored on a React Flow canvas: drag nodes from the palette, wire typed handles, set
+PASS/REJECT/ANY edges, validate the graph and run it. An inspector on the right shows metadata and run
+history, and the JSON tab exposes the raw definition.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="pipeline-editor.png" alt="Pipeline editor canvas"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pipeline_versioning">Pipeline Versioning</h3>
+<div class="paragraph">
+<p>Every save mints a new pipeline version. The version badge opens a history popover where you can review,
+restore (copy-forward) or diff any earlier version against the current one.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="pipeline-versions.png" alt="Pipeline version history"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cortex_instances">Cortex Instances</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Cortex view monitors the worker daemons connected to Loom. Each registered worker shows its
+online status, host, priority, live CPU/IO/memory metrics, advertised capabilities and the node
+kinds it is allowed to run. From here you can pause, resume or forget a worker and edit its node
+restrictions. Workers appear automatically once a <a href="../cortex/">Cortex</a> daemon registers with the
+server.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="cortex.png" alt="Connected Cortex worker"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="administration">Administration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The admin area centralises governance. <strong>Users</strong> manages accounts, status and role assignments.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="users.png" alt="User management"/>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Permissions</strong> is the access-control (ACL) surface: define roles and toggle fine-grained permissions
+across every resource type (assets, annotations, users, and more) in a permission matrix. Roles are
+assigned to users through groups.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="acl-roles.png" alt="Role and permission (ACL) management"/>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>API Keys</strong> generates and revokes long-lived API tokens for programmatic access — see
+<a href="../loom/authentication/">Authentication</a>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="api-keys.png" alt="API key management"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_related">Related</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../getting-started/">Getting Started</a> — run the demo container and open the UI</p>
+</li>
+<li>
+<p><a href="../loom/chat/">Chat &amp; AI Agent</a> — the agent, sessions, skills, memory and coding sandbox</p>
+</li>
+<li>
+<p><a href="../loom/rest-api/">REST API</a> — the endpoints the UI is built on</p>
+</li>
+<li>
+<p><a href="../loom/authentication/">Authentication</a> — login, tokens and API keys</p>
+</li>
+<li>
+<p><a href="../pipeline/">Pipeline Mechanism</a> and <a href="../nodes/">Nodes</a> — what the pipeline editor builds</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://metaloom.io/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>
