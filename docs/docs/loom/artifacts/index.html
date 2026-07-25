@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -128,7 +124,11 @@
 <h2 id="_containers">Containers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>See <a href="../containers/">Containers</a> for the standalone Docker and Docker Compose examples.</p>
+<p>Loom ships as <code>metaloom/loom-server</code> (production) and <code>metaloom/loom-demo</code> (all-in-one). The AI agent’s
+coding sandbox additionally uses the <code>metaloom/loom-session-runner</code> image. See
+<a href="../containers/">Containers</a> for the Docker / Compose examples and <a href="../../deployment/">Container Images</a>
+for the full list. The agentic modules (<code>loom/agent/chat</code>, <code>loom/agent/memory</code>, <code>loom/agent/sandbox</code>)
+are part of the server image and require no separate artifact.</p>
 </div>
 </div>
 </div>

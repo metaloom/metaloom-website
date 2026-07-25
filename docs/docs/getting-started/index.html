@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -121,20 +117,20 @@ No build tools or configuration files are required.</p>
 <h2 id="_what_you_will_run">What You Will Run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The demo bundle starts three services side by side:</p>
+<p>The demo image (<code>metaloom/loom-demo</code>) bundles everything in one container:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Loom</strong> — the asset management server (REST API on port 8092)</p>
-</li>
-<li>
-<p><strong>Loom UI</strong> — a browser-based management interface (default port 3000)</p>
+<p><strong>Loom</strong> — the asset management server (REST API, WebSocket and embedded UI, all on port 8092)</p>
 </li>
 <li>
 <p><strong>Loom App</strong> — a desktop client built with Electron (optional, launched separately)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>For the full set of images and their ports, see <a href="../deployment/">Container Images</a>.</p>
 </div>
 </div>
 </div>
@@ -164,12 +160,11 @@ No build tools or configuration files are required.</p>
 <pre class="highlight"><code class="language-bash" data-lang="bash">docker run -d \
   --name loom-demo \
   -p 8092:8092 \
-  -p 3000:3000 \
   metaloom/loom-demo:latest</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Once the container is running, Loom is available at <a href="http://localhost:8092" class="bare">http://localhost:8092</a> and the web UI at <a href="http://localhost:3000" class="bare">http://localhost:3000</a>.</p>
+<p>Once the container is running, Loom — and its embedded web UI — are available at <a href="http://localhost:8092" class="bare">http://localhost:8092</a>.</p>
 </div>
 <div class="paragraph">
 <p>Default credentials:</p>
@@ -192,10 +187,13 @@ No build tools or configuration files are required.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>admin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>finger</code></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>(The password is set by <code>LOOM_INITIAL_PASSWORD</code>, which the demo image defaults to <code>finger</code>.)</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -206,7 +204,9 @@ No build tools or configuration files are required.</p>
 It lets you browse assets, manage users, groups, roles, tags and API keys, and monitor running pipelines — all without touching the REST API directly.</p>
 </div>
 <div class="paragraph">
-<p>Open <a href="http://localhost:3000" class="bare">http://localhost:3000</a> after starting the demo container.</p>
+<p>Open <a href="http://localhost:8092" class="bare">http://localhost:8092</a> after starting the demo container. The first thing you land on is the
+<a href="../loom/chat/">AI assistant</a> chat; the asset browser, users, pipelines and settings are in the
+navigation.</p>
 </div>
 <div class="paragraph">
 <p>Key areas of the UI:</p>

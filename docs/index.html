@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -102,10 +102,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="#blog">blog</a>
 					</li>
 					
@@ -143,7 +139,7 @@
 				<div class="about-content text-center wow fadeIn" data-wow-duration="1500ms">
 					<p><p>Loom is a Headless Media Asset Management System which is still in <strong>early development</strong>.
 At the moment there are no public sources or binaries available for download. If you are however interested in the development process or have general question I recommend to checkout my <a href="/blog/day0-let-there-be-loom/">blog</a>.</p>
-<p>Loom is a private project which is not backed by a company. The design, development is done by <a href="/#team">Johannes Schüth</a>.</p>
+<p>Loom is a private project which is not backed by a company. The design, development is done by <a href="https://jotschi.de">Johannes Schüth</a>.</p>
 </p>
 				</div>
 			</div>
@@ -213,8 +209,8 @@ At the moment there are no public sources or binaries available for download. If
 			</div>
 			<div class="col-lg-9">
 				<div class="content-block">
-					<h2>Planned features</h2>
-					<p>This list contains some of the key features which are planned for Loom.</p>
+					<h2>Features</h2>
+					<p>A selection of the key features of the MetaLoom platform. Items marked (planned) are on the roadmap; everything else is implemented.</p>
 					<div class="row">
 						
 						<div class="col-lg-6">
@@ -226,7 +222,7 @@ At the moment there are no public sources or binaries available for download. If
 								
 								<div class="media-body">
 									<h4 class="media-heading">Developer Centric</h4>
-									<p>The whole architecture of loom has a developer centric design which makes it easy to adapt it to your needs.</p>
+									<p>The whole architecture of Loom has a developer centric design which makes it easy to adapt it to your needs.</p>
 								</div>
 							</div>
 						</div>
@@ -239,8 +235,22 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">REST API (planned)</h4>
-									<p>The loom server provides you with a powerful REST API which can be used to manage all resources.</p>
+									<h4 class="media-heading">REST API</h4>
+									<p>The Loom server provides a powerful REST API which can be used to manage all resources, including a Java client and a generated OpenAPI specification.</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-6">
+							<div class="media">
+								
+								<div class="align-self-start mr-3">
+									<i class="ti-comments"></i>
+								</div>
+								
+								<div class="media-body">
+									<h4 class="media-heading">Chat &amp; AI Agent</h4>
+									<p>A built-in conversational assistant backed by a server-side agentic loop. It answers questions about your assets in natural language, with per-chat Skills, a persistent Memory bank, publishable Sessions and an optional isolated coding sandbox.</p>
 								</div>
 							</div>
 						</div>
@@ -267,8 +277,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">ACL (planned)</h4>
-									<p>Loom comes with a powerful permission system. Permissions can be granted on a object level.</p>
+									<h4 class="media-heading">ACL</h4>
+									<p>Loom comes with a powerful permission system. Permissions can be granted on an object level via users, groups and roles.</p>
 								</div>
 							</div>
 						</div>
@@ -281,8 +291,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">SSO (planned)</h4>
-									<p>SSO IAM providers such as RedHat Keycloak, Auth0, Okta will be natively supported. No need for complicated plugins.</p>
+									<h4 class="media-heading">SSO</h4>
+									<p>SSO IAM providers such as RedHat Keycloak, Auth0 and Okta are natively supported. No need for complicated plugins.</p>
 								</div>
 							</div>
 						</div>
@@ -295,8 +305,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Asset Store (planned)</h4>
-									<p>Existing assets can be referenced from disk or S3. Alternatively files can be uploaded and stored locally or in a configured S3 bucket.</p>
+									<h4 class="media-heading">Asset Store</h4>
+									<p>Existing assets can be referenced from disk. Alternatively files can be uploaded and stored locally (S3 backend planned).</p>
 								</div>
 							</div>
 						</div>
@@ -309,8 +319,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Media fingerprinting (planned)</h4>
-									<p>An extension can be attached which allows the generation of media fingerprints. These fingerprints can be used for asset blacklisting and similarly search using nearest neighbor search.</p>
+									<h4 class="media-heading">Media fingerprinting</h4>
+									<p>A perceptual media fingerprint can be generated for video content. These fingerprints can be used for asset blacklisting and similarity search using nearest neighbor search.</p>
 								</div>
 							</div>
 						</div>
@@ -337,8 +347,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Video thumbnail generation (planned)</h4>
-									<p>Thumbnails can be automatically generated from video content.</p>
+									<h4 class="media-heading">Video thumbnail generation</h4>
+									<p>Contact-sheet thumbnails are automatically generated from video content by the Cortex thumbnail node.</p>
 								</div>
 							</div>
 						</div>
@@ -351,8 +361,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Search (planned)</h4>
-									<p>The stored metadata can be indexed using Elasticsearch.</p>
+									<h4 class="media-heading">Search</h4>
+									<p>Stored metadata can be indexed for full-text and vector search (Elasticsearch, Lucene and Qdrant integrations).</p>
 								</div>
 							</div>
 						</div>
@@ -365,8 +375,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Tagging (planned)</h4>
-									<p>Loom comes with a system which allows you to tag assets, namespaces and contents.</p>
+									<h4 class="media-heading">Tagging</h4>
+									<p>Loom comes with a system which allows you to tag assets, collections and content.</p>
 								</div>
 							</div>
 						</div>
@@ -379,8 +389,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Metadata (planned)</h4>
-									<p>Sometimes data can&rsquo;t be structured using the provided models. Loom thus provides you with options to add custom metadata to any element it stores.</p>
+									<h4 class="media-heading">Metadata</h4>
+									<p>Beyond the structured models, Loom lets you attach custom metadata to any element it stores, together with user-generated content such as comments, reactions, ratings and annotations kept alongside your assets.</p>
 								</div>
 							</div>
 						</div>
@@ -407,22 +417,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Metadata extraction (planned)</h4>
-									<p>Metadata from images, videos, documents will automatically be extracted and make accessible via REST or GraphQL API.</p>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-lg-6">
-							<div class="media">
-								
-								<div class="align-self-start mr-3">
-									<i class="ti-comments"></i>
-								</div>
-								
-								<div class="media-body">
-									<h4 class="media-heading">User Content (planned)</h4>
-									<p>User specific content such as comments, taggings, ratings can be stored along with your assets or content elements.</p>
+									<h4 class="media-heading">Metadata extraction</h4>
+									<p>Metadata from images, videos and documents is automatically extracted by Cortex nodes (hashes, transcripts, captions, OCR, faces, scenes …) and made accessible via the API.</p>
 								</div>
 							</div>
 						</div>
@@ -449,8 +445,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Webhooks (planned)</h4>
-									<p>The server provides webhooks that allow you to trigger other attached processes.</p>
+									<h4 class="media-heading">Webhooks</h4>
+									<p>The server provides webhooks that allow you to trigger other attached processes when entities change.</p>
 								</div>
 							</div>
 						</div>
@@ -468,8 +464,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Multiple Storage Options (planned)</h4>
-									<p>You can choose between different persistent modes. In-Memory, Filesystem, MariaDB, PostgreSQL</p>
+									<h4 class="media-heading">Multiple Storage Options</h4>
+									<p>You can choose between different persistence backends — In-Memory, Filesystem, and PostgreSQL (jOOQ / Hibernate).</p>
 								</div>
 							</div>
 						</div>
@@ -482,8 +478,22 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Monitoring (planned)</h4>
-									<p>Monitoring data will be made accessible via a Prometheus scrape endpoint. You can thus track status of the instances via a Grafana dashboard.</p>
+									<h4 class="media-heading">Monitoring</h4>
+									<p>Monitoring data is exposed via a Prometheus scrape endpoint, so you can track instance status from a Grafana dashboard.</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-6">
+							<div class="media">
+								
+								<div class="align-self-start mr-3">
+									<i class="ti-infinite"></i>
+								</div>
+								
+								<div class="media-body">
+									<h4 class="media-heading">Cortex Processing Nodes</h4>
+									<p>Media processing runs on a fleet of Cortex worker daemons that register with Loom and execute node tasks it dispatches. Scale out by adding workers, and pin heavy node kinds (face detection, speech-to-text) to dedicated or GPU hardware.</p>
 								</div>
 							</div>
 						</div>
@@ -510,8 +520,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Kubernetes support / Helm Chart (planned)</h4>
-									<p>Loom fully supports Kubernetes and comes with a Helm Chart that helps you deploy it in your K8S cluster.</p>
+									<h4 class="media-heading">Kubernetes support / Helm Chart</h4>
+									<p>Loom supports Kubernetes and ships a Helm Chart that helps you deploy it in your K8S cluster; Cortex workers deploy as scalable Deployments.</p>
 								</div>
 							</div>
 						</div>
@@ -524,22 +534,8 @@ At the moment there are no public sources or binaries available for download. If
 								</div>
 								
 								<div class="media-body">
-									<h4 class="media-heading">Extensions (planned)</h4>
-									<p>Extensions can be registered in order to extend the functionality of Loom using Microservices or Serverless servies (e.g. AWS Lambda).</p>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-lg-6">
-							<div class="media">
-								
-								<div class="align-self-start mr-3">
-									<i class="ti-infinite"></i>
-								</div>
-								
-								<div class="media-body">
-									<h4 class="media-heading">Clustering (planned)</h4>
-									<p>Multiple instances of Loom can form a cluster in order to help you scale your API.</p>
+									<h4 class="media-heading">Extensions</h4>
+									<p>Extensions can be registered in order to extend the functionality of Loom, and custom Cortex processing nodes can be authored in Java or Python.</p>
 								</div>
 							</div>
 						</div>
@@ -590,66 +586,6 @@ At the moment there are no public sources or binaries available for download. If
 
 
 
-
-
-
-
-
-
-
-
-<!-- Start Our Team -->
-<section id="team" class="section">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <!-- section title -->
-        <div class="title text-center wow fadeInUp" data-wow-duration="500ms">
-          <h2> The <span class="color">
-              Developer </span></h2>
-          <div class="border-meghna"></div>
-        </div>
-      </div>
-      <!-- /section title -->
-
-      
-      <!-- team member -->
-      <div class="col-lg-4 col-md-6 col-12 wow fadeInDown" data-wow-duration="500ms">
-        <div class="team-member">
-          <div class="member-photo">
-            <!-- member photo -->
-            <img class="img-fluid" width="100%" src="https://metaloom.io/images/team/js.webp" alt="Johannes Schüth">
-
-            <!-- member social profile -->
-            <div class="mask">
-              <ul class="list-inline">
-                
-                <li class="list-inline-item"><a href="https://twitter.com/jotschi"><i class="ti-twitter-alt"></i></a></li>
-                
-                <li class="list-inline-item"><a href="https://www.linkedin.com/in/johannes-sch%C3%BCth-01a024156/"><i class="ti-linkedin"></i></a></li>
-                
-                <li class="list-inline-item"><a href="https://github.com/jotschi"><i class="ti-github"></i></a></li>
-                
-                <li class="list-inline-item"><a href="https://jotschi.de"><i class="ti-home"></i></a></li>
-                
-              </ul>
-            </div>
-          </div>
-
-          <!-- member name & designation -->
-          <div class="member-meta">
-            <h4>Johannes Schüth</h4>
-            <span>Developer</span>
-            <p>Johannes main focus is backend development but he does not mind devops and the occasional frontend development. He recharges his coding battery by outdoor photography or working on his IBM 5150. Besides retro computing his hobbies also include electronics and astronomy.</p>
-          </div>
-        </div>
-      </div>
-      <!-- end team member -->
-      
-    </div>
-  </div>
-</section>
-<!-- /team -->
 
 
 

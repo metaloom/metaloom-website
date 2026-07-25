@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -78,10 +78,6 @@
 					
 					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
-					</li>
-					
-					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
 					</li>
 					
 					<li class="nav-item">
@@ -193,108 +189,8 @@
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Add File: /home/defaultuser/workspaces/metaloom/metaloom/website/content/english/docs/loom/containers/index.adoc
----
-title: Containers
----</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>The Loom server is distributed as a Docker image.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_running_with_docker">Running with Docker</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -d \
-  --name loom \
-  -p 8092:8092 \
-  -p 8091:8091 \
-  -p 8989:8989 \
-  -e LOOM_DB_HOST=postgres \
-  -e LOOM_DB_PASSWORD=secret \
-  -e LOOM_INITIAL_PASSWORD=admin123 \
-  -v loom-config:/app/config \
-  metaloom/loom:latest</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_docker_compose">Docker Compose</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">version: &#34;3.8&#34;
-services:
-  postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: loom
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
-
-  loom:
-    image: metaloom/loom:latest
-    depends_on:
-      - postgres
-    ports:
-      - &#34;8092:8092&#34;
-      - &#34;8989:8989&#34;
-    environment:
-      LOOM_DB_HOST: postgres
-      LOOM_DB_PASSWORD: secret
-      LOOM_INITIAL_PASSWORD: admin123</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Add File: /home/defaultuser/workspaces/metaloom/metaloom/website/content/english/docs/loom/helm-chart/index.adoc
----
-title: Helm Chart
----</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The Loom Helm chart is the Kubernetes deployment entry point for running the server in-cluster.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_location">Location</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The chart is available in the <code>loom/helm</code> directory of the source repository.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_typical_use">Typical Use</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Use the chart when you want to deploy Loom together with database, ingress, persistent volumes and environment-specific values files in a Kubernetes environment.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_example">Example</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install loom ./loom/helm \
-  --namespace loom \
-  --create-namespace \
-  --values values.yaml</code></pre>
-</div>
+<p>For container deployment see <a href="../containers/">Containers</a> and <a href="../../deployment/">Container Images</a>.</p>
 </div>
 </div>
 </div>

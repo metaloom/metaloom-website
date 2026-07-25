@@ -22,18 +22,25 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom uses JWT (JSON Web Token) bearer tokens for API authentication.&#xA;OAuth2 integration is also available.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Chat &amp; AI Agent</title>
+      <link>https://metaloom.io/docs/loom/chat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/chat/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom ships with a built-in &lt;strong&gt;AI assistant&lt;/strong&gt; — an OpenAI-style chat, backed by a &lt;strong&gt;server-side agentic&#xA;loop&lt;/strong&gt; that runs inside the Loom backend. Users converse with their asset domain in natural language&#xA;(&amp;#34;find beach videos&amp;#34;, &amp;#34;what tasks are open for me?&amp;#34;, &amp;#34;summarize this clip’s transcript&amp;#34;) and the&#xA;agent answers by calling Loom’s own tools with the caller’s permissions.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Configuration</title>
       <link>https://metaloom.io/docs/loom/configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/configuration/</guid>
-      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom is configured via a YAML file (&lt;code&gt;loom.yml&lt;/code&gt;) with optional environment variable overrides.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_config_file_locations&#34;&gt;Config File Locations&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom looks for &lt;code&gt;loom.yml&lt;/code&gt; in the following order (first match wins):&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom is configured through a YAML file (&lt;code&gt;loom.yml&lt;/code&gt;) with &lt;strong&gt;environment-variable overrides&lt;/strong&gt; layered on&#xA;top. The resolution order is:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Containers</title>
       <link>https://metaloom.io/docs/loom/containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/containers/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server is distributed as a Docker image.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_running_with_docker&#34;&gt;Running with Docker&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker run -d \&#xA;  --name loom \&#xA;  -p 8092:8092 \&#xA;  -p 8091:8091 \&#xA;  -p 8989:8989 \&#xA;  -e LOOM_DB_HOST=postgres \&#xA;  -e LOOM_DB_PASSWORD=secret \&#xA;  -e LOOM_INITIAL_PASSWORD=admin123 \&#xA;  -v loom-config:/app/config \&#xA;  metaloom/loom:latest&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server is distributed as the &lt;code&gt;metaloom/loom-server&lt;/code&gt; image (JVM and &lt;code&gt;-native&lt;/code&gt; variants). For a&#xA;zero-config first run, use the all-in-one &lt;code&gt;metaloom/loom-demo&lt;/code&gt; image instead — see&#xA;&lt;a href=&#34;../../getting-started/&#34;&gt;Getting Started&lt;/a&gt;. The full image list is on &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Examples</title>

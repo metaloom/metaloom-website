@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -112,22 +108,47 @@
         <div class="post-single-content docs-content docs-main-content">
           <div class="paragraph">
 <p>MetaLoom // <strong>Cortex</strong> is the media processing engine of the MetaLoom platform.
-It analyses media files — images, videos, audio, documents — and extracts metadata that can be stored locally (via extended file attributes) or forwarded to a Loom server.</p>
+It analyses media files — images, videos, audio, documents — and extracts metadata such as hashes,
+thumbnails, fingerprints, face embeddings, transcripts, captions and OCR text.</p>
+</div>
+<div class="sect1">
+<h2 id="_cortex_is_a_daemon_that_serves_nodes">Cortex is a Daemon that Serves Nodes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cortex runs as a <strong>long-running worker daemon</strong>, not a one-shot CLI batch tool. On startup it opens a
+persistent WebSocket to a Loom server, <strong>registers</strong> itself and the node kinds it can run, and then
+waits for work. Loom <strong>pushes</strong> tasks down that connection; Cortex never polls.</p>
+</div>
+<div class="paragraph">
+<p>Crucially, <strong>the pipeline graph lives on Loom, not on Cortex</strong>. Loom owns the DAG and dispatches
+individual tasks — a source task to enumerate media, then one node task per graph node per item — to
+whichever registered Cortex instance is allowed to run that kind. Cortex only ever sees one node (or
+affinity segment) at a time and answers with a result. See <a href="../pipeline/">Pipeline Mechanism</a> and
+<a href="../interaction/">Loom &amp; Cortex Interaction</a>.</p>
+</div>
+<div class="paragraph">
+<p>This lets you scale processing horizontally: run many Cortex instances, each advertising a subset of
+node kinds (e.g. a GPU box that only runs <code>facedetect</code> and <code>whisper</code>), and Loom routes tasks
+accordingly.</p>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_modes_of_operation">Modes of Operation</h2>
 <div class="sectionbody">
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><strong>Offline mode</strong> </dt>
-<dd>
-<p>Cortex runs as a standalone batch processor without a Loom server.
-Extracted metadata is stored alongside the files (xattr / local meta-path).</p>
-</dd>
 <dt class="hdlist1"><strong>Online mode</strong> </dt>
 <dd>
-<p>Cortex connects to a Loom server, loads pipeline definitions from it, and sends all extracted results back via the Loom REST API.
-It acts as the processing worker for the Loom MAM.</p>
+<p>Cortex connects to a Loom server, registers its capabilities, and executes source /
+node / segment tasks dispatched by Loom’s pipeline engine. Results are written back to Loom over the
+REST API. This is the primary deployment.</p>
+</dd>
+<dt class="hdlist1"><strong>Offline mode</strong> </dt>
+<dd>
+<p>With no Loom host configured, Cortex runs standalone against local files. Loom-bound
+features (registration, task dispatch, result sync) gracefully degrade to no-ops. Useful for
+air-gapped pre-processing.</p>
 </dd>
 </dl>
 </div>
@@ -139,22 +160,22 @@ It acts as the processing worker for the Loom MAM.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Monitoring API</strong> — Health and metrics endpoint. See <a href="monitoring">Monitoring API</a>.</p>
+<p><strong>Pipeline Nodes</strong> — The built-in processing nodes. See <a href="../nodes/">Nodes</a>.</p>
 </li>
 <li>
-<p><strong>Configuration</strong> — CLI arguments and environment variables. See <a href="configuration">Configuration</a>.</p>
+<p><strong>Configuration</strong> — Environment variables and settings. See <a href="configuration">Configuration</a>.</p>
 </li>
 <li>
-<p><strong>Artifacts</strong> — Maven coordinates and container deployment options. See <a href="artifacts">Artifacts</a>.</p>
+<p><strong>Monitoring API</strong> — Health and readiness endpoints. See <a href="monitoring">Monitoring API</a>.</p>
 </li>
 <li>
-<p><strong>Pipeline Nodes</strong> — The built-in processing nodes. See <a href="nodes">Pipeline Nodes</a>.</p>
+<p><strong>Artifacts</strong> — Maven coordinates and the container image. See <a href="artifacts">Artifacts</a>.</p>
 </li>
 <li>
 <p><strong>Features</strong> — Overview of all Cortex capabilities. See <a href="features">Features</a>.</p>
 </li>
 <li>
-<p><strong>Examples</strong> — Custom node and custom CLI examples. See <a href="examples">Examples</a>.</p>
+<p><strong>Examples</strong> — Custom node, custom daemon (Java) and custom worker (Python). See <a href="examples">Examples</a>.</p>
 </li>
 </ul>
 </div>

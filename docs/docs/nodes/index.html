@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Nodes</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Nodes" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Nodes">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="docs-page-header text-center">
+          <h1>Nodes</h1>
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="post-single-content docs-content docs-main-content">
+          <div class="paragraph">
+<p>Nodes are the atomic processing steps of MetaLoom. A <a href="../pipeline/">pipeline</a> is a graph of nodes,
+and <a href="../cortex/">Cortex</a> workers execute the individual node tasks that Loom dispatches. Each node
+has a unique <strong>kind</strong> (name) used to reference it in a pipeline definition and to route its work to a
+worker that can run it.</p>
+</div>
+<div class="paragraph">
+<p>When online, a node writes its result back to Loom over the REST API — a typed component plus a
+<code>asset_node_result</code> ledger row; offline, results stay in the worker’s local cache. Downstream nodes
+read a dependency’s <strong>output keys</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The built-in nodes fall into four categories.</p>
+</div>
+<div class="sect1">
+<h2 id="hashing">Hashing &amp; Deduplication</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Applies to</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hash/">Hashing</a> (<code>md5</code>, <code>sha256</code>, <code>sha512</code>, <code>chunk-hash</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content hashes for identity and deduplication</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="fingerprint/">Fingerprint</a> (<code>fingerprint</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perceptual video fingerprint for similarity search</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="consistency/">Consistency</a> (<code>consistency</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video, Audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detect incomplete / corrupt media</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="dedup/">Deduplication</a> (<code>sha512-dedup</code>, fingerprint dedup)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any / Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detect and move duplicates</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="extraction">Extraction &amp; AI</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Applies to</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="tika/">Tika</a> (<code>tika</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extract format metadata + text with Apache Tika</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="ocr/">OCR</a> (<code>ocr</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extract text with Tesseract</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="whisper/">Speech-to-Text</a> (<code>whisper</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video, Audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transcribe audio with Whisper</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="llm/">LLM Enrichment</a> (<code>llm</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enrich metadata with a language model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="captioning/">Captioning</a> (<code>captioning</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Natural-language image captions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedetect/">Face Detection</a> (<code>facedetect</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detect faces + embeddings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedescription/">Face Description</a> (<code>facedescription</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describe detected faces with a vision model</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="media">Media Analysis</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Applies to</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="thumbnail/">Thumbnail</a> (<code>thumbnail</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contact-sheet preview thumbnails</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="quality/">Quality</a> (<code>quality</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resolution / blurriness / bitrate metrics</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="scene-detection/">Scene Detection</a> (<code>scene-detection</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optical-flow scene boundaries</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pipeline">Pipeline</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Applies to</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="filesystem-source/">Filesystem Source</a> (<code>filesystem-source</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">— (source)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enumerate media from disk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="filters/">Filters</a> (<code>filter-*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">— (routing)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Route items down PASS/REJECT branches</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/">Loom Sync</a> (<code>loom</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Batch hash results back to Loom</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements_at_a_glance">Requirements at a Glance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most nodes are pure CPU. A few need a native library or an external model service:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Requirement</th>
+<th class="tableblock halign-left valign-top">Nodes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenCV / video4j native runtime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fingerprint</code>, <code>thumbnail</code>, <code>quality</code>, <code>scene-detection</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">InspireFace native runtime (GPU optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>facedetect</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whisper runtime (whisper.cpp; GPU optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>whisper</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tesseract (Tess4J)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ocr</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An LLM provider service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>llm</code>, <code>facedescription</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A vision-language model service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>captioning</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, filters, dedup</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Pin the heavy kinds to dedicated or GPU workers via <code>CORTEX_NODE_WHITELIST</code> — see
+<a href="../cortex/configuration/">Cortex Configuration</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authoring_your_own_node">Authoring Your Own Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Custom nodes are written in Java (extending <code>AbstractMediaNode</code>) or as a Python worker that speaks the
+wire protocol. See <a href="../cortex/examples/">Cortex Examples</a>.</p>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://metaloom.io/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.ef558ab60e181d3d6e423237a73e635357660ad269aaf394b450c69972f92a96dd457107aab6b5e167d70fc55cb53636.js" integrity="sha384-71WKtg4YHT1uQjI3pz5jU1dmCtJpqvOUtFDGmXL5KpbdRXEHqra14WfXD8VctTY2"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

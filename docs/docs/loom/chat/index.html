@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Chat &amp; AI Agent</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Chat &amp; AI Agent" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Chat &amp; AI Agent">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/chat/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <nav id="toc"></nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Chat &amp; AI Agent</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>Loom ships with a built-in <strong>AI assistant</strong> — an OpenAI-style chat, backed by a <strong>server-side agentic
+loop</strong> that runs inside the Loom backend. Users converse with their asset domain in natural language
+(&#34;find beach videos&#34;, &#34;what tasks are open for me?&#34;, &#34;summarize this clip’s transcript&#34;) and the
+agent answers by calling Loom’s own tools with the caller’s permissions.</p>
+</div>
+<div class="paragraph">
+<p>The chat is more than a single conversation: work is organised into <strong>Sessions</strong> (publishable
+snapshots of a chat’s working state, including any coding workspace), the agent draws on a persistent
+<strong>Memory</strong> bank of scoped notes that survive across conversations, its behaviour is steered by
+user-owned <strong>Skills</strong> (versioned, shareable instruction packages), and — when enabled — it can run
+code inside an isolated per-chat <strong>coding sandbox</strong>. Those four parts are described below.</p>
+</div>
+<div class="paragraph">
+<p>The chat is the landing page of the <a href="../../">Loom UI</a> (route <code>/</code>).</p>
+</div>
+<div class="sect1">
+<h2 id="_the_agentic_loop">The Agentic Loop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The backend runs a tool-calling loop against a Large Language Model. On each user message the loop:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Builds the conversation from the persisted transcript plus the active system prompt.</p>
+</li>
+<li>
+<p>Streams the model’s answer — assistant text, hidden <strong>reasoning</strong> (&#34;thinking&#34;) chunks, and tool
+calls — back to the browser as Server-Sent Events.</p>
+</li>
+<li>
+<p>Dispatches any tool calls in-process against Loom’s tool registry (permission-checked), feeding
+the results back to the model.</p>
+</li>
+<li>
+<p>Repeats until the model produces a final answer or the turn limit is reached.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Tool failures become <strong>error tool results</strong> rather than aborting the run, so the model can react and
+retry — a run is resilient to a single failing tool.</p>
+</div>
+<div class="paragraph">
+<p>Built-in domain tools include <code>search_assets</code>, <code>get_asset</code>, <code>search_transcript</code>, <code>list_collections</code>
+and <code>asset_statistics</code>. Results carry structured <strong>references</strong> (asset · collection · task · comment
+· pipeline · annotation), which the UI renders as clickable chips inside the conversation.</p>
+</div>
+<div class="paragraph">
+<p>The LLM provider is pluggable and configured separately from the chat — see the provider settings in
+<a href="../configuration/">Loom Configuration</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_streaming_endpoint">Streaming Endpoint</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats/:uuid/stream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Send a user message; receive the agent run as an SSE event stream (text, reasoning, tool activity, references, final message).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats/:uuid/stream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancel the active run (204).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A chat may have only one active run at a time; a concurrent request returns <code>409 AGENT_BUSY</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_chats">Chats</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>chat</strong> is a stored conversation (<code>/api/v1/chats</code> CRUD). Its transcript — user and assistant
+messages, tool calls, reasoning and references — is persisted so a session can be reloaded and
+continued. The active skill set is stored per chat.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sessions">Sessions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>session</strong> is a <strong>publishable snapshot</strong> of a chat’s working state. Beyond the transcript, a session
+captures:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <strong>coding sandbox filesystem</strong> (<code>/session</code> workspace contents), when the coding sandbox is used;</p>
+</li>
+<li>
+<p>the <strong>pinned skill versions</strong> active at snapshot time;</p>
+</li>
+<li>
+<p><strong>context references</strong> to other published sessions, so one session can build on another.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Sessions are owned per user, can be named, tagged, described and <strong>published</strong> for other users to
+reference. They are managed via <code>/api/v1/chat/sessions</code>. Publishing a session shares a reproducible
+working context, not just a chat log.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_skills">Skills</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>skill</strong> is a user-owned, <code>SKILL.md</code>-style markdown instruction package (name, description and a
+full markdown body) that steers the agent for a particular task.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Skills are <strong>per user</strong>; each user owns their own set (<code>/api/v1/skills</code> CRUD).</p>
+</li>
+<li>
+<p>Skills are <strong>activated per chat</strong> — toggled in the chat’s Skills panel and sent with every message.</p>
+</li>
+<li>
+<p>Skills use <strong>progressive disclosure</strong>: only the name + description are placed in the system prompt;
+the model pulls the full body on demand via a <code>load_skill</code> tool, keeping the context window small.</p>
+</li>
+<li>
+<p>Skills are <strong>versioned</strong> and can be <strong>published to a shared library</strong>
+(<code>GET /api/v1/skills/library</code>). Another user <strong>installs</strong> a published skill
+(<code>POST /api/v1/skills/:uuid/install</code>), which <strong>copies</strong> it into their own set with provenance — so a
+later edit by the author never silently changes an installed copy.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Skills are managed in the UI at <code>/skills</code> (table, markdown editor, publish toggle, Library tab with
+install).</p>
+</div>
+<div class="sect2">
+<h3 id="_example_skill_memory_keeper">Example Skill: memory-keeper</h3>
+<div class="paragraph">
+<p>A skill that teaches the agent to use the <a href="#memory">memory</a> tools — <code>list_memory</code>, <code>get_memory</code>,
+<code>put_memory</code>, <code>delete_memory</code> — to remember durable facts across conversations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-markdown" data-lang="markdown">---
+name: memory-keeper
+description: Remember durable facts about the user and their assets across chats using the memory tools.
+---
+
+# Memory Keeper
+
+You maintain a long-term memory of facts that stay useful beyond the current chat.
+
+## Before answering
+- Call `list_memory` to see what is already stored for the active scope.
+- Call `get_memory` to read any note whose title looks relevant to the question.
+
+## When you learn something durable
+Persist it with `put_memory` — a short, single-fact note with a descriptive title. Good candidates:
+- stable preferences (&#34;prefers 16:9 thumbnails&#34;)
+- project facts (&#34;the &#39;Summer2026&#39; collection is the campaign master set&#34;)
+- decisions the user made that future chats should respect
+
+Keep one fact per note. Do **not** store secrets or transient chat state.
+
+## Housekeeping
+If a stored fact becomes wrong, correct it by overwriting the note with `put_memory`, or remove it
+with `delete_memory`. Never let a note contradict what the user just told you.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_skill_transcript_summarizer">Example Skill: transcript-summarizer</h3>
+<div class="paragraph">
+<p>A domain skill that turns a request like &#34;summarize this clip&#34; into a tight, sourced summary:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-markdown" data-lang="markdown">---
+name: transcript-summarizer
+description: Summarize a video/audio asset&#39;s transcript into a short, sourced bullet list.
+---
+
+# Transcript Summarizer
+
+When the user asks to summarize a clip:
+
+1. Resolve the asset with `get_asset` (or `search_assets` if only a name was given).
+2. Call `search_transcript` to pull the relevant transcript passages.
+3. Produce **5–8 bullets**, most important first. Each bullet is one sentence.
+4. End with a one-line **TL;DR**.
+
+If no transcript exists yet, say so plainly and suggest running a Whisper pipeline on the asset —
+do not invent content.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_memory">Memory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent has a persistent <strong>memory bank</strong> — scoped markdown notes it can read and write across
+conversations, so useful facts survive between chats.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Notes are <strong>scoped</strong> (e.g. per user / shared scopes) and quota-limited.</p>
+</li>
+<li>
+<p>During a run the agent reads and writes memory through four tools: <strong><code>list_memory</code></strong> (enumerate
+notes in a scope), <strong><code>get_memory</code></strong> (read one note), <strong><code>put_memory</code></strong> (create/overwrite a note),
+and <strong><code>delete_memory</code></strong> (remove a note). An optional per-scope index note (<code>memory.md</code>) is inlined
+into the system prompt for fast recall.</p>
+</li>
+<li>
+<p>Users can browse and edit the memory bank from the UI. REST surface (<code>/api/v1/memory</code>):</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory/scopes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the caller’s memory scopes with usage and quota.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the notes of a scope.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory/entry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read one note.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST / PUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory/entry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create / upsert a note.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory/entry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete a note.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When the coding sandbox is enabled, the memory bank can also be materialized read-only into the
+runner so coding tasks can consult it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_coding_sandbox">Coding Sandbox</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Beyond querying the domain, the agent can run <strong>coding tasks</strong> (<code>run_shell</code>, <code>write_file</code>,
+<code>read_file</code>, <code>list_files</code>) inside a hardened, per-chat <strong>Session Runner</strong> container. This turns the
+chat into a lightweight coding agent operating on an isolated <code>/workspace</code>. It is <strong>off by default</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One <strong>Session Runner</strong> is provisioned <strong>lazily</strong> on the first coding tool call of a chat, and reaped
+on idle-TTL or when a hard session time-box elapses.</p>
+</li>
+<li>
+<p>The runner’s only process is <code>runnerd</code>, a small standard-library HTTP daemon. <strong>No credentials ever
+enter the runner</strong> — Loom drives it over HTTP with a per-session bearer token, confined to its
+<code>/workspace</code>.</p>
+</li>
+<li>
+<p>Loom holds the registry of live runners, applies a per-deployment concurrency cap, waits for
+readiness, and destroys runners on chat reset / idle / max-session.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>   Loom backend (SandboxOrchestrator)
+        │  create runner (per chat)         drive over HTTP + per-session token
+        ▼                                   ┌───────────────────────────────┐
+   Session Runner pod/container  ◀──────────┤ run_shell / write_file / ...  │
+   (runnerd, /workspace, no creds)          └───────────────────────────────┘
+        ▲  reaped on idle-TTL / max-session</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_backends">Backends</h3>
+<div class="paragraph">
+<p>The backend is selected with <code>LOOM_AGENT_SANDBOX_BACKEND</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>podman</code></strong> (local dev) — runs a rootless, hardened container and reaches it on
+<code>127.0.0.1:&lt;published-port&gt;</code>.</p>
+</li>
+<li>
+<p><strong><code>kubernetes</code></strong> (production, including OpenShift) — creates a Pod using the Loom pod’s mounted
+<strong>service-account token</strong>, and reaches it on the pod IP.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kubernetes_rbac_isolation">Kubernetes RBAC &amp; Isolation</h3>
+<div class="paragraph">
+<p>The Kubernetes backend spawns runner Pods at runtime, so the Loom <strong>service account</strong> needs
+permission to manage them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>RBAC allowing the Loom service account to <code>create</code> / <code>get</code> / <code>delete</code> pods in
+<code>LOOM_AGENT_SANDBOX_NAMESPACE</code>.</p>
+</li>
+<li>
+<p>Recommended guardrails on the <code>app: loom-session-runner</code> label: a <code>ResourceQuota</code>, a <code>LimitRange</code>,
+and a <strong>default-deny <code>NetworkPolicy</code></strong> (runners should have no egress).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The runner Pod is hardened: <code>runAsNonRoot</code>, all capabilities dropped, read-only root filesystem,
+<code>automountServiceAccountToken: false</code>, seccomp <code>RuntimeDefault</code>, CPU/memory limits, a hard
+<code>activeDeadlineSeconds</code> backstop, and <code>emptyDir</code> workspace/tmp volumes. A reference Pod manifest ships
+at <code>loom/agent/deploy/session-runner-pod-template.yaml</code>; the backend POSTs the equivalent at runtime.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: loom-session-runner-manager
+  namespace: loom-runners
+rules:
+  - apiGroups: [&#34;&#34;]
+    resources: [&#34;pods&#34;]
+    verbs: [&#34;create&#34;, &#34;get&#34;, &#34;delete&#34;]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loom-session-runner-manager
+  namespace: loom-runners
+subjects:
+  - kind: ServiceAccount
+    name: loom            # the service account the Loom pod runs as
+    namespace: loom
+roleRef:
+  kind: Role
+  name: loom-session-runner-manager
+  apiGroup: rbac.authorization.k8s.io</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_runner_image">The Runner Image</h3>
+<div class="paragraph">
+<p>Build and push the runner image so it matches <code>LOOM_AGENT_SANDBOX_IMAGE</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">loom/agent/session-runner/build.sh
+# default reference: metaloom/loom-session-runner:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="../../deployment/">Container Images</a> for the image overview.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sandbox_configuration_loom_agent_sandbox">Sandbox Configuration (<code>LOOM_AGENT_SANDBOX_*</code>)</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Master switch for the coding tools.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_BACKEND</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>podman</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>podman</code> | <code>kubernetes</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_IMAGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/loom-session-runner:latest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runner image reference.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_NAMESPACE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(SA namespace)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes namespace for runner pods.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_IDLE_TTL_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>900</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reap a runner after this much inactivity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MAX_SESSION_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3600</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hard per-session time-box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_EXEC_TIMEOUT_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>120</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default per-exec wall-clock timeout.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MAX_CONCURRENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per-deployment cap on live runners.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_READY_TIMEOUT_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>60</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long to wait for a runner to become healthy.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_CPU_REQUEST</code> / <code>_CPU_LIMIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100m</code> / <code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runner CPU request / limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MEM_REQUEST</code> / <code>_MEM_LIMIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>128Mi</code> / <code>512Mi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runner memory request / limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_WORKSPACE_SIZE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>512Mi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workspace <code>emptyDir</code> size limit.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Full operator notes live in <code>loom/agent/deploy/README.md</code> in the source repository.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent is configured via <code>LOOM_AI_*</code> (LLM provider + loop), the coding sandbox via
+<code>LOOM_AGENT_SANDBOX_*</code> (above), and the memory bank via <code>LOOM_AGENT_MEMORY_*</code>. The agent is <strong>enabled
+by default</strong> but needs a reachable LLM provider to answer; the coding sandbox and memory bank are
+<strong>off</strong> by default. See <a href="../configuration/">Loom Configuration</a> for the full tables.</p>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://metaloom.io/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.ef558ab60e181d3d6e423237a73e635357660ad269aaf394b450c69972f92a96dd457107aab6b5e167d70fc55cb53636.js" integrity="sha384-71WKtg4YHT1uQjI3pz5jU1dmCtJpqvOUtFDGmXL5KpbdRXEHqra14WfXD8VctTY2"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

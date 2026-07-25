@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -116,7 +112,25 @@
           <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Loom is configured via a YAML file (<code>loom.yml</code>) with optional environment variable overrides.</p>
+<p>Loom is configured through a YAML file (<code>loom.yml</code>) with <strong>environment-variable overrides</strong> layered on
+top. The resolution order is:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Load <code>loom.yml</code> from the first location that exists (see below), or fall back to built-in defaults.</p>
+</li>
+<li>
+<p>Apply environment variables — <strong>any <code>LOOM_*</code> variable overrides the corresponding YAML value</strong>.</p>
+</li>
+<li>
+<p>Validate the result (e.g. a keystore password must be present; one is generated if unset).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>So for container deployments you can skip the file entirely and configure everything with environment
+variables.</p>
 </div>
 </div>
 </div>
@@ -129,43 +143,69 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>config/loom.yml</code> — directory relative to the working directory</p>
+<p><code>/etc/metaloom/loom.yml</code> — system-wide config</p>
 </li>
 <li>
 <p><code>~/.config/metaloom/loom.yml</code> — user home config</p>
 </li>
 <li>
-<p><code>/etc/metaloom/loom.yml</code> — system-wide config</p>
+<p><code>config/loom.yml</code> — relative to the working directory</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>If none exist (and none is on the classpath), Loom writes a default <code>config/loom.yml</code> on first start.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_full_configuration_example">Full Configuration Example</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Every top-level key maps to an options group. Only the keys you want to change need to be present.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">database:
   host: &#34;127.0.0.1&#34;
   port: 5432
   username: &#34;postgres&#34;
-  password: &#34;secret&#34;
+  password: &#34;finger&#34;
   databaseName: &#34;loom&#34;
   minPoolSize: 5
   acquireIncrement: 5
   maxPoolSize: 20
 
 server:
-  grpcPort: 8091
+  restPort: 8092          # REST API + WebSocket + UI
+  grpcPort: 8091          # gRPC
+  monitoringPort: 8989    # health / metrics
+  mcpPort: 4041           # Model Context Protocol server
   bindAddress: &#34;0.0.0.0&#34;
-  restPort: 8092
-  monitoringPort: 8989
 
 auth:
   keystorePath: &#34;keystore.jceks&#34;
-  keystorePassword: &#34;change-me&#34;
-  tokenExpirationTime: 3600</code></pre>
+  keystorePassword: &#34;change-me&#34;   # generated if omitted
+  tokenExpirationTime: 3600
+  oauth2:
+    enabled: false
+    # clientId / clientSecret / authUrl / tokenUrl / userInfoUrl / callbackUrl / logoutUrl / scope
+
+storage:
+  uploadDirectory: &#34;data/storage&#34;   # where uploaded asset binaries are stored
+
+ai:                       # Chat &amp; AI agent — see the &#34;AI Agent&#34; section below
+  enabled: true
+  providerType: &#34;OLLAMA&#34;
+  url: &#34;http://127.0.0.1:11434&#34;
+  modelId: &#34;gpt-oss:20b&#34;
+
+sandbox:                  # Agentic coding sandbox — off by default
+  enabled: false
+  backend: &#34;podman&#34;
+
+memory:                   # Agent memory bank — off by default
+  enabled: false</code></pre>
 </div>
 </div>
 </div>
@@ -250,12 +290,17 @@ Environment variables take precedence over values in <code>loom.yml</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SERVER_REST_PORT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>8092</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP REST port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP REST port (REST + WebSocket + UI)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SERVER_GRPC_PORT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>8091</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">gRPC port</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SERVER_MCP_PORT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4041</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model Context Protocol server port</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SERVER_GRPC_BIND_ADDRESS</code></p></td>
@@ -266,6 +311,30 @@ Environment variables take precedence over values in <code>loom.yml</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SERVER_MON_PORT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>8989</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Monitoring/health port</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_storage">Storage</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_STORAGE_UPLOAD_DIR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data/storage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directory where uploaded asset binaries are stored</p></td>
 </tr>
 </tbody>
 </table>
@@ -296,6 +365,212 @@ Environment variables take precedence over values in <code>loom.yml</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>3600</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JWT token lifetime in seconds</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_MCP_AUTH_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Require auth on the MCP endpoints</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_MCP_AUTH_STRICT_MODE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reject unauthenticated MCP calls (no lenient mode)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_MCP_AUTH_ALLOWED_ORIGINS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CORS origins allowed on the MCP SSE endpoint</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The keystore password is read from the <code>auth.keystorePassword</code> config key (a random one is generated
+if unset). See <a href="../authentication/">Authentication</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_oauth2">OAuth2</h3>
+<div class="paragraph">
+<p>Optional OAuth2 login (BFF pattern). Set <code>LOOM_OAUTH2_ENABLED=true</code> and provide your provider’s
+endpoints:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_OAUTH2_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable OAuth2 authentication (default <code>false</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_OAUTH2_CLIENT_ID</code> / <code>LOOM_OAUTH2_CLIENT_SECRET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client credentials</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_OAUTH2_AUTH_URL</code> / <code>LOOM_OAUTH2_TOKEN_URL</code> / <code>LOOM_OAUTH2_USERINFO_URL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provider endpoints</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_OAUTH2_CALLBACK_URL</code> / <code>LOOM_OAUTH2_LOGOUT_URL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Callback and logout URLs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_OAUTH2_SCOPE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scopes to request (default <code>openid profile email</code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_ai_agent">AI Agent</h3>
+<div class="paragraph">
+<p>Settings for the built-in <a href="../chat/">Chat &amp; AI Agent</a>. The agent is <strong>enabled by default</strong>
+(<code>LOOM_AI_ENABLED=true</code>) but needs a reachable LLM provider to answer.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Master switch for the chat agent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_PROVIDER_TYPE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OLLAMA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LLM provider (<code>OLLAMA</code> | <code>VLLM</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_URL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://127.0.0.1:11434" class="bare">http://127.0.0.1:11434</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provider base URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_MODEL_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpt-oss:20b</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_CONTEXT_WINDOW</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16384</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Context window (tokens)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_MAX_TURNS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max tool-calling turns per message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_TOOL_TIMEOUT_MS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per-tool timeout</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_STREAMING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Opt-in true token/reasoning streaming</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_THINK_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(model default)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable model &#34;thinking&#34; chunks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_TITLE_GENERATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(on)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto-title a chat after the first exchange</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_coding_sandbox">Coding Sandbox</h3>
+<div class="paragraph">
+<p>Settings for the per-chat coding sandbox (<code>LOOM_AGENT_SANDBOX_*</code>). Off unless
+<code>LOOM_AGENT_SANDBOX_ENABLED=true</code>. See <a href="../chat/#coding-sandbox">Chat &amp; AI Agent — Coding Sandbox</a> for the full
+table and deployment (backends, Kubernetes RBAC, the runner image). Key switches:
+<code>LOOM_AGENT_SANDBOX_BACKEND</code> (<code>podman</code> \| <code>kubernetes</code>), <code>LOOM_AGENT_SANDBOX_IMAGE</code>,
+<code>LOOM_AGENT_SANDBOX_NAMESPACE</code>, <code>LOOM_AGENT_SANDBOX_IDLE_TTL_S</code>, <code>LOOM_AGENT_SANDBOX_MAX_SESSION_S</code>,
+<code>LOOM_AGENT_SANDBOX_MAX_CONCURRENT</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_agent_memory">Agent Memory</h3>
+<div class="paragraph">
+<p>Settings for the agent <a href="../chat/#memory">memory bank</a> (<code>LOOM_AGENT_MEMORY_*</code>):</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable the memory bank</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_MAX_ENTRIES_PER_SCOPE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(quota)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max notes per scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_MAX_ENTRY_BYTES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(quota)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max size of a single note</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_MAX_SCOPE_BYTES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(quota)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max total size per scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_MAX_WRITES_PER_RUN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(quota)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max memory writes per agent run</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_SHARED_SCOPES_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow shared (cross-user) scopes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_MOUNT_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mount memory read-only into the coding sandbox</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_MEMORY_MOUNT_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sandbox mount path for memory</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -305,8 +580,8 @@ Environment variables take precedence over values in <code>loom.yml</code>.</p>
 <h2 id="_cli">CLI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Loom server CLI is currently a stub (<code>TBD</code>).
-The main entry point is <code>LoomCLI</code>. Configuration is driven entirely via the YAML file and environment variables.</p>
+<p>The Loom server main entry point is <code>LoomCLI</code>. Configuration is driven via the YAML file and
+environment variables shown above.</p>
 </div>
 </div>
 </div>

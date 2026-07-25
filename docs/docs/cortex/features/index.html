@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -78,10 +78,6 @@
 					
 					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
-					</li>
-					
-					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
 					</li>
 					
 					<li class="nav-item">
@@ -307,21 +303,22 @@ Custom nodes can be built by:</p>
 <h2 id="_deployment_flexibility">Deployment Flexibility</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cortex can run as:</p>
+<p>Cortex is primarily a long-running worker daemon (the <code>metaloom/cortex-server</code> image) that registers
+with Loom and serves node tasks. It can run as:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A long-running daemon server (<code>cortex server start</code>)</p>
+<p>One or more replicas of a Kubernetes <code>Deployment</code> — scale out to add processing capacity.</p>
 </li>
 <li>
-<p>A one-shot batch processor (<code>cortex process run &lt;path&gt;</code>)</p>
+<p>A specialised worker pool advertising only heavy node kinds (e.g. GPU-bound <code>facedetect</code>/<code>whisper</code>).</p>
 </li>
 <li>
-<p>A Kubernetes CronJob or Job workload</p>
+<p>A side-car container next to Loom in a small compose stack.</p>
 </li>
 <li>
-<p>A standalone Docker container</p>
+<p>A standalone/offline process against local files (no Loom server).</p>
 </li>
 </ul>
 </div>

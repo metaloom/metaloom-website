@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -114,7 +110,9 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The Loom server is distributed as a Docker image.</p>
+<p>The Loom server is distributed as the <code>metaloom/loom-server</code> image (JVM and <code>-native</code> variants). For a
+zero-config first run, use the all-in-one <code>metaloom/loom-demo</code> image instead — see
+<a href="../../getting-started/">Getting Started</a>. The full image list is on <a href="../../deployment/">Container Images</a>.</p>
 </div>
 <div class="sect1">
 <h2 id="_running_with_docker">Running with Docker</h2>
@@ -129,8 +127,7 @@
   -e LOOM_DB_HOST=postgres \
   -e LOOM_DB_PASSWORD=secret \
   -e LOOM_INITIAL_PASSWORD=admin123 \
-  -v loom-config:/app/config \
-  metaloom/loom:latest</code></pre>
+  metaloom/loom-server:latest</code></pre>
 </div>
 </div>
 </div>
@@ -150,7 +147,7 @@ services:
       POSTGRES_PASSWORD: secret
 
   loom:
-    image: metaloom/loom:latest
+    image: metaloom/loom-server:latest
     depends_on:
       - postgres
     ports:
@@ -161,6 +158,10 @@ services:
       LOOM_DB_PASSWORD: secret
       LOOM_INITIAL_PASSWORD: admin123</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>To add processing, run one or more <a href="../../cortex/containers/">Cortex workers</a> pointed at this Loom
+instance on port <code>8092</code>.</p>
 </div>
 </div>
 </div>

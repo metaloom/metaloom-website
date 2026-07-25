@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -78,10 +78,6 @@
 					
 					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
-					</li>
-					
-					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
 					</li>
 					
 					<li class="nav-item">
@@ -178,6 +174,24 @@
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.metaloom.cortex&lt;/groupId&gt;
     &lt;artifactId&gt;cortex-api&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_node_runtime">Node Runtime</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The task runners that execute individual source / node / segment tasks dispatched by Loom
+(<code>NodeTaskRunner</code>, <code>SourceTaskRunner</code>, <code>SegmentTaskRunner</code>). Pull this in when building a custom daemon:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.metaloom.cortex&lt;/groupId&gt;
+    &lt;artifactId&gt;cortex-node-runtime&lt;/artifactId&gt;
     &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>

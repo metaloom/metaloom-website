@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -116,127 +112,151 @@
           <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cortex exposes a lightweight monitoring/health endpoint that can be used by load balancers,
-Kubernetes liveness probes, and Prometheus scrapers.</p>
+<p>A Cortex worker runs a lightweight monitoring HTTP server exposing <strong>liveness</strong> and <strong>readiness</strong>
+endpoints, designed for Kubernetes probes and load balancers. Loom exposes its own health check on the
+REST API.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_default_endpoint">Default Endpoint</h2>
+<h2 id="_cortex_health_server">Cortex Health Server</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre>http://localhost:8093</pre>
+<div class="paragraph">
+<p>The Cortex daemon starts a small Vert.x HTTP server (separate from any Loom traffic) on port <code>8093</code> by
+default, configurable with the <code>CORTEX_MONITORING_PORT</code> environment variable.</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Status</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET /api/health</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">always <code>200</code> while the process is up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Liveness.</strong> JSON <code>{ &#34;status&#34;: &#34;up&#34;, &#34;loom&#34;: { … } }</code> — the process is alive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET /api/ready</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>200</code> when ready, else <code>503</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Readiness.</strong> Ready means the worker is <strong>connected to Loom <strong>and</strong> registered</strong>. JSON <code>{ &#34;status&#34;: &#34;ready&#34; | &#34;not_ready&#34;, &#34;loom&#34;: { … } }</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The legacy paths <code>GET /health</code> and <code>GET /ready</code> are also served for backward compatibility with
+existing probes.
+</td>
+</tr>
+</tbody></table>
 </div>
 <div class="paragraph">
-<p>The port is configurable with <code>--monitoring-port</code> or the <code>CORTEX_MONITORING_PORT</code> environment variable (default: <code>8093</code>).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_health_check">Health Check</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre>GET /health</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Returns HTTP <code>200 OK</code> with a JSON body when Cortex is running and healthy:</p>
+<p>The embedded <code>loom</code> object reports the worker’s connection to Loom:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  &#34;status&#34;: &#34;UP&#34;
+  &#34;status&#34;: &#34;ready&#34;,
+  &#34;loom&#34;: {
+    &#34;configured&#34;: true,
+    &#34;connected&#34;: true,
+    &#34;registered&#34;: true,
+    &#34;host&#34;: &#34;loom.internal&#34;,
+    &#34;port&#34;: 8092,
+    &#34;reconnectAttempts&#34;: 0,
+    &#34;lastConnectedAt&#34;: 1750000000000,
+    &#34;lastHeartbeatAckAt&#34;: 1750000009000,
+    &#34;error&#34;: null
+  }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Returns HTTP <code>503 Service Unavailable</code> when Cortex is starting up or shutting down.</p>
+<p>In offline mode (<code>configured: false</code>) the worker reports <code>up</code> for liveness but stays <code>not_ready</code>, since
+there is no Loom to register with.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_metrics">Metrics</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_kubernetes_probe_configuration">Kubernetes Probe Configuration</h3>
 <div class="paragraph">
-<p>Cortex exposes JVM and application metrics in Prometheus text format:</p>
+<p>Map liveness onto <code>/api/health</code> and readiness onto <code>/api/ready</code>:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>GET /metrics</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Exposed metrics include:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>JVM memory usage (heap / non-heap)</p>
-</li>
-<li>
-<p>Thread pool sizes and task queue depths</p>
-</li>
-<li>
-<p>Per-node processing counters (processed, skipped, failed)</p>
-</li>
-<li>
-<p>Pipeline execution times</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_kubernetes_probe_configuration">Kubernetes Probe Configuration</h2>
-<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">livenessProbe:
   httpGet:
-    path: /health
+    path: /api/health
     port: 8093
   initialDelaySeconds: 10
   periodSeconds: 15
 
 readinessProbe:
   httpGet:
-    path: /health
+    path: /api/ready
     port: 8093
   initialDelaySeconds: 5
   periodSeconds: 10</code></pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_changing_the_port">Changing the Port</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">CORTEX_MONITORING_PORT=9090</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
-<h2 id="_changing_the_port">Changing the Port</h2>
+<h2 id="_loom_health_check">Loom Health Check</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Via CLI:</p>
+<p>The Loom server exposes a health check on its REST API:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>cortex server start --monitoring-port 9090</pre>
+<pre>GET /api/v1/health</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;status&#34;: &#34;UP&#34;,
+  &#34;version&#34;: &#34;1.0.0-SNAPSHOT&#34;,
+  &#34;database&#34;: &#34;UP&#34;,
+  &#34;timestamp&#34;: &#34;2026-07-25T20:00:00Z&#34;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Via environment variable:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>CORTEX_MONITORING_PORT=9090 cortex server start</pre>
+<p>It verifies database connectivity; if the database is unreachable, <code>database</code> is <code>DOWN</code> and <code>status</code>
+becomes <code>DEGRADED</code>. See <a href="../../loom/rest-api/">REST API</a>.</p>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_metrics_planned">Metrics (planned)</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Via YAML configuration (if applicable to the deployment):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">monitoringPort: 9090</code></pre>
-</div>
+<p>A dedicated <strong>Prometheus metrics</strong> endpoint and a separate Loom monitoring port
+(<code>LOOM_SERVER_MON_PORT</code>, default <code>8989</code>) are reserved for future use — the Loom <code>monitoring</code> module is
+currently a placeholder and neither Loom nor Cortex serves a <code>/metrics</code> endpoint yet. Until then, use
+the health/readiness endpoints above for probing and availability checks.</p>
 </div>
 </div>
 </div>

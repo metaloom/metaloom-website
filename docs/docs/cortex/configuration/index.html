@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>CLI Arguments &amp; Env Settings</title>
+	<title>Configuration</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,16 +12,16 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@metaloom" />
     <meta name="twitter:creator" content="" />
-    <meta name="twitter:title" content="CLI Arguments &amp; Env Settings" />
+    <meta name="twitter:title" content="Configuration" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
     
-    <meta property="og:title" content="CLI Arguments &amp; Env Settings">
+    <meta property="og:title" content="Configuration">
     <meta property="og:url" content="https://metaloom.io/docs/cortex/configuration/">
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -110,191 +106,27 @@
       </div>
       <div class="col-lg-9">
         <div class="docs-page-header">
-          <h1>CLI Arguments &amp; Env Settings</h1>
+          <h1>Configuration</h1>
         </div>
         <div class="post-single-content docs-main-content">
           <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cortex is configured entirely via CLI arguments and environment variables.
-Environment variables can be used as drop-in replacements for CLI flags, which is convenient for container-based deployments.</p>
+<p>Cortex is a daemon and is configured primarily through <strong>environment variables</strong>, which is convenient
+for container-based deployments. A <code>cortex</code> CLI wrapper (picocli) also exists for local runs, but in a
+typical online deployment you just set environment variables and start the process — it connects to
+Loom, registers, and serves node tasks.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_entry_point">Entry Point</h2>
+<h2 id="_connecting_to_loom">Connecting to Loom</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cortex &lt;global-options&gt; &lt;command&gt; &lt;sub-command&gt; [options]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_global_options">Global Options</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>These options apply to all commands and can be set via environment variables.</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;"/>
 <col style="width: 16.6666%;"/>
-<col style="width: 16.6666%;"/>
-<col style="width: 33.3335%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Flag</th>
-<th class="tableblock halign-left valign-top">Short</th>
-<th class="tableblock halign-left valign-top">Default</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--hostname</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localhost</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname of the Loom server. Env: <code>LOOM_HOST</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--port</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-p</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7733</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP port of the Loom server. Env: <code>LOOM_PORT</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--monitoring-port</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8093</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Monitoring HTTP port. Env: <code>CORTEX_MONITORING_PORT</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--meta-path</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~/.cache/metaloom/cortex/meta</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Local metadata storage path. Env: <code>CORTEX_META_PATH</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-v</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(off)</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable DEBUG logging. Use <code>-vv</code> for TRACE.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_commands">Commands</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_server_start"><code>server start</code></h3>
-<div class="paragraph">
-<p>Start the Cortex server in continuous (daemon) mode.
-Cortex connects to Loom, loads pipeline definitions, and processes new assets as they arrive.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cortex server start [--actions &lt;node1,node2,...&gt;]</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 40%;"/>
-<col style="width: 20%;"/>
-<col style="width: 40%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Option</th>
-<th class="tableblock halign-left valign-top">Short</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--actions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-a</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-separated list of node names to enable.
-  When omitted all registered nodes are active.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cortex --hostname loom.internal --port 7733 server start --actions sha256,thumbnail,tika</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_process_run"><code>process run</code></h3>
-<div class="paragraph">
-<p>Process a local directory tree once (batch mode) and exit.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cortex process run [--actions &lt;node1,...&gt;] &lt;path&gt;</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 40%;"/>
-<col style="width: 20%;"/>
-<col style="width: 40%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Option</th>
-<th class="tableblock halign-left valign-top">Short</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--actions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-a</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-separated list of node names to enable.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;path&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">(positional) Root directory to process.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Example — hash and thumbnail all files under <code>/media/archive</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cortex process run --actions sha256,sha512,thumbnail /media/archive</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Example — run all nodes against a directory using env vars instead of flags:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">LOOM_HOST=loom.internal LOOM_PORT=7733 cortex process run /media/inbox</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_environment_variable_reference">Environment Variable Reference</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 40%;"/>
-<col style="width: 20%;"/>
-<col style="width: 40%;"/>
+<col style="width: 50.0001%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -307,41 +139,177 @@ Cortex connects to Loom, loads pipeline definitions, and processes new assets as
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_HOST</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>localhost</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Loom server hostname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname of the Loom server to register with.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_PORT</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7733</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Loom server HTTP port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8092</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom REST + WebSocket port. Cortex dials <strong>out</strong> to this port.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_MONITORING_PORT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>8093</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cortex monitoring/health port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cortex health / readiness HTTP port.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_META_PATH</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>~/.cache/metaloom/cortex/meta</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Local metadata cache directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local sidecar metadata cache directory.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_NODE_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stable worker id. Set it so a restarted worker keeps its identity — Loom keys registrations on it.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Some older material references a Cortex↔Loom port of <code>7733</code>. The running Loom server and the
+demo/start scripts use <code>8092</code>; prefer that.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_verbosity">Verbosity</h2>
+<h2 id="_authentication">Authentication</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"># INFO level (default)
-cortex server start
-
-# DEBUG level
-cortex -v server start
-
-# TRACE level
-cortex -vv server start</code></pre>
+<div class="paragraph">
+<p>An online Cortex worker authenticates to Loom for the WebSocket (<code>?token=&lt;jwt&gt;</code>) and for REST result
+writes (<code>Bearer &lt;jwt&gt;</code>) using a single token:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_TOKEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A JWT used for both the WebSocket handshake and REST calls.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Without a token a worker still <strong>registers and answers tasks</strong>; it simply skips result persistence
+(the same graceful degradation as an offline worker).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <a href="../examples/">Python worker example</a> additionally accepts <code>LOOM_USER</code> / <code>LOOM_PASSWORD</code>
+to log in for a token — that is a convenience of that example, not the JVM daemon, which uses
+<code>LOOM_TOKEN</code>.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advertising_node_kinds">Advertising Node Kinds</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Cortex instance advertises the node kinds it is willing to run when it registers. Loom only
+dispatches a task to a worker whose restriction accepts that kind, which is how you pin heavy nodes
+(e.g. <code>facedetect</code>, <code>whisper</code>) to specific hardware.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_NODE_WHITELIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-separated node kinds this worker will run. Empty/unset = accept anything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_NODE_BLACKLIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma-separated node kinds this worker refuses, even if the whitelist would admit them.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>An administrator can further restrict a worker from the Loom UI; the effective restriction is
+reconciled on registration and persisted as a durable <code>cortex_instance</code> record.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_optional_yaml_file_per_node_options">Optional YAML File &amp; Per-Node Options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Global connection settings come from environment variables (or CLI flags). Fine-grained <strong>per-node
+options</strong> can also be supplied in an optional YAML file at <code>~/.config/metaloom/cortex.yml</code> (a default
+is written there on first run if missing). Cortex also ships sensible per-node default timeouts (e.g.
+<code>sha512</code> 30 s, <code>thumbnail</code> 120 s, <code>whisper</code>/<code>llm</code> 600 s) and a media-level concurrency default of <code>4</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_monitoring_health">Monitoring / Health</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The daemon exposes a small monitoring HTTP server (default port <code>8093</code>), which maps cleanly onto
+Kubernetes probes:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET /api/health</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Liveness — <code>200</code> while the process is up.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET /api/ready</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Readiness — <code>200</code> once connected <strong>and</strong> registered with Loom, else <code>503</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See <a href="../monitoring/">Monitoring API</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_offline_local_runs">Offline / Local Runs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With no <code>LOOM_HOST</code> reachable, Cortex runs standalone against local files and stores results in the
+local meta-path / xattr cache. Loom-dependent components degrade to no-ops.</p>
 </div>
 </div>
 </div>

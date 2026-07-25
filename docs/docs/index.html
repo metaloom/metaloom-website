@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -135,7 +131,8 @@
 			</div>
 			<div class="docs-card-body">
 				<a href="getting-started/" class="docs-card-link">Demo Container</a>
-				<a href="getting-started/#loom-ui" class="docs-card-link">Loom UI</a>
+				<a href="deployment/" class="docs-card-link">Container Images</a>
+				<a href="loom/chat/" class="docs-card-link">Chat &amp; AI Agent</a>
 				<a href="getting-started/#loom-app" class="docs-card-link">Loom App</a>
 			</div>
 		</div>
@@ -151,7 +148,7 @@
 				<a href="loom/java-client/" class="docs-card-link">Java Client</a>
 				<a href="loom/authentication/" class="docs-card-link">Authentication</a>
 				<a href="loom/configuration/" class="docs-card-link">Configuration</a>
-				<a href="loom/artifacts/" class="docs-card-link">Artifacts</a>
+				<a href="loom/chat/" class="docs-card-link">Chat &amp; AI Agent</a>
 				<a href="loom/features/" class="docs-card-link">Features</a>
 				<a href="loom/examples/" class="docs-card-link">Examples</a>
 			</div>
@@ -164,12 +161,27 @@
 				<p>The media processing engine. Use these guides when you need node behavior, runtime configuration, deployment options or an overview of supported processing capabilities.</p>
 			</div>
 			<div class="docs-card-body">
-				<a href="cortex/nodes/" class="docs-card-link">Pipeline Nodes</a>
+				<a href="nodes/" class="docs-card-link">Pipeline Nodes</a>
 				<a href="cortex/features/" class="docs-card-link">Features</a>
 				<a href="cortex/configuration/" class="docs-card-link">Configuration</a>
 				<a href="cortex/monitoring/" class="docs-card-link">Monitoring API</a>
-				<a href="cortex/artifacts/" class="docs-card-link">Artifacts</a>
-				<a href="cortex/examples/" class="docs-card-link">Examples</a>
+				<a href="cortex/containers/" class="docs-card-link">Containers</a>
+				<a href="cortex/examples/" class="docs-card-link">Custom Nodes (Java/Python)</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="nodes/">Nodes</a></h2>
+				<p>The built-in Cortex processing nodes — the atomic steps a pipeline is built from. Each node page covers what it does, the media it applies to, its inputs and output keys, requirements and configuration.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="nodes/" class="docs-card-link">All Nodes</a>
+				<a href="nodes/#hashing" class="docs-card-link">Hashing &amp; dedup</a>
+				<a href="nodes/#extraction" class="docs-card-link">Extraction &amp; AI</a>
+				<a href="nodes/#media" class="docs-card-link">Media analysis</a>
+				<a href="nodes/#pipeline" class="docs-card-link">Pipeline</a>
 			</div>
 		</div>
 	</div>
@@ -215,7 +227,7 @@
 	<div class="col-md-6 col-xl-4 mb-4">
 		<div class="note p-4 h-100">
 			<h3>Pipeline</h3>
-			<p>A directed graph of processing nodes. Pipelines describe how Cortex evaluates assets and how results flow between nodes.</p>
+			<p>A directed graph of processing nodes, authored in the UI and stored on Loom. Loom&#39;s engine runs the graph and delegates node tasks to Cortex workers.</p>
 			<p><a href="pipeline/">See pipeline mechanism</a></p>
 		</div>
 	</div>
@@ -223,13 +235,13 @@
 		<div class="note p-4 h-100">
 			<h3>Node</h3>
 			<p>A single processing step such as hashing, OCR, thumbnail generation, face detection, captioning or synchronization back to Loom.</p>
-			<p><a href="cortex/nodes/">See pipeline nodes</a></p>
+			<p><a href="nodes/">See pipeline nodes</a></p>
 		</div>
 	</div>
 	<div class="col-md-6 col-xl-4 mb-4">
 		<div class="note p-4 h-100">
 			<h3>Online vs Offline</h3>
-			<p>Cortex can run standalone against local files or connected to Loom, where it loads pipeline definitions and persists extracted results remotely.</p>
+			<p>Cortex can run standalone against local files, or connected to Loom as a worker daemon that registers, receives node tasks, and persists results remotely.</p>
 			<p><a href="interaction/">See interaction model</a></p>
 		</div>
 	</div>
@@ -243,8 +255,8 @@
 	<div class="col-md-6 col-xl-4 mb-4">
 		<div class="note p-4 h-100">
 			<h3>Deployment</h3>
-			<p>Both systems ship as JVM artifacts and container images, with Kubernetes deployment paths for server and scheduled batch processing setups.</p>
-			<p><a href="loom/artifacts/">Loom artifacts</a> · <a href="cortex/artifacts/">Cortex artifacts</a></p>
+			<p>Both systems ship as JVM artifacts and container images (<code>loom-server</code>, <code>loom-demo</code>, <code>cortex-server</code>, <code>loom-session-runner</code>), with Kubernetes deployment paths.</p>
+			<p><a href="deployment/">Container images</a> · <a href="loom/artifacts/">Loom artifacts</a> · <a href="cortex/artifacts/">Cortex artifacts</a></p>
 		</div>
 	</div>
 </div>
@@ -283,7 +295,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Understand how media gets processed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="interaction/">Loom and Cortex Interaction</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline/">Pipeline Mechanism</a>, <a href="cortex/nodes/">Pipeline Nodes</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline/">Pipeline Mechanism</a>, <a href="nodes/">Nodes</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deploy or operate the system</p></td>
@@ -294,6 +306,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Learn the data model and feature surface</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/features/">Loom Features</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cortex/features/">Cortex Features</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use or deploy the AI assistant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/chat/">Chat &amp; AI Agent</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/chat/#coding-sandbox">Coding Sandbox</a></p></td>
 </tr>
 </tbody>
 </table>

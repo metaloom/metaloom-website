@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -78,10 +78,6 @@
 					
 					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
-					</li>
-					
-					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
 					</li>
 					
 					<li class="nav-item">
@@ -150,7 +146,9 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <h2 id="_interactive_api_swagger_ui">Interactive API (Swagger UI)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A live Swagger UI is embedded in the <a href="/docs">Documentation</a> landing page and points to the OpenAPI spec at <code>/api/v1/openapi.json</code>.</p>
+<p>A live Swagger UI is embedded in the <a href="/docs">Documentation</a> landing page and points to the OpenAPI
+spec at <code>/api/v1/openapi.json</code>. The bundled spec is generated from the server’s endpoint registry; see
+the note on regenerating it in the website build documentation (<code>spec/website/WEBSITE.md</code>).</p>
 </div>
 </div>
 </div>
@@ -302,8 +300,41 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/binary</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete binary data</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/json-comps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upsert a generic JSON component (schema-agnostic node result sink)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/json-comps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List an asset’s JSON components</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/components</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List typed asset components</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/node-results</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record a node-result ledger row (asset, nodeKind, nodeId)</p></td>
+</tr>
 </tbody>
 </table>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<code>json-comps</code> + <code>node-results</code> is the lightweight persistence path used by Cortex nodes. See
+<a href="../../cortex/examples/">Cortex Examples</a>.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_users">Users</h3>
@@ -483,6 +514,10 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="_pipelines">Pipelines</h3>
+<div class="paragraph">
+<p>Pipelines are versioned: each update creates a new immutable version. Runs are executed by Loom’s
+engine and delegated to registered Cortex workers — see <a href="../../pipeline/">Pipeline Mechanism</a>.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;"/>
@@ -500,7 +535,7 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create pipeline definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create pipeline (writes version 1)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
@@ -510,12 +545,12 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Load pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load pipeline (latest version)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Update pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update pipeline (creates a new version)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
@@ -523,9 +558,169 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete pipeline</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid/run</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start a run (body: <code>mediaUuids</code>, <code>pathGlobs</code>, <code>dryRun</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid/runs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List run history with status + counters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid/versions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List versions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid/versions/:version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load a specific version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/:uuid/versions/:version/restore</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restore a version as a new version</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/pipelines/events/ws</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">WebSocket: live pipeline events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebSocket: live pipeline run events</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_processors_cortex_workers">Processors (Cortex workers)</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/processors</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List registered Cortex workers and their state</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/processors/:uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load one worker (capabilities, node-kind restriction)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/processors/ws</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebSocket: the control channel Cortex workers connect to</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_ai_agent_chats">AI Agent — Chats</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a chat</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List chats</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET/POST/DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats/:uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load / update / delete a chat</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats/:uuid/stream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Send a message; receive the agent run as an SSE stream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chats/:uuid/stream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancel the active run</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See <a href="../chat/">Chat &amp; AI Agent</a> for the streaming event protocol.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ai_agent_sessions_skills_memory">AI Agent — Sessions, Skills, Memory</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chat/sessions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publishable snapshots of a chat’s working state</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/skills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User-owned skill instruction packages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/skills/library</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browse published skills</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/skills/:uuid/install</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Install (copy) a published skill</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory/scopes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the caller’s memory scopes with usage + quota</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List notes of a scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET/POST/PUT/DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/memory/entry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read / create / upsert / delete a memory note</p></td>
 </tr>
 </tbody>
 </table>
@@ -621,8 +816,10 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <div class="sect2">
 <h3 id="_further_endpoints">Further Endpoints</h3>
 <div class="paragraph">
-<p>Additional endpoints exist for: <code>attachments</code>, <code>webhooks</code>, <code>tasks</code>, <code>comments</code>, <code>embeddings</code>, <code>spaces</code>, <code>annotations</code>, <code>asset-pools</code>, <code>asset-components</code>, <code>asset-binaries</code>, <code>tokens</code> (API keys), and <code>node-descriptors</code>.
-All follow the same CRUD pattern under <code>/api/v1/&lt;resource&gt;</code>.</p>
+<p>Additional endpoints exist for: <code>attachments</code>, <code>webhooks</code>, <code>tasks</code>, <code>comments</code>, <code>reactions</code>,
+<code>embeddings</code>, <code>spaces</code>, <code>annotations</code>, <code>persons</code>, <code>clusters</code>, <code>blacklists</code>, <code>pools</code> (asset pools),
+<code>tokens</code> (API keys), <code>me</code>, <code>health</code>, and the pipeline node metadata under <code>pipeline/node-descriptors</code>
+and <code>pipeline/content-types</code>. Most follow the same CRUD pattern under <code>/api/v1/&lt;resource&gt;</code>.</p>
 </div>
 </div>
 </div>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Container Images</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Container Images" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Container Images">
+    <meta property="og:url" content="https://metaloom.io/docs/deployment/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <nav id="toc"></nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Container Images</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>MetaLoom ships as a small set of OCI (Docker/Podman) container images. All images are published
+under the <code>metaloom/</code> namespace.</p>
+</div>
+<div class="sect1">
+<h2 id="_image_overview">Image Overview</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 28.5715%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Image</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Built from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/loom-server</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Loom backend server (REST/gRPC API, DB access, auth, UI). Production image.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom/containers/server</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/loom-demo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All-in-one demo: Loom server pre-seeded with a database and sample assets. Best for a first run.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom/containers/demo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/cortex-server</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Cortex processing daemon (media analysis worker). Registers with Loom and serves nodes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex/container</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/loom-session-runner</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The isolated per-chat coding sandbox spawned by the Loom AI agent. Not started manually — Loom provisions it on demand. See <a href="../loom/chat/#coding-sandbox">Chat &amp; AI Agent — Coding Sandbox</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom/agent/session-runner</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Both <code>loom-server</code> and <code>loom-demo</code> are available in two variants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>JVM</strong> (default tag, e.g. <code>:latest</code>) — Eclipse Temurin JRE running the shaded JAR.</p>
+</li>
+<li>
+<p><strong>Native</strong> (<code>-native</code> suffix, e.g. <code>:latest-native</code>) — a GraalVM ahead-of-time compiled binary with
+faster startup and lower memory.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_default_ports">Default Ports</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Service</th>
+<th class="tableblock halign-left valign-top">Port</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom REST API + WebSocket + UI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8092</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The single port clients, the UI and Cortex workers all connect to. Env: <code>LOOM_SERVER_REST_PORT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom gRPC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8091</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional gRPC surface. Env: <code>LOOM_SERVER_GRPC_PORT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom monitoring</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8989</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Health / metrics. Env: <code>LOOM_SERVER_MON_PORT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cortex monitoring</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8093</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cortex health / readiness (<code>/api/health</code>, <code>/api/ready</code>). Env: <code>CORTEX_MONITORING_PORT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session Runner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>8080</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal only — reached by Loom over the pod/loopback network, never exposed publicly.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Cortex connects <strong>out</strong> to Loom on port <code>8092</code>; Loom never dials in to Cortex. Older
+documentation referenced a Cortex↔Loom port of <code>7733</code> — the current default is <code>8092</code>.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_the_images">Building the Images</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Loom (JVM + native, demo + server) — requires a prior `mvn package` and `npm run build` in loom-ui
+loom/containers/build-containers.sh                 # all variants
+loom/containers/build-containers.sh jvm server      # only the JVM server image
+
+# Cortex (requires a local OpenCV 5.1 build; see the script header)
+cortex/container/build-container.sh
+
+# Session Runner (coding sandbox)
+loom/agent/session-runner/build.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="../getting-started/">Getting Started</a> to run the demo image, and
+<a href="../loom/containers/">Loom Containers</a> / <a href="../cortex/containers/">Cortex Containers</a> for
+production deployment examples.</p>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://metaloom.io/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.ef558ab60e181d3d6e423237a73e635357660ad269aaf394b450c69972f92a96dd457107aab6b5e167d70fc55cb53636.js" integrity="sha384-71WKtg4YHT1uQjI3pz5jU1dmCtJpqvOUtFDGmXL5KpbdRXEHqra14WfXD8VctTY2"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -78,10 +78,6 @@
 					
 					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
-					</li>
-					
-					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
 					</li>
 					
 					<li class="nav-item">
@@ -276,7 +272,7 @@ They can be set at the global level or scoped to specific libraries or collectio
 <h2 id="_pipelines">Pipelines</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Pipelines</strong> define the processing workflows that Cortex executes on assets.</p>
+<p><strong>Pipelines</strong> define the media processing workflows.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -284,10 +280,10 @@ They can be set at the global level or scoped to specific libraries or collectio
 <p>Define a pipeline with a name, description, priority, and enabled flag</p>
 </li>
 <li>
-<p>Pipelines are stored in Loom and loaded by Cortex at startup</p>
+<p>Pipelines are authored in the UI and stored on Loom with immutable versioning</p>
 </li>
 <li>
-<p>Each pipeline maps to a directed node graph (see <a href="../../pipeline">Pipeline Mechanism</a>)</p>
+<p>Runs are executed by Loom’s engine, which delegates node tasks to registered Cortex workers (see <a href="../../pipeline">Pipeline Mechanism</a>)</p>
 </li>
 <li>
 <p>Pipeline execution results are tracked and surfaced as real-time WebSocket events</p>

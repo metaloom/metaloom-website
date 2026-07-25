@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -114,14 +110,58 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>A <strong>pipeline</strong> is a directed acyclic graph (DAG) of processing nodes that Cortex executes on each media asset.
-Pipelines are defined in Loom (stored in the database) and loaded by Cortex at startup.</p>
+<p>A <strong>pipeline</strong> is a directed acyclic graph (DAG) of processing nodes applied to media assets.
+Pipelines are <strong>authored in the Loom UI</strong>, <strong>stored on Loom</strong> (versioned in the database), and
+<strong>executed by Loom’s pipeline engine</strong>, which delegates the individual node tasks to registered
+<a href="../cortex/">Cortex</a> workers.</p>
+</div>
+<div class="sect1">
+<h2 id="_execution_model_loom_owns_the_graph">Execution Model: Loom Owns the Graph</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Earlier versions of MetaLoom pushed a whole pipeline definition to Cortex and let Cortex execute the
+graph. That is no longer the case. Today:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Loom owns the DAG.</strong> When a run starts, Loom parses the stored definition into an executable graph
+and drives it with its own pipeline run engine.</p>
+</li>
+<li>
+<p><strong>Loom selects a worker.</strong> It picks a registered, online Cortex instance whose advertised node kinds
+accept the pipeline’s <strong>source</strong> kind, and sends it a <strong>source task</strong> to enumerate media items.</p>
+</li>
+<li>
+<p><strong>Loom dispatches node tasks.</strong> For each discovered item, Loom walks the DAG and dispatches one
+<strong>node task</strong> per node to a suitable worker; affinity-grouped work goes out as <strong>segment tasks</strong>.
+Cortex only ever sees one node (or segment) at a time and replies with a result.</p>
+</li>
+<li>
+<p><strong>Loom tracks the run.</strong> Run state (status, counters, durations) is persisted on Loom, so a run
+survives the process that started it and is reported back to the UI live.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>  Loom UI ──POST /run──▶ Loom pipeline engine ──SOURCE_TASK──▶ Cortex worker
+                              │  owns the DAG      ◀─SOURCE_ITEMS─┘
+                              ├──NODE_TASK────────▶ Cortex worker ─NODE_TASK_RESULT─▶
+                              └──SEGMENT_TASK─────▶ Cortex worker ─SEGMENT_TASK_RESULT─▶</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is what makes processing <strong>horizontally scalable</strong>: add Cortex workers to add capacity, and pin
+heavy node kinds to specific hardware — Loom routes each task to a worker that accepts its kind.</p>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_pipeline_structure">Pipeline Structure</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A pipeline has the following properties:</p>
+<p>A pipeline version has the following properties:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -140,105 +180,79 @@ Pipelines are defined in Loom (stored in the database) and loaded by Cortex at s
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier for the pipeline (lowercase, alphanumeric, hyphens)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Human-readable pipeline name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Human-readable description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Human-readable description.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>priority</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When multiple pipelines match an asset, higher priority wins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When multiple pipelines are candidates, higher priority wins.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>enabled</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether this pipeline is active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether this pipeline is active.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>dryRun</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When <code>true</code>, nodes log their actions but do not persist results</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <code>true</code>, nodes run but do not persist results.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sourceNode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PipelineNode</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The single entry-point node that yields media</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nodes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;PipelineNode&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All nodes, in topological order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The node graph — <code>nodes[]</code> and <code>edges[]</code>.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Pipelines are <strong>versioned</strong>: every save creates a new immutable <code>pipeline_version</code>; older versions can
+be viewed and restored. See <a href="../loom/rest-api/">REST API</a> for the endpoints.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_node_graph">Node Graph</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Each node in the graph has:</p>
+<p>The definition is a graph of <code>nodes[]</code> connected by <code>edges[]</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;nodes&#34;: [
+    { &#34;id&#34;: &#34;pn1&#34;, &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;File Source&#34; },
+    { &#34;id&#34;: &#34;pn2&#34;, &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;MIME Filter&#34; },
+    { &#34;id&#34;: &#34;pn3&#34;, &#34;type&#34;: &#34;sha256&#34;,            &#34;name&#34;: &#34;SHA-256 Hash&#34; }
+  ],
+  &#34;edges&#34;: [
+    { &#34;id&#34;: &#34;pe1&#34;, &#34;source&#34;: &#34;pn1&#34;, &#34;target&#34;: &#34;pn2&#34; },
+    { &#34;id&#34;: &#34;pe2&#34;, &#34;source&#34;: &#34;pn2&#34;, &#34;target&#34;: &#34;pn3&#34; }
+  ]
+}</code></pre>
+</div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A unique <code>id</code> (e.g. <code>sha256</code>, <code>thumbnail</code>)</p>
+<p>Each node carries a graph <code>id</code> and a <code>type</code> — the <strong>node kind</strong> that Loom uses to route the task to
+a worker that can run it.</p>
 </li>
 <li>
-<p>Zero or more <strong>upstream</strong> connections it reads outputs from</p>
+<p>A pipeline has exactly one <strong>source</strong> node (e.g. <code>filesystem-source</code>) that enumerates media.</p>
 </li>
 <li>
-<p>Zero or more <strong>downstream</strong> connections it writes to</p>
+<p><strong>Filter</strong> nodes (e.g. <code>filter-mimetype</code>) route items down <code>PASS</code> / <code>REJECT</code> branches so, for
+example, a video-only branch never receives images.</p>
 </li>
 <li>
-<p>An optional <strong>filter</strong> that controls which assets reach this node (e.g. video-only, image-only)</p>
+<p>Node kinds map to the built-in <a href="../nodes/">Nodes</a> (or your own custom nodes).</p>
 </li>
 </ul>
-</div>
-<div class="sect2">
-<h3 id="_connections">Connections</h3>
-<div class="paragraph">
-<p>Nodes are wired via <code>connectTo()</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">sourceNode.connectTo(sha256Node);
-sha256Node.connectTo(thumbnailNode, FilterBranch.PASS);
-sha256Node.connectTo(dedupNode,     FilterBranch.PASS);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Connections carry a branch label (<code>PASS</code> / <code>FAIL</code>) so a filter node can route assets differently depending on the filter result.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_topological_ordering">Topological Ordering</h3>
-<div class="paragraph">
-<p><code>DefaultPipeline</code> discovers all nodes reachable from the source node via a BFS walk and sorts them in topological order.
-This ensures every node’s dependencies are processed before it runs.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_node_lifecycle">Node Lifecycle</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>For each media asset, every node in the pipeline goes through this sequence:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>1. isEnabled()   → skip if node is turned off in options
-2. existsResult() → skip if result is already cached (meta-path or Loom)
-3. isProcessable() → skip if media type doesn&#39;t match (e.g. video-only node on an image)
-4. compute()     → run the actual analysis</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If any step returns <code>false</code>, the node is skipped and the pipeline moves to the next node.</p>
 </div>
 </div>
 </div>
@@ -246,105 +260,28 @@ This ensures every node’s dependencies are processed before it runs.</p>
 <h2 id="_node_outputs">Node Outputs</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Nodes publish typed key-value outputs that downstream nodes can consume:</p>
+<p>A node returns a result carrying typed key-value <strong>outputs</strong> (e.g. <code>sha256</code>, <code>transcript</code>,
+<code>embedding</code>). Downstream nodes read a dependency’s outputs, so a hash node upstream lets later nodes
+resolve the asset and content-address their work. Node results with sync enabled are written back to
+Loom as asset metadata; see <a href="../cortex/examples/">Cortex Examples</a> for the persistence path.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_a_pipeline">Running a Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Trigger a run over REST (or from the UI’s Run button):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Publishing an output
-ctx.output(OUTPUT_FILE_SIZE, fileSize);
-ctx.output(OUTPUT_SHA256, hashValue);
-
-// Reading an upstream output (from a node named &#34;sha256&#34;)
-String hash = ctx.upstreamOutput(&#34;sha256&#34;, &#34;sha256&#34;);</code></pre>
+<pre class="highlight"><code class="language-text" data-lang="text">POST /api/v1/pipelines/:uuid/run     # body: { mediaUuids, pathGlobs, dryRun }
+GET  /api/v1/pipelines/:uuid/runs    # run history with status + counters</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output keys are defined as <code>NodeOutputKey&lt;T&gt;</code> constants on each node class.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_result_origins">Result Origins</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Each node result carries an origin that explains how the result was obtained:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;"/>
-<col style="width: 75%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Origin</th>
-<th class="tableblock halign-left valign-top">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>COMPUTED</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The node performed the analysis now</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>REMOTE</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The result was already stored in Loom and loaded from there</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CACHED</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The result was read from the local meta-path cache</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipeline_executor">Pipeline Executor</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>ReactivePipelineExecutor</code> drives pipeline execution using RxJava.
-It:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Streams media assets from the source node.</p>
-</li>
-<li>
-<p>For each asset, runs the topologically ordered nodes in sequence.</p>
-</li>
-<li>
-<p>Collects <code>NodeResult</code> objects and emits them as <code>PipelineResult</code> events.</p>
-</li>
-<li>
-<p>Publishes events to the <code>PipelineEventBus</code>, which forwards them to Loom over WebSocket.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_defining_a_pipeline_in_code">Defining a Pipeline in Code</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Build nodes
-LoomSourceNode source    = new LoomSourceNode(loomClient);
-SHA256Node    sha256    = new SHA256Node(loomClient, options, hashOptions);
-ThumbnailNode thumbnail = new ThumbnailNode(loomClient, options, thumbOptions);
-LoomNode      loom      = new LoomNode(loomClient, options, loomNodeOptions);
-
-// Wire the graph
-source.connectTo(sha256);
-sha256.connectTo(thumbnail);
-thumbnail.connectTo(loom);
-
-// Build the pipeline
-Pipeline pipeline = DefaultPipeline.builder(&#34;ingest&#34;)
-    .description(&#34;Default ingest pipeline&#34;)
-    .priority(10)
-    .source(source)
-    .build();</code></pre>
-</div>
+<p>The response reports whether the run was dispatched, the assigned worker, and the <code>runUuid</code>. If no
+suitable online worker exists the run is rejected (<code>503</code>) rather than silently queued.</p>
 </div>
 </div>
 </div>
@@ -352,15 +289,27 @@ Pipeline pipeline = DefaultPipeline.builder(&#34;ingest&#34;)
 <h2 id="_dry_run_mode">Dry-Run Mode</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When <code>dryRun = true</code>, nodes execute their <code>compute()</code> logic and log what they <strong>would</strong> do,
-but they do not write to the local cache, xattr, or Loom.
-This is useful for testing pipeline definitions against real media without side effects.</p>
+<p>When <code>dryRun = true</code>, nodes execute but do not persist results — useful for validating a pipeline
+against real media without side effects. It is a property of the pipeline definition (or the run
+request).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_live_progress_websocket">Live Progress (WebSocket)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While a run executes, the engine emits structured tracking events which the UI consumes live:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"># Dry-run mode is set via the pipeline definition in Loom (dryRun: true)
-# or by passing a flag during process run (TBD in CLI)</code></pre>
+<pre class="highlight"><code class="language-text" data-lang="text">ws://&lt;loom-host&gt;:8092/api/v1/pipelines/events/ws     # optional ?pipeline=&lt;name&gt; filter</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Each event identifies the pipeline, node, media item, status (<code>STARTED</code>, <code>COMPLETED</code>, <code>SKIPPED</code>,
+<code>FAILED</code>) and duration. The Loom UI subscribes to this stream to display live processing progress and
+per-node statistics.</p>
 </div>
 </div>
 </div>
@@ -368,25 +317,9 @@ This is useful for testing pipeline definitions against real media without side 
 <h2 id="_custom_nodes">Custom Nodes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Any class extending <code>AbstractMediaNode&lt;YourOptions&gt;</code> can be added to a pipeline.
-See <a href="../cortex/examples">Cortex Examples</a> for a complete working example and Dagger wiring.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipeline_events_websocket">Pipeline Events (WebSocket)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As the executor processes assets, it emits structured events to the Loom WebSocket endpoint:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ws://&lt;loom-host&gt;:8092/api/v1/pipelines/events/ws</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Each event identifies the pipeline, node, asset UUID, status (<code>STARTED</code>, <code>COMPLETED</code>, <code>SKIPPED</code>, <code>FAILED</code>), and duration.
-The Loom UI subscribes to this stream to display live processing progress.</p>
+<p>Any node kind can be added by a custom Cortex worker that advertises it. See
+<a href="../cortex/examples/">Cortex Examples</a> for authoring a node in Java, assembling a custom daemon, or
+implementing a worker in Python.</p>
 </div>
 </div>
 </div>

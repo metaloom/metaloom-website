@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -113,17 +109,99 @@
           <h1>Configuration</h1>
         </div>
         <div class="post-single-content docs-main-content">
-          <div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-	&#34;db&#34;: {
-		&#34;host&#34;: &#34;localhost&#34;,
-		&#34;port&#34;: 5432
-	},
-	&#34;server&#34;: {
-		&#34;port&#34;: 8080
-	}
-}</code></pre>
+          <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>MetaLoom has two independently configured runtime components. This page is a hub; follow the links for
+the full settings tables.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">How it is configured</th>
+<th class="tableblock halign-left valign-top">Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Loom</strong> (server)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom.yml</code> YAML file <strong>plus</strong> <code>LOOM_*</code> environment-variable overrides</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../loom/configuration/">Loom Configuration</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cortex</strong> (worker daemon)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Environment variables / CLI flags (optional <code>cortex.yml</code> for per-node options)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../cortex/configuration/">Cortex Configuration</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_loom">Loom</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Loom loads <code>loom.yml</code> from the first location that exists — <code>/etc/metaloom/loom.yml</code>,
+<code>~/.config/metaloom/loom.yml</code>, then <code>config/loom.yml</code> — and then applies environment-variable
+overrides on top, so any <code>LOOM_*</code> variable wins over the file. Configuration groups:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>database</strong> — PostgreSQL connection + pool (<code>LOOM_DB_*</code>)</p>
+</li>
+<li>
+<p><strong>server</strong> — REST/gRPC/MCP/monitoring ports and bind address (<code>LOOM_SERVER_*</code>)</p>
+</li>
+<li>
+<p><strong>auth</strong> — keystore, token lifetime, OAuth2, MCP auth (<code>LOOM_INITIAL_PASSWORD</code>, <code>LOOM_TOKEN_EXPIRATION_TIME</code>, <code>LOOM_OAUTH2_*</code>, <code>LOOM_MCP_AUTH_*</code>)</p>
+</li>
+<li>
+<p><strong>storage</strong> — upload directory for asset binaries (<code>LOOM_STORAGE_UPLOAD_DIR</code>)</p>
+</li>
+<li>
+<p><strong>ai</strong> — the Chat &amp; AI agent (<code>LOOM_AI_*</code>)</p>
+</li>
+<li>
+<p><strong>sandbox</strong> — the agentic coding sandbox (<code>LOOM_AGENT_SANDBOX_*</code>)</p>
+</li>
+<li>
+<p><strong>memory</strong> — the agent memory bank (<code>LOOM_AGENT_MEMORY_*</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See <a href="../loom/configuration/">Loom Configuration</a> for the full YAML example and every environment
+variable with defaults. The AI-agent, coding-sandbox and memory settings are also covered on the
+<a href="../loom/chat/">Chat &amp; AI Agent</a> page (which also covers the coding sandbox).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cortex">Cortex</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Cortex worker is configured with environment variables (or the equivalent CLI flags): <code>LOOM_HOST</code> /
+<code>LOOM_PORT</code> (default <code>8092</code>) to reach Loom, <code>LOOM_TOKEN</code> to authenticate, <code>CORTEX_MONITORING_PORT</code>,
+<code>CORTEX_META_PATH</code>, <code>CORTEX_NODE_ID</code>, and <code>CORTEX_NODE_WHITELIST</code> / <code>CORTEX_NODE_BLACKLIST</code> to control
+which node kinds it runs. See <a href="../cortex/configuration/">Cortex Configuration</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_precedence">Precedence</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For both components, <strong>environment variables override file/default values</strong>. This makes container
+deployment straightforward: set the handful of <code>LOOM_*</code> / <code>CORTEX_*</code> variables you need and skip the
+config file entirely.</p>
+</div>
 </div>
 </div>
 

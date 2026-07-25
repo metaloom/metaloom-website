@@ -21,7 +21,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
-	<meta name="generator" content="Hugo 0.158.0">
+	<meta name="generator" content="Hugo 0.161.1">
 
 	<!-- plugins -->
 	
@@ -81,10 +81,6 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#team">developer</a>
-					</li>
-					
-					<li class="nav-item">
             <a class="nav-link" href="/#blog">blog</a>
 					</li>
 					
@@ -114,175 +110,240 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The <code>examples/</code> directory in the source repository contains two Cortex example projects.</p>
+<p>The <code>examples/</code> directory of the source repository contains three customer-facing examples showing how
+to extend Cortex with your own processing logic. They are deliberately lightweight: your code depends
+only on the slim Cortex node API (or, for Python, nothing but the wire protocol) and the Loom REST
+client — never on the Loom database, jOOQ or Postgres.</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex-custom-node</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How to <strong>write a custom node</strong> (Java) whose result is persisted agnostically into Loom.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex-custom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How to <strong>assemble a custom Cortex daemon</strong> (Java) that bundles your node and connects to Loom.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex-python</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How to implement a minimal <strong>Cortex worker in Python</strong> that speaks Loom’s wire protocol directly.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect1">
-<h2 id="_cortex_custom_node">cortex-custom-node</h2>
+<h2 id="_how_results_are_persisted_and_loaded">How Results are Persisted and Loaded</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A minimal Maven project that shows how to build a custom processing node.</p>
+<p>A worker uses two planes:</p>
 </div>
-<div class="sect2">
-<h3 id="_helloworldnode"><code>HelloWorldNode</code></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Control plane (WebSocket)</strong> — <code>/api/v1/processors/ws</code>. The worker registers, Loom dispatches
+<code>NODE_TASK`s, the worker answers with `NODE_TASK_RESULT</code>. The result carries the node’s outputs so
+downstream nodes can read them, but it is <strong>not</strong> the durable store.</p>
+</li>
+<li>
+<p><strong>Data plane (REST)</strong> — the computed payload is written into Loom keyed by asset UUID. The
+lightweight, schema-agnostic sink is <code>asset_json_comp</code>:</p>
+</li>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">/**
- * Custom Cortex node that reads file size and word count from each media asset.
- */
-public class HelloWorldNode extends AbstractMediaNode&lt;HelloWorldNodeOptions&gt; {
-
-    public static final String OUTPUT_FILE_SIZE  = &#34;file_size&#34;;
-    public static final String OUTPUT_WORD_COUNT = &#34;word_count&#34;;
-
-    @Inject
-    public HelloWorldNode(@Nullable LoomClient client,
-                          CortexOptions cortexOption,
-                          HelloWorldNodeOptions options) {
-        super(client, cortexOption, options);
-    }
+<pre class="highlight"><code class="language-text" data-lang="text">POST   /api/v1/assets/:uuid/json-comps        # upsert a generic JSON component
+GET    /api/v1/assets/:uuid/json-comps         # list them
+POST   /api/v1/assets/:uuid/node-results       # a ledger row recording what ran (asset, nodeKind, nodeId)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The request body carries <code>nodeKind</code>, <code>schemaType</code>, an optional <code>variant</code> and an opaque <code>data</code> object.
+Re-posting the same <code>(nodeKind, schemaType, variant)</code> for an asset <strong>upserts</strong> the single row, so
+re-running a node rewrites its result rather than accumulating duplicates.</p>
+</div>
+<div class="paragraph">
+<p><strong>How the asset is found:</strong> the worker resolves the asset UUID from the media hash the task carries
+(<code>GET /api/v1/assets/sha512/:sha512</code>). That hash is only present after a hash node has run upstream, so
+persistence is <strong>best-effort</strong> — if the asset is not known yet, the worker still reports the result to
+the engine and skips the write.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<strong>Promotion policy</strong> — start every custom node in <code>asset_json_comp</code>. If you later need to <strong>query</strong>
+a field, render it in the UI, or reference it with a foreign key, graduate that node kind to a typed
+component table.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_custom_node_java_cortex_custom_node">1. Custom Node (Java) — <code>cortex-custom-node</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A node extends <code>AbstractMediaNode&lt;O&gt;</code> and implements <code>name()</code>, <code>isProcessable(…​)</code> and
+<code>compute(…​)</code>. The base class handles the lifecycle: the <strong>enabled</strong> check, the <strong>file exists</strong> check, the
+<strong>is-processable</strong> check, and (online) fetching the <code>AssetResponse</code> from Loom before <code>compute(…​)</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class HelloWorldNode extends AbstractMediaNode&lt;HelloWorldNodeOptions&gt; {
 
     @Override
     public String name() {
-        return &#34;hello-world&#34;;
+        return &#34;hello-world&#34;; // the node kind Loom dispatches to this node
     }
 
     @Override
     protected boolean isProcessable(NodeContext&lt;LoomMedia&gt; ctx) {
-        return true; // accepts all media types
+        return true; // narrow to images/video/etc. if you like
     }
 
     @Override
     protected NodeResult compute(NodeContext&lt;LoomMedia&gt; ctx, AssetResponse asset) throws Exception {
         LoomMedia media = ctx.media();
-
-        // Read an output published by an upstream node (e.g. sha256)
-        String upstreamHash = ctx.upstreamOutput(&#34;sha256&#34;, &#34;sha256&#34;);
-
-        // Compute outputs
         long fileSize  = media.size();
         long wordCount = countWords(media.file());
 
         // Publish outputs for downstream nodes
         ctx.output(OUTPUT_FILE_SIZE,  fileSize);
         ctx.output(OUTPUT_WORD_COUNT, wordCount);
-        ctx.info(&#34;file_size=&#34; + fileSize + &#34;, word_count=&#34; + wordCount);
 
+        // Persist agnostically into asset_json_comp (online mode only)
+        if (!isOfflineMode() &amp;&amp; asset != null) {
+            JsonObject data = new JsonObject()
+                .put(OUTPUT_FILE_SIZE, fileSize)
+                .put(OUTPUT_WORD_COUNT, wordCount);
+            JsonCompCreateRequest request = new JsonCompCreateRequest()
+                .setNodeKind(name())
+                .setSchemaType(SCHEMA_TYPE)
+                .setData(data);
+            client().createAssetJsonComp(asset.getUuid(), request).sync();
+        }
         return ctx.origin(COMPUTED).next();
     }
 }</code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_helloworldnodeoptions"><code>HelloWorldNodeOptions</code></h3>
 <div class="paragraph">
-<p>Options control per-node CLI flags and are injected via Dagger:</p>
+<p>In <strong>offline mode</strong> (<code>null</code> client) <code>asset</code> is <code>null</code> and the node skips the remote write — which is
+exactly what the unit tests exercise (pass a <code>null</code> client and drive <code>process(…​)</code> directly).</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-public class HelloWorldNodeOptions extends AbstractNodeOptions {
-
-    @Option(names = &#34;--hw-enabled&#34;, description = &#34;Enable HelloWorldNode&#34;)
-    private boolean enabled = true;
-
-    @Override
-    public boolean isEnabled() { return enabled; }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_dagger_module">Dagger Module</h3>
 <div class="paragraph">
-<p>Register the node so the pipeline runner discovers it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Module
-public abstract class HelloWorldNodeModule {
-    @Binds @IntoSet
-    public abstract MediaNode bindHelloWorldNode(HelloWorldNode node);
-}</code></pre>
-</div>
-</div>
+<p>The node is contributed via a Dagger module (<code>@Binds @IntoSet FilesystemNode&lt;?,?&gt;</code>).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cortex_custom_cli">cortex-custom-cli</h2>
+<h2 id="_2_custom_daemon_java_cortex_custom">2. Custom Daemon (Java) — <code>cortex-custom</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>cortex-custom-cli</code> example shows how to assemble a complete Cortex CLI binary that includes your custom node alongside the built-in nodes.</p>
-</div>
-<div class="sect2">
-<h3 id="_nodecollectionmodule"><code>NodeCollectionModule</code></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Module(includes = {
-    HelloWorldNodeModule.class,
-    // ... add other built-in node modules here
-})
-public interface NodeCollectionModule {}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_cortexcomponent"><code>CortexComponent</code></h3>
-<div class="paragraph">
-<p>Wire the Dagger component with the custom module:</p>
+<p>A custom instance is a stripped-down fork of the Cortex CLI: no picocli command layer, just a <code>main</code>
+that builds a <code>Cortex</code> and runs it in the foreground — the shape you want for a container (PID 1)
+supervised by Kubernetes, Docker or systemd.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Singleton
-@Component(modules = {
-    NodeCollectionModule.class,
-    LoomStorageModule.class,
-    PicoCLIModule.class
-})
-public interface CortexComponent {
-    CommandLine cli();
-    // ...
+<pre class="highlight"><code class="language-java" data-lang="java">public static void main(String... args) {
+    Cortex cortex = buildComponent(null).cortex();  // null → resolve config from the environment
+    Runtime.getRuntime().addShutdownHook(new Thread(cortex::shutdown, &#34;cortex-shutdown&#34;));
+    cortex.run(); // starts monitoring, opens the control channel to Loom, registers, and blocks
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>You own two small Dagger modules: <code>NodeCollectionModule</code> (includes the built-in node modules <strong>plus</strong>
+your <code>HelloWorldNodeModule</code>) and <code>PipelineNodeFactoryModule</code> (registers the node type):</p>
 </div>
-<div class="sect2">
-<h3 id="_running_the_custom_cli">Running the Custom CLI</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"># Build the fat JAR
-mvn package
-
-# Process a folder with the custom node enabled
-java -jar target/cortex-custom-cli.jar process run --actions hello-world /media/inbox</code></pre>
+<pre class="highlight"><code class="language-java" data-lang="java">factory.register(&#34;hello-world&#34;, def -&gt; adapt(helloWorld, def, cortexOptions));</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>That is the whole extension surface: depend on a node’s module, <code>include</code> it, and <code>register</code> its type.
+Run it against your Loom backend:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">mvn -pl examples/cortex-custom -am package
+LOOM_HOST=localhost LOOM_PORT=8092 CORTEX_MONITORING_PORT=8093 \
+  java -jar examples/cortex-custom/target/cortex-custom-*.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The monitoring endpoints (<code>/api/health</code>, <code>/api/ready</code>) map onto Kubernetes liveness/readiness probes.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_unit_testing_a_node">Unit Testing a Node</h2>
+<h2 id="_3_custom_worker_python_cortex_python">3. Custom Worker (Python) — <code>cortex-python</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The JVM node SPI cannot be called from Python, so this example talks Loom’s <strong>wire protocol</strong> directly
+— which is all a worker actually needs. It is a single file (<code>daemon.py</code>) with one dependency
+(<code>websockets</code>); the REST calls use the standard library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">pip install -r requirements.txt
+export LOOM_HOST=localhost LOOM_PORT=8092
+export LOOM_TOKEN=&lt;jwt&gt;          # or LOOM_USER / LOOM_PASSWORD
+export CORTEX_NODE_KINDS=py-hello  # kinds this worker advertises and runs
+python daemon.py</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Implement your logic by replacing <code>run_node()</code>, which receives the media path, the per-task <code>options</code>
+and the <code>upstreamOutputs</code>, and returns a <code>NodeResult</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def run_node(node_kind, media_path, options, upstream):
+    # ... compute whatever you like from media_path ...
+    return NodeResult.completed({&#34;my_output&#34;: value})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then advertise the kind via <code>CORTEX_NODE_KINDS</code> so Loom dispatches it to you. Online, a <code>COMPLETED</code>
+result is persisted with the same two-step <code>json-comps</code> + <code>node-results</code> pattern as the Java nodes.
+You can verify node logic with no Loom server at all:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">python daemon.py --selftest ./some-file.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Python example implements only the <code>NODE_TASK</code> path (not <code>SOURCE_TASK</code> / <code>SEGMENT_TASK</code>), which is
+enough to join the fleet and run per-item nodes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_the_java_examples">Building the Java Examples</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">class HelloWorldNodeTest {
-
-    @Test
-    void testCompute() {
-        // Arrange
-        HelloWorldNode node = new HelloWorldNode(null, new CortexOptions(),
-                                                 new HelloWorldNodeOptions());
-        NodeContext&lt;LoomMedia&gt; ctx = MockNodeContext.forFile(Path.of(&#34;src/test/resources/sample.txt&#34;));
-
-        // Act
-        NodeResult result = node.compute(ctx, null);
-
-        // Assert
-        assertEquals(COMPUTED, result.origin());
-        assertNotNull(ctx.output(HelloWorldNode.OUTPUT_FILE_SIZE));
-    }
-}</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">mvn -pl examples/cortex-custom-node,examples/cortex-custom -am install
+mvn -pl examples/cortex-custom-node,examples/cortex-custom test</code></pre>
 </div>
 </div>
 </div>
