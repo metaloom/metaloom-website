@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Captioning</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Captioning" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Captioning">
-    <meta property="og:url" content="http://localhost:38273/docs/nodes/captioning/">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/captioning/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -194,10 +195,11 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The captioning node generates a <strong>natural-language caption</strong> for an image using a vision-language
-model — a short description of what the image shows.</p>
+<p>The captioning node generates a <strong>natural-language caption</strong> — a short description of what the media
+shows — for both <strong>images</strong> and <strong>videos</strong> using a vision-language model. Images are described from a
+single still frame; videos are described from their temporal content (what happens across the clip).</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;captioning&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;one-sentence description&#34;}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;captioning&#34;,&#34;applies&#34;:&#34;Image · Video&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;image&#34;,&#34;note&#34;:&#34;still-frame caption (SmolVLM)&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;one-sentence description&#34;}]},{&#34;name&#34;:&#34;video · whole&#34;,&#34;note&#34;:&#34;videoStrategy: WHOLE&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;N frames sampled evenly&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;single description of the clip&#34;}]},{&#34;name&#34;:&#34;video · scene&#34;,&#34;note&#34;:&#34;videoStrategy: SCENE&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;segmented into scenes first&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;per-scene caption timeline&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -210,7 +212,7 @@ model — a short description of what the image shows.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Image (video / audio are stubbed / not yet implemented)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
@@ -222,14 +224,53 @@ model — a short description of what the image shows.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A vision-language model service reachable from the worker (configurable host/port). CPU on the worker; the model runs in the service.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A vision-language model service reachable from the worker. Images use a SmolVLM service (host/port); videos use an OpenAI-compatible VLM endpoint (e.g. Qwen2.5-VL on vLLM or llama.cpp). CPU on the worker; the models run in the service.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> + <code>asset_node_result</code> ledger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> (<code>caption</code> for images, <code>video-caption</code> for videos) + <code>asset_node_result</code> ledger</p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect1">
+<h2 id="_how_video_captioning_works">How video captioning works</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A video is turned into a caption by one of three interchangeable strategies, selected with the
+<code>videoStrategy</code> option:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Strategy</th>
+<th class="tableblock halign-left valign-top">Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WHOLE</code> (default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Samples a fixed number of frames evenly across the whole clip and sends them as one prompt, producing a single description. Works on any length of clip and on any backend. The recommended default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SCENE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Splits the clip into scenes first (optical-flow scene detection), then captions each scene independently, producing a per-scene caption <strong>timeline</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NATIVE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hands the whole file to the model and lets it do its own temporal sampling. Highest quality for short clips, but requires a backend that decodes video natively (vLLM) and can fail on longer clips.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Video captions are stored with the producing strategy, the model, the frame count and — for the scene
+strategy — the per-scene breakdown, so the timeline is available for search and review.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
@@ -249,12 +290,44 @@ model — a short description of what the image shows.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">model host</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname of the vision-language model service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>smolVLMHost</code> / <code>smolVLMPort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host and port of the image (SmolVLM) captioning service</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">model port</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Port of the vision-language model service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoStrategy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WHOLE</code>, <code>SCENE</code> or <code>NATIVE</code> (see above)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoEndpointUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the OpenAI-compatible VLM endpoint used for video</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoModel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model id served at that endpoint (e.g. a Qwen2.5-VL variant)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoApiKey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional bearer token for the video endpoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>frameCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of frames sampled per clip (whole) or per scene (scene)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>targetFrameSize</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Longest-edge pixel size each sampled frame is scaled to before sending</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxScenes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on scenes captioned by the scene strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxTokens</code> / <code>temperature</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generation limits for the video model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoPrompt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The instruction sent to the video model</p></td>
 </tr>
 </tbody>
 </table>
@@ -266,13 +339,16 @@ model — a short description of what the image shows.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alt text / accessibility</strong> — auto-generate descriptions for images.</p>
+<p><strong>Alt text / accessibility</strong> — auto-generate descriptions for images and clips.</p>
 </li>
 <li>
-<p><strong>Searchable descriptions</strong> — index a caption per image for natural-language retrieval.</p>
+<p><strong>Searchable descriptions</strong> — index a caption per asset for natural-language retrieval.</p>
 </li>
 <li>
-<p><strong>Cold-start metadata</strong> — give newly ingested images a description before human review.</p>
+<p><strong>Scene timelines</strong> — with the scene strategy, get a per-scene description of a video for navigation.</p>
+</li>
+<li>
+<p><strong>Cold-start metadata</strong> — give newly ingested media a description before human review.</p>
 </li>
 </ul>
 </div>
@@ -312,7 +388,7 @@ model — a short description of what the image shows.</p>
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:38273/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>

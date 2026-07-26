@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Helm Chart</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Helm Chart" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Helm Chart">
-    <meta property="og:url" content="http://localhost:38273/docs/loom/helm-chart/">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/helm-chart/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -194,51 +195,47 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>Kubernetes is the supported production deployment path for Loom. The full walkthrough — service
-account, RBAC for the chat’s coding sandbox, quotas, NetworkPolicy and the Cortex worker pools — is in
+<p>Kubernetes is the supported production deployment path for Loom. There are two Helm charts in the
+source repository — <code>helm/loom</code> for the server and <code>helm/cortex</code> for the workers.</p>
+</div>
+<div class="sect1">
+<h2 id="_install">Install</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Loom with a bundled PostgreSQL (evaluation):
+helm install loom ./helm/loom --set postgresql.enabled=true --set auth.initialPassword=&lt;password&gt;
+# A Cortex worker pointed at it:
+helm install cortex ./helm/cortex --set loom.host=loom --set loom.token=&lt;token&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The full guide — values reference, external vs bundled database, custom Cortex worker images and the
+verification steps — is on the <a href="../../deployment/helm/">Helm Charts</a> page. For the underlying
+manifests, the service account, the sandbox guardrails and the worker pools explained step by step, see
 the <a href="../../playbooks/kubernetes/">Kubernetes playbook</a>.</p>
 </div>
-<div class="sect1">
-<h2 id="_status">Status</h2>
-<div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tbody><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-<code>loom/helm</code> in the source repository is currently a <strong>placeholder</strong>: it contains a README and
-no chart. There is no <code>helm install</code> to run yet.
-</td>
-</tr>
-</tbody></table>
-</div>
-<div class="paragraph">
-<p>Until a chart ships, deploy with the manifests in the
-<a href="../../playbooks/kubernetes/">Kubernetes playbook</a>, or wrap them in a chart of your own. That page
-also carries a suggested <code>values.yaml</code> layout, so a chart written now stays close to the one that will
-be published.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_a_chart_must_cover">What a Chart Must Cover</h2>
+<h2 id="_what_the_chart_handles_for_you">What the Chart Handles For You</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Two things are easy to miss when packaging Loom, and both are called out in the playbook:</p>
+<p>Two things are easy to get wrong when packaging Loom. The chart handles both, but they are worth
+knowing before you change the defaults:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>/config</code> volume holds <code>loom.yml</code> and <code>keystore.jceks</code> — the JWT signing key. It must be
-persistent, or every issued token stops verifying after a restart.</p>
+<p>The keystore volume holds the JWT signing key. The chart persists it by default; keep it that way,
+or every issued token stops verifying after a restart. The configuration volume (<code>loom.yml</code>) is
+persisted for the same reason.</p>
 </li>
 <li>
-<p>Enabling the coding sandbox (<code>LOOM_AGENT_SANDBOX_ENABLED</code>) is only complete together with the Role,
-RoleBinding, ResourceQuota, LimitRange and NetworkPolicy for the runner namespace. Templating the
-environment variable alone produces a deployment that cannot create runners, or creates unconstrained
-ones.</p>
+<p>Enabling the coding sandbox (<code>sandbox.enabled=true</code>) renders the runner-namespace Role, RoleBinding,
+ResourceQuota, LimitRange and NetworkPolicy together with the feature flag. Setting the flag without
+that set would produce a deployment that cannot create runners, or creates unconstrained ones — the
+chart keeps them together.</p>
 </li>
 </ul>
 </div>
@@ -281,7 +278,7 @@ ones.</p>
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:38273/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>

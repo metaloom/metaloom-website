@@ -2,100 +2,100 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Loom on MetaLoom</title>
-    <link>http://localhost:38273/docs/loom/</link>
+    <link>https://metaloom.io/docs/loom/</link>
     <description>Recent content in Loom on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:38273/docs/loom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://metaloom.io/docs/loom/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Artifacts</title>
-      <link>http://localhost:38273/docs/loom/artifacts/</link>
+      <link>https://metaloom.io/docs/loom/artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/artifacts/</guid>
+      <guid>https://metaloom.io/docs/loom/artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom publishes JVM artifacts, a command line client and container deployment assets separately.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_artifacts&#34;&gt;Maven Artifacts&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;See &lt;a href=&#34;../maven-artifacts/&#34;&gt;Maven Artifacts&lt;/a&gt; for the BOM and the primary client and shared model modules.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Authentication</title>
-      <link>http://localhost:38273/docs/loom/authentication/</link>
+      <link>https://metaloom.io/docs/loom/authentication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/authentication/</guid>
+      <guid>https://metaloom.io/docs/loom/authentication/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom uses JWT (JSON Web Token) bearer tokens for API authentication.&#xA;OAuth2 integration is also available.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Chat &amp; AI Agent</title>
-      <link>http://localhost:38273/docs/loom/chat/</link>
+      <link>https://metaloom.io/docs/loom/chat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/chat/</guid>
+      <guid>https://metaloom.io/docs/loom/chat/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom ships with a built-in &lt;strong&gt;AI assistant&lt;/strong&gt; — an OpenAI-style chat, backed by a &lt;strong&gt;server-side agentic&#xA;loop&lt;/strong&gt; that runs inside the Loom backend. Users converse with their asset domain in natural language&#xA;(&amp;#34;find beach videos&amp;#34;, &amp;#34;what tasks are open for me?&amp;#34;, &amp;#34;summarize this clip’s transcript&amp;#34;) and the&#xA;agent answers by calling Loom’s own tools with the caller’s permissions.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Configuration</title>
-      <link>http://localhost:38273/docs/loom/configuration/</link>
+      <link>https://metaloom.io/docs/loom/configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/configuration/</guid>
+      <guid>https://metaloom.io/docs/loom/configuration/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom is configured through a YAML file (&lt;code&gt;loom.yml&lt;/code&gt;) with &lt;strong&gt;environment-variable overrides&lt;/strong&gt; layered on&#xA;top. The resolution order is:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Containers</title>
-      <link>http://localhost:38273/docs/loom/containers/</link>
+      <link>https://metaloom.io/docs/loom/containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/containers/</guid>
+      <guid>https://metaloom.io/docs/loom/containers/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server is distributed as the &lt;code&gt;metaloom/loom-server&lt;/code&gt; image (JVM and &lt;code&gt;-native&lt;/code&gt; variants). For a&#xA;zero-config first run, use the all-in-one &lt;code&gt;metaloom/loom-demo&lt;/code&gt; image instead — see&#xA;&lt;a href=&#34;../../getting-started/&#34;&gt;Getting Started&lt;/a&gt;. The full image list is on &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Examples</title>
-      <link>http://localhost:38273/docs/loom/examples/</link>
+      <link>https://metaloom.io/docs/loom/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/examples/</guid>
+      <guid>https://metaloom.io/docs/loom/examples/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;/examples&lt;/code&gt; directory of the source repository contains runnable example projects.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_listing_examples&#34;&gt;Listing Examples&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;examples/&lt;/code&gt; Maven module contains sub-projects for both Loom and Cortex use cases.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Features</title>
-      <link>http://localhost:38273/docs/loom/features/</link>
+      <link>https://metaloom.io/docs/loom/features/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/features/</guid>
+      <guid>https://metaloom.io/docs/loom/features/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.&#xA;Each section below links to the reference page that covers the feature in depth.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>GraphQL API</title>
-      <link>http://localhost:38273/docs/loom/graphql-api/</link>
+      <link>https://metaloom.io/docs/loom/graphql-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/graphql-api/</guid>
+      <guid>https://metaloom.io/docs/loom/graphql-api/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset&#xA;together with its components and locations in a single request, selecting exactly the fields you&#xA;need.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Helm Chart</title>
-      <link>http://localhost:38273/docs/loom/helm-chart/</link>
+      <link>https://metaloom.io/docs/loom/helm-chart/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/helm-chart/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Kubernetes is the supported production deployment path for Loom. The full walkthrough — service&#xA;account, RBAC for the chat’s coding sandbox, quotas, NetworkPolicy and the Cortex worker pools — is in&#xA;the &lt;a href=&#34;../../playbooks/kubernetes/&#34;&gt;Kubernetes playbook&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>https://metaloom.io/docs/loom/helm-chart/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Kubernetes is the supported production deployment path for Loom. There are two Helm charts in the&#xA;source repository — &lt;code&gt;helm/loom&lt;/code&gt; for the server and &lt;code&gt;helm/cortex&lt;/code&gt; for the workers.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Java Client Usage</title>
-      <link>http://localhost:38273/docs/loom/java-client/</link>
+      <link>https://metaloom.io/docs/loom/java-client/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/java-client/</guid>
+      <guid>https://metaloom.io/docs/loom/java-client/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;loom-rest-client&lt;/code&gt; module provides a typed HTTP client for JVM applications.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_dependency&#34;&gt;Maven Dependency&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&amp;lt;dependency&amp;gt;&#xA;    &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt;&#xA;    &amp;lt;artifactId&amp;gt;loom-rest-client&amp;lt;/artifactId&amp;gt;&#xA;    &amp;lt;version&amp;gt;1.0.0-SNAPSHOT&amp;lt;/version&amp;gt;&#xA;&amp;lt;/dependency&amp;gt;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Maven Artifacts</title>
-      <link>http://localhost:38273/docs/loom/maven-artifacts/</link>
+      <link>https://metaloom.io/docs/loom/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/maven-artifacts/</guid>
+      <guid>https://metaloom.io/docs/loom/maven-artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Loom artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_bom_pom&#34;&gt;BOM POM&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Use the BOM to align versions across Loom and Cortex modules:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Metrics</title>
-      <link>http://localhost:38273/docs/loom/metrics/</link>
+      <link>https://metaloom.io/docs/loom/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/metrics/</guid>
+      <guid>https://metaloom.io/docs/loom/metrics/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on a dedicated monitoring&#xA;port. All Loom meters are prefixed &lt;code&gt;loom_&lt;/code&gt;. For Cortex worker metrics see&#xA;&lt;a href=&#34;../../cortex/metrics/&#34;&gt;Cortex Metrics&lt;/a&gt;; for health and readiness endpoints see&#xA;&lt;a href=&#34;../../cortex/monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>REST API</title>
-      <link>http://localhost:38273/docs/loom/rest-api/</link>
+      <link>https://metaloom.io/docs/loom/rest-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:38273/docs/loom/rest-api/</guid>
+      <guid>https://metaloom.io/docs/loom/rest-api/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes its full functionality via a versioned REST API.&#xA;All endpoints are rooted at &lt;code&gt;/api/v1&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

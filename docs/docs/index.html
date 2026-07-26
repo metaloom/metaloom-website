@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Documentation</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Documentation" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Documentation">
-    <meta property="og:url" content="http://localhost:38273/docs/">
+    <meta property="og:url" content="https://metaloom.io/docs/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -144,14 +145,16 @@
 		<div class="docs-card h-100">
 			<div class="docs-card-header">
 				<h2><a href="playbooks/">Playbooks</a></h2>
-				<p>Task-oriented guides that string the whole platform together: deploying the stack with Docker or Kubernetes, and building pipelines that transcribe, analyse scenes and translate content.</p>
+				<p>Task-oriented guides that string the whole platform together: deploying the stack with Docker or Kubernetes, building pipelines that transcribe, analyse scenes and translate content, and writing a processing node of your own.</p>
 			</div>
 			<div class="docs-card-body">
 				<a href="playbooks/docker/" class="docs-card-link">Docker Deployment</a>
 				<a href="playbooks/kubernetes/" class="docs-card-link">Kubernetes &amp; Helm</a>
+				<a href="deployment/helm/" class="docs-card-link">Helm Charts</a>
 				<a href="playbooks/transcription/" class="docs-card-link">Transcription for Chat</a>
 				<a href="playbooks/scene-analysis/" class="docs-card-link">Scene Analysis</a>
 				<a href="playbooks/translation/" class="docs-card-link">Translation</a>
+				<a href="playbooks/python-node/" class="docs-card-link">Custom Node (Python)</a>
 			</div>
 		</div>
 	</div>
@@ -308,7 +311,7 @@
 		<div class="note p-4 h-100">
 			<h3>Deployment</h3>
 			<p>Both systems ship as JVM artifacts and container images (<code>loom-server</code>, <code>loom-demo</code>, <code>cortex-server</code>, <code>loom-session-runner</code>), with Kubernetes deployment paths.</p>
-			<p><a href="deployment/">Container images</a> · <a href="loom/artifacts/">Loom artifacts</a> · <a href="cortex/artifacts/">Cortex artifacts</a></p>
+			<p><a href="deployment/">Container images</a> · <a href="deployment/helm/">Helm charts</a> · <a href="loom/artifacts/">Loom artifacts</a> · <a href="cortex/artifacts/">Cortex artifacts</a></p>
 		</div>
 	</div>
 </div>
@@ -356,13 +359,13 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deploy or operate the system</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/docker/">Docker Playbook</a>, <a href="playbooks/kubernetes/">Kubernetes Playbook</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/docker/">Docker Playbook</a>, <a href="playbooks/kubernetes/">Kubernetes Playbook</a>, <a href="deployment/helm/">Helm Charts</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cortex/monitoring/">Monitoring</a>, <a href="loom/metrics/">Loom Metrics</a>, <a href="cortex/metrics/">Cortex Metrics</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Build a working pipeline end to end</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/">Playbooks</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/transcription/">Transcription</a>, <a href="playbooks/scene-analysis/">Scene Analysis</a>, <a href="playbooks/translation/">Translation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/transcription/">Transcription</a>, <a href="playbooks/scene-analysis/">Scene Analysis</a>, <a href="playbooks/translation/">Translation</a>, <a href="playbooks/python-node/">Custom Node</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Learn the data model and feature surface</p></td>
@@ -441,7 +444,7 @@
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:38273/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>

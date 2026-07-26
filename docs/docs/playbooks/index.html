@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Playbooks</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Playbooks" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Playbooks">
-    <meta property="og:url" content="http://localhost:38273/docs/playbooks/">
+    <meta property="og:url" content="https://metaloom.io/docs/playbooks/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -176,6 +177,19 @@ than repeating it.</p>
 	<div class="col-lg-4 mb-4">
 		<div class="docs-card h-100">
 			<div class="docs-card-header">
+				<h2><a href="python-node/">A Custom Node in Python</a></h2>
+				<p>Run your own processing logic inside a pipeline without touching the JVM build: a single-file worker that advertises its node kind and answers the tasks Loom dispatches.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="python-node/#node" class="docs-card-link">Write the node</a>
+				<a href="python-node/#descriptor" class="docs-card-link">Register the kind</a>
+				<a href="python-node/#agent-prompt" class="docs-card-link">Coding-agent prompt</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
 				<h2><a href="translation/">Translating Content</a></h2>
 				<p>Get source text out of speech, documents and images, translate it, and — optionally — speak the translation back onto the asset as narration audio.</p>
 			</div>
@@ -232,10 +246,12 @@ registered with the pipeline node factory</strong>, so Loom will not route work 
 growing; <code>vlm</code> and <code>tts</code> were the most recent additions.</p>
 </div>
 <div class="paragraph">
-<p>Until a kind you need appears in that list, either register it in
-<code>cortex/cli/src/main/java/io/metaloom/cortex/cli/dagger/PipelineNodeFactoryModule.java</code> (one
-<code>factory.register(…​)</code> line) and rebuild the worker image, or run it from a custom Cortex build as
-described in <a href="../cortex/examples/">Cortex Examples</a>. Check the live answer for your deployment with:</p>
+<p>Until a kind you need appears in that list you have two ways round it. The one that needs no JVM
+build at all is to run the work in <strong>your own worker</strong>, which advertises its kinds on the wire —
+<a href="python-node/">A Custom Node in Python</a> walks through it end to end. Otherwise register the kind
+with the JVM worker’s pipeline node factory (a single line in
+<code>cortex/cli/…​/dagger/PipelineNodeFactoryModule.java</code>) and rebuild the <code>cortex-server</code> image. Check
+the live answer for your deployment with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -265,11 +281,11 @@ the registered set fills in.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>$LOOM</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the Loom server, e.g. <code><a href="http://localhost:8092" class="bare">http://localhost:8092</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the Loom server, e.g. <code>http://localhost:8092</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>$TOKEN</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A JWT from <code>POST /api/v1/auth/login</code>, or an API key from <code>/api/v1/tokens</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A JWT from <code>POST /api/v1/login</code>, or an API key from <code>/api/v1/tokens</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline JSON</p></td>
@@ -317,7 +333,7 @@ the registered set fills in.</p>
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:38273/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>

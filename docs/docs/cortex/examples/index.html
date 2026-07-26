@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Examples</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Examples" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Examples">
-    <meta property="og:url" content="http://localhost:38273/docs/cortex/examples/">
+    <meta property="og:url" content="https://metaloom.io/docs/cortex/examples/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -252,9 +253,34 @@ POST   /api/v1/assets/:uuid/node-results       # a ledger row recording what ran
 </div>
 </div>
 <div class="paragraph">
-<p>The request body carries <code>nodeKind</code>, <code>schemaType</code>, an optional <code>variant</code> and an opaque <code>data</code> object.
-Re-posting the same <code>(nodeKind, schemaType, variant)</code> for an asset <strong>upserts</strong> the single row, so
-re-running a node rewrites its result rather than accumulating duplicates.</p>
+<p>The request body carries <code>nodeKind</code>, <code>schemaType</code>, an optional <code>variant</code>, an optional
+<code>producerVersion</code> and an opaque <code>data</code> object. Re-posting the same <code>(nodeKind, schemaType, variant)</code>
+for an asset <strong>upserts</strong> the single row, so re-running a node rewrites its result rather than
+accumulating duplicates. The ledger row upserts on <code>(asset, nodeKind, nodeId)</code>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>The two states are different enums.</strong> The <code>NODE_TASK_RESULT</code> a worker sends over the WebSocket uses
+<code>COMPLETED | FAILED | SKIPPED</code>; the <code>state</code> on <code>/node-results</code> uses <strong><code>SUCCESS</code></strong> <code>| FAILED |
+SKIPPED</code>, enforced by a CHECK constraint on <code>asset_node_result</code> (<code>origin</code> likewise accepts only
+<code>COMPUTED</code>, <code>LOCAL</code> or <code>REMOTE</code>). Map <code>COMPLETED</code> → <code>SUCCESS</code> before posting: because the payload is
+written first and succeeds, getting this wrong leaves a stored component with no ledger row saying the
+node ran.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Stamp a <code>producerVersion</code> on both writes and bump it when a node’s output shape changes — the ledger
+is indexed on <code>(node_kind, producer_version)</code>, which is how an operator finds and re-runs everything an
+older version produced.</p>
 </div>
 <div class="paragraph">
 <p><strong>How the asset is found:</strong> the worker resolves the asset UUID from the media hash the task carries
@@ -466,7 +492,7 @@ mvn -pl examples/cortex-custom-node,examples/cortex-custom test</code></pre>
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:38273/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>

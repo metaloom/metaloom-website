@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Nodes</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Nodes" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Nodes">
-    <meta property="og:url" content="http://localhost:38273/docs/nodes/">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -221,8 +222,8 @@ carry:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="captioning/">Captioning</a> (<code>captioning</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Natural-language image captions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Natural-language captions for images and videos</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedetect/">Face Detection</a> (<code>facedetect</code>)</p></td>
@@ -417,8 +418,10 @@ the layout — tables, columns, formulas — that plain glyph recognition flatte
 </dd>
 <dt class="hdlist1">AI captioning and enrichment</dt>
 <dd>
-<p><a href="captioning/"><code>captioning</code></a> generates natural-language descriptions with a vision-language model
-(SmolVLM), and <a href="llm/"><code>llm</code></a> enriches metadata through an LLM provider such as Ollama.</p>
+<p><a href="captioning/"><code>captioning</code></a> generates natural-language descriptions of both images and videos with
+a vision-language model — images from a still frame (SmolVLM), videos from their temporal content
+(Qwen2.5-VL), optionally as a per-scene timeline — and <a href="llm/"><code>llm</code></a> enriches metadata through an
+LLM provider such as Ollama.</p>
 </dd>
 <dt class="hdlist1">Text-to-speech</dt>
 <dd>
@@ -507,7 +510,7 @@ and the build and run commands.</p>
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:38273/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>

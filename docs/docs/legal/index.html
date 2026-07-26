@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Legal &amp; Licensing</title>
 
@@ -14,12 +14,13 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Legal &amp; Licensing" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="http://localhost:1313/images/banner_square.webp" />
     
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+
     <meta property="og:title" content="Legal &amp; Licensing">
-    <meta property="og:url" content="http://localhost:1313/docs/legal/">
+    <meta property="og:url" content="https://metaloom.io/docs/legal/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="http://localhost:1313/images/banner_square.webp">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -128,6 +129,20 @@ forbid commercial use outright.</p>
 </ul>
 </div>
 <div class="row mt-4 mb-4">
+	<div class="col-lg-12 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2 data-toc-skip="">MetaLoom is Apache License 2.0</h2>
+				<p>The entire platform — the Loom server, the Cortex engine, every built-in node, the UI, the clients, the CLI and this website — is released under the <strong>Apache License, Version 2.0</strong>. Commercial use, modification, distribution, patent grant and private use are all permitted. The full text ships as <code>LICENSE.txt</code> in the repository root.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="#the-platform-license" class="docs-card-link">What Apache-2.0 gives you</a>
+				<a href="#what-the-license-covers" class="docs-card-link">What it covers</a>
+				<a href="#model-weights" class="docs-card-link">Where it stops: model weights</a>
+				<a href="https://www.apache.org/licenses/LICENSE-2.0" class="docs-card-link">Full license text</a>
+			</div>
+		</div>
+	</div>
 	<div class="col-lg-6 mb-4">
 		<div class="docs-card h-100">
 			<div class="docs-card-header">
@@ -158,17 +173,86 @@ forbid commercial use outright.</p>
 	</div>
 </div>
 <div class="sect1">
-<h2 id="_the_platform_license">The Platform License</h2>
+<h2 id="the-platform-license">The Platform License — Apache 2.0</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The MetaLoom source — the Loom server, the Cortex engine, the nodes, the UI, the clients and this
-website — is licensed under the <strong>Apache License, Version 2.0</strong>. The full text ships as
-<code>LICENSE.txt</code> in the repository root.</p>
+<p><strong>MetaLoom is licensed under the Apache License, Version 2.0.</strong> One license, one copy, no dual-licensed
+&#34;community edition&#34;: the full text ships as <code>LICENSE.txt</code> in the repository root and is the same
+license that applies to every artifact and container image published from that source.</p>
 </div>
 <div class="paragraph">
-<p>Apache-2.0 permits commercial use, modification, distribution and private use, subject to the usual
-attribution and NOTICE obligations. Nothing on this page restricts that.</p>
+<p>Apache-2.0 is a permissive license. In practical terms:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">You may</th>
+<th class="tableblock halign-left valign-top">Conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Use it commercially</strong> — run MetaLoom in production, sell a service built on it, embed it in a product</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep the license and copyright notices in copies of the source you distribute</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Modify it</strong> — patch, extend, fork, write your own nodes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">State significant changes you made to modified files you distribute</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Distribute it</strong> — ship the source or the binaries, alone or as part of something larger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include a copy of the license, and the <code>NOTICE</code> file if one is present</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Use it privately</strong> — deploy internally with no obligation to publish anything</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Rely on the patent grant</strong> — contributors grant a licence to their patent claims in their contributions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The grant terminates for anyone who initiates patent litigation over the software</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You do <strong>not</strong> have to open-source your own code to use MetaLoom, publish your pipeline definitions,
+give attribution in a user interface, or pay a fee at any deployment size.</p>
+</div>
+<div class="sect2">
+<h3 id="what-the-license-covers">What the License Covers</h3>
+<div class="paragraph">
+<p>Everything produced from the MetaLoom repository:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <strong>Loom</strong> server, its REST, GraphQL and WebSocket APIs, and the Loom UI;</p>
+</li>
+<li>
+<p>the <strong>Cortex</strong> engine, the node runtime and every built-in node;</p>
+</li>
+<li>
+<p>the Java client, the <code>metaloom</code> command line client and the published Maven artifacts;</p>
+</li>
+<li>
+<p>the container images built from that source;</p>
+</li>
+<li>
+<p>the examples — including the Python worker the <a href="../playbooks/python-node/">custom node playbook</a>
+starts from — and this documentation website.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Contributions are accepted under the same license: submitting a change means offering it under
+Apache-2.0, as section 5 of the license describes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="model-weights">Where the License Stops</h3>
 <div class="admonitionblock important">
 <table>
 <tbody><tr>
@@ -184,6 +268,13 @@ governs a model is the one on that model’s card — not Apache-2.0.</p>
 </td>
 </tr>
 </tbody></table>
+</div>
+<div class="paragraph">
+<p>The same boundary applies to the third-party runtimes a node calls into — OpenCV, Tesseract,
+whisper.cpp, InspireFace and the model services you point nodes at. They carry their own terms, and a
+few of them are stricter than Apache-2.0. The <a href="model-licenses/">Model Licenses</a> page inventories
+each one.</p>
+</div>
 </div>
 </div>
 </div>
@@ -256,7 +347,7 @@ revision you deploy, and involve your own counsel where the answer matters.</p>
 
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="http://localhost:1313/">
+					<a href="/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
