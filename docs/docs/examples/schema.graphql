@@ -1,0 +1,414 @@
+"""
+The Loom GraphQL API.
+
+The API is currently read-only - all write access goes through the REST API. Every field is guarded
+by the same permissions as its REST counterpart; see the Loom GraphQL specification for the mapping.
+"""
+type Query {
+
+    # ------------------------------------------------------------------
+    # Asset
+    # ------------------------------------------------------------------
+
+    """Load an asset by UUID"""
+    asset(uuid: ID!): Asset
+
+    """Load an asset by its SHA512 checksum"""
+    assetBySha512(sha512: String!): Asset
+
+    """List all assets"""
+    assets: [Asset!]!
+
+    """Load an asset location by UUID"""
+    assetLocation(uuid: ID!): AssetLocation
+
+    """List asset locations. When assetUuid is given only the locations of that asset are returned."""
+    assetLocations(assetUuid: ID): [AssetLocation!]!
+
+    # ------------------------------------------------------------------
+    # User / Group / Role
+    # ------------------------------------------------------------------
+
+    """Load a user by UUID"""
+    user(uuid: ID!): User
+
+    """Load a user by username"""
+    userByUsername(username: String!): User
+
+    """List all users"""
+    users: [User!]!
+
+    """Load a group by UUID"""
+    group(uuid: ID!): Group
+
+    """Load a group by name"""
+    groupByName(name: String!): Group
+
+    """List all groups"""
+    groups: [Group!]!
+
+    """Load a role by UUID"""
+    role(uuid: ID!): Role
+
+    """Load a role by name"""
+    roleByName(name: String!): Role
+
+    """List all roles"""
+    roles: [Role!]!
+
+    # ------------------------------------------------------------------
+    # Pipeline
+    # ------------------------------------------------------------------
+
+    """Load a pipeline by UUID"""
+    pipeline(uuid: ID!): Pipeline
+
+    """List all pipelines"""
+    pipelines: [Pipeline!]!
+
+    """Load a pipeline version by UUID"""
+    pipelineVersion(uuid: ID!): PipelineVersion
+
+    """List all versions of a pipeline, ordered by version number"""
+    pipelineVersions(pipelineUuid: ID!): [PipelineVersion!]!
+
+    """Load a specific version of a pipeline"""
+    pipelineVersionByNumber(pipelineUuid: ID!, versionNumber: Int!): PipelineVersion
+
+    """Load a pipeline run by UUID"""
+    pipelineRun(uuid: ID!): PipelineRun
+
+    """List pipeline runs, optionally narrowed down by pipeline and/or run status"""
+    pipelineRuns(pipelineUuid: ID, status: String): [PipelineRun!]!
+
+    """Load the most recent run of a pipeline"""
+    latestPipelineRun(pipelineUuid: ID!): PipelineRun
+
+    # ------------------------------------------------------------------
+    # Skill
+    # ------------------------------------------------------------------
+
+    """Load a skill by UUID"""
+    skill(uuid: ID!): Skill
+
+    """List all skills"""
+    skills: [Skill!]!
+
+    """Load a skill version by UUID"""
+    skillVersion(uuid: ID!): SkillVersion
+
+    """List all versions of a skill, ordered by version number ascending"""
+    skillVersions(skillUuid: ID!): [SkillVersion!]!
+
+    """Load a specific version of a skill"""
+    skillVersionByNumber(skillUuid: ID!, versionNumber: Int!): SkillVersion
+
+    """Load the latest (highest numbered) version of a skill"""
+    latestSkillVersion(skillUuid: ID!): SkillVersion
+
+    # ------------------------------------------------------------------
+    # Memory
+    # ------------------------------------------------------------------
+
+    """Load a memory entry by UUID"""
+    memoryEntry(uuid: ID!): MemoryEntry
+
+    """Load a memory entry by its natural key (scope, scopeUuid, memoryId)"""
+    memoryEntryByPath(scope: MemoryScope!, scopeUuid: ID!, memoryId: String!): MemoryEntry
+
+    """List the memory entries of one scope, most recently edited first"""
+    memoryEntries(scope: MemoryScope!, scopeUuid: ID!, prefix: String, limit: Int = 50): [MemoryEntry!]!
+
+    """Entry count and total body size of one memory scope"""
+    memoryStats(scope: MemoryScope!, scopeUuid: ID!): MemoryScopeStats!
+
+    """Load a memory deny rule by UUID"""
+    memoryDenyRule(uuid: ID!): MemoryDenyRule
+
+    """Load a memory deny rule by its unique name"""
+    memoryDenyRuleByName(name: String!): MemoryDenyRule
+
+    """List the memory deny rules. Pass enabledOnly to skip the disabled ones."""
+    memoryDenyRules(enabledOnly: Boolean = false): [MemoryDenyRule!]!
+}
+
+# ----------------------------------------------------------------------
+# Asset
+# ----------------------------------------------------------------------
+
+type Asset {
+    uuid: ID!
+    filename: String
+    mimeType: String
+    size: Long
+    sha512: String
+    sha256: String
+    md5: String
+    initialOrigin: String
+    s3BucketName: String
+    s3ObjectPath: String
+    firstSeen: DateTime
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    imageComponents: [ImageComponent!]!
+    videoComponents: [VideoComponent!]!
+    audioComponents: [AudioComponent!]!
+    locations: [AssetLocation!]!
+}
+
+type AssetLocation {
+    uuid: ID!
+    path: String
+    assetUuid: ID
+    libraryUuid: ID
+    mimeType: String
+    """The asset this location points at"""
+    asset: Asset
+}
+
+type ImageComponent {
+    uuid: ID!
+    source: String
+    dominantColor: String
+    width: Int
+    height: Int
+}
+
+type VideoComponent {
+    uuid: ID!
+    source: String
+}
+
+type AudioComponent {
+    uuid: ID!
+    source: String
+}
+
+# ----------------------------------------------------------------------
+# User / Group / Role
+# ----------------------------------------------------------------------
+
+"""A Loom account. The stored password hash is deliberately not exposed."""
+type User {
+    uuid: ID!
+    username: String
+    email: String
+    firstname: String
+    lastname: String
+    """Whether the account may log in"""
+    enabled: Boolean!
+    """Whether the account has been soft deleted (the row is kept to satisfy FK constraints)"""
+    deleted: Boolean!
+    """Whether the account is backed by an external identity provider"""
+    sso: Boolean!
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    """The groups the user is a member of"""
+    groups: [Group!]!
+}
+
+type Group {
+    uuid: ID!
+    name: String
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    """The members of the group"""
+    users: [User!]!
+    """The roles assigned to the group"""
+    roles: [Role!]!
+}
+
+type Role {
+    uuid: ID!
+    name: String
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+}
+
+# ----------------------------------------------------------------------
+# Pipeline
+# ----------------------------------------------------------------------
+
+type Pipeline {
+    uuid: ID!
+    latestVersionUuid: ID
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    """The version referenced by latestVersionUuid"""
+    latestVersion: PipelineVersion
+    """All versions of this pipeline"""
+    versions: [PipelineVersion!]!
+    """All runs of this pipeline"""
+    runs: [PipelineRun!]!
+}
+
+"""An immutable snapshot of a pipeline definition."""
+type PipelineVersion {
+    uuid: ID!
+    pipelineUuid: ID
+    versionNumber: Int!
+    name: String
+    description: String
+    """The node graph of this pipeline version"""
+    definition: Json
+    enabled: Boolean!
+    priority: Int!
+    dryRun: Boolean!
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    pipeline: Pipeline
+}
+
+type PipelineRun {
+    uuid: ID!
+    pipelineUuid: ID
+    """The version number of the pipeline that was executed"""
+    pipelineVersion: Int!
+    started: DateTime
+    finished: DateTime
+    status: String
+    mediaCount: Int!
+    successCount: Int!
+    failureCount: Int!
+    skippedCount: Int!
+    dryRun: Boolean!
+    errorMessage: String
+    durationMs: Long
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    pipeline: Pipeline
+}
+
+# ----------------------------------------------------------------------
+# Skill
+# ----------------------------------------------------------------------
+
+type Skill {
+    uuid: ID!
+    name: String
+    description: String
+    content: String
+    enabled: Boolean!
+    published: Boolean!
+    """Set when the skill was forked from another (published) skill"""
+    originSkillUuid: ID
+    activeVersionUuid: ID
+    activeVersionNumber: Int!
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    """The version referenced by activeVersionUuid"""
+    activeVersion: SkillVersion
+    """The highest numbered version of this skill"""
+    latestVersion: SkillVersion
+    """All versions of this skill, ordered by version number ascending"""
+    versions: [SkillVersion!]!
+}
+
+"""An immutable snapshot of a skill body (description + content)."""
+type SkillVersion {
+    uuid: ID!
+    skillUuid: ID
+    versionNumber: Int!
+    description: String
+    content: String
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+    skill: Skill
+}
+
+# ----------------------------------------------------------------------
+# Memory
+# ----------------------------------------------------------------------
+
+"""The scope a memory entry belongs to. Determines who may read it and what scopeUuid points at."""
+enum MemoryScope {
+    """Private to one user. scopeUuid is a user uuid."""
+    USER
+    """Shared with the members of one RBAC group. scopeUuid is a group uuid."""
+    GROUP
+    """Shared within one space (called project by users). scopeUuid is a space uuid."""
+    SPACE
+}
+
+"""One markdown note in the agent memory bank, addressed by (scope, scopeUuid, memoryId)."""
+type MemoryEntry {
+    uuid: ID!
+    scope: MemoryScope
+    scopeUuid: ID
+    """The path like id relative to the scope, e.g. projects/loom-db.md"""
+    memoryId: String
+    title: String
+    """The markdown body without frontmatter. Null on entries loaded through an index query."""
+    body: String
+    """Byte length of the body"""
+    size: Int!
+    """Digest of the rendered file (header + body)"""
+    sha256: String
+    version: Int!
+    """Name of the chat session that last wrote this entry"""
+    sessionName: String
+    chatUuid: ID
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+}
+
+"""Aggregate usage of one memory scope."""
+type MemoryScopeStats {
+    count: Int!
+    bytes: Long!
+}
+
+"""One entry of the instance wide memory denylist."""
+type MemoryDenyRule {
+    uuid: ID!
+    name: String
+    """The regular expression matched against a note"""
+    pattern: String
+    """The message handed back when this rule rejects a write"""
+    message: String
+    enabled: Boolean!
+    meta: Json
+    created: DateTime
+    edited: DateTime
+    creatorUuid: ID
+    editorUuid: ID
+}
+
+# ----------------------------------------------------------------------
+# Scalars
+# ----------------------------------------------------------------------
+
+"""Long scalar for large numeric values (e.g. file sizes)"""
+scalar Long
+
+"""An instant in time, serialized as an ISO-8601 string in UTC (e.g. 2024-05-01T12:00:00Z)"""
+scalar DateTime
+
+"""An arbitrary JSON object, used for meta and definition properties"""
+scalar Json

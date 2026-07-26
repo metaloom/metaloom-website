@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -110,7 +112,8 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.</p>
+<p>Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.
+Each section below links to the reference page that covers the feature in depth.</p>
 </div>
 <div class="sect1">
 <h2 id="_assets">Assets</h2>
@@ -156,6 +159,9 @@ It represents a digital media file (image, video, audio, document) together with
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_assets">REST API — Assets</a> · <a href="../java-client/#_working_with_assets">Java Client — Assets</a> · <a href="../../ui/#assets">Loom UI — Assets</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -164,6 +170,9 @@ It represents a digital media file (image, video, audio, document) together with
 <div class="paragraph">
 <p><strong>Asset pools</strong> are logical groupings of assets, typically corresponding to a physical storage location (folder, bucket, NAS share).
 They are used to scope Cortex processing runs and asset import operations.</p>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../nodes/filesystem-source/">Filesystem Source Node</a> · <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — <code>pool list</code></a></p>
 </div>
 </div>
 </div>
@@ -174,6 +183,9 @@ They are used to scope Cortex processing runs and asset import operations.</p>
 <p><strong>Libraries</strong> provide a higher-level organizational layer above asset pools.
 A library can span multiple pools and is the primary unit for user-visible browsing.</p>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_libraries">REST API — Libraries</a> · <a href="../../ui/#_library">Loom UI — Library</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -182,6 +194,9 @@ A library can span multiple pools and is the primary unit for user-visible brows
 <div class="paragraph">
 <p><strong>Collections</strong> are curated, user-defined sets of assets (similar to playlists or albums).
 An asset can appear in multiple collections.</p>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_collections">REST API — Collections</a></p>
 </div>
 </div>
 </div>
@@ -207,6 +222,9 @@ An asset can appear in multiple collections.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_users">REST API — Users</a> · <a href="../authentication/">Authentication</a> · <a href="../../ui/#administration">Loom UI — Administration</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -214,6 +232,9 @@ An asset can appear in multiple collections.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Groups aggregate users and are the unit on which <strong>roles</strong> are assigned.</p>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_groups">REST API — Groups</a> · <a href="../java-client/#_working_with_users_groups_and_roles">Java Client — Users, Groups and Roles</a></p>
 </div>
 </div>
 </div>
@@ -236,6 +257,9 @@ An asset can appear in multiple collections.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_roles">REST API — Roles</a> · <a href="../../ui/#administration">Loom UI — Permissions (ACL matrix)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -244,6 +268,9 @@ An asset can appear in multiple collections.</p>
 <div class="paragraph">
 <p>Permissions control what actions a role can perform on each resource (create, read, update, delete).
 They can be set at the global level or scoped to specific libraries or collections.</p>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../ui/#administration">Loom UI — Administration</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — access listings</a></p>
 </div>
 </div>
 </div>
@@ -266,6 +293,9 @@ They can be set at the global level or scoped to specific libraries or collectio
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../rest-api/#_tags">REST API — Tags</a> · <a href="../java-client/#_working_with_tags">Java Client — Tags</a> · <a href="../../ui/#_tags">Loom UI — Tags</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -283,12 +313,15 @@ They can be set at the global level or scoped to specific libraries or collectio
 <p>Pipelines are authored in the UI and stored on Loom with immutable versioning</p>
 </li>
 <li>
-<p>Runs are executed by Loom’s engine, which delegates node tasks to registered Cortex workers (see <a href="../../pipeline">Pipeline Mechanism</a>)</p>
+<p>Runs are executed by Loom’s engine, which delegates node tasks to registered Cortex workers (see <a href="../../pipeline/">Pipeline Mechanism</a>)</p>
 </li>
 <li>
 <p>Pipeline execution results are tracked and surfaced as real-time WebSocket events</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../nodes/">Nodes</a> · <a href="../rest-api/#_pipelines">REST API — Pipelines</a> · <a href="../../ui/#pipeline-editing">Loom UI — Pipeline Editing</a> · <a href="../../cli/#_running_a_pipeline">Command Line — Running a Pipeline</a></p>
 </div>
 </div>
 </div>
@@ -299,6 +332,9 @@ They can be set at the global level or scoped to specific libraries or collectio
 <p><strong>Tasks</strong> represent asynchronous background operations (e.g. bulk ingestion).
 They can be monitored via the REST API.</p>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../operation/#_how_loom_dispatches_work">Operation — How Loom Dispatches Work</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -308,6 +344,9 @@ They can be monitored via the REST API.</p>
 <p>Long-lived API keys can be created for service accounts or CI/CD integrations.
 They are functionally equivalent to JWT tokens.</p>
 </div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../authentication/#_api_keys_tokens">Authentication — API Keys</a> · <a href="../../ui/#administration">Loom UI — API Keys</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -315,6 +354,9 @@ They are functionally equivalent to JWT tokens.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Assets or hashes can be blacklisted to prevent them from being re-ingested or surfaced in search results.</p>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../nodes/hash/">Hashing Node</a> · <a href="../../nodes/filters/">Filter Nodes</a> · <a href="../../ui/#administration">Loom UI — Blacklist</a></p>
 </div>
 </div>
 </div>
@@ -324,6 +366,9 @@ They are functionally equivalent to JWT tokens.</p>
 <div class="paragraph">
 <p><strong>Spaces</strong> are top-level organisational units that group libraries, collections and users.
 They allow multi-tenant deployments within a single Loom instance.</p>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../cli/#_browsing_content_and_access">Command Line — Content Hierarchy</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
 </div>
 </div>
 </div>
@@ -342,6 +387,9 @@ They allow multi-tenant deployments within a single Loom instance.</p>
 <p>Vector similarity search using stored embeddings (e.g. face embeddings, video fingerprints)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><em>Read more:</em> <a href="../../nodes/fingerprint/">Fingerprint Node</a> · <a href="../../nodes/facedescription/">Face Description Node</a> · <a href="../../nodes/dedup/">Deduplication Node</a> · <a href="../graphql-api/">GraphQL API</a></p>
 </div>
 </div>
 </div>
@@ -407,6 +455,14 @@ They allow multi-tenant deployments within a single Loom instance.</p>
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

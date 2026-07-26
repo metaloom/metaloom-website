@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -275,13 +277,106 @@ Loom as asset metadata; see <a href="../cortex/examples/">Cortex Examples</a> fo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-text" data-lang="text">POST /api/v1/pipelines/:uuid/run     # body: { mediaUuids, pathGlobs, dryRun }
+<pre class="highlight"><code class="language-text" data-lang="text">POST /api/v1/pipelines/:uuid/run     # body: { mediaUuids, path, pathGlobs, dryRun }
 GET  /api/v1/pipelines/:uuid/runs    # run history with status + counters</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The response reports whether the run was dispatched, the assigned worker, and the <code>runUuid</code>. If no
 suitable online worker exists the run is rejected (<code>503</code>) rather than silently queued.</p>
+</div>
+<div class="sect2">
+<h3 id="_choosing_what_to_process">Choosing what to process</h3>
+<div class="paragraph">
+<p>The run request narrows what the pipeline’s source enumerates. The most specific selector wins:
+<code>mediaUuids</code>, then <code>pathGlobs</code>, then <code>path</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A single folder or file. The source compares it against its index and processes only media
+that is new, modified or moved — so re-running over a large library is cheap.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pathGlobs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more glob patterns. Always walks the filesystem in full, so use it when you want a
+complete re-scan or need pattern matching.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mediaUuids</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specific assets, resolved to their stored files.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>From the command line these are <code>--dir</code>, <code>--glob</code> and <code>--asset</code> respectively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom pipeline run my-pipeline --dir /media/library</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pausing_and_resuming_a_run">Pausing and resuming a run</h3>
+<div class="paragraph">
+<p>A run in progress can be suspended and later resumed, or stopped for good:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">POST /api/v1/pipelines/:uuid/runs/:runUuid/pause
+POST /api/v1/pipelines/:uuid/runs/:runUuid/resume
+POST /api/v1/pipelines/:uuid/runs/:runUuid/cancel</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A paused run keeps everything it has done. No further work is handed to workers, and the source
+scan stops as well, so a pause genuinely halts the pipeline rather than merely hiding it. Work
+already handed to a worker finishes normally. The run’s status becomes <code>PAUSED</code>, and its counters
+are preserved.</p>
+</div>
+<div class="paragraph">
+<p>Cancelling is final: a cancelled run cannot be resumed.</p>
+</div>
+<div class="paragraph">
+<p>A paused run continues to occupy a worker, so it should be resumed or cancelled rather than left
+indefinitely.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Resuming requires the run to still be live on the server. A run whose server was restarted
+while it was paused is restored in the paused state and can be resumed as normal; one that was
+lost entirely must be started again.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>From the command line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom run pause  &lt;run-uuid&gt;
+metaloom run resume &lt;run-uuid&gt;
+metaloom run cancel &lt;run-uuid&gt;</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -303,13 +398,27 @@ request).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-text" data-lang="text">ws://&lt;loom-host&gt;:8092/api/v1/pipelines/events/ws     # optional ?pipeline=&lt;name&gt; filter</code></pre>
+<pre class="highlight"><code class="language-text" data-lang="text">ws://&lt;loom-host&gt;:8092/api/v1/pipelines/events/ws     # optional ?pipeline=&lt;name&gt; and ?run=&lt;uuid&gt; filters</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Each event identifies the pipeline, node, media item, status (<code>STARTED</code>, <code>COMPLETED</code>, <code>SKIPPED</code>,
 <code>FAILED</code>) and duration. The Loom UI subscribes to this stream to display live processing progress and
 per-node statistics.</p>
+</div>
+<div class="paragraph">
+<p>Two optional filters narrow the stream: <code>?pipeline=&lt;name&gt;</code> restricts it to one pipeline, and
+<code>?run=&lt;uuid&gt;</code> to a single run. Both may be combined. The stream carries no history — it delivers
+only what happens after the connection opens.</p>
+</div>
+<div class="paragraph">
+<p>The command line consumes the same stream:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom run follow &lt;run-uuid&gt;
+metaloom pipeline run my-pipeline --dir /media --follow</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -385,6 +494,14 @@ implementing a worker in Python.</p>
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

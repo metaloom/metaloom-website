@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -108,7 +110,7 @@
         <div class="post-single-content docs-content docs-main-content">
           <div class="paragraph">
 <p>MetaLoom // <strong>Loom</strong> is the media asset management server at the heart of the MetaLoom platform.
-It exposes a REST API over HTTP, a gRPC API (planned), and a GraphQL API (planned) for managing digital media assets and all related entities.</p>
+It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for managing digital media assets and all related entities.</p>
 </div>
 <div class="sect1">
 <h2 id="_components">Components</h2>
@@ -117,6 +119,9 @@ It exposes a REST API over HTTP, a gRPC API (planned), and a GraphQL API (planne
 <ul>
 <li>
 <p><strong>REST API</strong> — Full CRUD for all entities. See <a href="rest-api">REST API Reference</a>.</p>
+</li>
+<li>
+<p><strong>GraphQL API</strong> — Flexible, nested queries over the asset model, with an interactive explorer. See <a href="graphql-api">GraphQL API</a>.</p>
 </li>
 <li>
 <p><strong>Java Client</strong> — Typed HTTP client for JVM applications. See <a href="java-client">Java Client Usage</a>.</p>
@@ -208,6 +213,14 @@ It exposes a REST API over HTTP, a gRPC API (planned), and a GraphQL API (planne
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

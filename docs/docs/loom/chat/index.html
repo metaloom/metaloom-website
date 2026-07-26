@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -228,7 +230,7 @@ captures:</p>
 </div>
 <div class="paragraph">
 <p>Sessions are owned per user, can be named, tagged, described and <strong>published</strong> for other users to
-reference. They are managed via <code>/api/v1/chat/sessions</code>. Publishing a session shares a reproducible
+reference. They are managed via <code>/api/v1/chat-sessions</code>. Publishing a session shares a reproducible
 working context, not just a chat log.</p>
 </div>
 </div>
@@ -674,6 +676,14 @@ by default</strong> but needs a reachable LLM provider to answer; the coding san
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -117,7 +119,8 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 <h2 id="_authentication">Authentication</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All endpoints (except <code>POST /api/v1/auth/login</code>) require a JWT bearer token:</p>
+<p>All endpoints except <code>POST /api/v1/login</code>, the OAuth2 routes, <code>/api/v1/health</code> and the OpenAPI
+document itself require a JWT bearer token:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -143,13 +146,88 @@ All endpoints are rooted at <code>/api/v1</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_interactive_api_swagger_ui">Interactive API (Swagger UI)</h2>
+<h2 id="_openapi_specification">OpenAPI Specification</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Swagger UI below renders the bundled OpenAPI document (<code>/docs/examples/openapi.json</code>), which is
-generated from the server’s endpoint registry. A running Loom server serves the same document live at
-<code>/api/v1/openapi.json</code>; see the note on regenerating it in the website build documentation
-(<code>spec/website/WEBSITE.md</code>).</p>
+<p>The complete API surface — every route, its path and query parameters, its request and response
+examples and the authentication it requires — is described by an OpenAPI 3.0 document. It is
+<strong>generated from the server’s endpoint registry</strong>, never written by hand, so it cannot drift away from
+the running code.</p>
+</div>
+<div class="row mt-4 mb-4">
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2 data-toc-skip="">Download the spec</h2>
+				<p>Feed it to a client generator, an API workbench (Postman, Insomnia, Bruno) or your editor&#39;s HTTP client.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="/docs/examples/openapi.yaml" class="docs-card-link" download="">openapi.yaml</a>
+				<a href="/docs/examples/openapi.json" class="docs-card-link" download="">openapi.json</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2 data-toc-skip="">Explore it</h2>
+				<p>Browse the API by resource group in the explorer below — filter by keyword, expand an operation to see its parameters and examples, and link straight to it.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="#api-explorer" class="docs-card-link">API Explorer</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="paragraph">
+<p>A running server serves the same document for its own endpoint set, with its own address filled in
+as the server URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl http://localhost:8092/api/v1/openapi        # YAML (default)
+curl http://localhost:8092/api/v1/openapi.yaml   # YAML
+curl http://localhost:8092/api/v1/openapi.json   # JSON</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Generating a typed client from the spec is a one-liner with any OpenAPI generator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">openapi-generator-cli generate \
+  -i https://metaloom.io/docs/examples/openapi.yaml \
+  -g python -o ./loom-client</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Loom also ships a maintained, typed Java client — see <a href="../java-client/">Java Client</a>. Prefer
+it over a generated one when you work in Java.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="api-explorer">API Explorer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The explorer below renders the bundled specification. Operations are grouped by resource; use the
+filter box to narrow the list, and expand an operation to see its parameters, request body and
+response examples.</p>
+</div>
+<div class="paragraph">
+<p>To call a live server from here, set the server URL to your instance, click <strong>Authorize</strong> and paste a
+JWT obtained from <code>POST /api/v1/login</code> or an API token from the
+<a href="../../ui/">Loom UI admin area</a>. Note that the API must allow your browser’s origin
+(CORS) for in-page calls to succeed.</p>
 </div>
 <div id="swagger-ui"></div>
 </div>
@@ -157,6 +235,11 @@ generated from the server’s endpoint registry. A running Loom server serves th
 <div class="sect1">
 <h2 id="_endpoint_reference">Endpoint Reference</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The tables below are a reading guide to the most-used routes, grouped the way you are likely to need
+them. They are a summary — the <a href="#api-explorer">API Explorer</a> above is the complete and
+authoritative list.</p>
+</div>
 <div class="sect2">
 <h3 id="_auth">Auth</h3>
 <table class="tableblock frame-all grid-all stretch">
@@ -175,13 +258,33 @@ generated from the server’s endpoint registry. A running Loom server serves th
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/auth/login</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Login with username + password, returns JWT token</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/login</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Login with username + password, returns a JWT and sets the session cookie</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/auth/oauth2</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OAuth2 token exchange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/auth/oauth2/login</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start the OAuth2 (BFF) flow — redirects to the identity provider</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/auth/oauth2/callback</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Handle the identity provider callback and set the Loom JWT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/auth/oauth2/logout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear the session cookie</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/me</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load the currently authenticated user</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/tokens</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manage long-lived API tokens</p></td>
 </tr>
 </tbody>
 </table>
@@ -691,7 +794,7 @@ engine and delegated to registered Cortex workers — see <a href="../../pipelin
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CRUD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chat/sessions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/chat-sessions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Publishable snapshots of a chat’s working state</p></td>
 </tr>
 <tr>
@@ -830,16 +933,57 @@ and <code>pipeline/content-types</code>. Most follow the same CRUD pattern under
 <h2 id="_error_responses">Error Responses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All errors return a JSON body with <code>message</code> and optional <code>statusCode</code> fields.</p>
+<p>All errors return the HTTP status code plus a JSON body carrying a human readable <code>message</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  &#34;message&#34;: &#34;Cannot find asset with uuid &#39;abc&#39;&#34;,
-  &#34;statusCode&#34;: 404
+  &#34;message&#34;: &#34;Cannot find asset with uuid &#39;abc&#39;&#34;
 }</code></pre>
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Validation error, or a malformed path/query parameter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Missing, expired or invalid token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user lacks the permission the operation requires</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No such resource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conflict — e.g. a chat run is already active, or a memory entry already exists</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal server error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">503</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No processor available to accept a pipeline run</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -904,6 +1048,14 @@ and <code>pipeline/content-types</code>. Most follow the same CRUD pattern under
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

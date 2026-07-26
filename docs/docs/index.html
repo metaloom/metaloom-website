@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -145,6 +147,7 @@
 			</div>
 			<div class="docs-card-body">
 				<a href="loom/rest-api/" class="docs-card-link">REST API</a>
+				<a href="loom/graphql-api/" class="docs-card-link">GraphQL API</a>
 				<a href="loom/java-client/" class="docs-card-link">Java Client</a>
 				<a href="loom/authentication/" class="docs-card-link">Authentication</a>
 				<a href="loom/configuration/" class="docs-card-link">Configuration</a>
@@ -264,8 +267,8 @@
 	<div class="col-md-6 col-xl-4 mb-4">
 		<div class="note p-4 h-100">
 			<h3>API and Client</h3>
-			<p>Loom exposes a REST API and a Java client for creating assets, authenticating, managing users and orchestrating processing workflows.</p>
-			<p><a href="loom/rest-api/">REST API</a> · <a href="loom/java-client/">Java Client</a></p>
+			<p>Loom exposes a REST API, a Java client and the <code>metaloom</code> command line client for creating assets, authenticating, managing users and orchestrating processing workflows.</p>
+			<p><a href="loom/rest-api/">REST API</a> · <a href="loom/java-client/">Java Client</a> · <a href="cli/">Command Line</a></p>
 		</div>
 	</div>
 	<div class="col-md-6 col-xl-4 mb-4">
@@ -307,6 +310,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integrate a client application with Loom</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/rest-api/">REST API</a> or <a href="loom/java-client/">Java Client</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/authentication/">Authentication</a>, <a href="loom/configuration/">Configuration</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Drive or script Loom from a terminal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cli/">Command Line</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline/">Pipeline Mechanism</a>, <a href="loom/authentication/">Authentication</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Understand how media gets processed</p></td>
@@ -418,6 +426,14 @@
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

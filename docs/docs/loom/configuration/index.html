@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -580,8 +582,12 @@ table and deployment (backends, Kubernetes RBAC, the runner image). Key switches
 <h2 id="_cli">CLI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Loom server main entry point is <code>LoomCLI</code>. Configuration is driven via the YAML file and
-environment variables shown above.</p>
+<p>The Loom server main entry point is <code>LoomServerRunner</code>. Configuration is driven via the YAML
+file and environment variables shown above.</p>
+</div>
+<div class="paragraph">
+<p>The <code>metaloom</code> command-line client is a separate program that talks to a running Loom server
+over the REST API and has its own configuration file.</p>
 </div>
 </div>
 </div>
@@ -647,6 +653,14 @@ environment variables shown above.</p>
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Command Line</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Command Line" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Command Line">
+    <meta property="og:url" content="https://metaloom.io/docs/cli/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <nav id="toc"></nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Command Line</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p><code>metaloom</code> is a command line client for a Loom server. It talks to the same REST API the web
+interface uses, so anything you can do in the UI you can script.</p>
+</div>
+<div class="paragraph">
+<p>It ships in two forms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a <strong>native binary</strong> with no Java requirement, which starts in a few milliseconds, and</p>
+</li>
+<li>
+<p>a <strong>runnable JAR</strong> for environments that already have a JVM.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both are listed under <a href="../loom/artifacts/">Artifacts</a>.</p>
+</div>
+<div class="sect1">
+<h2 id="_installing">Installing</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_native_binary">Native binary</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cli/build-native.sh
+cli/build-native.sh install     # copies to ~/.local/bin/metaloom</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Building the native binary needs a GraalVM 25 installation. Point <code>GRAALVM_HOME</code> at it if it
+is not in the default location:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">GRAALVM_HOME=/opt/jvm/graalvm-25 cli/build-native.sh</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jar">JAR</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">mvn -pl cli -am package
+java -jar cli/target/metaloom-cli.jar --help</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started">Getting started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Point the client at a server and log in once. The token is stored and reused.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom config set server http://localhost:6333
+Set server = http://localhost:6333 in profile &#39;default&#39;.
+
+$ metaloom login --username admin
+Password:
+Logged in as admin (profile &#39;default&#39;).
+
+$ metaloom whoami
+UUID                                  USERNAME  EMAIL
+f91e1dbf-4077-4091-828e-7f0547f08cfc  admin</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check what you are talking to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom health
+STATUS
+UP
+
+$ metaloom version
+COMPONENT  VERSION
+client     1.0.0-SNAPSHOT
+server     1.0.0-SNAPSHOT</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_where_settings_come_from">Where settings come from</h3>
+<div class="paragraph">
+<p>Settings are resolved in this order, first match wins:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>a command line flag</p>
+</li>
+<li>
+<p>an environment variable</p>
+</li>
+<li>
+<p>the configuration file, for the active profile</p>
+</li>
+<li>
+<p>the built-in default</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_global_flags">Global flags</h3>
+<div class="paragraph">
+<p>These are accepted by every command.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Flag</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-s</code>, <code>--server=URL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom server URL. A bare <code>host:port</code> is accepted, and a sub-path such as
+<code><a href="https://example.com/loom" class="bare">https://example.com/loom</a></code> is honoured for reverse-proxied deployments.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-P</code>, <code>--profile=NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration profile to use for this command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--token=TOKEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer token. Overrides the stored credentials.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--token-file=FILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read the bearer token from a file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-o</code>, <code>--output=FORMAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code>, <code>json</code> or <code>yaml</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-q</code>, <code>--quiet</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print only identifiers, one per line. Suppresses progress messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-v</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increase verbosity. Repeat for more (<code>-v</code>, <code>-vv</code>). Also prints stack traces on failure.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--color=WHEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>auto</code>, <code>always</code> or <code>never</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--no-color</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shorthand for <code>--color=never</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--timeout=DURATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request timeout. Accepts <code>30s</code>, <code>5m</code>, <code>2h</code>, <code>500ms</code> or an ISO-8601 value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--config=FILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration file to use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-k</code>, <code>--insecure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do not verify the server’s TLS certificate.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code>, <code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show help for the command you are on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-V</code>, <code>--version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print the version and exit.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_environment_variables">Environment variables</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 28.5715%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Sets</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METALOOM_SERVER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://localhost:6333" class="bare">http://localhost:6333</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_HOST</code> + <code>LOOM_PORT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server URL, if <code>METALOOM_SERVER</code> is unset. The same pair the server and Cortex use, so
+one export covers all three.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METALOOM_PROFILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The active profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>default</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METALOOM_TOKEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The bearer token</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the stored login</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METALOOM_OUTPUT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The output format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METALOOM_TIMEOUT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The request timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30s</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METALOOM_CONFIG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$XDG_CONFIG_HOME/metaloom/cli.yml</code>, else <code>~/.config/metaloom/cli.yml</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NO_COLOR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disables colour when set to any non-empty value. Honoured even with <code>--color=always</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>XDG_CONFIG_HOME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The base directory for the configuration and credentials files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~/.config</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_the_configuration_file">The configuration file</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">currentProfile: default
+profiles:
+  default:
+    server: http://localhost:6333
+    output: table
+    timeout: 30s
+  prod:
+    server: https://loom.example.com/loom</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Manage it with the <code>config</code> command rather than editing it by hand — values are validated
+before they are written:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom config path
+/home/you/.config/metaloom/cli.yml
+
+$ metaloom config list
+KEY              VALUE
+server           http://localhost:6333
+profile          default
+effectiveServer  http://localhost:6333
+
+$ metaloom config set timeout not-a-duration
+error: Not a valid duration: &#39;not-a-duration&#39;. Try 30s, 5m, 1h or an ISO-8601 value like PT30S.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>effectiveServer</code> is the address the next command will actually use, after the environment
+and any flags have had their say.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_profiles">Profiles</h3>
+<div class="paragraph">
+<p>A profile is a named server configuration — useful when you work against more than one
+environment.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom config use-profile prod
+metaloom config set server https://loom.example.com
+metaloom login --username admin
+
+metaloom --profile dev pipeline list      # one-off against another profile</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_credentials">Credentials</h3>
+<div class="paragraph">
+<p>Credentials live in <code>~/.config/metaloom/credentials.yml</code>, separately from the configuration
+file, and are readable only by you. The client refuses to use a credentials file that anyone
+else can read; if that happens, run <code>chmod 600</code> on it or simply log in again — logging in
+rewrites the file with the right permissions.</p>
+</div>
+<div class="paragraph">
+<p>For CI, prefer a long-lived API token over a password login, because a login token expires:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom login --api-token &#34;$METALOOM_API_TOKEN&#34;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_output_formats">Output formats</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every command renders as an aligned table, as JSON, or as YAML.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom pipeline list
+UUID                                  NAME             VERSION  ENABLED  PRIORITY
+69cb7a95-51e8-45c3-9f0d-97c0a5ec3a90  Ingest &amp; Proxy   1        yes      0
+c26a0805-90cf-4fb0-aa3f-79f8eecad463  Full Processing  1        yes      0
+f1ae366b-a606-477a-83fd-29b5268b3ec1  Quick Hash       1        yes      0</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom -o json pipeline list
+[ {
+  &#34;uuid&#34; : &#34;69cb7a95-51e8-45c3-9f0d-97c0a5ec3a90&#34;,
+  &#34;versionUuid&#34; : &#34;b85096b2-1975-4110-bd96-b3ed964b1f23&#34;,
+  &#34;versionNumber&#34; : 1,
+  &#34;name&#34; : &#34;Ingest &amp; Proxy&#34;,
+  &#34;description&#34; : &#34;MIME filtering, hashing, fingerprinting and proxy generation.&#34;,
+  &#34;definition&#34; : {
+    &#34;edges&#34; : [ {
+      &#34;source&#34; : &#34;src&#34;,
+      &#34;target&#34; : &#34;hash&#34;
+    } ],
+    &#34;nodes&#34; : [ {
+      &#34;id&#34; : &#34;src&#34;,
+      &#34;source&#34; : true,
+      &#34;type&#34; : &#34;filesystem-source&#34;
+    }, {
+      &#34;id&#34; : &#34;hash&#34;,
+      &#34;type&#34; : &#34;sha512&#34;
+    } ]
+  },
+  &#34;enabled&#34; : true,
+  &#34;priority&#34; : 0,
+  &#34;dryRun&#34; : false
+} ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Results go to standard output and progress messages to standard error, so piping into <code>jq</code> is
+always safe:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom -o json pipeline list | jq -r &#39;.[].name&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--quiet</code> reduces a listing to bare identifiers, one per line, which is what you want when
+feeding one command into another:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom -q pipeline list
+69cb7a95-51e8-45c3-9f0d-97c0a5ec3a90
+c26a0805-90cf-4fb0-aa3f-79f8eecad463
+f1ae366b-a606-477a-83fd-29b5268b3ec1
+
+$ metaloom -q pipeline list | xargs -n1 metaloom pipeline get</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Colour is used when writing to a terminal, and disabled by <code>--no-color</code>, <code>--color=never</code> or
+the <code>NO_COLOR</code> environment variable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_a_pipeline">Running a pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Run a pipeline over a folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom pipeline run &#34;Ingest &amp; Proxy&#34; --dir /media/library
+Run 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3 dispatched to cortex-01.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--dir</code> lets the pipeline’s source do a differential scan: media that has not changed since
+the last run over that folder is skipped. When you need a full re-scan, or want to select by
+pattern, use <code>--glob</code> instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom pipeline run &#34;Ingest &amp; Proxy&#34; --glob &#39;/media/**/*.mp4&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also run against specific assets:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom pipeline run &#34;Ingest &amp; Proxy&#34; --asset 0d3f… --asset 7b21…</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If no worker can serve the pipeline, the server refuses the run rather than queueing it
+silently:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom pipeline run &#34;Ingest &amp; Proxy&#34; --dir /media/library
+error: The server cannot serve this request right now. For a pipeline run this usually means
+no registered processor accepts the pipeline&#39;s source kind.
+# exit 20</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_watching_a_run">Watching a run</h3>
+<div class="paragraph">
+<p><code>--follow</code> streams events until the run finishes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom pipeline run &#34;Quick Hash&#34; --dir /media/library --follow
+Run 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3 dispatched to cortex-01.
+PIPELINE_STARTED
+NODE_COMPLETED hash /media/library/clip-01.mp4 (412ms)
+NODE_COMPLETED hash /media/library/clip-02.mp4 (388ms)
+NODE_FAILED    hash /media/library/broken.mp4 - could not read the file
+PIPELINE_COMPLETED</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With <code>-o json</code>, following emits one JSON object per line, so it streams through <code>jq</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom -o json run follow &lt;run-uuid&gt; | jq &#39;select(.type == &#34;NODE_FAILED&#34;) | .mediaPath&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--wait</code> blocks without printing every event, and exits non-zero if the run did not succeed —
+which is what you want in a script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom pipeline run &#34;Quick Hash&#34; --dir /media --wait
+Run 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3 dispatched to cortex-01.
+Run 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3 is RUNNING.
+Run finished: SUCCESS (media=128, success=128, failed=0, skipped=0).</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pausing_resuming_and_stopping">Pausing, resuming and stopping</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom run pause 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3
+Pipeline run paused
+
+$ metaloom run resume 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3
+Pipeline run resumed
+
+$ metaloom run cancel 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3
+Pipeline run cancelled</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>start</code> and <code>stop</code> are accepted as aliases for <code>resume</code> and <code>cancel</code>.</p>
+</div>
+<div class="paragraph">
+<p>Pausing suspends a run without losing its progress: no further work is handed out, and the
+scan itself stops. Work already in progress finishes normally. Resuming picks up where it
+left off.</p>
+</div>
+<div class="paragraph">
+<p>Cancelling is final — a cancelled run cannot be resumed.</p>
+</div>
+<div class="paragraph">
+<p>A paused run holds on to its worker, so remember to resume or cancel it.</p>
+</div>
+<div class="paragraph">
+<p>Acting on a run in the wrong state is reported rather than silently ignored:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom run pause 4c1f2b90-3d5e-4a71-9c8b-2f6a0d51e7c3
+error: Pipeline run is already paused.
+# exit 7</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+These commands take a run UUID. The client will find the pipeline it belongs to for you,
+but passing <code>--pipeline</code> makes it faster.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inspecting_runs">Inspecting runs</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom run list -p &#34;Quick Hash&#34;
+UUID                                  STATUS   STARTED               MEDIA  OK   FAILED  SKIPPED  DURATION
+be71a0d2-5c3f-4e18-9a20-7d4c1b8e6f35  SUCCESS  2026-07-25T22:14:07Z  128    128  0       0        42000ms
+1f9c4e77-08ab-4d62-b3e1-9c05a7f2d418  PARTIAL  2026-07-24T09:02:51Z  64     58   6       0        187000ms
+
+$ metaloom run list -p &#34;Quick Hash&#34; --status FAILED
+No results.</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom run items 1f9c4e77-08ab-4d62-b3e1-9c05a7f2d418 --state FAILED
+SEQ  STATE   PATH                          ERROR
+17   FAILED  /media/library/broken.mp4     could not read the file
+41   FAILED  /media/library/truncated.mov  unexpected end of stream</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom run stats
+DATE        RUNS  OK  FAILED  SKIPPED
+2026-07-24  3     2   1       0
+2026-07-25  5     5   0       0
+2026-07-26  1     1   0       0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_browsing_content_and_access">Browsing content and access</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom user list
+UUID                                  USERNAME  EMAIL
+6793ad7e-200c-432b-8e64-62b9f9544ece  joedoe    joe@example.com
+f91e1dbf-4077-4091-828e-7f0547f08cfc  admin     admin@example.com
+
+$ metaloom group list
+UUID                                  NAME
+7a50a663-492e-44f7-a62b-b6c87f36046f  editors
+a7aebcc9-ad94-4a44-90e0-8f15bdbfd83a  admins
+
+$ metaloom role list
+UUID                                  NAME
+9eedd285-55a5-4dc4-b169-8578a08b442b  admin-role
+d11cf021-d06c-4327-9f85-024f5fa3811d  viewer-role</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The content hierarchy is spaces, then libraries, then asset pools:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom space list
+UUID                                  NAME
+7d784065-7953-4702-813f-36e231b67283  Demo Space
+
+$ metaloom pool list
+UUID                                  NAME                PATH
+2b8c1d40-9e77-4c05-bb31-6a0f2e9d4c88  Production Storage  /mnt/media/production</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shell_completion">Shell completion</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom completion &gt; ~/.local/share/bash-completion/completions/metaloom</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart your shell, then <code>metaloom &lt;TAB&gt;</code> completes commands and options.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exit_codes">Exit codes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Scripts can branch on the exit code rather than parsing messages.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wrong arguments</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A local file could not be read or written</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not found</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not authenticated — run <code>metaloom login</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not permitted</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conflict, for example pausing a run that has already finished</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server rejected the request as invalid</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unspecified error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server could not be reached</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server reported a failure</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">21</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--wait</code> finished, but the run did not succeed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">124</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timed out</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">130</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupted</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Two examples:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ metaloom pipeline get no-such-pipeline
+error: No pipeline named &#39;no-such-pipeline&#39;.
+# exit 4
+
+$ metaloom -s http://127.0.0.1:1 pipeline list
+error: Could not reach the server: Connection refused
+# exit 15</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command_reference">Command reference</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Run <code>metaloom --help</code>, or <code>--help</code> on any subcommand, for the authoritative list.</p>
+</div>
+<div class="sect2">
+<h3 id="_metaloom_help"><code>metaloom --help</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Usage: metaloom [-hkqVv] [--no-color] [--color=WHEN] [--config=FILE]
+                [-o=FORMAT] [-P=NAME] [-s=URL] [--timeout=DURATION]
+                [--token=TOKEN] [--token-file=FILE] COMMAND
+Command line client for a MetaLoom (Loom) server.
+      --color=WHEN         Colourise output: auto, always or never. Honours
+                             NO_COLOR.
+      --config=FILE        Configuration file. Env: METALOOM_CONFIG. Default:
+                             ~/.config/metaloom/cli.yml
+  -h, --help               Show this help message and exit.
+  -k, --insecure           Do not verify the server&#39;s TLS certificate.
+      --no-color           Disable coloured output.
+  -o, --output=FORMAT      Output format: table, json or yaml. Env:
+                             METALOOM_OUTPUT.
+  -P, --profile=NAME       Configuration profile to use. Env: METALOOM_PROFILE.
+  -q, --quiet              Print only identifiers, one per line. Suppresses
+                             progress messages.
+  -s, --server=URL         Loom server URL. Env: METALOOM_SERVER, or LOOM_HOST
+                             + LOOM_PORT. Default: http://localhost:6333
+      --timeout=DURATION   Request timeout, e.g. 30s or 2m. Env:
+                             METALOOM_TIMEOUT.
+      --token=TOKEN        Bearer token. Env: METALOOM_TOKEN. Defaults to the
+                             stored credentials.
+      --token-file=FILE    Read the bearer token from this file.
+  -v                       Increase verbosity. Repeat for more (-v, -vv).
+  -V, --version            Print version information and exit.
+Commands:
+  login       Log in to a Loom server and store the token.
+  logout      Discard the stored token for the active profile.
+  whoami      Show the user the current token belongs to.
+  config      Manage the CLI configuration file.
+  pipeline    Inspect and run pipelines.
+  run         Inspect and control pipeline runs.
+  health      Check whether the server is healthy.
+  version     Show the CLI and server versions.
+  space       Spaces - the top of the content hierarchy.
+  library     Libraries within a space.
+  pool        Asset pools - where binaries live on disk.
+  user        Users.
+  group       Groups.
+  role        Roles.
+  completion  Generate bash/zsh completion script for metaloom.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metaloom_pipeline_help"><code>metaloom pipeline --help</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Usage: metaloom pipeline [-hkqVv] [--no-color] [--color=WHEN] [--config=FILE]
+                         [-o=FORMAT] [-P=NAME] [-s=URL] [--timeout=DURATION]
+                         [--token=TOKEN] [--token-file=FILE] [COMMAND]
+Inspect and run pipelines.
+Commands:
+  list, ls    List pipelines.
+  get         Show one pipeline.
+  delete, rm  Delete a pipeline and all of its versions.
+  run         Trigger a pipeline run.</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The global flags are repeated in every subcommand’s help. They are omitted here for
+brevity — see the table above.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metaloom_pipeline_run_help"><code>metaloom pipeline run --help</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Usage: metaloom pipeline run [-fhkqVv] [--dry-run] [--no-color] [--wait]
+                             [--color=WHEN] [--config=FILE] [-d=PATH]
+                             [-o=FORMAT] [-P=NAME] [-s=URL]
+                             [--timeout=DURATION] [--token=TOKEN]
+                             [--token-file=FILE] [--wait-timeout=DURATION]
+                             [-a=UUID]... [-g=GLOB]... PIPELINE
+Trigger a pipeline run.
+      PIPELINE             Pipeline name or UUID.
+  -a, --asset=UUID         Run against these assets. Repeatable. Takes
+                             precedence over --dir and --glob.
+  -d, --dir=PATH           Run against this directory or file. Uses the source
+                             node&#39;s differential index-backed scan, so
+                             unchanged media is skipped.
+      --dry-run            Override the pipeline&#39;s dry-run flag for this run.
+  -f, --follow             Stream run events until the run finishes.
+  -g, --glob=GLOB          Run against media matching this glob. Repeatable.
+                             Forces a full re-walk and takes precedence over
+                             --dir.
+      --wait               Block until the run finishes. Exits 21 if it did not
+                             succeed.
+      --wait-timeout=DURATION
+                           Give up waiting after this long. Exits 124.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metaloom_run_help"><code>metaloom run --help</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Usage: metaloom run [-hkqVv] [--no-color] [--color=WHEN] [--config=FILE]
+                    [-o=FORMAT] [-P=NAME] [-s=URL] [--timeout=DURATION]
+                    [--token=TOKEN] [--token-file=FILE] [COMMAND]
+Inspect and control pipeline runs.
+Commands:
+  list, ls       List runs of a pipeline.
+  get            Show one run.
+  items          List the media items a run processed.
+  follow         Stream events for a run until it finishes.
+  pause          Suspend an in-flight run.
+  resume, start  Resume a suspended run.
+  cancel, stop   Cancel an in-flight run.
+  stats          Show daily run statistics across all pipelines.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metaloom_config_help"><code>metaloom config --help</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Usage: metaloom config [-hkqVv] [--no-color] [--color=WHEN] [--config=FILE]
+                       [-o=FORMAT] [-P=NAME] [-s=URL] [--timeout=DURATION]
+                       [--token=TOKEN] [--token-file=FILE] [COMMAND]
+Manage the CLI configuration file.
+Commands:
+  list, ls     Show the active profile&#39;s settings.
+  get          Print one setting.
+  set          Set one setting on the active profile.
+  use-profile  Make a profile the default for future commands.
+  path         Print the path of the configuration file.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metaloom_login_help"><code>metaloom login --help</code></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Usage: metaloom login [-hkqVv] [--no-color] [--password-stdin] [-p
+                      [=&lt;password&gt;]] [--api-token=TOKEN] [--color=WHEN]
+                      [--config=FILE] [-o=FORMAT] [-P=NAME] [-s=URL]
+                      [--timeout=DURATION] [--token=TOKEN] [--token-file=FILE]
+                      [-u=&lt;username&gt;]
+Log in to a Loom server and store the token.
+      --api-token=TOKEN    Store this long-lived API token (from
+                             /api/v1/tokens) instead of logging in with a
+                             password. Preferred for CI, where a login JWT
+                             would expire.
+  -p, --password[=&lt;password&gt;]
+                           Password. Prompted for if omitted.
+      --password-stdin     Read the password from stdin. Use this in scripts.
+  -u, --username=&lt;username&gt;
+                           Username. Prompted for if omitted.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_listing_commands">The listing commands</h3>
+<div class="paragraph">
+<p><code>space</code>, <code>library</code>, <code>pool</code>, <code>user</code>, <code>group</code> and <code>role</code> each take a single <code>list</code> subcommand
+(aliased <code>ls</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">$ metaloom user --help
+Usage: metaloom user [-hkqVv] [--no-color] [--color=WHEN] [--config=FILE]
+                     [-o=FORMAT] [-P=NAME] [-s=URL] [--timeout=DURATION]
+                     [--token=TOKEN] [--token-file=FILE] [COMMAND]
+Users.
+Commands:
+  list, ls  List users.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://metaloom.io/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

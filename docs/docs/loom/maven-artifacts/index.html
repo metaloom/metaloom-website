@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -189,6 +191,24 @@
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command_line_client">Command Line Client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>metaloom</code> CLI is normally used as a binary rather than as a dependency — see
+<a href="../../cli/">Command Line</a>. The module is published for embedding it in another tool:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.metaloom.cli&lt;/groupId&gt;
+    &lt;artifactId&gt;metaloom-cli&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>For container deployment see <a href="../containers/">Containers</a> and <a href="../../deployment/">Container Images</a>.</p>
 </div>
@@ -256,6 +276,14 @@
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

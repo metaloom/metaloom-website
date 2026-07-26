@@ -46,6 +46,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/loom/chat/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/cli/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/configuration/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/cortex/configuration/</loc>
@@ -79,6 +81,8 @@
     <loc>https://metaloom.io/docs/nodes/filters/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/fingerprint/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/loom/graphql-api/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/hash/</loc>
   </url><url>

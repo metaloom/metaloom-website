@@ -41,6 +41,8 @@
 	
 	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
 	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
 
 	<!-- Main Stylesheet -->
 	
@@ -110,13 +112,52 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>Loom publishes JVM artifacts and container deployment assets separately.</p>
+<p>Loom publishes JVM artifacts, a command line client and container deployment assets separately.</p>
 </div>
 <div class="sect1">
 <h2 id="_maven_artifacts">Maven Artifacts</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>See <a href="../maven-artifacts/">Maven Artifacts</a> for the BOM and the primary client and shared model modules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command_line_client">Command Line Client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>metaloom</code> is the command line client for a Loom server. It ships in two forms from the same
+<code>io.metaloom.cli:metaloom-cli</code> module:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Form</th>
+<th class="tableblock halign-left valign-top">Artifact</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runnable JAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom-cli.jar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Self-contained; needs a JVM. Built by <code>mvn -pl cli -am package</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Native binary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No JVM required, ~30 MB, starts in single-digit milliseconds. Built by
+<code>cli/build-native.sh</code> with GraalVM 25.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See <a href="../../cli/">Command Line</a> for usage.</p>
 </div>
 </div>
 </div>
@@ -202,6 +243,14 @@ are part of the server image and require no separate artifact.</p>
 <script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
 
 <script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
 
 
 <!-- Main Script -->

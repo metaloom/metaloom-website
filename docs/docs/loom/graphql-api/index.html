@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Java Client Usage</title>
+	<title>GraphQL API</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,12 +12,12 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@metaloom" />
     <meta name="twitter:creator" content="" />
-    <meta name="twitter:title" content="Java Client Usage" />
+    <meta name="twitter:title" content="GraphQL API" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
     
-    <meta property="og:title" content="Java Client Usage">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/java-client/">
+    <meta property="og:title" content="GraphQL API">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/graphql-api/">
     <meta property="og:description" content="">
     <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
 
@@ -108,175 +108,150 @@
       </div>
       <div class="col-lg-9">
         <div class="docs-page-header">
-          <h1>Java Client Usage</h1>
+          <h1>GraphQL API</h1>
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The <code>loom-rest-client</code> module provides a typed HTTP client for JVM applications.</p>
+<p>Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset
+together with its components and locations in a single request, selecting exactly the fields you
+need.</p>
 </div>
 <div class="sect1">
-<h2 id="_maven_dependency">Maven Dependency</h2>
+<h2 id="_endpoint">Endpoint</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.metaloom.loom.client&lt;/groupId&gt;
-    &lt;artifactId&gt;loom-rest-client&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_creating_a_client">Creating a Client</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Use the fluent builder to configure and construct the client:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">LoomHttpClient client = LoomHttpClient.builder()
-    .hostname(&#34;localhost&#34;)
-    .port(8092)
-    .build();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_authentication">Authentication</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Login and store the token
-AuthLoginRequest loginRequest = new AuthLoginRequest()
-    .setUsername(&#34;admin&#34;)
-    .setPassword(&#34;secret&#34;);
-
-AuthLoginResponse loginResponse = client.login(loginRequest).sync();
-client.setToken(loginResponse.getToken());</code></pre>
+<pre>POST http://&lt;host&gt;:8092/api/v1/graphql</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The token is automatically included as a <code>Bearer</code> header in all subsequent requests.</p>
+<p>The endpoint accepts a JSON body with <code>query</code>, and optional <code>operationName</code> and <code>variables</code> fields,
+and returns the standard GraphQL <code>{ &#34;data&#34;: …​, &#34;errors&#34;: …​ }</code> response shape.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_working_with_assets">Working with Assets</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Create an asset
-AssetCreateRequest createReq = new AssetCreateRequest()
-    .setFilename(&#34;photo.jpg&#34;)
-    .setSha512(&#34;abc123...&#34;);
-AssetResponse asset = client.createAsset(createReq).sync();
-
-// Load an asset by UUID
-AssetResponse found = client.loadAsset(UUID.fromString(asset.getUuid())).sync();
-
-// Update an asset
-AssetUpdateRequest updateReq = new AssetUpdateRequest()
-    .setDescription(&#34;My photo&#34;);
-client.updateAsset(UUID.fromString(asset.getUuid()), updateReq).sync();
-
-// Delete an asset
-client.deleteAsset(UUID.fromString(asset.getUuid())).sync();
-
-// List assets (paged)
-AssetListResponse list = client.listAssets().sync();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_working_with_tags">Working with Tags</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">TagCreateRequest tagReq = new TagCreateRequest().setName(&#34;holiday&#34;);
-TagResponse tag = client.createTag(tagReq).sync();
-
-// Add tag to asset
-client.addTagToAsset(assetUuid, UUID.fromString(tag.getUuid())).sync();
-
-// Remove tag from asset
-client.removeTagFromAsset(assetUuid, UUID.fromString(tag.getUuid())).sync();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_working_with_users_groups_and_roles">Working with Users, Groups and Roles</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Create user
-UserCreateRequest userReq = new UserCreateRequest()
-    .setUsername(&#34;alice&#34;)
-    .setPassword(&#34;s3cret&#34;);
-UserResponse user = client.createUser(userReq).sync();
-
-// Create group and assign user
-GroupCreateRequest groupReq = new GroupCreateRequest().setName(&#34;editors&#34;);
-GroupResponse group = client.createGroup(groupReq).sync();
-
-// Create role and assign permissions
-RoleCreateRequest roleReq = new RoleCreateRequest().setName(&#34;asset-editor&#34;);
-RoleResponse role = client.createRole(roleReq).sync();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipelines">Pipelines</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Create a pipeline definition
-PipelineCreateRequest pipelineReq = new PipelineCreateRequest()
-    .setName(&#34;ingest-pipeline&#34;)
-    .setEnabled(true);
-PipelineResponse pipeline = client.createPipeline(pipelineReq).sync();
-
-// List pipelines
-PipelineListResponse pipelines = client.listPipelines().sync();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_async_usage">Async Usage</h2>
+<h2 id="_authentication_authorization">Authentication &amp; Authorization</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All methods return a <code>LoomClientRequest&lt;T&gt;</code> that supports both synchronous <code>.sync()</code> and reactive <code>.rx()</code> usage:</p>
+<p>The GraphQL endpoint reuses the REST authentication stack — a valid JWT bearer token (HttpOnly
+cookie or <code>Authorization</code> header) is required; unauthenticated requests are rejected with <code>401</code>
+before the query is parsed. Obtain a token via the <a href="../authentication">Authentication</a> flow.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Synchronous
-AssetResponse asset = client.loadAsset(uuid).sync();
-
-// Reactive (RxJava)
-client.loadAsset(uuid).rx()
-    .subscribe(a -&gt; System.out.println(&#34;Loaded: &#34; + a.getUuid()));</code></pre>
+<div class="paragraph">
+<p>Authorization is enforced per field. Each resolver checks the caller’s permissions:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 66.6666%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Required permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Query.asset</code>, <code>Query.assets</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.imageComponents</code> / <code>videoComponents</code> / <code>audioComponents</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.locations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET_LOCATION</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A denied field surfaces a GraphQL error with a <code>code</code> extension (<code>UNAUTHENTICATED</code> when no
+permission context is present, <code>FORBIDDEN</code> with the missing <code>permission</code> otherwise).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_closing_the_client">Closing the Client</h2>
+<h2 id="_interactive_explorer_graphiql">Interactive Explorer (GraphiQL)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The client implements <code>AutoCloseable</code>:</p>
+<p>The GraphiQL explorer below is loaded with the Loom schema so you can browse every type and field
+via the <strong>Docs</strong> panel (top-left) and compose queries with autocomplete and validation.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This embedded explorer is <strong>schema-only</strong> — it runs against the published static schema, so the
+<strong>Execute</strong> button does not return live data here. To run real queries, start a Loom server (for
+example the demo container) and open its built-in GraphiQL at <code>http://&lt;host&gt;:8092/graphiql</code>, which
+executes authenticated queries against <code>/api/v1/graphql</code>.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div id="graphiql" style="height: 70vh;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_queries">Example Queries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Fetch a single asset with all of its components and locations:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">try (LoomHttpClient client = LoomHttpClient.builder().hostname(&#34;localhost&#34;).build()) {
-    // use client
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">query GetAsset($uuid: ID!) {
+  asset(uuid: $uuid) {
+    uuid
+    filename
+    mimeType
+    size
+    imageComponents { uuid dominantColor width height }
+    videoComponents { uuid source }
+    audioComponents { uuid source }
+    locations { uuid path libraryUuid mimeType }
+  }
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>List all assets with a minimal field selection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">query ListAssets {
+  assets {
+    uuid
+    filename
+    mimeType
+    size
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also">See Also</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="rest-api">REST API Reference</a> — the primary external API with full CRUD.</p>
+</li>
+<li>
+<p><a href="java-client">Java Client</a> — typed JVM HTTP client.</p>
+</li>
+<li>
+<p><a href="authentication">Authentication</a> — obtaining a bearer token.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
