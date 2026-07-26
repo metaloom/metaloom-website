@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Consistency</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Consistency" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
     <meta property="og:title" content="Consistency">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/consistency/">
+    <meta property="og:url" content="http://localhost:38273/docs/nodes/consistency/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -103,7 +103,89 @@
     <div class="row">
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
         </div>
       </div>
       <div class="col-lg-9">
@@ -116,6 +198,7 @@
 (runs of empty bytes) that indicate a truncated or partially-downloaded file. Running it early lets a
 pipeline skip expensive processing on broken media.</p>
 </div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;consistency&#34;,&#34;applies&#34;:&#34;Video \u00b7 Audio&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;asset consistency block + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;file&#34;,&#34;l&#34;:&#34;media file&#34;,&#34;d&#34;:&#34;scanned for zero chunks&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;zero_chunk_count&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;is_complete&#34;,&#34;d&#34;:&#34;read by downstream nodes&#34;}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -198,9 +281,19 @@ transcoding or ML nodes.</p>
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:38273/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -246,6 +339,8 @@ transcoding or ML nodes.</p>
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

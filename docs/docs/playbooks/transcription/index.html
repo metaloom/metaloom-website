@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Transcribing for the Chat Agent</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Transcribing for the Chat Agent" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Transcribing for the Chat Agent">
+    <meta property="og:url" content="http://localhost:38273/docs/playbooks/transcription/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/" class="is-current">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Transcribing for the Chat Agent</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The chat agent can only answer from what has been extracted. Ask it &#34;which clip mentions the launch
+date?&#34; and it calls <code>search_transcript</code> — which returns nothing at all until something has actually
+transcribed your media.</p>
+</div>
+<div class="paragraph">
+<p>This playbook closes that loop: a pipeline that turns a library of video and audio into stored
+transcripts, and the chat questions those transcripts then make answerable.</p>
+</div>
+<div class="sect1">
+<h2 id="_how_the_pieces_line_up">How the Pieces Line Up</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>  filesystem-source ─▶ filter-mimetype ─PASS─▶ sha512 ─▶ whisper
+        walks disk        video/* audio/*      identity   transcribe
+                                                             │
+                                                             ▼
+                                            asset_transcript_comp in Loom
+                                                             │
+                                              search_transcript tool
+                                                             │
+                                                   Chat &amp; AI Agent ◀── &#34;what did they say about …?&#34;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two links in that chain are easy to get wrong, and both are about <strong>identity</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>The asset must already exist in Loom.</strong> Nodes resolve the asset by looking it up by <strong>SHA-512</strong>
+(<code>loadAsset(sha512)</code>). A file on disk that is not a known asset still gets processed, but the result
+has nothing to attach to. Ingest first — upload through the UI, <code>POST /api/v1/assets</code>, or
+<code>POST /api/v1/assets/bulk/create</code> — then run the pipeline over the same files.</p>
+</li>
+<li>
+<p><strong>A hash node must run upstream.</strong> That SHA-512 lookup needs the hash, so <code>sha512</code> belongs in the
+graph before any node whose output you want persisted.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>whisper</code> is not yet registered with the stock worker’s pipeline node factory, so a run containing it
+is rejected with <code>503</code> until you register the kind and rebuild the worker image — see
+<a href="../#node-availability">Which node kinds a worker can actually run</a>. Verify what your workers accept
+with <code>GET /api/v1/processors</code> before authoring against them.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A running stack — <a href="../docker/">Docker</a> or <a href="../kubernetes/">Kubernetes</a>.</p>
+</li>
+<li>
+<p>Assets in Loom for the media you want transcribed (see above).</p>
+</li>
+<li>
+<p>A worker that can run <a href="../../nodes/whisper/"><code>whisper</code></a>: a Whisper runtime and a model file. The
+model is a <strong>file on the worker</strong>, not something Loom ships.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="worker">Step 1 — Prepare the Whisper Worker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whisper settings live in the <strong>worker’s</strong> <code>cortex.yml</code>, read from <code>~/.config/metaloom/cortex.yml</code>
+(<code>/cortex/.config/metaloom/cortex.yml</code> in the container image):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">metaPath: /meta
+nodes:
+  whisper:
+    modelPath: /models/ggml-large-v3-turbo.bin
+    language: de          # omit to auto-detect
+    useGpu: true
+    gpuDevice: 0
+    temperature: 0.0
+    temperatureInc: 0.2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mount that file and the model directory into the worker:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -d --name cortex-gpu --network metaloom \
+  -e LOOM_HOST=loom -e LOOM_PORT=8092 -e LOOM_TOKEN=&#34;$TOKEN&#34; \
+  -e CORTEX_NODE_ID=cortex-gpu-1 \
+  -e CORTEX_META_PATH=/meta \
+  -e CORTEX_NODE_WHITELIST=filesystem-source,sha512,filter-mimetype,whisper \
+  -v cortex-gpu-meta:/meta \
+  -v /srv/models:/models:ro \
+  -v ./cortex.yml:/cortex/.config/metaloom/cortex.yml:ro \
+  -v /srv/media:/media:ro \
+  metaloom/cortex-server:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The whitelist is doing real work here: it keeps cheap hashing jobs from queueing behind a
+half-hour transcription on your only GPU box, while a second CPU worker (with <code>whisper</code> blacklisted)
+handles the rest of the library.</p>
+</div>
+<div class="paragraph">
+<p>Transcription is slow by design — Cortex gives <code>whisper</code> a default per-task timeout of <strong>600 s</strong> and a
+default concurrency of <strong>1</strong>. Long recordings need the timeout raised in the graph (see below).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pipeline">Step 2 — The Pipeline</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;nodes&#34;: [
+    { &#34;id&#34;: &#34;source&#34;,  &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Media library&#34;,
+      &#34;options&#34;: { &#34;path&#34;: &#34;/media/library&#34; } },
+    { &#34;id&#34;: &#34;mime&#34;,    &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Audio and video only&#34;,
+      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*,audio/*&#34; } },
+    { &#34;id&#34;: &#34;hash&#34;,    &#34;type&#34;: &#34;sha512&#34;,            &#34;name&#34;: &#34;SHA-512 identity&#34; },
+    { &#34;id&#34;: &#34;speech&#34;,  &#34;type&#34;: &#34;whisper&#34;,           &#34;name&#34;: &#34;Transcribe&#34;,
+      &#34;timeoutMs&#34;: 3600000, &#34;blocking&#34;: true }
+  ],
+  &#34;edges&#34;: [
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;target&#34;: &#34;mime&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;target&#34;: &#34;hash&#34;,   &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;speech&#34; }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What each part is for:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>filesystem-source</code></dt>
+<dd>
+<p>The one source node. It walks the library and, when given a <code>path</code>, compares
+against its persisted index so a re-run only picks up new, modified or moved files.</p>
+</dd>
+<dt class="hdlist1"><code>filter-mimetype</code></dt>
+<dd>
+<p>Routes items down <code>PASS</code> / <code>REJECT</code> branches. The <code>branch: &#34;PASS&#34;</code> on edge <code>e2</code> is
+what makes images skip the rest of the graph instead of being handed to a speech model. A branch is
+only valid on an edge leaving a filter node.</p>
+</dd>
+<dt class="hdlist1"><code>sha512</code></dt>
+<dd>
+<p>The identity step described above.</p>
+</dd>
+<dt class="hdlist1"><code>whisper</code></dt>
+<dd>
+<p>Produces <code>whisper_result</code> and persists an <code>asset_transcript_comp</code> plus an
+<code>asset_node_result</code> ledger row against the asset. <code>timeoutMs</code> overrides the 600 s default;
+<code>blocking: true</code> (the default) means a failed hash skips the transcription rather than transcribing
+something Loom cannot attach the result to.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Where a setting goes.</strong> Only some keys are read from the pipeline definition. The rest come from the
+worker’s <code>cortex.yml</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Read from the definition</th>
+<th class="tableblock halign-left valign-top">Read from the worker’s <code>cortex.yml</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code>, <code>type</code>, <code>name</code>, <code>blocking</code>, <code>concurrency</code>, <code>timeoutMs</code>, <code>mode</code>, <code>affinity</code>; and for the source node <code>path</code>, <code>pathGlobs</code>, <code>emitStates</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Everything node-specific: <code>whisper.modelPath</code>, <code>whisper.language</code>, <code>llm.prompts</code>, <code>tts.voice</code>, …</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Putting <code>&#34;options&#34;: {&#34;language&#34;: &#34;en&#34;}</code> on a <code>whisper</code> node has no effect — set <code>nodes.whisper.language</code>
+in the worker config instead. Node IDs must match <code>^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?$</code>; the graph must
+be acyclic and every node reachable, or the definition is rejected on save.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_step_3_create_it">Step 3 — Create It</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">LOOM=http://localhost:8092
+
+curl -s -X POST $LOOM/api/v1/pipelines \
+  -H &#34;Authorization: Bearer $TOKEN&#34; \
+  -H &#39;Content-Type: application/json&#39; \
+  -d &#39;{
+    &#34;name&#34;: &#34;Transcribe Library&#34;,
+    &#34;description&#34;: &#34;Transcribe audio and video so the agent can search speech&#34;,
+    &#34;enabled&#34;: true,
+    &#34;priority&#34;: 10,
+    &#34;definition&#34;: { &#34;nodes&#34;: [ ... ], &#34;edges&#34;: [ ... ] }
+  }&#39; | jq -r .uuid</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Every save creates a new immutable version; older versions can be listed and restored. Authoring the
+same graph in the UI’s pipeline editor works too — it is the same stored definition.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_step_4_run_it">Step 4 — Run It</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">PIPELINE=&lt;uuid-from-above&gt;
+
+curl -s -X POST $LOOM/api/v1/pipelines/$PIPELINE/run \
+  -H &#34;Authorization: Bearer $TOKEN&#34; \
+  -H &#39;Content-Type: application/json&#39; \
+  -d &#39;{&#34;path&#34;: &#34;/media/library/podcasts&#34;}&#39; | jq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The response carries the assigned worker and a <code>runUuid</code>. If no online worker accepts every kind in the
+graph, the run is <strong>rejected with <code>503</code></strong> rather than queued — that is the failure mode to expect when
+the whisper worker is down.</p>
+</div>
+<div class="paragraph">
+<p>The selector narrows what the source enumerates; the most specific wins:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One folder or file, compared against the source’s index — cheap to re-run over a large library.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pathGlobs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Patterns, always a full filesystem walk. Use for a complete re-scan.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mediaUuids</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specific assets, resolved to their stored files.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>From the CLI, with live progress:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">metaloom pipeline run &#34;Transcribe Library&#34; --dir /media/library/podcasts --follow</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A long run can be paused and resumed (<code>metaloom run pause|resume|cancel &lt;run-uuid&gt;</code>); a paused run keeps
+its progress but continues to occupy a worker.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_step_5_check_the_transcripts_landed">Step 5 — Check the Transcripts Landed</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Run history with per-status counters
+curl -s -H &#34;Authorization: Bearer $TOKEN&#34; $LOOM/api/v1/pipelines/$PIPELINE/runs | jq
+
+# Items that did not make it
+metaloom run items &lt;run-uuid&gt; --state FAILED</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then open an asset in the UI — the transcript appears on the asset detail view. If a run reports
+success but no transcript is attached, the asset lookup failed: the file’s SHA-512 does not match any
+asset in Loom. Re-check the ingest step.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ask">Step 6 — Ask the Agent</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With transcripts stored, the chat has something to search:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>&#34;Which clips mention the launch date?&#34;</p>
+</div>
+<div class="paragraph">
+<p>&#34;Summarize the interview with the product team.&#34;</p>
+</div>
+<div class="paragraph">
+<p>&#34;Find the part where they discuss pricing and tell me which video it is in.&#34;</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>The agent resolves these by calling <code>search_transcript</code> (alongside <code>search_assets</code>, <code>get_asset</code>,
+<code>list_collections</code> and <code>asset_statistics</code>), all permission-checked as the calling user. Results come
+back with asset references the UI renders as clickable chips.</p>
+</div>
+<div class="paragraph">
+<p>To make summaries consistent, activate a <strong>skill</strong> — the
+<a href="../../loom/chat/#example-skill-transcript-summarizer"><code>transcript-summarizer</code></a> skill on the Chat
+page is written for exactly this pipeline: resolve the asset, pull the transcript, produce 5–8 sourced
+bullets, and say so plainly when no transcript exists rather than inventing one.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The agent’s domain tools are <strong>read-only</strong>. It answers, summarizes and cites from stored
+transcripts; it does not write results back onto the asset. Persisting derived text is the pipeline’s
+job, not the chat’s.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keeping_it_current">Keeping It Current</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Re-run the same pipeline on a schedule with <code>path</code> rather than <code>pathGlobs</code>. The filesystem source
+compares against its persisted index and only emits new, modified or moved media, so a nightly run over
+a large library is cheap — as long as <code>CORTEX_META_PATH</code> is on a volume that survives restarts.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gotchas">Gotchas</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symptom</th>
+<th class="tableblock halign-left valign-top">Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run rejected with <code>503</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No online worker accepts every node kind in the graph. Check <code>GET /api/v1/processors</code> and the
+worker’s whitelist/blacklist.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node succeeds, nothing stored</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file’s SHA-512 matches no asset in Loom, or no <code>sha512</code> node ran upstream.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transcriptions time out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The 600 s default is too low for long recordings. Raise <code>timeoutMs</code> on the node.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>language</code> / <code>modelPath</code> ignored</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">They were set in the pipeline definition. Node-specific options come from the worker’s <code>cortex.yml</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images are being handed to Whisper</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The filter edge is missing its <code>&#34;branch&#34;: &#34;PASS&#34;</code>, so the filter’s verdict is not routing anything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every run re-transcribes everything</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The worker’s meta path is not persistent, so the filesystem index is rebuilt empty each start.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps">Next Steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Break long video into scenes first — <a href="../scene-analysis/">Scene-Level Video Analysis</a>.</p>
+</li>
+<li>
+<p>Take the transcript further — <a href="../translation/">Translating Content</a>.</p>
+</li>
+<li>
+<p>Node reference — <a href="../../nodes/whisper/">Whisper</a>, <a href="../../nodes/filters/">Filters</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

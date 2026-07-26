@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Playbooks</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Playbooks" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Playbooks">
+    <meta property="og:url" content="http://localhost:38273/docs/playbooks/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="docs-page-header text-center">
+          <h1>Playbooks</h1>
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="post-single-content docs-content docs-main-content">
+          <div class="paragraph">
+<p>Playbooks are <strong>task-oriented guides</strong>. Where the reference pages describe one component at a time —
+a node, an endpoint, a config key — a playbook walks a whole job end to end: what you are building,
+the commands and manifests in order, and how to check that it actually worked.</p>
+</div>
+<div class="paragraph">
+<p>Each playbook is self-contained. Start at the top, run the steps, and finish with the verification
+section. Where a step depends on behaviour documented elsewhere, it links to the reference page rather
+than repeating it.</p>
+</div>
+<div class="row mt-4 mb-4">
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="docker/">Deploying with Docker</a></h2>
+				<p>A production-shaped stack on a single host: PostgreSQL, the Loom server and one or more Cortex workers, wired with the volumes and the worker token they need to survive a restart.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="docker/#compose" class="docs-card-link">Compose file</a>
+				<a href="docker/#persist" class="docs-card-link">What to persist</a>
+				<a href="docker/#scaling" class="docs-card-link">Dedicated workers</a>
+				<a href="docker/#troubleshooting" class="docs-card-link">Troubleshooting</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="kubernetes/">Deploying on Kubernetes</a></h2>
+				<p>The same stack in-cluster: service accounts, the RBAC the chat&#39;s coding sandbox needs to spawn runner Pods, the guardrails that keep those Pods contained, and how to package it all as a Helm chart.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="kubernetes/#service-account" class="docs-card-link">Service account</a>
+				<a href="kubernetes/#sandbox" class="docs-card-link">Session sandboxes</a>
+				<a href="kubernetes/#guardrails" class="docs-card-link">Quotas &amp; NetworkPolicy</a>
+				<a href="kubernetes/#helm" class="docs-card-link">Helm packaging</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="transcription/">Transcribing for the Chat Agent</a></h2>
+				<p>Turn a library of video and audio into transcripts the AI agent can search, so questions like &#34;what did they say about the launch date?&#34; have something to answer from.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="transcription/#pipeline" class="docs-card-link">The pipeline</a>
+				<a href="transcription/#worker" class="docs-card-link">Worker setup</a>
+				<a href="transcription/#ask" class="docs-card-link">Ask the agent</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="scene-analysis/">Scene-Level Video Analysis</a></h2>
+				<p>Cut a video into scenes, then describe each one — from the soundtrack with Whisper, from the picture with a vision model, or both.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="scene-analysis/#audio" class="docs-card-link">Audio route</a>
+				<a href="scene-analysis/#visual" class="docs-card-link">Visual route</a>
+				<a href="scene-analysis/#combined" class="docs-card-link">Both at once</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="translation/">Translating Content</a></h2>
+				<p>Get source text out of speech, documents and images, translate it, and — optionally — speak the translation back onto the asset as narration audio.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="translation/#extract" class="docs-card-link">Extract</a>
+				<a href="translation/#translate" class="docs-card-link">Translate</a>
+				<a href="translation/#dub" class="docs-card-link">Dub</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sect1">
+<h2 id="_before_you_start">Before You Start</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every playbook assumes you can reach a Loom server and log in. If you have not run MetaLoom before,
+start with <a href="../getting-started/">Getting Started</a> — the demo image gets you a working system in one
+command — and come back here when you want to build the real thing.</p>
+</div>
+<div class="paragraph">
+<p>The deployment playbooks assume familiarity with the <a href="../deployment/">container images</a> and their
+ports. The pipeline playbooks assume you have read <a href="../pipeline/">Pipeline Mechanism</a>: Loom owns the
+graph and dispatches one node task at a time to a registered <a href="../cortex/">Cortex</a> worker, which is
+why &#34;which worker can run this node kind&#34; appears in every one of them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="node-availability">Which Node Kinds a Worker Can Actually Run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The pipeline playbooks assume the node kinds they use are <strong>dispatchable</strong>, and that deserves a precise
+statement because it is the difference between a pipeline that runs and one that is rejected with
+<code>503</code>.</p>
+</div>
+<div class="paragraph">
+<p>A Cortex worker announces, at registration, the node kinds its <strong>pipeline node factory</strong> has producers
+for. Loom dispatches a task only to a worker that accepts its kind. Being present in the worker’s
+Dagger node collection is not enough — the kind has to be registered with the factory as well.</p>
+</div>
+<div class="paragraph">
+<p>As of this revision the stock <code>metaloom/cortex-server</code> image registers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">filesystem-source · asset-source · md5 · sha256 · sha512 · chunk-hash · thumbnail · vlm · tts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The other built-in nodes — <code>whisper</code>, <code>llm</code>, <code>ocr</code>, <code>tika</code>, <code>facedetect</code>, <code>facedescription</code>,
+<code>captioning</code>, <code>scene-detection</code>, <code>quality</code>, <code>consistency</code>, the dedup kinds, <code>loom</code> and the <code>filter-*</code>
+kinds — exist, are covered by tests, and are wired into the worker’s node collection, but are <strong>not yet
+registered with the pipeline node factory</strong>, so Loom will not route work to them. The registered set is
+growing; <code>vlm</code> and <code>tts</code> were the most recent additions.</p>
+</div>
+<div class="paragraph">
+<p>Until a kind you need appears in that list, either register it in
+<code>cortex/cli/src/main/java/io/metaloom/cortex/cli/dagger/PipelineNodeFactoryModule.java</code> (one
+<code>factory.register(…​)</code> line) and rebuild the worker image, or run it from a custom Cortex build as
+described in <a href="../cortex/examples/">Cortex Examples</a>. Check the live answer for your deployment with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -s -H &#34;Authorization: Bearer $TOKEN&#34; $LOOM/api/v1/processors | jq &#39;.[] | {nodeId, nodeWhitelist}&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The graphs in the playbooks are written against the node model as designed, so they stay correct as
+the registered set fills in.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions_used_here">Conventions Used Here</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Convention</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$LOOM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the Loom server, e.g. <code><a href="http://localhost:8092" class="bare">http://localhost:8092</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$TOKEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A JWT from <code>POST /api/v1/auth/login</code>, or an API key from <code>/api/v1/tokens</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown in the shape Loom’s graph parser executes — <code>nodes[]</code>, <code>edges[]</code>, per-node <code>options</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node kinds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Written as they appear in a definition’s <code>type</code> field: <code>whisper</code>, <code>filter-mimetype</code>, …</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

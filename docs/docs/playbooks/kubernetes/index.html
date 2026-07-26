@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Deploying on Kubernetes</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Deploying on Kubernetes" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Deploying on Kubernetes">
+    <meta property="og:url" content="http://localhost:38273/docs/playbooks/kubernetes/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/" class="is-current">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Deploying on Kubernetes</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>This playbook runs MetaLoom in a cluster: the Loom server, a pool of Cortex workers, and — the part
+that needs real attention — the <strong>service account and RBAC that let the chat agent spawn per-session
+sandbox Pods</strong>. It ends with how to package the whole thing as a Helm chart.</p>
+</div>
+<div class="paragraph">
+<p>If you have not deployed MetaLoom before, read <a href="../docker/">Deploying with Docker</a> first. The
+constraints are the same; only the packaging changes.</p>
+</div>
+<div class="sect1">
+<h2 id="_what_you_will_build">What You Will Build</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>  namespace: loom                          namespace: loom-runners
+  ┌────────────────────────────────┐       ┌──────────────────────────────┐
+  │ Deployment loom-server         │       │ Pod loom-runner-&lt;session&gt;    │
+  │   sa: loom  ───────────────────┼──────▶│   app: loom-session-runner   │
+  │   :8092 REST/WS/UI             │create │   :8080 runnerd, /workspace  │
+  │   :8989 /metrics               │ pods  │   no service account token   │
+  ├────────────────────────────────┤       │   no egress                  │
+  │ Deployment cortex-cpu  (N)     │       └──────────────────────────────┘
+  │ Deployment cortex-gpu  (M)     │        ResourceQuota · LimitRange
+  │   :8093 health/ready           │        default-deny NetworkPolicy
+  └────────────────────────────────┘</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two namespaces is a deliberate choice: runner Pods are created by the agent at runtime from untrusted
+model output, so they get their own namespace with its own quota and network policy, and the RBAC that
+creates them is scoped to that namespace only.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A cluster and <code>kubectl</code> context with permission to create namespaces, RBAC and workloads.</p>
+</li>
+<li>
+<p>A PostgreSQL instance. The manifests below assume a managed database or an operator-provisioned one
+reachable at <code>postgres.loom.svc</code>; running your own is out of scope here.</p>
+</li>
+<li>
+<p>A <code>ReadWriteMany</code> volume for the media library if more than one worker replica must see it, plus a
+volume for Loom’s uploads.</p>
+</li>
+<li>
+<p>The images from <a href="../../deployment/">Container Images</a>, reachable from the cluster.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_step_1_namespaces_and_secret">Step 1 — Namespaces and Secret</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl create namespace loom
+kubectl create namespace loom-runners
+
+kubectl -n loom create secret generic loom-secrets \
+  --from-literal=db-password=&#39;change-me&#39; \
+  --from-literal=initial-password=&#39;first-login-password&#39;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_step_2_loom_server">Step 2 — Loom Server</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: loom
+  namespace: loom
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: loom-config
+  namespace: loom
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: loom-uploads
+  namespace: loom
+spec:
+  accessModes: [ReadWriteMany]
+  resources:
+    requests:
+      storage: 200Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loom-server
+  namespace: loom
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: loom-server }
+  template:
+    metadata:
+      labels: { app: loom-server }
+    spec:
+      serviceAccountName: loom          # the sandbox backend authenticates with this SA&#39;s token
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 0
+      containers:
+        - name: loom
+          image: metaloom/loom-server:latest
+          env:
+            - name: LOOM_DB_HOST
+              value: postgres.loom.svc
+            - name: LOOM_DB_NAME
+              value: loom
+            - name: LOOM_DB_USERNAME
+              value: loom
+            - name: LOOM_DB_PASSWORD
+              valueFrom:
+                secretKeyRef: { name: loom-secrets, key: db-password }
+            - name: LOOM_INITIAL_PASSWORD
+              valueFrom:
+                secretKeyRef: { name: loom-secrets, key: initial-password }
+          ports:
+            - { name: rest, containerPort: 8092 }
+            - { name: metrics, containerPort: 8989 }
+          livenessProbe:
+            httpGet: { path: /api/v1/health, port: rest }
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /api/v1/health, port: rest }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - { name: config, mountPath: /config }
+            - { name: uploads, mountPath: /uploads }
+      volumes:
+        - name: config
+          persistentVolumeClaim: { claimName: loom-config }
+        - name: uploads
+          persistentVolumeClaim: { claimName: loom-uploads }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loom
+  namespace: loom
+spec:
+  selector: { app: loom-server }
+  ports:
+    - { name: rest, port: 8092, targetPort: rest }
+    - { name: metrics, port: 8989, targetPort: metrics }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notes that matter more than they look:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>/config</code> must be persistent.</strong> On first start Loom writes <code>loom.yml</code> there with a generated
+keystore password and creates <code>keystore.jceks</code> beside it. That keystore signs every JWT — if the
+volume is recreated, all issued tokens (including your Cortex workers&#39;) stop verifying.</p>
+</li>
+<li>
+<p><strong>Probe on <code>8092</code>, not <code>8989</code>.</strong> The monitoring port serves <code>/metrics</code> only; the health check that
+also verifies database connectivity is <code>GET /api/v1/health</code> on the REST port.</p>
+</li>
+<li>
+<p><strong>Keep <code>replicas: 1</code> unless you have verified otherwise.</strong> The pipeline run engine keeps run state in
+the process that started the run, and <code>/config</code> is <code>ReadWriteOnce</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cortex-workers">Step 3 — Cortex Workers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Workers are long-running daemons that dial <strong>out</strong> to Loom, so they are a plain <code>Deployment</code> and you scale
+capacity with the replica count.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cortex-cpu
+  namespace: loom
+spec:
+  serviceName: cortex-cpu
+  replicas: 3
+  selector:
+    matchLabels: { app: cortex-cpu }
+  template:
+    metadata:
+      labels: { app: cortex-cpu }
+    spec:
+      containers:
+        - name: cortex
+          image: metaloom/cortex-server:latest
+          env:
+            - name: LOOM_HOST
+              value: loom.loom.svc
+            - name: LOOM_PORT
+              value: &#34;8092&#34;
+            - name: LOOM_TOKEN
+              valueFrom:
+                secretKeyRef: { name: cortex-token, key: token }
+            - name: CORTEX_NODE_ID          # unique + stable: the ordinal from the StatefulSet
+              valueFrom:
+                fieldRef: { fieldPath: metadata.name }
+            - name: CORTEX_META_PATH
+              value: /meta
+            - name: CORTEX_NODE_BLACKLIST
+              value: whisper,llm,vlm,captioning,facedescription
+          ports:
+            - { name: mon, containerPort: 8093 }
+          livenessProbe:
+            httpGet: { path: /api/health, port: mon }
+          readinessProbe:
+            httpGet: { path: /api/ready, port: mon }
+            periodSeconds: 10
+          volumeMounts:
+            - { name: meta, mountPath: /meta }
+            - { name: media, mountPath: /media }
+      volumes:
+        - name: media
+          persistentVolumeClaim: { claimName: media }
+  volumeClaimTemplates:
+    - metadata: { name: meta }
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources: { requests: { storage: 5Gi } }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Why a <code>StatefulSet</code> rather than a <code>Deployment</code>: <code>CORTEX_NODE_ID</code> <strong>must be unique per worker and stable
+across restarts</strong> — Loom keys registration, node-kind restrictions and run attribution on it and rejects
+a second worker announcing an id already in use. The worker refuses to start without one. A StatefulSet
+gives you <code>cortex-cpu-0</code>, <code>cortex-cpu-1</code>, … for free, plus a per-replica <code>/meta</code> volume so the
+filesystem-source index survives a reschedule. With a Deployment you would have to inject an id another
+way.</p>
+</div>
+<div class="paragraph">
+<p><code>LOOM_TOKEN</code> should be a long-lived API key (<code>POST /api/v1/tokens</code>, or Admin → API Keys in the UI),
+stored in a Secret. Without a token a worker still registers and runs tasks but cannot persist results.</p>
+</div>
+<div class="sect2">
+<h3 id="_a_gpu_pool_for_the_heavy_kinds">A GPU pool for the heavy kinds</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">          env:
+            - name: CORTEX_NODE_WHITELIST
+              value: whisper,facedetect,captioning,vlm
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+      nodeSelector:
+        accelerator: nvidia</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Loom routes each node task to a worker that accepts its kind, so a whitelisted GPU pool plus a
+blacklisted CPU pool splits the work without any change to the pipeline. See
+<a href="../../nodes/#requirements">Nodes → Requirements at a glance</a> for which kinds need what.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Every worker that might receive a task for a given asset needs the media mounted <strong>at the
+same path</strong>. Loom dispatches a path reference, never the bytes. In-cluster that means one <code>ReadWriteMany</code>
+PVC mounted at an identical <code>mountPath</code> in every worker pool.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="service-account">Step 4 — The Loom Service Account</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Deployment above already sets <code>serviceAccountName: loom</code>. On its own that account needs no
+permissions — Loom does not talk to the Kubernetes API for normal operation.</p>
+</div>
+<div class="paragraph">
+<p>It becomes load-bearing the moment you enable the <strong>coding sandbox</strong>: the Kubernetes backend creates
+runner Pods using the token mounted into the Loom pod at
+<code>/var/run/secrets/kubernetes.io/serviceaccount/token</code>, and reaches the API server at
+<code>KUBERNETES_SERVICE_HOST:KUBERNETES_SERVICE_PORT</code>. So do <strong>not</strong> set <code>automountServiceAccountToken:
+false</code> on the Loom pod, and grant that account exactly the pod verbs it needs — nothing more.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sandbox">Step 5 — Session Sandboxes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <a href="../../loom/chat/#coding-sandbox">coding sandbox</a> gives the chat agent <code>run_shell</code>,
+<code>write_file</code>, <code>read_file</code> and <code>list_files</code> inside a per-chat <strong>Session Runner</strong> Pod. It is <strong>off by
+default</strong>; everything below is what turning it on requires.</p>
+</div>
+<div class="sect2">
+<h3 id="_5a_rbac_in_the_runner_namespace">5a. RBAC in the runner namespace</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: loom-session-runner-manager
+  namespace: loom-runners
+rules:
+  - apiGroups: [&#34;&#34;]
+    resources: [&#34;pods&#34;]
+    verbs: [&#34;create&#34;, &#34;get&#34;, &#34;delete&#34;]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: loom-session-runner-manager
+  namespace: loom-runners
+subjects:
+  - kind: ServiceAccount
+    name: loom
+    namespace: loom          # the SA the Loom pod runs as, in ITS namespace
+roleRef:
+  kind: Role
+  name: loom-session-runner-manager
+  apiGroup: rbac.authorization.k8s.io</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>Role</code> + <code>RoleBinding</code> (not a <code>ClusterRole</code>) is the point: the grant is confined to <code>loom-runners</code>.
+<code>create</code>, <code>get</code> and <code>delete</code> on pods is the complete set the backend uses — creating the runner, polling
+it to readiness, and reaping it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5b_turn_it_on">5b. Turn it on</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">            - name: LOOM_AGENT_SANDBOX_ENABLED
+              value: &#34;true&#34;
+            - name: LOOM_AGENT_SANDBOX_BACKEND
+              value: kubernetes
+            - name: LOOM_AGENT_SANDBOX_NAMESPACE
+              value: loom-runners
+            - name: LOOM_AGENT_SANDBOX_IMAGE
+              value: metaloom/loom-session-runner:latest
+            - name: LOOM_AGENT_SANDBOX_MAX_CONCURRENT
+              value: &#34;10&#34;
+            - name: LOOM_AGENT_SANDBOX_IDLE_TTL_S
+              value: &#34;900&#34;
+            - name: LOOM_AGENT_SANDBOX_MAX_SESSION_S
+              value: &#34;3600&#34;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Effect in a cluster</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Master switch for the coding tools.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_BACKEND</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>podman</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to <code>kubernetes</code> in-cluster (also for OpenShift).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_NAMESPACE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the SA’s own namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where runner Pods are created. Point it at the isolated namespace, or the grant above will not match.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_IMAGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/loom-session-runner:latest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be pullable <strong>by the runner namespace</strong> — copy the imagePullSecret there if the registry is private.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MAX_CONCURRENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per-deployment cap on live runners. Size it together with the ResourceQuota below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_IDLE_TTL_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>900</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Idle reap. Lower it on a busy cluster.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MAX_SESSION_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3600</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hard time-box, also written into the Pod’s <code>activeDeadlineSeconds</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_CPU_REQUEST</code> / <code>_CPU_LIMIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100m</code> / <code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per-runner CPU.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MEM_REQUEST</code> / <code>_MEM_LIMIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>128Mi</code> / <code>512Mi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per-runner memory.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_WORKSPACE_SIZE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>512Mi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>emptyDir</code> size limit for <code>/workspace</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_READY_TIMEOUT_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>60</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long Loom waits for the runner to answer <code>/healthz</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You do not apply a runner manifest yourself — Loom POSTs one per session. It is already hardened:
+<code>runAsNonRoot</code>, all capabilities dropped, read-only root filesystem,
+<code>automountServiceAccountToken: false</code>, seccomp <code>RuntimeDefault</code>, <code>emptyDir</code> workspace and tmp, and an
+<code>activeDeadlineSeconds</code> backstop. The annotated reference is
+<code>loom/agent/deploy/session-runner-pod-template.yaml</code> in the source repository. No credentials ever enter
+a runner: Loom drives it over HTTP with a per-session bearer token.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="guardrails">5c. Guardrails on the runner namespace</h3>
+<div class="paragraph">
+<p>RBAC decides who may create runner Pods. These three objects decide what a runner can do once it
+exists. Treat them as part of enabling the feature, not as optional hardening.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: loom-session-runners
+  namespace: loom-runners
+spec:
+  hard:
+    pods: &#34;12&#34;                    # &gt;= LOOM_AGENT_SANDBOX_MAX_CONCURRENT, with headroom for reaping
+    requests.cpu: &#34;2&#34;
+    requests.memory: 2Gi
+    limits.cpu: &#34;12&#34;
+    limits.memory: 6Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: loom-session-runners
+  namespace: loom-runners
+spec:
+  limits:
+    - type: Container
+      default:        { cpu: &#34;1&#34;,    memory: 512Mi }
+      defaultRequest: { cpu: 100m,   memory: 128Mi }
+      max:            { cpu: &#34;2&#34;,    memory: 1Gi }
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: loom-session-runner-isolation
+  namespace: loom-runners
+spec:
+  podSelector:
+    matchLabels: { app: loom-session-runner }
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: { kubernetes.io/metadata.name: loom }
+          podSelector:
+            matchLabels: { app: loom-server }
+      ports:
+        - { protocol: TCP, port: 8080 }
+  egress: []                      # deny all egress: a runner has no reason to reach anything</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The NetworkPolicy is the one that needs care in both directions. Loom talks to the runner <strong>directly on
+its pod IP</strong>, so ingress from the Loom pod on <code>8080</code> must be allowed or every sandbox session dies at the
+readiness wait. Everything else — including all egress — stays denied, which is what keeps arbitrary
+model-generated code from reaching your cluster, your database or the internet.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you run a CNI without NetworkPolicy enforcement, these rules are silently inert. Verify before
+you rely on them.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5d_openshift">5d. OpenShift</h3>
+<div class="paragraph">
+<p>The <code>kubernetes</code> backend covers OpenShift as well. The runner Pod already complies with the
+<code>restricted-v2</code> SCC (non-root, no privilege escalation, all capabilities dropped, seccomp
+<code>RuntimeDefault</code>), so no custom SCC is needed. Grant the same namespaced Role, and make sure the runner
+image is pullable from the runner namespace’s image pull secrets.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_step_6_verify">Step 6 — Verify</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl -n loom rollout status deploy/loom-server
+kubectl -n loom rollout status statefulset/cortex-cpu
+
+# Loom sees the workers
+kubectl -n loom exec deploy/loom-server -- \
+  curl -sf -H &#34;Authorization: Bearer $TOKEN&#34; localhost:8092/api/v1/processors | jq &#39;.[].nodeId&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then exercise the sandbox from the chat UI — ask the agent to run a shell command — and watch the Pod
+appear and disappear:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl -n loom-runners get pods -l app=loom-session-runner -w</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A runner is created lazily on the <strong>first</strong> coding tool call of a chat, and reaped on idle-TTL or when the
+session time-box elapses. Seeing one appear, become ready, and vanish some minutes later is the whole
+feature working.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="helm">Packaging as a Helm Chart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The manifests above are the deployable truth; a chart is a way to parameterize them per environment.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<code>loom/helm</code> in the source repository is currently a <strong>placeholder</strong> — it contains a README and
+no chart. Until a chart ships, deploy with the manifests above or wrap them in a chart of your own. The
+<a href="../../loom/helm-chart/">Helm Chart</a> page tracks that status.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>A values file for a chart wrapping this playbook looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  repository: metaloom/loom-server
+  tag: latest
+  pullPolicy: IfNotPresent
+
+database:
+  host: postgres.loom.svc
+  name: loom
+  username: loom
+  existingSecret: loom-secrets      # key: db-password
+
+persistence:
+  config:  { size: 1Gi,   accessMode: ReadWriteOnce }   # keystore + loom.yml — never drop this
+  uploads: { size: 200Gi, accessMode: ReadWriteMany }
+
+serviceAccount:
+  create: true
+  name: loom
+
+ai:                                  # chat agent; needs a reachable provider to answer
+  enabled: true
+  providerType: OLLAMA
+  url: http://ollama.loom.svc:11434
+  modelId: gpt-oss:20b
+
+sandbox:                             # renders the RBAC, quota, LimitRange and NetworkPolicy
+  enabled: false
+  namespace: loom-runners
+  image: metaloom/loom-session-runner:latest
+  maxConcurrent: 10
+  idleTtlSeconds: 900
+  maxSessionSeconds: 3600
+  rbac:
+    create: true
+  networkPolicy:
+    create: true
+
+cortex:
+  pools:
+    - name: cpu
+      replicas: 3
+      nodeBlacklist: [whisper, llm, vlm, captioning, facedescription]
+    - name: gpu
+      replicas: 1
+      nodeWhitelist: [whisper, facedetect, captioning, vlm]
+      gpu: 1
+  media:
+    existingClaim: media
+    mountPath: /media</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two rules for whoever writes the templates:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Everything under <code>sandbox</code> is a unit. Rendering <code>LOOM_AGENT_SANDBOX_ENABLED=true</code> without the Role,
+the RoleBinding and the NetworkPolicy produces a deployment that either cannot create runners at all
+or creates unconstrained ones.</p>
+</li>
+<li>
+<p><code>CORTEX_NODE_ID</code> must come from a stable per-replica identity (a StatefulSet ordinal), never from a
+random suffix — see <a href="#cortex-workers">Step 3</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting">Troubleshooting</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symptom</th>
+<th class="tableblock halign-left valign-top">Cause and fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sandbox tool calls fail with a <code>403</code> from the API server</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The RoleBinding subject does not match. The <code>ServiceAccount</code> subject needs <code>namespace: loom</code> (where
+the SA lives) while the Role and RoleBinding live in <code>loom-runners</code> (where the pods are created).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runner Pods are created but never become ready</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The NetworkPolicy is blocking Loom → runner on <code>8080</code>, or the runner image cannot be pulled in the
+runner namespace. Check <code>kubectl -n loom-runners describe pod</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runner creation fails with <code>exceeded quota</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AGENT_SANDBOX_MAX_CONCURRENT</code> is higher than the ResourceQuota allows. Raise the quota or lower
+the cap — keep the quota above the cap so reaping has headroom.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cortex pod restarts with <em>&#34;No worker id configured&#34;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_NODE_ID</code> is unset. Use a StatefulSet and the pod name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two workers, only one visible in <code>/api/v1/processors</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duplicate <code>CORTEX_NODE_ID</code>. Loom rejects a second worker announcing an id already in use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Everyone logged out after a Loom pod restart</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>/config</code> PVC was not persistent, so a new keystore and signing key were generated.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node tasks fail with missing files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The media PVC is mounted at different paths in different pools, or not mounted in one of them.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps">Next Steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Give the workers something to do — <a href="../transcription/">Transcribing for the Chat Agent</a>.</p>
+</li>
+<li>
+<p>Scrape the stack — <a href="../../loom/metrics/">Loom Metrics</a>, <a href="../../cortex/metrics/">Cortex Metrics</a>.</p>
+</li>
+<li>
+<p>Full sandbox reference — <a href="../../loom/chat/#coding-sandbox">Chat &amp; AI Agent → Coding Sandbox</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

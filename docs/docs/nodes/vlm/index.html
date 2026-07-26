@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>VLM</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="VLM" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="VLM">
+    <meta property="og:url" content="http://localhost:38273/docs/nodes/vlm/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>VLM</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The VLM node reads an image with a <strong>vision-language model</strong> served over an OpenAI-compatible
+endpoint. It ships an <strong>olmOCR</strong> preset that transcribes a document page — scans, receipts,
+screenshots, forms — into clean markdown, with tables converted to HTML and equations to LaTeX.</p>
+</div>
+<div class="paragraph">
+<p>Unlike the <a href="../ocr/">OCR</a> node, which recognises glyphs with Tesseract, this node hands the whole
+page to a model that also understands its layout. It is the better choice for multi-column pages,
+tables, forms and handwriting, at the cost of needing a GPU-backed model service. Both nodes can run
+in the same pipeline.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;vlm&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;GPU vision endpoint&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;olmOCR preset&#34;,&#34;note&#34;:&#34;the default when no prompts are configured&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;document page&#34;,&#34;d&#34;:&#34;scaled to maxImageDim&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;vlm_result_olmocr&#34;,&#34;d&#34;:&#34;markdown transcription&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;page observations&#34;,&#34;d&#34;:&#34;language, rotation, is_table&#34;}]},{&#34;name&#34;:&#34;custom prompts&#34;,&#34;note&#34;:&#34;one output per configured prompt id&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;scaled to maxImageDim&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;vlm_result_caption&#34;,&#34;d&#34;:&#34;responseFormat TEXT&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;vlm_result_fields&#34;,&#34;d&#34;:&#34;responseFormat JSON&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vlm</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vlm_result_{promptId}</code> (String) — for the shipped preset, <code>vlm_result_olmocr</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An OpenAI-compatible vision endpoint (for example vLLM serving olmOCR). GPU-bound; no native library on the worker.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> + <code>asset_node_result</code> ledger</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>VlmNodeOptions</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>endpointUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the vision endpoint, e.g. <code><a href="http://127.0.0.1:8000" class="bare">http://127.0.0.1:8000</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apiKey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer token for the endpoint; usually unset for a local service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prompts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Named tasks to run against the image, keyed by prompt id</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Each entry under <code>prompts</code> configures one task:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>model</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model id to select on the endpoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prompt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instruction sent alongside the image</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>responseFormat</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TEXT</code>, <code>JSON</code> or <code>OLMOCR</code> — how the answer is read back</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxImageDim</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Longest image side in pixels sent to the model; <code>0</code> disables scaling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxTokens</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output token budget; a full document page needs a few thousand</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>temperature</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sampling temperature</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>retryOnRotation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For <code>OLMOCR</code>: when the model reports the page is sideways, rotate it and ask again</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Configured with no prompts the node falls back to the olmOCR preset, so pointing <code>endpointUrl</code> at a
+running olmOCR server is enough to get document transcription.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_olmocr">Running olmOCR</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The preset targets <code>allenai/olmOCR-2-7B-1025-FP8</code>. Serve it with vLLM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">vllm serve allenai/olmOCR-2-7B-1025-FP8 \
+    --host 0.0.0.0 --port 8000 \
+    --max-num-seqs 1 \
+    --max-model-len 16384 \
+    --limit-mm-per-prompt.image 1 \
+    --gpu-memory-utilization 0.85 \
+    --kv-cache-dtype fp8 \
+    --override-generation-config &#39;{&#34;max_new_tokens&#34;:4096}&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Give the context window room: at the preset’s 1288-pixel page size the image alone takes well over a
+thousand tokens before the model writes a single word, and a dense page can run to several thousand
+more. A context or token limit set too low silently truncates the transcription part-way through the
+page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_results">Results</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For the olmOCR preset the stored component carries the transcribed page plus what the model observed
+about it:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>natural_text</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transcribed page as markdown</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primary_language</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Language the model detected</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>is_rotation_valid</code> / <code>rotation_correction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the page was upright, and the turn needed if not</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>is_table</code> / <code>is_diagram</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the page is mostly a table or a diagram</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>truncated</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set when the model ran out of output tokens mid-page</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Searchable document archives</strong> — transcribe scanned reports, contracts and correspondence.</p>
+</li>
+<li>
+<p><strong>Structured pages</strong> — recover tables and forms that plain OCR flattens into unusable text.</p>
+</li>
+<li>
+<p><strong>Mixed-language material</strong> — the model reports the language it detected per page.</p>
+</li>
+<li>
+<p><strong>Beyond OCR</strong> — point a prompt at any vision model to caption images or pull specific fields out
+of them.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

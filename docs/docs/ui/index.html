@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Loom UI</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Loom UI" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
     <meta property="og:title" content="Loom UI">
-    <meta property="og:url" content="https://metaloom.io/docs/ui/">
+    <meta property="og:url" content="http://localhost:38273/docs/ui/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -103,7 +103,89 @@
     <div class="row">
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/" class="is-current">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
         </div>
       </div>
       <div class="col-lg-9">
@@ -142,17 +224,35 @@ demo credentials <strong>admin</strong> / <strong>finger</strong>. See <a href="
 <h2 id="_what_the_ui_offers">What the UI Offers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The interface is split into a <strong>user</strong> area (day-to-day media work) and an <strong>admin</strong> area (governance and
-operations), reachable from the collapsible left navigation.</p>
+<p>The collapsible left navigation groups every screen into three sections — <strong>AI</strong>, <strong>Content</strong> and
+<strong>Management</strong> — so it is always clear whether you are steering the agent, working on media, or
+operating the installation.</p>
 </div>
 <div class="paragraph">
-<p><strong>User area</strong></p>
+<p><strong>AI</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Chat &amp; AI Agent</strong> — a conversational assistant with live references to your assets, tasks and pipelines</p>
+<p><strong>Chat</strong> — a conversational assistant with live references to your assets, tasks and pipelines</p>
 </li>
+<li>
+<p><strong>Chat Sessions</strong> — durable, publishable records of past conversations, with the context and skill
+versions they ran with</p>
+</li>
+<li>
+<p><strong>Skills</strong> — versioned instruction packages the chat agent can apply per conversation</p>
+</li>
+<li>
+<p><strong>Memory</strong> — browse and edit the scoped markdown notes the agent reads and writes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Content</strong></p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Library</strong> — browse assets grouped into libraries</p>
 </li>
@@ -163,7 +263,7 @@ operations), reachable from the collapsible left navigation.</p>
 <p><strong>Collections</strong> — organise assets into colour-coded collections</p>
 </li>
 <li>
-<p><strong>Tasks</strong> — a Kanban-style task board with priority, status and assignees</p>
+<p><strong>Tasks</strong> — a Kanban-style task board with priority, status, due dates and per-asset tasks</p>
 </li>
 <li>
 <p><strong>Detection</strong> — review face, object and LLM detections; manage face clusters and persons</p>
@@ -174,16 +274,10 @@ operations), reachable from the collapsible left navigation.</p>
 <li>
 <p><strong>Workflow</strong> — fullscreen, keyboard-driven bulk review</p>
 </li>
-<li>
-<p><strong>Skills</strong> — reusable instruction packages the chat agent can apply per conversation</p>
-</li>
-<li>
-<p><strong>Agent Memory</strong> — browse and edit the scoped markdown notes the agent reads and writes</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Admin area</strong></p>
+<p><strong>Management</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -200,15 +294,44 @@ operations), reachable from the collapsible left navigation.</p>
 <p><strong>Monitoring</strong> — rolling metrics dashboards</p>
 </li>
 <li>
-<p><strong>Spaces, Users, Groups &amp; Permissions</strong> — full access-control administration (ACL)</p>
+<p><strong>Spaces</strong> — tenant/project separation</p>
 </li>
 <li>
-<p><strong>API Keys</strong> — generate and revoke long-lived API tokens</p>
+<p><strong>Memory Denylist</strong> — regex guardrails for what the agent may never store</p>
 </li>
 <li>
-<p><strong>Blacklist &amp; Memory Denylist</strong> — security and agent-guardrail rules</p>
+<p><strong>ACL</strong> — a sub-group holding <strong>Users</strong>, <strong>Groups</strong>, <strong>Permissions</strong>, <strong>API Keys</strong> and <strong>Blacklist</strong>, i.e. every
+screen that decides who may do what</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_your_first_steps">Your First Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A brand-new Loom instance starts out empty, and the UI is built to guide you through that first hour
+rather than show you blank screens.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A personal welcome</strong> — starting a new conversation greets you by name and explains, in one line,
+what the agent can do for you. The greeting disappears as soon as you send your first message.</p>
+</li>
+<li>
+<p><strong>Guided empty pages</strong> — every feature page (Assets, Library, Collections, Tags, Tasks, Skills,
+Asset Pools) shows a large icon, a short explanation of what the feature is for, and a single button
+that creates the first element — upload your first asset, create your first collection, write your
+first skill, and so on.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once a page has content, the empty state is replaced by the regular browser; if a search or filter
+returns nothing, you get a distinct &#34;no matches&#34; hint instead, so an empty result is never confused
+with an empty feature.</p>
 </div>
 </div>
 </div>
@@ -223,6 +346,21 @@ active tasks and collections, and past conversations are listed for quick recall
 <div class="imageblock img-fluid">
 <div class="content">
 <img src="chat.png" alt="Loom Agent chat interface"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_chat_sessions">Chat Sessions</h3>
+<div class="paragraph">
+<p>A conversation can be captured as a <strong>chat session</strong>: a named, describable record that survives the chat
+itself. Publishing a session makes it available as <strong>context</strong> for later conversations — a new session can
+pull in another session’s chat history, its skills, or its coding-sandbox filesystem, each toggled
+separately. Sessions also pin the exact skill versions they ran with, so a shared session stays
+reproducible after the underlying skills move on.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="chat-sessions.png" alt="Chat sessions overview"/>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -276,7 +414,9 @@ tabs for comments, annotations and reactions.</p>
 <div class="sect2">
 <h3 id="_library">Library</h3>
 <div class="paragraph">
-<p>Assets can be organised into libraries. The library view provides a per-library selector and asset grid.</p>
+<p>Assets can be organised into libraries. The library view provides a per-library selector and an asset
+grid that previews the stored image binaries; formats a browser cannot decode — video, audio,
+documents — keep their type icon.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
@@ -292,6 +432,18 @@ tabs for comments, annotations and reactions.</p>
 <div class="imageblock img-fluid">
 <div class="content">
 <img src="tags.png" alt="Tag management"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tasks">Tasks</h3>
+<div class="paragraph">
+<p>Work is tracked as tasks with a priority, a status and a due date. A task can be attached to the asset
+it is about, in which case it also shows up in the <strong>Tasks</strong> tab of that asset’s detail view.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="tasks.png" alt="Task board"/>
 </div>
 </div>
 </div>
@@ -354,10 +506,28 @@ server.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="monitoring">Monitoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The monitoring area is the operational overview: a row of headline figures — assets ingested, pipeline
+runs, average processing latency, storage used, open tasks, agent queries and new annotations — over a
+14-day rolling window, followed by the trends behind them. Asset ingestion, pipeline run outcomes
+(success / failed / skipped), task backlog, processing latency, storage growth and agent usage each get
+their own chart.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="monitoring.png" alt="Monitoring and statistics dashboard"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="administration">Administration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The admin area centralises governance. <strong>Users</strong> manages accounts, status and role assignments.</p>
+<p>Everything that decides <strong>who may do what</strong> lives in the <strong>ACL</strong> sub-group of the Management section.
+<strong>Users</strong> manages accounts, status and role assignments.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
@@ -366,8 +536,9 @@ server.</p>
 </div>
 <div class="paragraph">
 <p><strong>Permissions</strong> is the access-control (ACL) surface: define roles and toggle fine-grained permissions
-across every resource type (assets, annotations, users, and more) in a permission matrix. Roles are
-assigned to users through groups.</p>
+across every resource type (assets, annotations, users, and more) in a permission matrix. Each
+permission carries a one-line description of what it actually allows, so a role can be assembled
+without cross-referencing the API. Roles are assigned to users through groups.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
@@ -431,9 +602,19 @@ assigned to users through groups.</p>
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:38273/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -479,6 +660,8 @@ assigned to users through groups.</p>
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

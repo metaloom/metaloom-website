@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Chat &amp; AI Agent</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Chat &amp; AI Agent" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
     <meta property="og:title" content="Chat &amp; AI Agent">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/chat/">
+    <meta property="og:url" content="http://localhost:38273/docs/loom/chat/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -103,7 +103,89 @@
     <div class="row">
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/" class="is-current">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
         </div>
       </div>
       <div class="col-lg-9">
@@ -236,7 +318,7 @@ working context, not just a chat log.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_skills">Skills</h2>
+<h2 id="skills">Skills</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A <strong>skill</strong> is a user-owned, <code>SKILL.md</code>-style markdown instruction package (name, description and a
@@ -302,7 +384,7 @@ with `delete_memory`. Never let a note contradict what the user just told you.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="_example_skill_transcript_summarizer">Example Skill: transcript-summarizer</h3>
+<h3 id="example-skill-transcript-summarizer">Example Skill: transcript-summarizer</h3>
 <div class="paragraph">
 <p>A domain skill that turns a request like &#34;summarize this clip&#34; into a tight, sourced summary:</p>
 </div>
@@ -330,7 +412,7 @@ do not invent content.</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_memory">Memory</h2>
+<h2 id="memory">Memory</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The agent has a persistent <strong>memory bank</strong> — scoped markdown notes it can read and write across
@@ -400,7 +482,7 @@ runner so coding tasks can consult it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_coding_sandbox">Coding Sandbox</h2>
+<h2 id="coding-sandbox">Coding Sandbox</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Beyond querying the domain, the agent can run <strong>coding tasks</strong> (<code>run_shell</code>, <code>write_file</code>,
@@ -424,15 +506,77 @@ readiness, and destroys runners on chat reset / idle / max-session.</p>
 </li>
 </ul>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>   Loom backend (SandboxOrchestrator)
-        │  create runner (per chat)         drive over HTTP + per-session token
-        ▼                                   ┌───────────────────────────────┐
-   Session Runner pod/container  ◀──────────┤ run_shell / write_file / ...  │
-   (runnerd, /workspace, no creds)          └───────────────────────────────┘
-        ▲  reaped on idle-TTL / max-session</code></pre>
-</div>
+<div class="ml-figure">
+<svg viewBox="0 0 900 366" role="img" aria-labelledby="ml-sbx-title ml-sbx-desc" class="ml-arch-svg">
+  <title id="ml-sbx-title">Coding sandbox lifecycle</title>
+  <desc id="ml-sbx-desc">The Loom server holds the agent loop and the SandboxOrchestrator. On the first coding tool call of a chat the orchestrator creates a Session Runner container, then drives it over HTTP with a per-session bearer token; the runner holds only runnerd and an isolated workspace, runs hardened with no credentials and no network egress, and is destroyed on chat reset, idle timeout or the maximum session time-box.</desc>
+  <defs>
+    <marker id="ml-sbx-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57cbcc"></path></marker>
+    <marker id="ml-sbx-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7681"></path></marker>
+  </defs>
+
+  <!-- Loom side -->
+  <g>
+    <rect x="24" y="46" width="272" height="212" rx="10" class="ml-box-container"></rect>
+    <text x="38" y="68" class="ml-box-title">Loom Server</text>
+    <text x="38" y="84" class="ml-box-tag">metaloom/loom-server</text>
+    <rect x="38" y="96" width="244" height="60" rx="6" class="ml-box-part"></rect>
+    <text x="160" y="118" text-anchor="middle" class="ml-part-title">AI Agent Loop</text>
+    <text x="160" y="136" text-anchor="middle" class="ml-part-sub">run_shell · write_file · read_file</text>
+    <rect x="38" y="166" width="244" height="72" rx="6" class="ml-box-part"></rect>
+    <text x="160" y="188" text-anchor="middle" class="ml-part-title">SandboxOrchestrator</text>
+    <text x="160" y="206" text-anchor="middle" class="ml-part-sub">runner registry · concurrency cap</text>
+    <text x="160" y="222" text-anchor="middle" class="ml-part-sub">readiness wait · reaper</text>
+  </g>
+
+  <!-- Session runner side -->
+  <g>
+    <rect x="560" y="30" width="316" height="244" rx="10" class="ml-box-container"></rect>
+    <text x="574" y="52" class="ml-box-title">Session Runner</text>
+    <text x="574" y="68" class="ml-box-tag">loom-session-runner · one per chat</text>
+    <rect x="574" y="80" width="288" height="52" rx="6" class="ml-box-part"></rect>
+    <text x="718" y="101" text-anchor="middle" class="ml-part-title">runnerd</text>
+    <text x="718" y="118" text-anchor="middle" class="ml-part-sub">standard-library HTTP daemon · no credentials</text>
+    <rect x="574" y="140" width="288" height="44" rx="6" class="ml-box-part"></rect>
+    <text x="718" y="161" text-anchor="middle" class="ml-part-title">/workspace</text>
+    <text x="718" y="176" text-anchor="middle" class="ml-part-sub">emptyDir · the only writable path</text>
+    <!-- hardening chips -->
+    <rect x="574" y="194" width="139" height="24" rx="12" class="ml-chip"></rect>
+    <text x="643.5" y="210" text-anchor="middle" class="ml-chip-label">runAsNonRoot</text>
+    <rect x="723" y="194" width="139" height="24" rx="12" class="ml-chip"></rect>
+    <text x="792.5" y="210" text-anchor="middle" class="ml-chip-label">all caps dropped</text>
+    <rect x="574" y="224" width="139" height="24" rx="12" class="ml-chip"></rect>
+    <text x="643.5" y="240" text-anchor="middle" class="ml-chip-label">read-only rootfs</text>
+    <rect x="723" y="224" width="139" height="24" rx="12" class="ml-chip"></rect>
+    <text x="792.5" y="240" text-anchor="middle" class="ml-chip-label">no service-account token</text>
+  </g>
+
+  <!-- 1. create -->
+  <polyline points="296,110 560,110" class="ml-edge" marker-end="url(#ml-sbx-arrow)"></polyline>
+  <circle cx="330" cy="110" r="11" class="ml-step"></circle>
+  <text x="330" y="114" text-anchor="middle" class="ml-step-label">1</text>
+  <text x="432" y="102" text-anchor="middle" class="ml-edge-label">create on the first coding tool call</text>
+
+  <!-- 2. drive -->
+  <polyline points="296,166 560,166" class="ml-edge" marker-end="url(#ml-sbx-arrow)" marker-start="url(#ml-sbx-arrow)"></polyline>
+  <polyline points="300,166 556,166" class="ml-flow"></polyline>
+  <circle cx="330" cy="166" r="11" class="ml-step"></circle>
+  <text x="330" y="170" text-anchor="middle" class="ml-step-label">2</text>
+  <text x="436" y="158" text-anchor="middle" class="ml-edge-label">HTTP + per-session bearer token</text>
+  <text x="436" y="186" text-anchor="middle" class="ml-edge-label-muted">tool call in · stdout / files out</text>
+
+  <!-- 3. destroy -->
+  <polyline points="560,232 296,232" class="ml-edge-dashed" marker-end="url(#ml-sbx-arrow-muted)"></polyline>
+  <circle cx="330" cy="232" r="11" class="ml-step"></circle>
+  <text x="330" y="236" text-anchor="middle" class="ml-step-label">3</text>
+  <text x="470" y="224" text-anchor="middle" class="ml-edge-label">destroy on reset · idle-TTL · max-session</text>
+
+  <!-- no egress -->
+  <polyline points="718,274 718,306" class="ml-deny"></polyline>
+  <circle cx="718" cy="322" r="13" class="ml-deny" fill="none"></circle>
+  <line x1="709" y1="331" x2="727" y2="313" class="ml-deny"></line>
+  <text x="694" y="326" text-anchor="end" class="ml-deny-label">no egress — default-deny NetworkPolicy</text>
+</svg>
 </div>
 <div class="sect2">
 <h3 id="_backends">Backends</h3>
@@ -636,9 +780,19 @@ by default</strong> but needs a reachable LLM provider to answer; the coding san
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:38273/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -684,6 +838,8 @@ by default</strong> but needs a reachable LLM provider to answer; the coding san
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

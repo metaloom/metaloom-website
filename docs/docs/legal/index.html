@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Legal &amp; Licensing</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Legal &amp; Licensing" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:1313/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Legal &amp; Licensing">
+    <meta property="og:url" content="http://localhost:1313/docs/legal/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:1313/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="docs-page-header text-center">
+          <h1>Legal &amp; Licensing</h1>
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="post-single-content docs-content docs-main-content">
+          <div class="paragraph">
+<p>MetaLoom itself is open source under the <strong>Apache License 2.0</strong>. What you may do with a <strong>running</strong>
+MetaLoom deployment, however, is not decided by the platform license alone: the pipeline nodes call
+out to third-party <strong>model weights</strong>, and those weights carry their own licenses. A handful of them
+forbid commercial use outright.</p>
+</div>
+<div class="paragraph">
+<p>This section collects everything you need to answer two questions before you deploy:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Which models does my pipeline actually pull in, and what am I allowed to do with them?</strong></p>
+</li>
+<li>
+<p><strong>How was the MetaLoom source code produced, and where was AI code generation involved?</strong></p>
+</li>
+</ul>
+</div>
+<div class="row mt-4 mb-4">
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="model-licenses/">Model Licenses</a></h2>
+				<p>Every model, runtime and native library a MetaLoom node can pull in, mapped to its license and whether it is cleared for commercial use — including the ones that are <strong>not</strong>.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="model-licenses/#restricted" class="docs-card-link">Non-commercial models</a>
+				<a href="model-licenses/#per-node" class="docs-card-link">Per-node inventory</a>
+				<a href="model-licenses/#runtimes" class="docs-card-link">Runtimes &amp; libraries</a>
+				<a href="model-licenses/#clean-stack" class="docs-card-link">A clean commercial stack</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="ai-disclosure/">AI Code Generation Disclosure</a></h2>
+				<p>How MetaLoom was built. From 2023 through 2025 the code was written entirely by hand; in 2026 AI-assisted code generation was introduced. This page states exactly what changed and what did not.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="ai-disclosure/#timeline" class="docs-card-link">Timeline</a>
+				<a href="ai-disclosure/#scope" class="docs-card-link">What AI is used for</a>
+				<a href="ai-disclosure/#review" class="docs-card-link">Review &amp; ownership</a>
+				<a href="ai-disclosure/#licensing" class="docs-card-link">Licensing impact</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sect1">
+<h2 id="_the_platform_license">The Platform License</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The MetaLoom source — the Loom server, the Cortex engine, the nodes, the UI, the clients and this
+website — is licensed under the <strong>Apache License, Version 2.0</strong>. The full text ships as
+<code>LICENSE.txt</code> in the repository root.</p>
+</div>
+<div class="paragraph">
+<p>Apache-2.0 permits commercial use, modification, distribution and private use, subject to the usual
+attribution and NOTICE obligations. Nothing on this page restricts that.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>The platform license does not travel to the model weights.</strong> MetaLoom ships <strong>no</strong> model weights.
+Nodes reference models by path, repository id or endpoint URL, and you supply them. The license that
+governs a model is the one on that model’s card — not Apache-2.0.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_read_this_first_if_you_are_going_commercial">Read This First If You Are Going Commercial</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Two things in the catalogue are hard blockers for a commercial deployment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <strong>InspireFace model packs</strong> used by the <a href="../nodes/facedetect/">Face Detection</a> node, and</p>
+</li>
+<li>
+<p><strong>Ideogram 4.0</strong>, the backing model of the planned <code>imagegen</code> node.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both are covered in detail under
+<a href="model-licenses/#restricted">Models restricted to non-commercial use</a>, together with the swaps and
+workarounds that exist. Everything else in the default catalogue is either permissively licensed or
+carries conditions you can meet.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_not_legal_advice">Not Legal Advice</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These pages are an engineering inventory maintained alongside the code, not a legal opinion. Model
+licenses change between releases, and a checkpoint’s terms can differ from the terms of the
+architecture it is based on. Before you ship, verify the license on the model card of the <strong>exact</strong>
+revision you deploy, and involve your own counsel where the answer matters.</p>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:1313/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

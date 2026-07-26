@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Documentation</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Documentation" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
     <meta property="og:title" content="Documentation">
-    <meta property="og:url" content="https://metaloom.io/docs/">
+    <meta property="og:url" content="http://localhost:38273/docs/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -133,9 +133,25 @@
 			</div>
 			<div class="docs-card-body">
 				<a href="getting-started/" class="docs-card-link">Demo Container</a>
+				<a href="ui/" class="docs-card-link">Loom UI</a>
 				<a href="deployment/" class="docs-card-link">Container Images</a>
 				<a href="loom/chat/" class="docs-card-link">Chat &amp; AI Agent</a>
 				<a href="getting-started/#loom-app" class="docs-card-link">Loom App</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="playbooks/">Playbooks</a></h2>
+				<p>Task-oriented guides that string the whole platform together: deploying the stack with Docker or Kubernetes, and building pipelines that transcribe, analyse scenes and translate content.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="playbooks/docker/" class="docs-card-link">Docker Deployment</a>
+				<a href="playbooks/kubernetes/" class="docs-card-link">Kubernetes &amp; Helm</a>
+				<a href="playbooks/transcription/" class="docs-card-link">Transcription for Chat</a>
+				<a href="playbooks/scene-analysis/" class="docs-card-link">Scene Analysis</a>
+				<a href="playbooks/translation/" class="docs-card-link">Translation</a>
 			</div>
 		</div>
 	</div>
@@ -204,6 +220,20 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-lg-12 mb-4">
+		<div class="docs-card h-100">
+			<div class="docs-card-header">
+				<h2><a href="legal/">Legal &amp; Licensing</a></h2>
+				<p>What you are allowed to run. MetaLoom is Apache-2.0, but the models its nodes load carry their own licenses — and a few of them forbid commercial use. Also covers how the source was produced and where AI code generation was involved.</p>
+			</div>
+			<div class="docs-card-body">
+				<a href="legal/model-licenses/" class="docs-card-link">Model Licenses</a>
+				<a href="legal/model-licenses/#restricted" class="docs-card-link">Non-commercial models</a>
+				<a href="legal/model-licenses/#clean-stack" class="docs-card-link">A clean commercial stack</a>
+				<a href="legal/ai-disclosure/" class="docs-card-link">AI Disclosure</a>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="sect1">
 <h2 id="_start_here">Start Here</h2>
@@ -224,6 +254,9 @@
 </li>
 <li>
 <p>Continue into <a href="loom/">Loom</a> or <a href="cortex/">Cortex</a> depending on whether you are integrating with the API or building processing workflows.</p>
+</li>
+<li>
+<p>When you want to build something concrete — a deployment, a working pipeline — follow a <a href="playbooks/">Playbook</a>.</p>
 </li>
 </ol>
 </div>
@@ -323,8 +356,13 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deploy or operate the system</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/artifacts/">Loom Artifacts</a>, <a href="cortex/artifacts/">Cortex Artifacts</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/docker/">Docker Playbook</a>, <a href="playbooks/kubernetes/">Kubernetes Playbook</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="cortex/monitoring/">Monitoring</a>, <a href="loom/metrics/">Loom Metrics</a>, <a href="cortex/metrics/">Cortex Metrics</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Build a working pipeline end to end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/">Playbooks</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="playbooks/transcription/">Transcription</a>, <a href="playbooks/scene-analysis/">Scene Analysis</a>, <a href="playbooks/translation/">Translation</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Learn the data model and feature surface</p></td>
@@ -335,6 +373,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use or deploy the AI assistant</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/chat/">Chat &amp; AI Agent</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/chat/#coding-sandbox">Coding Sandbox</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear a deployment for commercial use</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="legal/model-licenses/">Model Licenses</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="legal/model-licenses/#restricted">Non-commercial models</a>, <a href="legal/ai-disclosure/">AI Disclosure</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -386,9 +429,19 @@
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:38273/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -434,6 +487,8 @@
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Nodes</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Nodes" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
     <meta property="og:title" content="Nodes">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/">
+    <meta property="og:url" content="http://localhost:38273/docs/nodes/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -123,6 +123,12 @@ worker that can run it.</p>
 is actually analysed for a given asset depends entirely on which nodes the pipeline contains.</p>
 </div>
 <div class="paragraph">
+<p>Every node page opens with a diagram of that node in a pipeline: what flows in on the left, what comes
+out on the right, and a tab per alternative configuration. Ports are labelled with the data type they
+carry:</p>
+</div>
+<div class="ml-nodeviz-legend"></div>
+<div class="paragraph">
 <p>The built-in nodes fall into four categories.</p>
 </div>
 <div class="sect1">
@@ -194,9 +200,19 @@ is actually analysed for a given asset depends entirely on which nodes the pipel
 <td class="tableblock halign-left valign-top"><p class="tableblock">Extract text with Tesseract</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="vlm/">VLM</a> (<code>vlm</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read images with a vision-language model; olmOCR document transcription</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="whisper/">Speech-to-Text</a> (<code>whisper</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Video, Audio</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transcribe audio with Whisper</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="tts/">Text-to-Speech</a> (<code>tts</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any (from upstream text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Synthesize narration audio (Orpheus/Kartoffel DE, Kokoro EN)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="llm/">LLM Enrichment</a> (<code>llm</code>)</p></td>
@@ -295,7 +311,7 @@ is actually analysed for a given asset depends entirely on which nodes the pipel
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements_at_a_glance">Requirements at a Glance</h2>
+<h2 id="requirements">Requirements at a Glance</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Most nodes are pure CPU. A few need a native library or an external model service:</p>
@@ -334,7 +350,11 @@ is actually analysed for a given asset depends entirely on which nodes the pipel
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A vision-language model service</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>captioning</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>captioning</code>, <code>vlm</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A TTS sidecar (Orpheus/Kartoffel + Kokoro)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
@@ -391,12 +411,20 @@ producing cut timestamps that can drive per-scene thumbnails or clips.</p>
 <dt class="hdlist1">OCR and speech-to-text</dt>
 <dd>
 <p><a href="ocr/"><code>ocr</code></a> extracts text from images and document pages with Tesseract;
+<a href="vlm/"><code>vlm</code></a> transcribes document pages with a vision-language model such as olmOCR, which keeps
+the layout — tables, columns, formulas — that plain glyph recognition flattens;
 <a href="whisper/"><code>whisper</code></a> transcribes audio and video soundtracks with the Whisper model.</p>
 </dd>
 <dt class="hdlist1">AI captioning and enrichment</dt>
 <dd>
 <p><a href="captioning/"><code>captioning</code></a> generates natural-language descriptions with a vision-language model
 (SmolVLM), and <a href="llm/"><code>llm</code></a> enriches metadata through an LLM provider such as Ollama.</p>
+</dd>
+<dt class="hdlist1">Text-to-speech</dt>
+<dd>
+<p><a href="tts/"><code>tts</code></a> turns upstream text — an <a href="llm/"><code>llm</code></a> summary, a caption, or a translated
+transcript — into narration audio, using Orpheus/Kartoffel for German and Kokoro for English behind a
+small HTTP sidecar.</p>
 </dd>
 <dt class="hdlist1">Consistency checking</dt>
 <dd>
@@ -467,9 +495,19 @@ and the build and run commands.</p>
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:38273/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -515,6 +553,8 @@ and the build and run commands.</p>
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

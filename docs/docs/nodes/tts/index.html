@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Text-to-Speech (TTS)</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Text-to-Speech (TTS)" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Text-to-Speech (TTS)">
+    <meta property="og:url" content="http://localhost:38273/docs/nodes/tts/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Text-to-Speech (TTS)</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The TTS node <strong>generates narration audio from text</strong>. Unlike the analysis nodes, which describe a
+property of the media itself, TTS takes text produced by an <strong>upstream</strong> node — an
+<a href="../llm/">LLM</a> summary, a <a href="../captioning/">caption</a>, or a translated
+<a href="../whisper/">transcript</a> — and synthesizes speech, attaching the audio to the asset.</p>
+</div>
+<div class="paragraph">
+<p>German is synthesized with <strong>Orpheus-3B / Kartoffel</strong> and English with <strong>Kokoro</strong>. Both run behind a
+small HTTP sidecar, so the node stays a pure client and needs no model runtime of its own.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;tts&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;TTS sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the WAV stays in the local tts_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;default source (llm)&#34;,&#34;note&#34;:&#34;sourceNodeId llm \u00b7 sourceOutputKey llm_result&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;llm_result&#34;,&#34;d&#34;:&#34;upstream LLM summary&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;tts_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;tts_path&#34;,&#34;d&#34;:&#34;local WAV path&#34;}]},{&#34;name&#34;:&#34;from a transcript&#34;,&#34;note&#34;:&#34;sourceNodeId whisper \u00b7 voice per language&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;whisper_result&#34;,&#34;d&#34;:&#34;translated transcript&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;tts_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;tts_path&#34;,&#34;d&#34;:&#34;local WAV path&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any asset (the audio is generated from upstream text, not from the media)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text from an upstream node output — configurable, defaults to the <code>llm</code> node’s <code>llm_result</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts_flag</code> (String), <code>tts_path</code> (String, local path of the generated WAV)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A running <strong>TTS sidecar</strong> (<code>/v1/tts</code>). German uses Orpheus/Kartoffel (GPU recommended); English uses Kokoro (CPU).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_node_result</code> ledger only — the generated WAV stays in the worker’s local <code>tts_bin</code> cache (as with thumbnails)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>TtsNodeOptions</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ttsHost</code> / <code>ttsPort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address of the TTS sidecar (default <code>localhost:9100</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>language</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>de</code> → Orpheus/Kartoffel, <code>en</code> → Kokoro (default <code>de</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>voice</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Voice id for the selected engine (default <code>Jakob</code>; English e.g. <code>af_heart</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sourceNodeId</code> / <code>sourceOutputKey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream node output supplies the text (default <code>llm</code> / <code>llm_result</code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Audio descriptions</strong> — speak an <a href="../llm/">LLM</a>-generated description or
+<a href="../captioning/">caption</a> for accessibility.</p>
+</li>
+<li>
+<p><strong>Dubbing / narration</strong> — voice a translated <a href="../whisper/">transcript</a> back onto the asset.</p>
+</li>
+<li>
+<p><strong>Bilingual output</strong> — German via Orpheus/Kartoffel, English via Kokoro, chosen per pipeline.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The sidecar is a small FastAPI service; see the <code>server/</code> directory next to the node for how to run
+it (including the production path where Orpheus runs on vLLM / llama.cpp).</p>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

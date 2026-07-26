@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Legal &amp; Licensing on MetaLoom</title>
+    <link>http://localhost:1313/docs/legal/</link>
+    <description>Recent content in Legal &amp; Licensing on MetaLoom</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/docs/legal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Code Generation Disclosure</title>
+      <link>http://localhost:1313/docs/legal/ai-disclosure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/legal/ai-disclosure/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;AI-assisted code generation was used in building MetaLoom.&lt;/strong&gt; This page states when that started,&#xA;what it covers, and what it does not change. It exists because you should not have to reverse-engineer&#xA;the provenance of a codebase you are considering deploying.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Model Licenses</title>
+      <link>http://localhost:1313/docs/legal/model-licenses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/legal/model-licenses/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;MetaLoom ships &lt;strong&gt;no model weights&lt;/strong&gt;. Every &lt;a href=&#34;../../nodes/&#34;&gt;node&lt;/a&gt; that needs a model references it by&#xA;file path, repository id or endpoint URL, and you provide the model. That means the license you have&#xA;to satisfy is the one attached to the model you point the node at — not the Apache-2.0 license of&#xA;MetaLoom itself.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

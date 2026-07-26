@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Filters</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Filters" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:1313/images/banner_square.webp" />
     
     <meta property="og:title" content="Filters">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/filters/">
+    <meta property="og:url" content="http://localhost:1313/docs/nodes/filters/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:1313/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -103,7 +103,89 @@
     <div class="row">
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
         </div>
       </div>
       <div class="col-lg-9">
@@ -116,6 +198,7 @@
 splits the pipeline into a <strong>PASS</strong> and a <strong>REJECT</strong> branch, so downstream nodes only run on the items
 that match. They are a pipeline-only construct (they have no standalone Cortex node).</p>
 </div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;filter-*&#34;,&#34;applies&#34;:&#34;Routing node&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;nothing \u2014 the branch decision is the result&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;filter-mimetype&#34;,&#34;note&#34;:&#34;downstream nodes depend on PASS or REJECT&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;file&#34;,&#34;l&#34;:&#34;the item&#34;,&#34;d&#34;:&#34;MIME type matched&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;PASS branch&#34;,&#34;d&#34;:&#34;e.g. video-only nodes&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;REJECT branch&#34;,&#34;d&#34;:&#34;skipped or routed elsewhere&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;filter_passed&#34;}]},{&#34;name&#34;:&#34;filter-quality&#34;,&#34;note&#34;:&#34;evaluates upstream metrics against thresholds&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;quality metrics&#34;,&#34;d&#34;:&#34;blurriness, resolution&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;PASS branch&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;REJECT branch&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;filter_reason&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -243,9 +326,19 @@ whose required branch does not match is skipped.</p>
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:1313/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -291,6 +384,8 @@ whose required branch does not match is skipped.</p>
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

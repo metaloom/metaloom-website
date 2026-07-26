@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Helm Chart</title>
 
@@ -14,12 +14,12 @@
     <meta name="twitter:creator" content="" />
     <meta name="twitter:title" content="Helm Chart" />
     <meta name="twitter:description" content="" />
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
     
     <meta property="og:title" content="Helm Chart">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/helm-chart/">
+    <meta property="og:url" content="http://localhost:38273/docs/loom/helm-chart/">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -103,7 +103,89 @@
     <div class="row">
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/" class="is-current">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
         </div>
       </div>
       <div class="col-lg-9">
@@ -112,34 +194,56 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The Loom Helm chart is the Kubernetes deployment entry point for running the server in-cluster.</p>
+<p>Kubernetes is the supported production deployment path for Loom. The full walkthrough — service
+account, RBAC for the chat’s coding sandbox, quotas, NetworkPolicy and the Cortex worker pools — is in
+the <a href="../../playbooks/kubernetes/">Kubernetes playbook</a>.</p>
 </div>
 <div class="sect1">
-<h2 id="_location">Location</h2>
+<h2 id="_status">Status</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<code>loom/helm</code> in the source repository is currently a <strong>placeholder</strong>: it contains a README and
+no chart. There is no <code>helm install</code> to run yet.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Until a chart ships, deploy with the manifests in the
+<a href="../../playbooks/kubernetes/">Kubernetes playbook</a>, or wrap them in a chart of your own. That page
+also carries a suggested <code>values.yaml</code> layout, so a chart written now stays close to the one that will
+be published.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_a_chart_must_cover">What a Chart Must Cover</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The chart is available in the <code>loom/helm</code> directory of the source repository.</p>
+<p>Two things are easy to miss when packaging Loom, and both are called out in the playbook:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>/config</code> volume holds <code>loom.yml</code> and <code>keystore.jceks</code> — the JWT signing key. It must be
+persistent, or every issued token stops verifying after a restart.</p>
+</li>
+<li>
+<p>Enabling the coding sandbox (<code>LOOM_AGENT_SANDBOX_ENABLED</code>) is only complete together with the Role,
+RoleBinding, ResourceQuota, LimitRange and NetworkPolicy for the runner namespace. Templating the
+environment variable alone produces a deployment that cannot create runners, or creates unconstrained
+ones.</p>
+</li>
+</ul>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_typical_use">Typical Use</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Use the chart when you want to deploy Loom together with database, ingress, persistent volumes and environment-specific values files in a Kubernetes environment.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_example">Example</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install loom ./loom/helm \
-  --namespace loom \
-  --create-namespace \
-  --values values.yaml</code></pre>
-</div>
+<p>See <a href="../artifacts/">Artifacts</a> for the published Maven and container coordinates.</p>
 </div>
 </div>
 </div>
@@ -165,9 +269,19 @@
 					</ul>
 				</div>
 
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
 				<!-- copyright -->
 				<div class="copyright text-center">
-					<a href="https://metaloom.io/">
+					<a href="http://localhost:38273/">
 						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
 					</a>
 					<br>
@@ -213,6 +327,8 @@
 <script src="/plugins/graphiql/graphiql.min.js"></script>
 
 <script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
 
 
 <!-- Main Script -->

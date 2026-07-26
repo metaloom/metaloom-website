@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Translating Content</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Translating Content" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Translating Content">
+    <meta property="og:url" content="http://localhost:38273/docs/playbooks/translation/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/" class="is-current">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Translating Content</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any
+pipeline, because each has a different answer today:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Extract</strong> the source text — from speech, from documents, from images.</p>
+</li>
+<li>
+<p><strong>Translate</strong> that text.</p>
+</li>
+<li>
+<p>Optionally <strong>speak</strong> the translation back onto the asset as narration audio.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Extraction and speech synthesis are stock nodes. Translation is the step that needs a decision, for a
+specific reason spelled out below.</p>
+</div>
+<div class="sect1">
+<h2 id="_the_shape_of_it">The Shape of It</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>  speech   ─▶ whisper ─▶ whisper_result ─┐
+  documents ─▶ tika   ─▶ tika_content   ─┼─▶  translate  ─▶ translated text ─▶ tts ─▶ narration WAV
+  images    ─▶ ocr    ─▶ ocr_text       ─┤
+  scans     ─▶ vlm    ─▶ vlm_result_*   ─┘</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Of the kinds on this page, only <code>tts</code> and <code>vlm</code> are registered with the stock worker’s pipeline node
+factory. <code>whisper</code>, <code>tika</code>, <code>ocr</code> and <code>llm</code> are not yet dispatchable — see
+<a href="../#node-availability">Which node kinds a worker can actually run</a>.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="extract">Step 1 — Extract the Source Text</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pick the extractor that matches the medium. All four write their text into Loom as a component <strong>and</strong>
+expose it as a node output that downstream nodes can read.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Medium</th>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Output key</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video, audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/whisper/"><code>whisper</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>whisper_result</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON transcript with per-utterance timings.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documents, any format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/tika/"><code>tika</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tika_content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full text plus format metadata, via Apache Tika.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images with text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/ocr/"><code>ocr</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ocr_text</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tesseract glyph recognition.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scanned pages, forms</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/vlm/"><code>vlm</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vlm_result_{promptId}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A vision-language model (olmOCR) that keeps tables, columns and layout that plain OCR flattens.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For scanned documents, prefer <code>vlm</code> over <code>ocr</code>: a translated invoice whose table structure was
+flattened into a column of numbers is not a usable translation.</p>
+</div>
+<div class="paragraph">
+<p>A speech extraction graph is exactly the one from
+<a href="../transcription/">Transcribing for the Chat Agent</a> — source, MIME filter, <code>sha512</code>, <code>whisper</code>.
+Build that first and confirm the transcripts are stored before adding anything downstream.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="translate">Step 2 — Translate</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is the constraint that decides the whole design:</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>The <code>llm</code> node does not see upstream text.</strong> It builds its prompt from the asset’s <strong>filename</strong> only
+(the prompt variable <code>name</code>), so it cannot be pointed at a transcript and asked to translate it. It is
+built for classification and tagging from metadata, and its output is a JSON document stored as a
+<code>asset_json_comp</code> per prompt.</p>
+</div>
+<div class="paragraph">
+<p>Anything that translates extracted text therefore has to come from one of the three options below.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_option_a_translate_outside_the_graph_works_today_no_code">Option A — Translate outside the graph (works today, no code)</h3>
+<div class="paragraph">
+<p>Run the extraction pipeline, then read the stored text over REST, translate it with whatever model you
+already run, and write the translation back as a JSON component on the same asset:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">ASSET=&lt;asset-uuid&gt;
+
+# 1. Read the stored transcript
+curl -s -H &#34;Authorization: Bearer $TOKEN&#34; \
+  $LOOM/api/v1/assets/$ASSET/transcripts | jq -r &#39;.[0].text&#39; &gt; source.txt
+
+# 2. Translate it with your provider (Ollama shown; any OpenAI-compatible endpoint works)
+TRANSLATION=$(curl -s http://ollama:11434/api/generate -d &#34;{
+  \&#34;model\&#34;: \&#34;gpt-oss:20b\&#34;,
+  \&#34;stream\&#34;: false,
+  \&#34;prompt\&#34;: $(jq -Rs &#39;&#34;Translate the following text into English. Return only the translation.\n\n&#34; + .&#39; source.txt)
+}&#34; | jq -r .response)
+
+# 3. Store it back on the asset, alongside the original
+curl -s -X POST $LOOM/api/v1/assets/$ASSET/json-comps \
+  -H &#34;Authorization: Bearer $TOKEN&#34; -H &#39;Content-Type: application/json&#39; \
+  -d &#34;$(jq -n --arg t &#34;$TRANSLATION&#34; &#39;{
+        nodeKind: &#34;translate&#34;,
+        schemaType: &#34;translation&#34;,
+        variant: &#34;en&#34;,
+        producerVersion: &#34;gpt-oss:20b&#34;,
+        data: { language: &#34;en&#34;, text: $t }
+      }&#39;)&#34;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using <code>variant</code> for the target language means one asset can carry <code>en</code>, <code>de</code> and <code>fr</code> translations side
+by side, each retrievable from <code>GET /api/v1/assets/{uuid}/json-comps</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is a batch job you run after the pipeline, not a node — which is exactly what it should be while
+translation is a one-off backfill.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_option_b_ask_the_chat_agent_works_today_interactive">Option B — Ask the chat agent (works today, interactive)</h3>
+<div class="paragraph">
+<p>For occasional, human-in-the-loop translation, the <a href="../../loom/chat/">chat agent</a> already reaches
+transcripts through <code>search_transcript</code>. A skill makes the behaviour consistent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-markdown" data-lang="markdown">---
+name: transcript-translator
+description: Translate an asset&#39;s transcript into a target language, preserving speaker turns and timings.
+---
+
+# Transcript Translator
+
+When the user asks for a translation of a clip:
+
+1. Resolve the asset with `get_asset` (or `search_assets` if only a name was given).
+2. Pull the transcript with `search_transcript`.
+3. Translate **only what is there**. Keep the utterance order and quote the original timings so the
+   user can locate each line in the video.
+4. Render as a table: `start | original | translation`.
+
+If no transcript exists, say so and suggest running the Whisper pipeline — never translate from the
+filename or invent dialogue.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remember that the agent’s domain tools are <strong>read-only</strong>: it will produce the translation in the
+conversation, not persist it onto the asset. Pair it with Option A when the translation must be stored.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_option_c_a_translate_node_the_durable_answer">Option C — A translate node (the durable answer)</h3>
+<div class="paragraph">
+<p>Once translation is a routine part of ingest, it belongs in the graph. A translate node is a small
+custom node: read the upstream text, call the provider, emit an output key.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class TranslateNode extends AbstractMediaNode&lt;TranslateNodeOptions&gt; {
+
+  public static final NodeOutputKey&lt;String&gt; OUTPUT_TRANSLATION =
+      NodeOutputKey.of(&#34;translation_text&#34;, String.class);
+
+  @Override
+  public String name() { return &#34;translate&#34;; }
+
+  @Override
+  protected boolean isProcessable(NodeContext&lt;LoomMedia&gt; ctx) {
+    return ctx.upstreamOutput(options().getSourceNodeId(), options().getSourceOutputKey()) != null;
+  }
+
+  @Override
+  protected NodeResult compute(NodeContext&lt;LoomMedia&gt; ctx, AssetResponse asset) {
+    Object source = ctx.upstreamOutput(options().getSourceNodeId(), options().getSourceOutputKey());
+    String translated = translate(source.toString(), options().getTargetLanguage());
+    ctx.output(OUTPUT_TRANSLATION, translated);
+    persistJsonComp(asset, translated);          // same pattern every stock node uses
+    return NodeResult.success(ctx.outputs());
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>sourceNodeId</code> / <code>sourceOutputKey</code> pair is the established convention for a node that consumes
+another node’s output — <a href="../../nodes/tts/"><code>tts</code></a> uses exactly that. Upstream outputs are shipped to
+the worker together with the node task, so this works across the distributed dispatch.</p>
+</div>
+<div class="paragraph">
+<p>Register the node in your Cortex build’s node collection <strong>and</strong> with the pipeline node factory, then
+advertise it — a worker becomes dispatchable for a kind as soon as it registers it. Full working
+examples (custom node, custom daemon, Python worker) are in
+<a href="../../cortex/examples/">Cortex Examples</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dub">Step 3 — Speak the Translation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../../nodes/tts/"><code>tts</code></a> turns upstream text into narration audio. Unlike the <code>llm</code> node it <strong>does</strong>
+read upstream outputs, addressed by node id and output key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml"># worker cortex.yml
+nodes:
+  tts:
+    ttsHost: tts
+    ttsPort: 9100
+    language: en             # en → Kokoro (CPU), de → Orpheus/Kartoffel (GPU recommended)
+    voice: af_heart          # German default: Jakob
+    sourceNodeId: translate  # the node id in the graph, not the kind
+    sourceOutputKey: translation_text</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With a <code>translate</code> node in place, the full dubbing graph is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;nodes&#34;: [
+    { &#34;id&#34;: &#34;source&#34;,    &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
+      &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
+    { &#34;id&#34;: &#34;mime&#34;,      &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Video only&#34;,
+      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
+    { &#34;id&#34;: &#34;hash&#34;,      &#34;type&#34;: &#34;sha512&#34;,            &#34;name&#34;: &#34;SHA-512 identity&#34; },
+    { &#34;id&#34;: &#34;speech&#34;,    &#34;type&#34;: &#34;whisper&#34;,           &#34;name&#34;: &#34;Transcribe&#34;,
+      &#34;timeoutMs&#34;: 3600000 },
+    { &#34;id&#34;: &#34;translate&#34;, &#34;type&#34;: &#34;translate&#34;,         &#34;name&#34;: &#34;Translate to English&#34; },
+    { &#34;id&#34;: &#34;narrate&#34;,   &#34;type&#34;: &#34;tts&#34;,               &#34;name&#34;: &#34;Speak the translation&#34; }
+  ],
+  &#34;edges&#34;: [
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;,    &#34;target&#34;: &#34;mime&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,      &#34;target&#34;: &#34;hash&#34;, &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;hash&#34;,      &#34;target&#34;: &#34;speech&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;speech&#34;,    &#34;target&#34;: &#34;translate&#34; },
+    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;translate&#34;, &#34;target&#34;: &#34;narrate&#34; }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Three things to know about the TTS step:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sourceNodeId</code> is the <strong>node id from the definition</strong> (<code>translate</code> above), not the node kind. Rename
+the node in the graph and the lookup stops resolving.</p>
+</li>
+<li>
+<p>The node emits <code>tts_flag</code> and <code>tts_path</code>, and records an <code>asset_node_result</code> ledger entry — the WAV
+itself stays in the worker’s local <code>tts_bin</code> cache, the same way thumbnails do. Upload it as an asset
+binary if it needs to be served.</p>
+</li>
+<li>
+<p>Do <strong>not</strong> point <code>sourceOutputKey</code> at a raw <code>llm_result_*</code>: the <code>llm</code> node emits a JSON document, so
+the synthesizer would read the braces and field names aloud. Feed it plain text.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The sidecar itself is a small FastAPI service shipped next to the node (<code>server/</code> in the source tree),
+with a production path where Orpheus runs on vLLM or llama.cpp.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_choosing_a_route">Choosing a Route</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Situation</th>
+<th class="tableblock halign-left valign-top">Route</th>
+<th class="tableblock halign-left valign-top">Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One-off backfill of an existing library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option A (REST batch)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No code, no rebuild; run it once and store the result.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Occasional, reviewed translation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option B (chat + skill)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A human sees the output before it counts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Translation on every ingest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option C (custom node)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Belongs in the graph; composes with <code>tts</code> for dubbing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dubbing / accessibility audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option C + <code>tts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code> needs an upstream node output to speak.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gotchas">Gotchas</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symptom</th>
+<th class="tableblock halign-left valign-top">Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>llm</code> node &#34;translates&#34; nonsense</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It only ever saw the filename. It cannot read a transcript — see the warning above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code> skips every asset with &#34;no upstream text&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sourceNodeId</code> / <code>sourceOutputKey</code> do not match a node id and output key in the graph.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The narration reads out JSON syntax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sourceOutputKey</code> points at an <code>llm_result_*</code> output, which is a JSON document, not prose.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The translation is stored but not visible</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is a JSON component — read it from <code>GET /api/v1/assets/{uuid}/json-comps</code>, filtered by <code>variant</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OCR-based translation of scans is garbled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use <code>vlm</code> instead of <code>ocr</code>; layout-preserving transcription survives translation, flattened text does
+not.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run rejected with <code>503</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A kind in the graph is not registered on any online worker — see
+<a href="../#node-availability">node availability</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps">Next Steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Get the source text first — <a href="../transcription/">Transcribing for the Chat Agent</a>.</p>
+</li>
+<li>
+<p>Translate per scene rather than per file — <a href="../scene-analysis/">Scene-Level Video Analysis</a>.</p>
+</li>
+<li>
+<p>Build the node — <a href="../../cortex/examples/">Cortex Examples</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

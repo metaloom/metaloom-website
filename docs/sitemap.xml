@@ -2,136 +2,158 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://metaloom.io/docs/getting-started/</loc>
+    <loc>http://localhost:38273/docs/playbooks/docker/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/deployment/</loc>
+    <loc>http://localhost:38273/docs/getting-started/</loc>
   </url><url>
-    <loc>https://metaloom.io/blog/</loc>
+    <loc>http://localhost:38273/docs/deployment/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/playbooks/kubernetes/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/playbooks/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/playbooks/transcription/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/playbooks/scene-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/playbooks/translation/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/legal/</loc>
+  </url><url>
+    <loc>http://localhost:38273/blog/</loc>
     <lastmod>2021-06-21T21:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/</loc>
+    <loc>http://localhost:38273/</loc>
     <lastmod>2021-06-21T21:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/blog/video-fingerprinting/</loc>
+    <loc>http://localhost:38273/blog/video-fingerprinting/</loc>
     <lastmod>2021-06-21T21:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/blog/day4-vertx-jooq-poc/</loc>
+    <loc>http://localhost:38273/blog/day4-vertx-jooq-poc/</loc>
     <lastmod>2021-05-19T21:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/blog/day3-vertx-dagger-poc/</loc>
+    <loc>http://localhost:38273/blog/day3-vertx-dagger-poc/</loc>
     <lastmod>2021-05-17T14:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/blog/day2-project-setup/</loc>
+    <loc>http://localhost:38273/blog/day2-project-setup/</loc>
     <lastmod>2021-05-16T14:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/blog/day1-project-design/</loc>
+    <loc>http://localhost:38273/blog/day1-project-design/</loc>
     <lastmod>2021-05-13T14:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/blog/day0-let-there-be-loom/</loc>
+    <loc>http://localhost:38273/blog/day0-let-there-be-loom/</loc>
     <lastmod>2021-05-12T14:51:12+06:00</lastmod>
   </url><url>
-    <loc>https://metaloom.io/docs/test/</loc>
+    <loc>http://localhost:38273/docs/test/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/artifacts/</loc>
+    <loc>http://localhost:38273/docs/legal/ai-disclosure/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/artifacts/</loc>
+    <loc>http://localhost:38273/docs/cortex/artifacts/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/authentication/</loc>
+    <loc>http://localhost:38273/docs/loom/artifacts/</loc>
   </url><url>
-    <loc>https://metaloom.io/author/</loc>
+    <loc>http://localhost:38273/docs/loom/authentication/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/captioning/</loc>
+    <loc>http://localhost:38273/author/</loc>
   </url><url>
-    <loc>https://metaloom.io/categories/</loc>
+    <loc>http://localhost:38273/docs/nodes/captioning/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/chat/</loc>
+    <loc>http://localhost:38273/categories/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cli/</loc>
+    <loc>http://localhost:38273/docs/loom/chat/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/configuration/</loc>
+    <loc>http://localhost:38273/docs/cli/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/configuration/</loc>
+    <loc>http://localhost:38273/docs/configuration/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/configuration/</loc>
+    <loc>http://localhost:38273/docs/cortex/configuration/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/consistency/</loc>
+    <loc>http://localhost:38273/docs/loom/configuration/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/containers/</loc>
+    <loc>http://localhost:38273/docs/nodes/consistency/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/containers/</loc>
+    <loc>http://localhost:38273/docs/cortex/containers/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/</loc>
+    <loc>http://localhost:38273/docs/loom/containers/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/dedup/</loc>
+    <loc>http://localhost:38273/docs/cortex/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/</loc>
+    <loc>http://localhost:38273/docs/nodes/dedup/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/examples/</loc>
+    <loc>http://localhost:38273/docs/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/examples/</loc>
+    <loc>http://localhost:38273/docs/cortex/examples/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/facedescription/</loc>
+    <loc>http://localhost:38273/docs/loom/examples/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/facedetect/</loc>
+    <loc>http://localhost:38273/docs/nodes/facedescription/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/features/</loc>
+    <loc>http://localhost:38273/docs/nodes/facedetect/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/filesystem-source/</loc>
+    <loc>http://localhost:38273/docs/loom/features/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/filters/</loc>
+    <loc>http://localhost:38273/docs/nodes/filesystem-source/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/fingerprint/</loc>
+    <loc>http://localhost:38273/docs/nodes/filters/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/graphql-api/</loc>
+    <loc>http://localhost:38273/docs/nodes/fingerprint/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/hash/</loc>
+    <loc>http://localhost:38273/docs/loom/graphql-api/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/helm-chart/</loc>
+    <loc>http://localhost:38273/docs/nodes/hash/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/java-client/</loc>
+    <loc>http://localhost:38273/docs/loom/helm-chart/</loc>
   </url><url>
-    <loc>https://metaloom.io/author/jotschi/</loc>
+    <loc>http://localhost:38273/docs/loom/java-client/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/llm/</loc>
+    <loc>http://localhost:38273/author/jotschi/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/</loc>
+    <loc>http://localhost:38273/docs/nodes/llm/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/loom/</loc>
+    <loc>http://localhost:38273/docs/loom/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/ui/</loc>
+    <loc>http://localhost:38273/docs/nodes/loom/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/maven-artifacts/</loc>
+    <loc>http://localhost:38273/docs/ui/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/maven-artifacts/</loc>
+    <loc>http://localhost:38273/docs/cortex/maven-artifacts/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/metrics/</loc>
+    <loc>http://localhost:38273/docs/loom/maven-artifacts/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/metrics/</loc>
+    <loc>http://localhost:38273/docs/cortex/metrics/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/cortex/monitoring/</loc>
+    <loc>http://localhost:38273/docs/loom/metrics/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/</loc>
+    <loc>http://localhost:38273/docs/legal/model-licenses/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/ocr/</loc>
+    <loc>http://localhost:38273/docs/cortex/monitoring/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/operation/</loc>
+    <loc>http://localhost:38273/docs/nodes/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/pipeline/</loc>
+    <loc>http://localhost:38273/docs/nodes/ocr/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/quality/</loc>
+    <loc>http://localhost:38273/docs/operation/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/loom/rest-api/</loc>
+    <loc>http://localhost:38273/docs/pipeline/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/rest/</loc>
+    <loc>http://localhost:38273/docs/nodes/quality/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/scene-detection/</loc>
+    <loc>http://localhost:38273/docs/loom/rest-api/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/whisper/</loc>
+    <loc>http://localhost:38273/docs/rest/</loc>
   </url><url>
-    <loc>https://metaloom.io/tags/</loc>
+    <loc>http://localhost:38273/docs/nodes/scene-detection/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/thumbnail/</loc>
+    <loc>http://localhost:38273/docs/nodes/whisper/</loc>
   </url><url>
-    <loc>https://metaloom.io/docs/nodes/tika/</loc>
+    <loc>http://localhost:38273/tags/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/nodes/tts/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/nodes/thumbnail/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/nodes/tika/</loc>
+  </url><url>
+    <loc>http://localhost:38273/docs/nodes/vlm/</loc>
   </url>
 </urlset>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Model Licenses</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Model Licenses" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Model Licenses">
+    <meta property="og:url" content="http://localhost:38273/docs/legal/model-licenses/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/" class="is-current">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Model Licenses</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>MetaLoom ships <strong>no model weights</strong>. Every <a href="../../nodes/">node</a> that needs a model references it by
+file path, repository id or endpoint URL, and you provide the model. That means the license you have
+to satisfy is the one attached to the model you point the node at — not the Apache-2.0 license of
+MetaLoom itself.</p>
+</div>
+<div class="paragraph">
+<p>This page inventories the models, runtimes and native libraries the built-in nodes use <strong>by default</strong> or
+in their documented reference setup, and states whether each one is cleared for commercial use.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is an engineering inventory maintained alongside the code, <strong>not legal advice</strong>. Model licenses
+change between revisions, and a checkpoint’s terms often differ from the terms of the base
+architecture it was fine-tuned from. Before shipping, verify the license on the model card of the
+exact revision you deploy.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect1">
+<h2 id="restricted">Models Restricted to Non-Commercial Use</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Two components in the catalogue may <strong>not</strong> be used in a commercial deployment. Both are usable for
+research, evaluation and personal projects.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>InspireFace model packs — academic use only.</strong> The <a href="../../nodes/facedetect/">Face Detection</a>
+node runs the InspireFace native runtime with a model pack (default: <code>packs/Pikachu</code>; <code>Megatron</code> is
+the larger alternative). The InspireFace <strong>code</strong> is Apache-2.0, but its bundled models inherit the
+<strong>InsightFace</strong> model terms, which permit use <strong>solely for academic purposes and explicitly prohibit
+commercial applications</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Everything downstream of the packs is affected — face bounding boxes, embeddings, person clustering,
+and therefore the <a href="../../nodes/facedescription/">Face Description</a> node that only runs on detected
+faces.</p>
+</div>
+<div class="paragraph">
+<p><strong>If you need face detection commercially:</strong> license a commercial face model, or swap the pack for one
+whose terms permit it. The node takes the pack location from the <code>inspirefacePackPath</code> option, so no
+code change is required — but the pack must be API-compatible with the InspireFace runtime.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Ideogram 4.0 — non-commercial model agreement.</strong> The planned <code>imagegen</code> node is designed around the
+open-weight <strong>Ideogram 4.0</strong> image generation model (<code>ideogram-ai/ideogram-4-nf4</code>). The inference
+<strong>code</strong> is Apache-2.0, but the <strong>weights are released under the Ideogram 4 Non-Commercial Model
+Agreement</strong>. Using them in a commercial MetaLoom deployment would violate the weight license.</p>
+</div>
+<div class="paragraph">
+<p>The node talks to a sidecar over a deliberately model-agnostic HTTP contract, so a permissively
+licensed image model can be dropped in behind the same endpoint without touching the node.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conditional">Models With Conditions Attached</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These are usable commercially, but not under a plain permissive license. Read the terms before you
+deploy.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Model</th>
+<th class="tableblock halign-left valign-top">License</th>
+<th class="tableblock halign-left valign-top">What the condition means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gemma2:27b</code> (<a href="../../nodes/llm/">LLM node</a> default)<br/>
+<code>gemma3:27b-it-q8_0</code> (<a href="../../nodes/facedescription/">Face Description</a> default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not an OSI license. Commercial use is permitted, but you accept a Prohibited Use Policy and must
+  pass the same terms (and the use restrictions) on to anyone you distribute the model or a derivative to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SebastianBodza/Kartoffel_Orpheus-3B_german_natural-v0.1</code> (German <a href="../../nodes/tts/">TTS</a> voice)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama 3.2 Community License (Llama-3.2 backbone) — repository is <strong>gated</strong> on Hugging Face</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Orpheus project code is Apache-2.0, but this checkpoint is a Llama-3.2 derivative and carries
+  Llama’s community license and acceptable-use policy, including its large-scale-user threshold. You
+  must accept the gate to download it.<br/>
+  <strong>Ungated alternative:</strong> set <code>ORPHEUS_REPO_DE=Thorsten-Voice/tv-orpheus-v1</code> — Apache-2.0, CC0 speaker.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="per-node">Per-Node Inventory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What each built-in node loads, and the license that governs it. &#34;Default&#34; means the value the node
+ships with; every entry is configurable.</p>
+</div>
+<div class="sect2">
+<h3 id="_nodes_that_use_no_model_at_all">Nodes that use no model at all</h3>
+<div class="paragraph">
+<p>These run plain algorithms or classical computer vision. Nothing beyond the MetaLoom license and the
+native libraries listed under <a href="#runtimes">Runtimes &amp; Libraries</a> applies.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 28.5715%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">What it uses</th>
+<th class="tableblock halign-left valign-top">Commercial use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/hash/">Hashing</a> · <a href="../../nodes/dedup/">Deduplication</a> · <a href="../../nodes/consistency/">Consistency</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JDK digest algorithms and byte-level checks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/filesystem-source/">Filesystem Source</a> · <a href="../../nodes/loom/">Loom</a> · <a href="../../nodes/filters/">Filters</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline plumbing — no media model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/fingerprint/">Fingerprint</a> · <a href="../../nodes/thumbnail/">Thumbnail</a> · <a href="../../nodes/scene-detection/">Scene Detection</a> · <a href="../../nodes/quality/">Quality</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenCV via <code>video4j</code> — perceptual hashing, frame extraction, optical flow, Laplacian variance. No learned weights.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_nodes_that_load_a_model">Nodes that load a model</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2223%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Model (default)</th>
+<th class="tableblock halign-left valign-top">License</th>
+<th class="tableblock halign-left valign-top">Commercial use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/tika/">Tika</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache Tika parsers — format detection and text extraction, no ML model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/ocr/">OCR</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tesseract via Tess4J + <code>tessdata</code> language files (<code>tessDataPath</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0 (engine and the official <code>tessdata</code> sets)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/whisper/">Speech-to-Text</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">whisper.cpp runtime + a GGML checkpoint; default <code>models/ggml-large-v3-turbo.bin</code> (<code>modelPath</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIT (whisper.cpp runtime and the OpenAI Whisper weights)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/vlm/">VLM</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allenai/olmOCR-2-7B-1025-FP8</code> served over an OpenAI-compatible endpoint (<code>model</code>, <code>endpointUrl</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0 per the model card; fine-tuned from Qwen2.5-VL-7B-Instruct (Apache-2.0)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/captioning/">Captioning</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SmolVLM behind the captioning sidecar (model host/port)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video captioning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>qwen25vl-awq</code> — Qwen2.5-VL-7B-Instruct, quantized (<code>model</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0 (7B instruct release)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/tts/">Text-to-Speech</a> — English</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kokoro-82M ONNX (<code>KOKORO_MODEL</code> / <code>KOKORO_VOICES</code> in the sidecar)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/tts/">Text-to-Speech</a> — German</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SebastianBodza/Kartoffel_Orpheus-3B_german_natural-v0.1</code> (<code>ORPHEUS_REPO_DE</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama 3.2 Community License, gated — see <a href="#conditional">conditions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/llm/">LLM Enrichment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gemma2:27b</code> via an Ollama / OpenAI-compatible provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use — see <a href="#conditional">conditions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/facedescription/">Face Description</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gemma3:27b-it-q8_0</code> via Ollama</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use — see <a href="#conditional">conditions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/facedetect/">Face Detection</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">InspireFace runtime + model pack, default <code>packs/Pikachu</code> (<code>inspirefacePackPath</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code Apache-2.0; <strong>model packs follow InsightFace — academic use only</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ <strong>No</strong> — see <a href="#restricted">restrictions</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>imagegen</code> (planned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ideogram 4.0 (<code>ideogram-ai/ideogram-4-nf4</code>) behind a Python sidecar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code Apache-2.0; <strong>weights under the Ideogram 4 Non-Commercial Model Agreement</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">❌ <strong>No</strong> — see <a href="#restricted">restrictions</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_the_loom_chat_agent">The Loom chat agent</h3>
+<div class="paragraph">
+<p>The <a href="../../loom/chat/">Chat &amp; AI Agent</a> is not a pipeline node, but it does run a model. Loom
+talks to an Ollama or OpenAI-compatible provider selected by
+<a href="../../loom/configuration/"><code>LOOM_AI_MODEL_ID</code></a>, which defaults to <strong><code>gpt-oss:20b</code></strong>
+(Apache-2.0). Point it at a hosted provider instead and the applicable terms become that provider’s
+API terms of service, not a weight license — which also means your prompts and asset content leave
+your infrastructure.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="runtimes">Runtimes, Native Libraries and Toolkits</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Cortex worker links against native code that is redistributed inside the
+<a href="../../cortex/containers/"><code>cortex-server</code> container image</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">License</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenCV 5.1 (staged into <code>/opt/opencv/lib</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frame decoding and all classical CV in <code>video4j</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFmpeg shared libraries (installed from the base image’s distribution packages)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LGPL-2.1-or-later upstream — <strong>distribution builds are frequently configured with <code>--enable-gpl</code></strong>, which makes the shipped libraries GPL-2.0-or-later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenCV’s <code>videoio</code> backend links against them. If you redistribute the image, check what your base actually ships: <code>ffmpeg -version</code> prints the build configuration.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">whisper.cpp (via the <code>asr4j</code> binding)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local speech-to-text inference.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">InspireFace native runtime (via <code>inspireface4j</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0 (code only — <strong>not</strong> the model packs)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">See <a href="#restricted">restrictions</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache Tika, Tess4J / Tesseract</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pure-JVM and JNI extraction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MetaLoom itself — Loom, Cortex, nodes, UI, clients, this site</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full text in <code>LICENSE.txt</code> at the repository root.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="clean-stack">A Clean Commercial Stack</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you need a deployment with no non-commercial and no conditionally licensed component, this
+configuration stays inside permissive licenses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Keep</strong> the hashing, dedup, consistency, fingerprint, thumbnail, scene-detection, quality, tika,
+ocr, whisper, vlm and captioning nodes as they ship.</p>
+</li>
+<li>
+<p><strong>Drop</strong> <a href="../../nodes/facedetect/">Face Detection</a> and
+<a href="../../nodes/facedescription/">Face Description</a>, or replace the InspireFace pack with a
+commercially licensed face model.</p>
+</li>
+<li>
+<p><strong>Do not deploy</strong> the <code>imagegen</code> node against Ideogram 4.0 weights.</p>
+</li>
+<li>
+<p><strong>Set <code>ORPHEUS_REPO_DE=Thorsten-Voice/tv-orpheus-v1</code></strong> for German
+<a href="../../nodes/tts/">Text-to-Speech</a> (Apache-2.0, ungated) instead of the Kartoffel checkpoint.</p>
+</li>
+<li>
+<p><strong>Replace the Gemma defaults</strong> in the <a href="../../nodes/llm/">LLM</a> node with an Apache-2.0 or
+MIT-licensed instruct model, unless the Gemma Terms of Use are acceptable to you.</p>
+</li>
+<li>
+<p><strong>Verify the FFmpeg build</strong> in your container base if you redistribute images.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="verify">Verifying What Your Deployment Actually Loads</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nothing is implicit — every model reference is a configuration value you can read back:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Where the model is named</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Speech-to-Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WhisperOptions.modelPath</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VLM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VlmNodeOptions.model</code> + <code>endpointUrl</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OCR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tessDataPath</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Face Detection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FacedetectNodeOptions.inspirefacePackPath</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LLM / Face Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">provider URL + <code>providerType</code>, model id in the prompt definition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text-to-Speech</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TtsNodeOptions.language</code> selects the engine; <code>ORPHEUS_REPO_DE</code>, <code>KOKORO_MODEL</code> and <code>KOKORO_VOICES</code> on the sidecar name the checkpoints</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Captioning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">model host / port of the captioning sidecar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chat agent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_MODEL_ID</code> on the Loom server</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A pipeline that contains none of the model-backed nodes pulls in no model license at all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also">See Also</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../">Legal &amp; Licensing</a> — section overview and the platform license</p>
+</li>
+<li>
+<p><a href="../ai-disclosure/">AI Code Generation Disclosure</a> — how the MetaLoom source was produced</p>
+</li>
+<li>
+<p><a href="../../nodes/">Nodes</a> — what each node does and how it is configured</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

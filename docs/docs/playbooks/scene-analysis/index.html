@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=38273&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Scene-Level Video Analysis</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="author" content="Jotschi">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@metaloom" />
+    <meta name="twitter:creator" content="" />
+    <meta name="twitter:title" content="Scene-Level Video Analysis" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image:src" content="http://localhost:38273/images/banner_square.webp" />
+    
+    <meta property="og:title" content="Scene-Level Video Analysis">
+    <meta property="og:url" content="http://localhost:38273/docs/playbooks/scene-analysis/">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="http://localhost:38273/images/banner_square.webp">
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/" class="is-current">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Scene-Level Video Analysis</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>A two-hour recording is one asset, and that is the problem: &#34;show me the part about pricing&#34; has no
+answer when the only unit of retrieval is the whole file. This playbook cuts video into <strong>scenes</strong> and
+then describes those scenes — from the soundtrack, from the picture, or both.</p>
+</div>
+<div class="sect1">
+<h2 id="_what_the_platform_gives_you">What the Platform Gives You</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Produces</th>
+<th class="tableblock halign-left valign-top">Stored as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/scene-detection/"><code>scene-detection</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene boundaries from optical-flow analysis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_segment_comp</code> (whole-set replace)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/whisper/"><code>whisper</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transcript with per-utterance start/end times</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_transcript_comp</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/thumbnail/"><code>thumbnail</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contact-sheet preview rendered from video frames</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local <code>thumbnail_bin</code> cache + binary upload</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/quality/"><code>quality</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resolution / blurriness / bitrate metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quality component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/consistency/"><code>consistency</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>is_complete</code> — is the file whole and decodable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">consistency component</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Scenes and transcript are both <strong>timestamped against the same asset</strong>, which is what makes them
+joinable: a scene is <code>[start, end)</code>, an utterance is <code>[start, end)</code>, and &#34;what was said in scene 4&#34; is
+an overlap query over the two stored components.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>scene-detection</code>, <code>whisper</code>, <code>consistency</code> and <code>quality</code> are not yet registered with the stock
+worker’s pipeline node factory, so a run containing them is rejected with <code>503</code> until you register the
+kinds and rebuild the worker image — see
+<a href="../#node-availability">Which node kinds a worker can actually run</a>. <code>thumbnail</code> is registered.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A running stack, and assets already in Loom for the video files (nodes resolve the asset by SHA-512 —
+see <a href="../transcription/">Transcribing for the Chat Agent</a> for why that matters).</p>
+</li>
+<li>
+<p>A worker with the <strong>OpenCV / video4j native runtime</strong>, which <code>scene-detection</code>, <code>thumbnail</code> and
+<code>quality</code> all need. It is present in the <code>metaloom/cortex-server</code> image.</p>
+</li>
+<li>
+<p>For the audio route, a Whisper runtime and model — same worker setup as the transcription playbook.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="audio">Route A — Describe Scenes from the Soundtrack</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cut the video, transcribe the speech, join on time. This is the cheaper route and it works on anything
+with dialogue: interviews, lectures, podcasts with video, meeting recordings.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;nodes&#34;: [
+    { &#34;id&#34;: &#34;source&#34;,      &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
+      &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
+    { &#34;id&#34;: &#34;mime&#34;,        &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Video only&#34;,
+      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
+    { &#34;id&#34;: &#34;hash&#34;,        &#34;type&#34;: &#34;sha512&#34;,            &#34;name&#34;: &#34;SHA-512 identity&#34; },
+    { &#34;id&#34;: &#34;consistency&#34;, &#34;type&#34;: &#34;consistency&#34;,       &#34;name&#34;: &#34;Decodable?&#34; },
+    { &#34;id&#34;: &#34;scenes&#34;,      &#34;type&#34;: &#34;scene-detection&#34;,   &#34;name&#34;: &#34;Scene boundaries&#34;,
+      &#34;timeoutMs&#34;: 900000 },
+    { &#34;id&#34;: &#34;speech&#34;,      &#34;type&#34;: &#34;whisper&#34;,           &#34;name&#34;: &#34;Transcribe&#34;,
+      &#34;timeoutMs&#34;: 3600000 }
+  ],
+  &#34;edges&#34;: [
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;,      &#34;target&#34;: &#34;mime&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,        &#34;target&#34;: &#34;hash&#34;,   &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;hash&#34;,        &#34;target&#34;: &#34;consistency&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;consistency&#34;, &#34;target&#34;: &#34;scenes&#34; },
+    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;consistency&#34;, &#34;target&#34;: &#34;speech&#34; }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>scenes</code> and <code>speech</code> both depend on <code>consistency</code> and nothing on each other, so Loom dispatches them
+independently — potentially to different workers, in parallel. That is the whole reason to model this
+as a graph rather than a script: the GPU box transcribes while the CPU box runs optical flow.</p>
+</div>
+<div class="paragraph">
+<p>The <code>consistency</code> gate is worth the extra node. A truncated download produces a plausible-looking file
+that wastes a half-hour of transcription; checking first is cheap.</p>
+</div>
+<div class="sect2">
+<h3 id="_reading_the_result">Reading the result</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">ASSET=&lt;asset-uuid&gt;
+
+curl -s -H &#34;Authorization: Bearer $TOKEN&#34; $LOOM/api/v1/assets/$ASSET/segments    | jq
+curl -s -H &#34;Authorization: Bearer $TOKEN&#34; $LOOM/api/v1/assets/$ASSET/transcripts | jq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Joining them is a query-side operation — no node does it for you today:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># For each scene, the utterances that overlap it
+jq -n --slurpfile s scenes.json --slurpfile t transcript.json &#39;
+  $s[0][] as $scene
+  | { scene: $scene,
+      said: [ $t[0].segments[]
+              | select(.start &lt; $scene.end and .end &gt; $scene.start)
+              | .text ] }&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Feed that per-scene text to an LLM, or simply ask the chat agent — it already reaches the transcript
+through <code>search_transcript</code> and can quote the passage and the asset it came from.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Scene segments are a <strong>whole-set replace</strong>. Re-running <code>scene-detection</code> on an asset deletes the
+previous segments, so anything you stored keyed to old segment identifiers must be regenerated too.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="visual">Route B — Describe Scenes from the Picture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For content with little or no dialogue — b-roll, surveillance, silent product footage — the soundtrack
+tells you nothing and you need the frames.</p>
+</div>
+<div class="paragraph">
+<p>What works today:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;nodes&#34;: [
+    { &#34;id&#34;: &#34;source&#34;, &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
+      &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
+    { &#34;id&#34;: &#34;mime&#34;,   &#34;type&#34;: &#34;filter-mimetype&#34;, &#34;name&#34;: &#34;Video only&#34;,
+      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
+    { &#34;id&#34;: &#34;hash&#34;,   &#34;type&#34;: &#34;sha512&#34;,          &#34;name&#34;: &#34;SHA-512 identity&#34; },
+    { &#34;id&#34;: &#34;scenes&#34;, &#34;type&#34;: &#34;scene-detection&#34;, &#34;name&#34;: &#34;Scene boundaries&#34; },
+    { &#34;id&#34;: &#34;sheet&#34;,  &#34;type&#34;: &#34;thumbnail&#34;,       &#34;name&#34;: &#34;Contact sheet&#34; },
+    { &#34;id&#34;: &#34;grade&#34;,  &#34;type&#34;: &#34;quality&#34;,         &#34;name&#34;: &#34;Quality metrics&#34; }
+  ],
+  &#34;edges&#34;: [
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;target&#34;: &#34;mime&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;target&#34;: &#34;hash&#34;, &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;scenes&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;sheet&#34; },
+    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;grade&#34; }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That gives you scene boundaries, a contact-sheet preview and quality metrics per video.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Per-scene visual captioning of video is not implemented today.</strong> The
+<a href="../../nodes/captioning/"><code>captioning</code></a> node accepts a video asset but skips it (<code>not implemented</code>);
+it captions <strong>images</strong> only, and <a href="../../nodes/vlm/"><code>vlm</code></a> is image-only as well. There is no node
+that samples a frame per scene and captions it.</p>
+</div>
+<div class="paragraph">
+<p>Two ways forward until such a node exists:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Extract frames as image assets.</strong> Register keyframes as their own assets in Loom and run an
+image pipeline (<code>captioning</code> or <code>vlm</code>) over them, linking them back to the source video in your own
+metadata. Every node in that path is a stock node.</p>
+</li>
+<li>
+<p><strong>Write the node.</strong> A frame-sampling caption node is a natural custom node: read the upstream
+<code>scene_detection</code> output, grab one frame per segment, call the vision model. See
+<a href="../../cortex/examples/">Cortex Examples</a> for the Java and Python paths.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_note_on_consistency_and_node_ids">A Note on <code>consistency</code> and Node IDs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some nodes read an upstream result <strong>by node id</strong>, not by kind. <code>thumbnail</code> looks for
+<code>consistency</code> → <code>is_complete</code> and refuses to render a preview for a file reported incomplete (unless
+<code>processIncomplete</code> is set on the worker). If you name that node <code>check</code> instead of <code>consistency</code>, the
+lookup silently finds nothing and the gate quietly stops working.</p>
+</div>
+<div class="paragraph">
+<p>The same applies to <a href="../../nodes/loom/"><code>loom</code></a>, which reads <code>md5sum</code> → <code>md5</code> and <code>sha256sum</code> →
+<code>sha256</code>. When a playbook names a node a particular way, keep the name.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="combined">Doing Both</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The two routes are the same graph with both branches attached — that is what a DAG is for:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>                     ┌─▶ scene-detection ─▶ segments
+  source ─▶ mime ─PASS─▶ sha512 ─▶ consistency ─┼─▶ whisper ────────▶ transcript
+                     └─▶ thumbnail ──────▶ contact sheet
+                     └─▶ quality ────────▶ metrics</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Costs to keep in mind when you fan out like this:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>scene-detection</code> decodes the whole video for optical flow — CPU-heavy, default task timeout 300 s.
+Long files need it raised.</p>
+</li>
+<li>
+<p><code>whisper</code> defaults to concurrency 1 and a 600 s timeout.</p>
+</li>
+<li>
+<p>Both read the file from the shared media mount, so a single-spindle NFS export becomes the ceiling
+long before the CPUs do.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Pin the expensive kinds to the machines that suit them with <code>CORTEX_NODE_WHITELIST</code> — see
+<a href="../docker/#scaling">Docker → dedicated workers</a> or <a href="../kubernetes/#cortex-workers">the GPU pool</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gotchas">Gotchas</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symptom</th>
+<th class="tableblock halign-left valign-top">Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run rejected with <code>503</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A kind in the graph is not registered on any online worker — see
+<a href="../#node-availability">node availability</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scene-detection</code> fails with <code>UnsatisfiedLinkError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The worker lacks the OpenCV / video4j native runtime, or a mismatched OpenCV version is on the
+library path.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Captions never appear for videos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expected: <code>captioning</code> skips video. Caption extracted frames as image assets instead.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Segments disappeared after a re-run</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whole-set replace: a shorter re-run deletes the surplus segments.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Thumbnails skipped for some files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>consistency</code> node reported them incomplete. That is the gate doing its job — check the file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scenes and transcript do not line up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">They are separate components joined on time by the consumer. Nothing in the pipeline aligns them.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps">Next Steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Turn scene text into another language — <a href="../translation/">Translating Content</a>.</p>
+</li>
+<li>
+<p>Node reference — <a href="../../nodes/scene-detection/">Scene Detection</a>,
+<a href="../../nodes/thumbnail/">Thumbnail</a>, <a href="../../nodes/quality/">Quality</a>.</p>
+</li>
+<li>
+<p>Build the frame-sampling node — <a href="../../cortex/examples/">Cortex Examples</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="http://localhost:38273/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

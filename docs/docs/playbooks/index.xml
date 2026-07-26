@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Playbooks on MetaLoom</title>
+    <link>http://localhost:38273/docs/playbooks/</link>
+    <description>Recent content in Playbooks on MetaLoom</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:38273/docs/playbooks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploying with Docker</title>
+      <link>http://localhost:38273/docs/playbooks/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38273/docs/playbooks/docker/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This playbook builds a &lt;strong&gt;production-shaped MetaLoom stack on a single host&lt;/strong&gt; with Docker or Podman:&#xA;PostgreSQL, the Loom server, and one or more Cortex workers that actually process media. It is the&#xA;step up from the all-in-one demo image — separate containers, real volumes, and state that survives a&#xA;restart.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Deploying on Kubernetes</title>
+      <link>http://localhost:38273/docs/playbooks/kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38273/docs/playbooks/kubernetes/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This playbook runs MetaLoom in a cluster: the Loom server, a pool of Cortex workers, and — the part&#xA;that needs real attention — the &lt;strong&gt;service account and RBAC that let the chat agent spawn per-session&#xA;sandbox Pods&lt;/strong&gt;. It ends with how to package the whole thing as a Helm chart.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Transcribing for the Chat Agent</title>
+      <link>http://localhost:38273/docs/playbooks/transcription/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38273/docs/playbooks/transcription/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The chat agent can only answer from what has been extracted. Ask it &amp;#34;which clip mentions the launch&#xA;date?&amp;#34; and it calls &lt;code&gt;search_transcript&lt;/code&gt; — which returns nothing at all until something has actually&#xA;transcribed your media.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Scene-Level Video Analysis</title>
+      <link>http://localhost:38273/docs/playbooks/scene-analysis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38273/docs/playbooks/scene-analysis/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A two-hour recording is one asset, and that is the problem: &amp;#34;show me the part about pricing&amp;#34; has no&#xA;answer when the only unit of retrieval is the whole file. This playbook cuts video into &lt;strong&gt;scenes&lt;/strong&gt; and&#xA;then describes those scenes — from the soundtrack, from the picture, or both.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Translating Content</title>
+      <link>http://localhost:38273/docs/playbooks/translation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:38273/docs/playbooks/translation/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any&#xA;pipeline, because each has a different answer today:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>
