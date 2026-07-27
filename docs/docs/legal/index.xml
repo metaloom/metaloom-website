@@ -2,23 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Legal &amp; Licensing on MetaLoom</title>
-    <link>http://localhost:1313/docs/legal/</link>
+    <link>https://metaloom.io/docs/legal/</link>
     <description>Recent content in Legal &amp; Licensing on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/docs/legal/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://metaloom.io/docs/legal/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI Code Generation Disclosure</title>
-      <link>http://localhost:1313/docs/legal/ai-disclosure/</link>
+      <link>https://metaloom.io/docs/legal/ai-disclosure/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/legal/ai-disclosure/</guid>
+      <guid>https://metaloom.io/docs/legal/ai-disclosure/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;AI-assisted code generation was used in building MetaLoom.&lt;/strong&gt; This page states when that started,&#xA;what it covers, and what it does not change. It exists because you should not have to reverse-engineer&#xA;the provenance of a codebase you are considering deploying.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Model Licenses</title>
-      <link>http://localhost:1313/docs/legal/model-licenses/</link>
+      <title>Impressum</title>
+      <link>https://metaloom.io/docs/legal/impressum/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/legal/model-licenses/</guid>
+      <guid>https://metaloom.io/docs/legal/impressum/</guid>
+      <description>&lt;div class=&#34;admonitionblock note&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;i class=&#34;fa icon-note&#34; title=&#34;Note&#34;&gt;&lt;/i&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This page is in &lt;strong&gt;German&lt;/strong&gt;: it is the legal disclosure required of a website operated from&#xA;Austria (§ 5 E-Commerce-Gesetz, § 25 Mediengesetz). The rest of the site — including the&#xA;&lt;a href=&#34;../&#34;&gt;licensing information&lt;/a&gt; — is in English.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Model Licenses</title>
+      <link>https://metaloom.io/docs/legal/model-licenses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/legal/model-licenses/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;MetaLoom ships &lt;strong&gt;no model weights&lt;/strong&gt;. Every &lt;a href=&#34;../../nodes/&#34;&gt;node&lt;/a&gt; that needs a model references it by&#xA;file path, repository id or endpoint URL, and you provide the model. That means the license you have&#xA;to satisfy is the one attached to the model you point the node at — not the Apache-2.0 license of&#xA;MetaLoom itself.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

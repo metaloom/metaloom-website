@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
 	<meta charset="utf-8">
 	<title>Getting Started | MetaLoom</title>
 
@@ -10,14 +10,14 @@
 	<meta name="description" content="This guide gets a full MetaLoom stack running locally in a few minutes using the demo container. No build tools or configuration files are required.">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="http://localhost:1313/docs/getting-started/">
+<link rel="canonical" href="https://metaloom.io/docs/getting-started/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Getting Started | MetaLoom">
-    <meta property="og:url" content="http://localhost:1313/docs/getting-started/">
+    <meta property="og:url" content="https://metaloom.io/docs/getting-started/">
     <meta property="og:description" content="This guide gets a full MetaLoom stack running locally in a few minutes using the demo container. No build tools or configuration files are required.">
-    <meta property="og:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Getting Started">
     <meta property="og:locale" content="en_US">
 
@@ -26,7 +26,7 @@
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Getting Started | MetaLoom">
     <meta name="twitter:description" content="This guide gets a full MetaLoom stack running locally in a few minutes using the demo container. No build tools or configuration files are required.">
-    <meta name="twitter:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Getting Started">
 
 
@@ -95,7 +95,7 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#feature">features</a>
+            <a class="nav-link" href="/features">features</a>
 					</li>
 					
 					<li class="nav-item">
@@ -103,7 +103,7 @@
 					</li>
 					
 					<li class="nav-item">
-            <a class="nav-link" href="/#blog">blog</a>
+            <a class="nav-link" href="/blog">blog</a>
 					</li>
 					
 					<li class="nav-item">
@@ -448,40 +448,80 @@ It embeds the Loom UI inside a native window and adds OS-level integrations:</p>
   </div>
 </section>
 
-  </div><!-- end Contact Area -->
-<footer id="footer" class="section-bg">
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
 	<div class="container">
-		<div class="row wow fadeInUp" data-wow-duration="500ms">
-			<div class="col-xl-12">
 
-				<!-- Footer Social Links -->
-				<div class="social-icon">
-					<ul class="list-inline">
-						
-						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
-						
-					</ul>
-				</div>
-
-				<!-- Footer Legal Links -->
-				<div class="footer-links text-center mb-3">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
-						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
-						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
-						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
-					</ul>
-				</div>
-
-				<!-- copyright -->
-				<div class="copyright text-center">
-					<a href="/">
-						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
-					</a>
-					<br>
-					<p></p>
-				</div>
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
 			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/studios/">For studios</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/NFdnFcSbfA" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
 		</div>
 	</div>
 </footer>
@@ -533,6 +573,7 @@ It embeds the Loom UI inside a native window and adds OS-level integrations:</p>
 <link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
 <script src="/plugins/highlight/highlight.pack.js"></script>
 <script>hljs.highlightAll();</script>
+
 
 
 </body>

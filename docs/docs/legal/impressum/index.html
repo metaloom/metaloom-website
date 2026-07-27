@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>GraphQL API | MetaLoom</title>
+	<title>Impressum | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+	<meta name="description" content="Impressum und Offenlegung nach § 5 ECG und § 25 MedienG sowie Datenschutzhinweise für metaloom.io.">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/graphql-api/">
+<link rel="canonical" href="https://metaloom.io/docs/legal/impressum/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="GraphQL API | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/graphql-api/">
-    <meta property="og:description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+    <meta property="og:title" content="Impressum | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/legal/impressum/">
+    <meta property="og:description" content="Impressum und Offenlegung nach § 5 ECG und § 25 MedienG sowie Datenschutzhinweise für metaloom.io.">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="GraphQL API">
+    <meta property="og:image:alt" content="Impressum">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="GraphQL API | MetaLoom">
-    <meta name="twitter:description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+    <meta name="twitter:title" content="Impressum | MetaLoom">
+    <meta name="twitter:description" content="Impressum und Offenlegung nach § 5 ECG und § 25 MedienG sowie Datenschutzhinweise für metaloom.io.">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="GraphQL API">
+    <meta name="twitter:image:alt" content="Impressum">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -151,7 +151,7 @@
               
               
               <li>
-                <a href="/docs/legal/">Legal &amp; Licensing</a>
+                <a href="/docs/legal/" class="is-current">Legal &amp; Licensing</a>
               </li>
               
               
@@ -173,7 +173,7 @@
               
               
               <li>
-                <a href="/docs/loom/" class="is-current">Loom</a>
+                <a href="/docs/loom/">Loom</a>
               </li>
               
               
@@ -210,150 +210,208 @@
       </div>
       <div class="col-lg-9">
         <div class="docs-page-header">
-          <h1>GraphQL API</h1>
+          <h1>Impressum</h1>
         </div>
         <div class="post-single-content docs-main-content">
-          <div class="paragraph">
-<p>Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset
-together with its components and locations in a single request, selecting exactly the fields you
-need.</p>
-</div>
-<div class="sect1">
-<h2 id="_endpoint">Endpoint</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre>POST http://&lt;host&gt;:8092/api/v1/graphql</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The endpoint accepts a JSON body with <code>query</code>, and optional <code>operationName</code> and <code>variables</code> fields,
-and returns the standard GraphQL <code>{ &#34;data&#34;: …​, &#34;errors&#34;: …​ }</code> response shape.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_authentication_authorization">Authentication &amp; Authorization</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The GraphQL endpoint reuses the REST authentication stack — a valid JWT bearer token (HttpOnly
-cookie or <code>Authorization</code> header) is required; unauthenticated requests are rejected with <code>401</code>
-before the query is parsed. Obtain a token via the <a href="../authentication/">Authentication</a> flow.</p>
-</div>
-<div class="paragraph">
-<p>Authorization is enforced per field. Each resolver checks the caller’s permissions:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 66.6666%;"/>
-<col style="width: 33.3334%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Field</th>
-<th class="tableblock halign-left valign-top">Required permission</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Query.asset</code>, <code>Query.assets</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.imageComponents</code> / <code>videoComponents</code> / <code>audioComponents</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.locations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET_LOCATION</code></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>A denied field surfaces a GraphQL error with a <code>code</code> extension (<code>UNAUTHENTICATED</code> when no
-permission context is present, <code>FORBIDDEN</code> with the missing <code>permission</code> otherwise).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_interactive_explorer_graphiql">Interactive Explorer (GraphiQL)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The GraphiQL explorer below is loaded with the Loom schema so you can browse every type and field
-via the <strong>Docs</strong> panel (top-left) and compose queries with autocomplete and validation.</p>
-</div>
-<div class="admonitionblock note">
+          <div class="admonitionblock note">
 <table>
 <tbody><tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This embedded explorer is <strong>schema-only</strong> — it runs against the published static schema, so the
-<strong>Execute</strong> button does not return live data here. To run real queries, start a Loom server (for
-example the demo container) and open its built-in GraphiQL at <code>http://&lt;host&gt;:8092/graphiql</code>, which
-executes authenticated queries against <code>/api/v1/graphql</code>.
+<div class="paragraph">
+<p>This page is in <strong>German</strong>: it is the legal disclosure required of a website operated from
+Austria (§ 5 E-Commerce-Gesetz, § 25 Mediengesetz). The rest of the site — including the
+<a href="../">licensing information</a> — is in English.</p>
+</div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="graphiql" style="height: 70vh;"></div>
+<div class="sect1">
+<h2 id="_medieninhaber_herausgeber_und_diensteanbieter">Medieninhaber, Herausgeber und Diensteanbieter</h2>
+<div class="sectionbody">
+<table class="tableblock frame-none grid-rows stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verantwortlich</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Johannes Schüth</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anschrift</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Straße und Hausnummer]<br/>
+  [PLZ] Wien<br/>
+  Österreich</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-Mail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:hello@metaloom.io">hello@metaloom.io</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Telefon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Telefonnummer]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Website</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://metaloom.io" class="bare">https://metaloom.io</a></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example_queries">Example Queries</h2>
+<h2 id="_unternehmensgegenstand">Unternehmensgegenstand</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Fetch a single asset with all of its components and locations:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">query GetAsset($uuid: ID!) {
-  asset(uuid: $uuid) {
-    uuid
-    filename
-    mimeType
-    size
-    imageComponents { uuid dominantColor width height }
-    videoComponents { uuid source }
-    audioComponents { uuid source }
-    locations { uuid path libraryUuid mimeType }
-  }
-}</code></pre>
-</div>
+<p>Entwicklung, Veröffentlichung und Dokumentation der freien Software <strong>MetaLoom</strong> — einer
+Plattform zur Verwaltung und automatisierten Analyse digitaler Medienbestände.</p>
 </div>
 <div class="paragraph">
-<p>List all assets with a minimal field selection:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">query ListAssets {
-  assets {
-    uuid
-    filename
-    mimeType
-    size
-  }
-}</code></pre>
-</div>
+<p>MetaLoom ist ein <strong>privates Projekt</strong>. Es steht hinter dem Projekt kein Unternehmen; es werden
+über diese Website weder Waren noch Dienstleistungen entgeltlich angeboten und es besteht keine
+Möglichkeit zur Bestellung.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_see_also">See Also</h2>
+<h2 id="_angaben_nach_5_ecg_und_14_ugb">Angaben nach § 5 ECG und § 14 UGB</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="../rest-api/">REST API Reference</a> — the primary external API with full CRUD.</p>
-</li>
-<li>
-<p><a href="../java-client/">Java Client</a> — typed JVM HTTP client.</p>
-</li>
-<li>
-<p><a href="../authentication/">Authentication</a> — obtaining a bearer token.</p>
-</li>
-</ul>
+<table class="tableblock frame-none grid-rows stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firmenbuchnummer und Firmenbuchgericht</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nicht im Firmenbuch eingetragen (Privatperson).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Umsatzsteuer-Identifikationsnummer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keine (keine unternehmerische Tätigkeit im Sinne des UStG).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gewerbeberechtigung, Aufsichtsbehörde</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entfällt — es wird über diese Website keine gewerbliche Tätigkeit ausgeübt.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kammerzugehörigkeit, Berufsverband</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entfällt.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anwendbare Rechtsvorschriften</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-Commerce-Gesetz (ECG), Mediengesetz (MedienG), Urheberrechtsgesetz (UrhG),
+  Datenschutz-Grundverordnung (DSGVO) und Datenschutzgesetz (DSG), jeweils abrufbar unter
+  <a href="https://www.ris.bka.gv.at">ris.bka.gv.at</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_blattlinie_grundlegende_richtung_25_abs_4_medieng">Blattlinie / grundlegende Richtung (§ 25 Abs. 4 MedienG)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Diese Website informiert über das Open-Source-Projekt MetaLoom: über seinen Funktionsumfang,
+seinen Entwicklungsstand, seine technische Dokumentation sowie über die Erfahrungen aus seiner
+Entwicklung. Sie verfolgt keine parteipolitischen, weltanschaulichen oder kommerziellen Ziele.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_urheberrecht_und_lizenzen">Urheberrecht und Lizenzen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Software MetaLoom steht unter der <strong>Apache License 2.0</strong>. Texte, Grafiken und sonstige
+Inhalte dieser Website sind — soweit nicht anders angegeben — urheberrechtlich geschützt.
+Verwendete Fotografien stammen von <a href="https://unsplash.com">Unsplash</a> und unterliegen der
+Unsplash-Lizenz.</p>
+</div>
+<div class="paragraph">
+<p>MetaLoom liefert <strong>keine Modellgewichte</strong> mit; für die Lizenzen der von Ihnen eingesetzten
+Modelle siehe <a href="../model-licenses/">Model Licenses</a>. Zur Entstehung des Quellcodes siehe die
+<a href="../ai-disclosure/">AI Code Generation Disclosure</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_haftung_für_inhalte_und_links">Haftung für Inhalte und Links</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und
+Aktualität wird jedoch keine Gewähr übernommen; insbesondere ersetzt die technische Dokumentation
+keine eigene Prüfung im konkreten Einsatzfall. Die Software wird — entsprechend Abschnitt 7 der
+Apache License 2.0 — <strong>ohne Gewährleistung</strong> bereitgestellt.</p>
+</div>
+<div class="paragraph">
+<p>Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte kein Einfluss besteht.
+Für diese Inhalte ist stets der jeweilige Anbieter verantwortlich. Zum Zeitpunkt der Verlinkung
+waren keine Rechtsverstöße erkennbar.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_online_streitbeilegung">Online-Streitbeilegung</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit:
+<a href="https://ec.europa.eu/consumers/odr/">ec.europa.eu/consumers/odr</a>. Es besteht weder eine
+Verpflichtung noch die Bereitschaft, an einem Streitbeilegungsverfahren vor einer
+Verbraucherschlichtungsstelle teilzunehmen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="datenschutz">Datenschutz</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Diese Website ist eine <strong>statische Website</strong>. Sie setzt keine Cookies, verwendet keine
+Analyse- oder Tracking-Dienste und betreibt keine Benutzerkonten, Formulare oder Newsletter.
+Es werden keine personenbezogenen Daten zum Zweck der Profilbildung verarbeitet.</p>
+</div>
+<div class="paragraph">
+<p>Verarbeitet werden dennoch die folgenden Daten:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Hosting</dt>
+<dd>
+<p>Die Website wird über <strong>GitHub Pages</strong> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San
+Francisco, CA 94107, USA) ausgeliefert. Beim Abruf einer Seite werden serverseitig technische
+Zugriffsdaten verarbeitet, darunter die IP-Adresse. Das erfolgt auf Grundlage des berechtigten
+Interesses am sicheren und stabilen Betrieb der Website (Art. 6 Abs. 1 lit. f DSGVO). Die
+Datenschutzerklärung von GitHub ist unter
+<a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement">docs.github.com</a>
+abrufbar; die Übermittlung in die USA stützt sich auf die Standardvertragsklauseln bzw. das
+EU-US Data Privacy Framework.</p>
+</dd>
+<dt class="hdlist1">Schriftarten</dt>
+<dd>
+<p>Die Seiten binden Schriftarten von <strong>Google Fonts</strong> (Google Ireland Limited) ein. Dabei wird die
+IP-Adresse an Google übertragen. Rechtsgrundlage ist ebenfalls Art. 6 Abs. 1 lit. f DSGVO.</p>
+</dd>
+<dt class="hdlist1">Externe Dienste</dt>
+<dd>
+<p>Verlinkungen zu Discord und GitHub führen zu Angeboten Dritter, die eigene Datenschutzerklärungen
+haben. Ein Aufruf erfolgt nur, wenn Sie den jeweiligen Link anklicken.</p>
+</dd>
+<dt class="hdlist1">E-Mail-Kontakt</dt>
+<dd>
+<p>Wenn Sie uns per E-Mail schreiben, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert
+und nicht ohne Ihre Einwilligung weitergegeben (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO).</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Ihnen stehen die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+Datenübertragbarkeit und Widerspruch zu. Wenden Sie sich dafür an
+<a href="mailto:hello@metaloom.io">hello@metaloom.io</a>. Sie haben zudem das Recht auf Beschwerde bei der
+österreichischen Datenschutzbehörde (<a href="https://www.dsb.gv.at">dsb.gv.at</a>).</p>
 </div>
 </div>
 </div>
