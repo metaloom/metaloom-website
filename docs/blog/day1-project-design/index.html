@@ -146,26 +146,56 @@
 </section>
 
 
-<section class="section">
+
+<section class="section docs-section">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 d-none d-lg-block toc-sticky-top">
-        <nav id="toc"></nav>
-      </div>
-      <div class="col-lg-9 text-center">
-        <h1>Day1 - Project Design</h1>
-        <ul class="list-inline mb-50">
-          <li class="list-inline-item"><a href="/author/jotschi/">jotschi</a></li>
-          <li class="list-inline-item">Thursday, May 13, 2021</li>
-        </ul>
-        
-        <img class="img-fluid lozad" src="/blog/day1-project-design/eleventh-wave-JsjtrixOiWc-unsplash.webp" data-src="/blog/day1-project-design/eleventh-wave-JsjtrixOiWc-unsplash.webp" alt="Day1 - Project Design">
-        <div class="image-credit">
-          Credit: Photo by Eleventh Wave on Unsplash
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          <nav class="docs-topics" aria-label="More posts">
+            <div class="docs-sidebar-title">More posts</div>
+            <ul>
+              
+              <li><a href="/blog/video-fingerprinting/">Video Fingerprinting</a></li>
+              
+              <li><a href="/blog/day4-vertx-jooq-poc/">Day4 - Vert.x jOOQ PoC</a></li>
+              
+              <li><a href="/blog/day3-vertx-dagger-poc/">Day3 - Vert.x Dagger PoC</a></li>
+              
+              <li><a href="/blog/day2-project-setup/">Day2 - Project Setup</a></li>
+              
+              <li><a href="/blog/day1-project-design/" class="is-current">Day1 - Project Design</a></li>
+              
+              <li><a href="/blog/day0-let-there-be-loom/">Day0 - Let there be Loom</a></li>
+              
+            </ul>
+          </nav>
         </div>
       </div>
-      <div class="col-lg-9 offset-lg-3">
-        <div class="post-single-content">
+
+      <div class="col-lg-9">
+        <header class="page-head post-head">
+          <p class="page-eyebrow">Build log</p>
+          <h1>Day1 - Project Design</h1>
+          <p class="post-meta">
+            <a href="/author/jotschi/">jotschi</a>
+            <time datetime="2021-05-13">13 May 2021</time>
+            <span>10 min read</span>
+          </p>
+          <p class="page-lead">In this post I would like to share how I approach the design for Loom.</p>
+        </header>
+
+        
+        
+        <figure class="post-hero">
+          <img class="lozad" src="/blog/day1-project-design/eleventh-wave-JsjtrixOiWc-unsplash.webp" data-src="/blog/day1-project-design/eleventh-wave-JsjtrixOiWc-unsplash.webp" alt="Day1 - Project Design">
+          <figcaption>Photo by Eleventh Wave on Unsplash</figcaption>
+        </figure>
+        
+
+        <div class="post-single-content docs-main-content">
           <div class="sect1">
 <h2 id="_basics">Basics</h2>
 <div class="sectionbody">
@@ -798,8 +828,13 @@ A reactive server design in combination with result streaming from a source data
 </div>
 
         </div>
+
         
-        
+
+        <div class="ann-back">
+          <a href="/blog/"><span aria-hidden="true">&larr;</span> View All Post</a>
+        </div>
+
         <div class="mt-5">
           
         </div>
