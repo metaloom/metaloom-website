@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
-	<title>Container Images</title>
+	<title>Container Images | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="description" content="MetaLoom ships as a small set of OCI (Docker/Podman) container images. All images are published under the metaloom/ namespace.">
 	
 	<meta name="author" content="Jotschi">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@metaloom" />
-    <meta name="twitter:creator" content="" />
-    <meta name="twitter:title" content="Container Images" />
-    <meta name="twitter:description" content="" />
-    
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+<link rel="canonical" href="http://localhost:1313/docs/deployment/">
 
-    <meta property="og:title" content="Container Images">
-    <meta property="og:url" content="https://metaloom.io/docs/deployment/">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Container Images | MetaLoom">
+    <meta property="og:url" content="http://localhost:1313/docs/deployment/">
+    <meta property="og:description" content="MetaLoom ships as a small set of OCI (Docker/Podman) container images. All images are published under the metaloom/ namespace.">
+    <meta property="og:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta property="og:image:alt" content="Container Images">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Container Images | MetaLoom">
+    <meta name="twitter:description" content="MetaLoom ships as a small set of OCI (Docker/Podman) container images. All images are published under the metaloom/ namespace.">
+    <meta name="twitter:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Container Images">
+
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -48,6 +56,9 @@
 	<!-- Main Stylesheet -->
 	
 	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
 
 	<!--Favicon-->
 	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
@@ -80,7 +91,15 @@
 				<ul class="navbar-nav ml-auto">
 					
 					<li class="nav-item">
+            <a class="nav-link" href="/studios">studios</a>
+					</li>
+					
+					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/announcements">announcements</a>
 					</li>
 					
 					<li class="nav-item">
@@ -101,99 +120,14 @@
 
 <section class="section docs-section">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-3 d-none d-lg-block">
-        <div class="docs-sidebar toc-sticky-top">
-          <div class="docs-sidebar-title">On this page</div>
-          <nav id="toc"></nav>
-          
-          
-          <nav class="docs-topics" aria-label="Documentation topics">
-            <div class="docs-sidebar-title">Topics</div>
-            <ul>
-              
-              
-              <li>
-                <a href="/docs/getting-started/">Getting Started</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/deployment/" class="is-current">Container Images</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/playbooks/">Playbooks</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/legal/">Legal &amp; Licensing</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cli/">Command Line</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cortex/">Cortex</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/loom/">Loom</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/ui/">Loom UI</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/nodes/">Nodes</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/operation/">Operation</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/pipeline/">Pipeline Mechanism</a>
-              </li>
-              
-              
-              
-              
-            </ul>
-          </nav>
-          
-        </div>
-      </div>
-      <div class="col-lg-9">
-        <div class="docs-page-header">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="docs-page-header text-center">
           <h1>Container Images</h1>
         </div>
-        <div class="post-single-content docs-main-content">
+      </div>
+      <div class="col-lg-10">
+        <div class="post-single-content docs-content docs-main-content">
           <div class="paragraph">
 <p>MetaLoom ships as a small set of OCI (Docker/Podman) container images. All images are published
 under the <code>metaloom/</code> namespace.</p>

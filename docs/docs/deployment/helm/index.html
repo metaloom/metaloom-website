@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>Helm Charts | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="MetaLoom ships two Helm charts for deploying on Kubernetes — one per component. They live in the helm/ directory of the source repository.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="http://localhost:1313/docs/deployment/helm/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Helm Charts | MetaLoom">
+    <meta property="og:url" content="http://localhost:1313/docs/deployment/helm/">
+    <meta property="og:description" content="MetaLoom ships two Helm charts for deploying on Kubernetes — one per component. They live in the helm/ directory of the source repository.">
+    <meta property="og:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta property="og:image:alt" content="Helm Charts">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Helm Charts | MetaLoom">
+    <meta name="twitter:description" content="MetaLoom ships two Helm charts for deploying on Kubernetes — one per component. They live in the helm/ directory of the source repository.">
+    <meta name="twitter:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Helm Charts">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/studios">studios</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/announcements">announcements</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/" class="is-current">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Helm Charts</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>MetaLoom ships two Helm charts for deploying on Kubernetes — one per component. They live in the
+<code>helm/</code> directory of the source repository.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Chart</th>
+<th class="tableblock halign-left valign-top">Deploys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>helm/loom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Loom backend server (REST/gRPC/GraphQL API, database access, auth, storage, the pipeline engine, the AI agent) and the bundled web UI. Optionally a self-contained PostgreSQL for quick starts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>helm/cortex</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more Cortex workers. They register with Loom and run the node tasks it dispatches. The worker image is overridable, so the same chart runs the stock worker or a custom node image.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ml-figure">
+<svg viewBox="0 0 840 290" role="img" aria-labelledby="ml-hl-title ml-hl-desc" class="ml-arch-svg">
+  <title id="ml-hl-title">MetaLoom Helm deployment overview</title>
+  <desc id="ml-hl-desc">The loom chart deploys the Loom server, a Service, persistent volumes and an
+  optional PostgreSQL. The cortex chart deploys one or more workers that register with the Loom
+  Service over a WebSocket and write results back over REST.</desc>
+  <defs>
+    <marker id="ml-hl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57cbcc"></path></marker>
+  </defs>
+
+  <rect x="30" y="30" width="360" height="230" rx="10" class="ml-box-container"></rect>
+  <text x="46" y="54" class="ml-box-title">helm/loom</text>
+  <text x="46" y="70" class="ml-box-tag">Deployment · Service · Secrets · PVCs</text>
+  <rect x="46" y="86" width="150" height="54" rx="6" class="ml-box-part"></rect>
+  <text x="121" y="108" text-anchor="middle" class="ml-box-tag">Loom server</text>
+  <text x="121" y="126" text-anchor="middle" class="ml-part-sub">Deployment + UI</text>
+  <rect x="212" y="86" width="162" height="54" rx="6" class="ml-box-part"></rect>
+  <text x="293" y="108" text-anchor="middle" class="ml-box-tag">Service</text>
+  <text x="293" y="126" text-anchor="middle" class="ml-part-sub">:8092 · :8091 · :8989</text>
+  <rect x="46" y="150" width="150" height="54" rx="6" class="ml-box-part"></rect>
+  <text x="121" y="172" text-anchor="middle" class="ml-box-tag">Volumes</text>
+  <text x="121" y="190" text-anchor="middle" class="ml-part-sub">config · keystore · uploads</text>
+  <rect x="212" y="150" width="162" height="54" rx="6" class="ml-box-dyn"></rect>
+  <text x="293" y="172" text-anchor="middle" class="ml-box-tag">PostgreSQL</text>
+  <text x="293" y="190" text-anchor="middle" class="ml-part-sub">bundled — optional</text>
+
+  <rect x="570" y="30" width="240" height="230" rx="10" class="ml-box-container"></rect>
+  <text x="586" y="54" class="ml-box-title">helm/cortex</text>
+  <text x="586" y="70" class="ml-box-tag">StatefulSet — 0..N workers</text>
+  <rect x="586" y="92" width="196" height="54" rx="6" class="ml-box-part"></rect>
+  <text x="684" y="114" text-anchor="middle" class="ml-box-tag">Worker 0</text>
+  <text x="684" y="132" text-anchor="middle" class="ml-part-sub">stock image · :8093</text>
+  <rect x="586" y="160" width="196" height="54" rx="6" class="ml-box-gpu"></rect>
+  <text x="684" y="182" text-anchor="middle" class="ml-box-tag">Worker N</text>
+  <text x="684" y="200" text-anchor="middle" class="ml-part-sub">custom image (override)</text>
+
+  <polyline points="570,150 480,150 480,113 390,113" class="ml-edge" marker-end="url(#ml-hl-arrow)"></polyline>
+  <text x="480" y="140" text-anchor="middle" class="ml-edge-label">register (WS)</text>
+  <polyline points="390,96 480,96 480,133 570,133" class="ml-edge" marker-end="url(#ml-hl-arrow)"></polyline>
+  <text x="480" y="88" text-anchor="middle" class="ml-edge-label">tasks · results (REST)</text>
+</svg>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Kubernetes 1.23+ and Helm 3</p>
+</li>
+<li>
+<p>A <code>StorageClass</code> for Loom’s persistent volumes</p>
+</li>
+<li>
+<p>The MetaLoom container images reachable from your cluster (see <a href="../">Container Images</a>)</p>
+</li>
+<li>
+<p>A PostgreSQL database — an external managed one (recommended) or the loom chart’s optional bundled
+Postgres</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_loom">Install Loom</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For evaluation, let the chart run a self-contained PostgreSQL alongside Loom:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm install loom ./helm/loom \
+  --set postgresql.enabled=true \
+  --set auth.initialPassword=&lt;admin-password&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For production, point Loom at an external managed database and expose it through an Ingress:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm install loom ./helm/loom \
+  --set database.host=postgres.internal \
+  --set database.name=loom \
+  --set database.user=loom \
+  --set database.password=&lt;db-password&gt; \
+  --set auth.initialPassword=&lt;admin-password&gt; \
+  --set ingress.enabled=true \
+  --set ingress.host=loom.example.com</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Log in to the UI (<code>/ui/</code>) as <code>admin</code> with the password you set.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+The bundled PostgreSQL uses the official <code>postgres</code> image and is meant for quick starts and
+evaluation. It is not a managed, backed-up database — run a managed one in production.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_two_things_a_loom_chart_must_get_right">Two things a Loom chart must get right</h3>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>The keystore volume holds the JWT signing key.</strong> It is persistent by default and must stay that
+way. If it is lost on a restart, every token issued beforehand stops verifying and all clients are
+logged out. The configuration volume (which holds <code>loom.yml</code>) is persisted for the same reason.</p>
+</li>
+<li>
+<p><strong>The coding sandbox is a unit.</strong> Setting <code>sandbox.enabled=true</code> renders the runner-namespace
+role, quota, limits and network policy together with the feature flag. Enabling the flag without
+that set produces a server that cannot create runner pods, or creates unconstrained ones. Leave it
+off unless you use the chat agent’s coding sandbox.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_cortex">Install Cortex</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Add one or more workers, pointed at the Loom Service:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm install cortex ./helm/cortex \
+  --set loom.host=loom \
+  --set loom.token=&lt;api-token&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Workers dial <strong>out</strong> to Loom; Loom never connects in to a worker. Scale with <code>replicaCount</code> — each
+replica registers as its own worker with a stable identity.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+A worker is handed a <strong>path</strong> to media, not the bytes, so any source/hash/transcription node needs
+the same media mounted that Loom uses. Enable the <code>media</code> volume (<code>--set media.enabled=true</code> with an
+<code>existingClaim</code>, <code>hostPath</code> or <code>nfs</code> source) for those workers.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_running_a_custom_node_image">Running a custom node image</h3>
+<div class="paragraph">
+<p>The cortex chart’s <code>image.repository</code> value is how you run <strong>your own</strong> worker — a custom Java daemon
+or a from-scratch Python worker — instead of the stock one. Build an image from the
+<a href="../../cortex/examples/">Cortex examples</a> and point the chart at it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># A JVM custom worker (built on the stock image; serves the health endpoints):
+helm install cortex ./helm/cortex \
+  --set image.repository=metaloom/cortex-custom \
+  --set loom.token=&lt;token&gt; \
+  --set &#39;nodeKinds={hello-world}&#39;
+
+# A minimal Python worker that does NOT serve a monitoring port — disable the HTTP probes:
+helm install cortex-py ./helm/cortex \
+  --set image.repository=metaloom/cortex-python \
+  --set loom.token=&lt;token&gt; \
+  --set readinessProbe.enabled=false \
+  --set livenessProbe.type=tcpSocket \
+  --set &#39;nodeKinds={py-hello}&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>nodeKinds</code> advertises which node kinds the worker runs. Use <code>command</code>/<code>args</code> if your image needs a
+different entrypoint and <code>extraEnv</code> for image-specific settings.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_selected_values">Selected values</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Loom chart</caption>
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image.repository</code> / <code>image.tag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/loom-server</code> / chart version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Server image (<code>-native</code> tag for the GraalVM variant).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>auth.initialPassword</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>changeme</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bootstrap admin password. Change it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>database.host</code> / <code>user</code> / <code>password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">External database connection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postgresql.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a bundled PostgreSQL (dev / evaluation).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>persistence.keystore</code> / <code>config</code> / <code>uploads</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persistent volumes (keep keystore + config).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ingress.enabled</code> / <code>host</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code> / —</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expose the REST/UI port.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ai.enabled</code> / <code>url</code> / <code>modelId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chat agent LLM provider.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sandbox.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coding sandbox + runner-namespace guardrails.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Cortex chart</caption>
+<colgroup>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 42.8572%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image.repository</code> / <code>image.tag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom/cortex-server</code> / chart version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Worker image — override for a custom one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom.host</code> / <code>port</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom</code> / <code>8092</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom Service to register with.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loom.token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API token for registration and result write-back.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>replicaCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of workers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nodeKinds</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node kinds this worker advertises.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media.enabled</code> / <code>mountPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code> / <code>/media</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shared source-media mount.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>livenessProbe</code> / <code>readinessProbe</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">httpGet on <code>8093</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Health probes (disable/retype for minimal images).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>resources</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">small</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add <code>limits.nvidia.com/gpu</code> for GPU nodes.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The charts ship a fully commented <code>values.yaml</code>; the READMEs in <code>helm/loom</code> and <code>helm/cortex</code> list
+every key.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify">Verify</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm lint ./helm/loom ./helm/cortex
+helm template loom ./helm/loom --set postgresql.enabled=true
+kubectl rollout status deploy/loom
+# Confirm a worker joined the fleet:
+kubectl get pods -l app.kubernetes.io/name=cortex</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps">Next steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../">Container Images</a> — the image and port inventory the charts deploy</p>
+</li>
+<li>
+<p><a href="../../playbooks/kubernetes/">Kubernetes playbook</a> — the underlying manifests, service account,
+sandbox guardrails and worker pools explained step by step</p>
+</li>
+<li>
+<p><a href="../../cortex/examples/">Cortex examples</a> — build a custom Java or Python worker image</p>
+</li>
+<li>
+<p><a href="../../loom/metrics/">Loom Metrics</a> and <a href="../../cortex/metrics/">Cortex Metrics</a> — scrape the
+deployed components</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>

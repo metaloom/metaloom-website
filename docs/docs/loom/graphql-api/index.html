@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
-	<title>GraphQL API</title>
+	<title>GraphQL API | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="MetaLoom 2021">
+	
+	<meta name="description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
 	
 	<meta name="author" content="Jotschi">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@metaloom" />
-    <meta name="twitter:creator" content="" />
-    <meta name="twitter:title" content="GraphQL API" />
-    <meta name="twitter:description" content="" />
-    
-    <meta name="twitter:image:src" content="https://metaloom.io/images/banner_square.webp" />
+<link rel="canonical" href="http://localhost:1313/docs/loom/graphql-api/">
 
-    <meta property="og:title" content="GraphQL API">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/graphql-api/">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="https://metaloom.io/images/banner_square.webp">
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GraphQL API | MetaLoom">
+    <meta property="og:url" content="http://localhost:1313/docs/loom/graphql-api/">
+    <meta property="og:description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+    <meta property="og:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta property="og:image:alt" content="GraphQL API">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="GraphQL API | MetaLoom">
+    <meta name="twitter:description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+    <meta name="twitter:image" content="http://localhost:1313/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="GraphQL API">
+
 
 	<meta name="generator" content="Hugo 0.161.1">
 
@@ -48,6 +56,9 @@
 	<!-- Main Stylesheet -->
 	
 	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
 
 	<!--Favicon-->
 	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
@@ -80,7 +91,15 @@
 				<ul class="navbar-nav ml-auto">
 					
 					<li class="nav-item">
+            <a class="nav-link" href="/studios">studios</a>
+					</li>
+					
+					<li class="nav-item">
             <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/announcements">announcements</a>
 					</li>
 					
 					<li class="nav-item">
@@ -219,7 +238,7 @@ and returns the standard GraphQL <code>{ &#34;data&#34;: …​, &#34;errors&#34
 <div class="paragraph">
 <p>The GraphQL endpoint reuses the REST authentication stack — a valid JWT bearer token (HttpOnly
 cookie or <code>Authorization</code> header) is required; unauthenticated requests are rejected with <code>401</code>
-before the query is parsed. Obtain a token via the <a href="../authentication">Authentication</a> flow.</p>
+before the query is parsed. Obtain a token via the <a href="../authentication/">Authentication</a> flow.</p>
 </div>
 <div class="paragraph">
 <p>Authorization is enforced per field. Each resolver checks the caller’s permissions:</p>
@@ -326,13 +345,13 @@ executes authenticated queries against <code>/api/v1/graphql</code>.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="rest-api">REST API Reference</a> — the primary external API with full CRUD.</p>
+<p><a href="../rest-api/">REST API Reference</a> — the primary external API with full CRUD.</p>
 </li>
 <li>
-<p><a href="java-client">Java Client</a> — typed JVM HTTP client.</p>
+<p><a href="../java-client/">Java Client</a> — typed JVM HTTP client.</p>
 </li>
 <li>
-<p><a href="authentication">Authentication</a> — obtaining a bearer token.</p>
+<p><a href="../authentication/">Authentication</a> — obtaining a bearer token.</p>
 </li>
 </ul>
 </div>

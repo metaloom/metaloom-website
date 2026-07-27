@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<title>MetaLoom 1.0.0 | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="The scope of the first stable MetaLoom release — pipeline engine, processing nodes, AI agent, APIs, UI, CLI and Kubernetes deployment.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="http://localhost:1313/announcements/metaloom-1-0-0/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MetaLoom 1.0.0 | MetaLoom">
+    <meta property="og:url" content="http://localhost:1313/announcements/metaloom-1-0-0/">
+    <meta property="og:description" content="The scope of the first stable MetaLoom release — pipeline engine, processing nodes, AI agent, APIs, UI, CLI and Kubernetes deployment.">
+    <meta property="og:image" content="http://localhost:1313/images/og-metaloom-1-0-0.jpg">
+    <meta property="og:image:alt" content="MetaLoom 1.0.0">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-07-27T10:00:00&#43;02:00">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="MetaLoom 1.0.0 | MetaLoom">
+    <meta name="twitter:description" content="The scope of the first stable MetaLoom release — pipeline engine, processing nodes, AI agent, APIs, UI, CLI and Kubernetes deployment.">
+    <meta name="twitter:image" content="http://localhost:1313/images/og-metaloom-1-0-0.jpg">
+    <meta name="twitter:image:alt" content="MetaLoom 1.0.0">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/">
+				
+				<img class="lozad" src="/images/logo_word_big.svg" alt="MetaLoom" height="42">
+				
+			</a>
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/studios">studios</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#feature">features</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/announcements">announcements</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/#blog">blog</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="/docs">docs</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          <nav class="docs-topics" aria-label="More announcements">
+            <div class="docs-sidebar-title">Announcements</div>
+            <ul>
+              
+              <li>
+                <a href="/announcements/metaloom-1-0-0/" class="is-current">MetaLoom 1.0.0</a>
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header ann-page-header">
+          <div class="ann-entry-meta">
+            <span class="ann-badge ann-badge-upcoming">Not released yet</span>
+            <time datetime="2026-07-27">27 July 2026</time>
+          </div>
+          <h1>MetaLoom 1.0.0</h1>
+          <p class="ann-lead">The scope of the first stable MetaLoom release — pipeline engine, processing nodes, AI agent, APIs, UI, CLI and Kubernetes deployment.</p>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>MetaLoom 1.0.0 has not been released yet.</strong> This page describes the scope of the upcoming
+release so you can judge whether it fits your setup. No <code>1.0.0</code> container images or Maven
+artifacts are published — everything currently builds from source at <code>1.0.0-SNAPSHOT</code>. The
+release date is not fixed; follow the <a href="https://discord.gg/NFdnFcSbfA">Discord</a> or the
+<a href="../../blog/">blog</a> to hear about it first.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>MetaLoom 1.0.0 is the first release intended for production use. It marks the point where the
+building blocks — the server, the processing fleet, the APIs and the front ends — line up into
+one platform: point it at media, and it works out what is in it, then stores, indexes and serves
+that back to you.</p>
+</div>
+<div class="sect1">
+<h2 id="_what_is_in_the_release">What Is In the Release</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pipeline_engine">Pipeline engine</h3>
+<div class="paragraph">
+<p>Loom owns the pipeline graph. It persists run state, resolves the DAG and dispatches individual
+source, node and segment tasks to registered Cortex workers over a WebSocket. Workers hold no
+database and run one task per slot, so scaling out is a matter of starting more of them — and
+heavy kinds (speech-to-text, face detection, vision models) can be pinned to GPU hardware.
+Pipelines are versioned, can be re-run, and every node result is written back with the producer
+version that created it.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/pipeline/">Pipeline</a> and <a href="../../docs/operation/">Operation</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_processing_nodes">Processing nodes</h3>
+<div class="paragraph">
+<p>A catalogue of built-in node kinds covering hashing and perceptual fingerprinting, deduplication
+and consistency checks, thumbnails and contact sheets, face detection and face descriptions,
+OCR, document extraction (Tika), speech-to-text (whisper.cpp), scene detection, captioning,
+vision-language models, LLM prompting, text-to-speech, quality metrics, filesystem and asset
+sources, and routing filters. Custom kinds can be written in Java or as a Python worker speaking
+the same wire protocol.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/nodes/">Nodes</a> and the <a href="../../docs/playbooks/python-node/">custom node playbook</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_chat_and_ai_agent">Chat and AI agent</h3>
+<div class="paragraph">
+<p>A server-side agentic loop that answers questions about your assets in natural language — with
+per-chat <strong>Skills</strong>, a persistent <strong>Memory</strong> bank, publishable <strong>Sessions</strong> and an optional
+isolated coding sandbox for agent-authored scripts.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/loom/chat/">Chat &amp; AI Agent</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apis">APIs</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>REST</strong> — roughly 130 endpoints across 35 resource groups, with a generated OpenAPI document,
+an in-browser API explorer and a typed Java client.</p>
+</li>
+<li>
+<p><strong>GraphQL</strong> — nested reads in a single round trip, with an embedded GraphiQL explorer.</p>
+</li>
+<li>
+<p><strong>WebSocket</strong> — live task and pipeline events, plus the processor protocol Cortex workers speak.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/loom/rest-api/">REST API</a>, <a href="../../docs/loom/graphql-api/">GraphQL API</a> and
+<a href="../../docs/loom/java-client/">Java Client</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_front_ends">Front ends</h3>
+<div class="paragraph">
+<p>The <strong>Loom UI</strong> (React) ships inside the server image and covers assets, libraries, tags, tasks,
+detections, pipelines, monitoring, ACL and the chat agent. <strong>Loom App</strong> wraps the same UI in an
+Electron desktop window. The <strong><code>metaloom</code> CLI</strong> talks to the same REST API and ships as a GraalVM
+native binary as well as a runnable JAR.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/ui/">Loom UI</a> and <a href="../../docs/cli/">Command Line</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_storage_search_and_access_control">Storage, search and access control</h3>
+<div class="paragraph">
+<p>Assets can be referenced in place on disk or uploaded and stored content-addressed. Metadata is
+indexed for full-text and vector search (Elasticsearch, Lucene, Qdrant). Permissions are granted
+on object level through users, groups and roles, and external identity providers (Keycloak,
+Auth0, Okta) are supported over OAuth2 alongside built-in JWT auth.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/loom/features/">Loom Features</a> and <a href="../../docs/loom/authentication/">Authentication</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deployment">Deployment</h3>
+<div class="paragraph">
+<p>Container images for the server, the demo, the Cortex worker and the agent session runner — each
+of the server images in a JVM and a GraalVM native variant. Two Helm charts (<code>helm/loom</code>,
+<code>helm/cortex</code>) deploy the stack on Kubernetes. Prometheus metrics are exposed by both Loom and
+Cortex.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../../docs/deployment/">Container Images</a>, <a href="../../docs/deployment/helm/">Helm Charts</a>
+and the <a href="../../docs/playbooks/kubernetes/">Kubernetes playbook</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_important_points">Important Points</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Topic</th>
+<th class="tableblock halign-left valign-top">What you should know</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not released. The version in the source tree is <code>1.0.0-SNAPSHOT</code>; published artifacts will
+  follow when the release is cut.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">License</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The platform is <strong>Apache 2.0</strong>. That covers the code — not the models you point it at.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Models are not shipped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MetaLoom ships no model weights. Every model is a configuration value (a path, a repo id or an
+  endpoint), so the license that applies is the one of the model <strong>you</strong> supply.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two components are non-commercial</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>InspireFace model packs</strong> used by face detection are academic-use only (which also
+  affects face descriptions downstream), and <strong>Ideogram 4.0</strong>, the model behind the planned
+  image generation node, is non-commercial. See
+  <a href="../../docs/legal/model-licenses/">Model Licenses</a> before deploying commercially.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL is the production backend (jOOQ + Flyway). In-memory and filesystem backends exist
+  for development and tests.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hardware</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CPU-only works. Speech-to-text, vision-language and LLM nodes are much happier with a GPU —
+  pin those kinds to dedicated workers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node availability per worker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A worker executes the node kinds its build registers. Check the
+  <a href="../../docs/nodes/">node catalogue</a> and the worker’s <code>/api/v1/processors</code> entry rather than
+  assuming every kind is present everywhere.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API stability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0.0 is where the REST and GraphQL surfaces become something we keep stable. Until it is cut,
+  endpoints may still move.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_after_1_0_0">After 1.0.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On the roadmap, not in this release: an S3 storage backend, selective import/export between
+instances, server-side image manipulation (resize, crop, focal point), a gRPC surface and the
+<code>imagegen</code> node.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_try_it_before_the_release">Try It Before the Release</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The demo container runs the whole thing on a laptop with seeded assets, pipelines and users:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="bash">docker run -p 8092:8092 metaloom/loom-demo:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then follow <a href="../../docs/getting-started/">Getting Started</a>. If something does not behave the
+way this page describes, that is worth telling us about on
+<a href="https://discord.gg/NFdnFcSbfA">Discord</a> — feedback before a 1.0 is worth more than after it.</p>
+</div>
+</div>
+</div>
+
+        </div>
+        <div class="ann-back">
+          <a href="/announcements/"><span aria-hidden="true">&larr;</span> All announcements</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- Footer Legal Links -->
+				<div class="footer-links text-center mb-3">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item px-2"><a href="/docs/">Documentation</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+						<li class="list-inline-item px-2"><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="/">
+						<img src="/images/logo_word_big.svg" alt="MetaLoom" height="42" />
+					</a>
+					<br>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.8af87f2a4f4df8cb6a8b0852fbc6962d80863622d892427811ef5568f832b8398c37667aee9daa1b1136a2d81c179f97.js" integrity="sha384-ivh/Kk9N&#43;MtqiwhS&#43;8aWLYCGNiLYkkJ4Ee9VaPgyuDmMN2Z67p2qGxE2otgcF5&#43;X"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>
