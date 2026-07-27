@@ -116,6 +116,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/loom/helm-chart/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/imagegen/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/legal/impressum/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/java-client/</loc>
@@ -159,6 +161,8 @@
     <loc>https://metaloom.io/docs/rest/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/scene-detection/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/nodes/sentiment/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/whisper/</loc>
   </url><url>

@@ -254,6 +254,11 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Synthesize narration audio (Orpheus/Kartoffel DE, Kokoro EN)</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="sentiment/">Sentiment Analysis</a> (<code>sentiment</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any (from upstream text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Score the tone of extracted text (German and English)</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="llm/">LLM Enrichment</a> (<code>llm</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enrich metadata with a language model</p></td>
@@ -262,6 +267,11 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="captioning/">Captioning</a> (<code>captioning</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Natural-language captions for images and videos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="imagegen/">Image Generation</a> (<code>imagegen</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate images from a prompt (or remix the asset) with a diffusion model</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedetect/">Face Detection</a> (<code>facedetect</code>)</p></td>
@@ -396,6 +406,14 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An image-generation sidecar (SDXL-Turbo / diffusion model; GPU recommended)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>imagegen</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A sentiment sidecar (german-sentiment-bert + twitter-roberta; CPU is enough)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sentiment</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, filters, dedup</p></td>
 </tr>
@@ -461,11 +479,23 @@ a vision-language model — images from a still frame (SmolVLM), videos from the
 (Qwen2.5-VL), optionally as a per-scene timeline — and <a href="llm/"><code>llm</code></a> enriches metadata through an
 LLM provider such as Ollama.</p>
 </dd>
+<dt class="hdlist1">Image generation</dt>
+<dd>
+<p><a href="imagegen/"><code>imagegen</code></a> generates a new image with a diffusion model behind a small HTTP sidecar —
+either from a text prompt or by remixing the asset’s own image — and writes the PNG to the worker’s
+local cache.</p>
+</dd>
 <dt class="hdlist1">Text-to-speech</dt>
 <dd>
 <p><a href="tts/"><code>tts</code></a> turns upstream text — an <a href="llm/"><code>llm</code></a> summary, a caption, or a translated
 transcript — into narration audio, using Orpheus/Kartoffel for German and Kokoro for English behind a
 small HTTP sidecar.</p>
+</dd>
+<dt class="hdlist1">Sentiment analysis</dt>
+<dd>
+<p><a href="sentiment/"><code>sentiment</code></a> scores the tone of text the pipeline already produced — document text,
+OCR output, captions or LLM answers — as positive, neutral or negative with a signed polarity value,
+using dedicated German and English models behind a small HTTP sidecar.</p>
 </dd>
 <dt class="hdlist1">Consistency checking</dt>
 <dd>
