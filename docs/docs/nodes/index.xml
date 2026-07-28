@@ -29,6 +29,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist:&#xA;one by exact content hash, one by perceptual video fingerprint.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Depth Map</title>
+      <link>https://metaloom.io/docs/nodes/depthmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/depthmap/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The depth map node works out &lt;strong&gt;how far each part of a photo is from the camera&lt;/strong&gt;, from the photo&#xA;alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a&#xA;greyscale map comes out in which bright means close and dark means far.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Face Description</title>
       <link>https://metaloom.io/docs/nodes/facedescription/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -111,6 +118,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/scene-detection/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The scene detection node finds &lt;strong&gt;scene boundaries&lt;/strong&gt; (cuts) in a video using optical-flow analysis, and&#xA;emits the resulting segments. Each run replaces the whole segment set for the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Scene Layout</title>
+      <link>https://metaloom.io/docs/nodes/scene-layout/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/scene-layout/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Detection tells you &lt;strong&gt;what&lt;/strong&gt; is in a picture and where its box sits. Scene layout tells you &lt;strong&gt;how&#xA;those things relate to each other&lt;/strong&gt; — which is in front, which is behind, which one is hiding part&#xA;of another, and which are standing side by side.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Script</title>
+      <link>https://metaloom.io/docs/nodes/script/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/script/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The script node runs &lt;strong&gt;a small piece of code you write&lt;/strong&gt; as a step in your pipeline. It reads the&#xA;media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare —&#xA;a text, a number, a list of texts, a block of JSON, a set of timeframes, or images.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Sentiment Analysis</title>

@@ -90,6 +90,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/nodes/dedup/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/depthmap/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/cortex/examples/</loc>
@@ -136,7 +138,9 @@
   </url><url>
     <loc>https://metaloom.io/docs/loom/maven-artifacts/</loc>
   </url><url>
-    <loc>https://metaloom.io/studios/</loc>
+    <loc>https://metaloom.io/tour/</loc>
+  </url><url>
+    <loc>https://metaloom.io/studio/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/cortex/metrics/</loc>
   </url><url>
@@ -161,6 +165,10 @@
     <loc>https://metaloom.io/docs/rest/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/scene-detection/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/nodes/scene-layout/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/nodes/script/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/sentiment/</loc>
   </url><url>

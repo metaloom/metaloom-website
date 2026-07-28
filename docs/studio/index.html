@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>MetaLoom Studio | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="MetaLoom Studio is the commercial edition: the same open source engine on your own hardware, plus single sign-on, S3 storage, commercially cleared models and a support agreement.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/studio/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MetaLoom Studio | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/studio/">
+    <meta property="og:description" content="MetaLoom Studio is the commercial edition: the same open source engine on your own hardware, plus single sign-on, S3 storage, commercially cleared models and a support agreement.">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="MetaLoom Studio">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="MetaLoom Studio | MetaLoom">
+    <meta name="twitter:description" content="MetaLoom Studio is the commercial edition: the same open source engine on your own hardware, plus single sign-on, S3 storage, commercially cleared models and a support agreement.">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="MetaLoom Studio">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+	
+	<link rel="stylesheet" href="/css/studio.min.css" media="screen">
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<main class="sd-page" data-reveal-scope>
+  
+<script>
+  document.documentElement.classList.add('reveal-js');
+  setTimeout(function () {
+    if (!window.__revealReady) document.documentElement.classList.remove('reveal-js');
+  }, 2500);
+</script>
+
+
+  
+  
+  
+  <section class="sd-hero" id="top">
+    
+    <div class="sd-hero-media">
+      <img src="/images/scenery/spectrum_hu_9cb5db80b9d760c6.webp"
+           srcset="/images/scenery/spectrum_hu_680f549dd9af50cd.webp 900w, /images/scenery/spectrum_hu_9cb5db80b9d760c6.webp 1920w"
+           sizes="100vw" alt="" aria-hidden="true" fetchpriority="high">
+      <div class="sd-hero-sweep" aria-hidden="true"></div>
+      <div class="sd-hero-sweep sd-hero-sweep-slow" aria-hidden="true"></div>
+      <div class="sd-hero-breathe" aria-hidden="true"></div>
+      <div class="sd-hero-veil"></div>
+      <div class="sd-hero-fade" aria-hidden="true"></div>
+    </div>
+    <div class="sd-hero-inner">
+      <p class="sd-eyebrow reveal">MetaLoom Studio · commercial edition</p>
+      <h1 class="sd-hero-title reveal" data-reveal-delay="1">The same engine.<br>With a company behind it.</h1>
+      <p class="sd-hero-lead reveal" data-reveal-delay="2">MetaLoom stays open source and stays on your hardware. Studio is what you add when the archive stops being a side project — identity, storage, cleared model licenses, and someone whose job it is to answer.</p>
+      
+      <div class="sd-hero-actions reveal" data-reveal-delay="3">
+        <a class="sd-btn sd-btn-primary" href="#early-access">Request early access</a>
+        <a class="sd-btn sd-btn-ghost" href="#open-core">What stays open</a>
+      </div>
+      
+      <p class="sd-status reveal" data-reveal-delay="4"><span class="sd-status-dot" aria-hidden="true"></span>In development alongside 1.0.0 — nothing is for sale yet</p>
+      
+    </div>
+    <a class="sd-scroll-cue" href="#open-core" aria-label="Scroll">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 34" width="18" height="26" aria-hidden="true">
+        <rect x="1" y="1" width="22" height="32" rx="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle class="sd-scroll-dot" cx="12" cy="10" r="2.6" fill="currentColor"/>
+      </svg>
+    </a>
+  </section>
+  
+
+  
+  
+  <section class="sd-section sd-open" id="open-core">
+    <div class="sd-wrap sd-split">
+      <div class="sd-split-text">
+        <p class="sd-eyebrow reveal">Open core, in writing</p>
+        <h2 class="sd-title reveal">Nothing you run today<br>moves behind a paywall.</h2>
+        <p class="sd-lead reveal">The platform — server, engine, every processing node, the API, the UI — is Apache 2.0 and stays that way. Studio adds the things that only exist because a company is on the other end of them: agreements, credentials, licenses, an answer.</p>
+      </div>
+      <div class="sd-split-art reveal">
+        
+<div class="sd-ledger" aria-hidden="true">
+  <div class="sd-ledger-col sd-ledger-open">
+    <p class="sd-ledger-head">Always open source</p>
+    <ul>
+      
+      <li style="--sd-delay:0ms"><span class="sd-tick" aria-hidden="true">&#10003;</span>Loom server · Cortex engine</li>
+      
+      <li style="--sd-delay:90ms"><span class="sd-tick" aria-hidden="true">&#10003;</span>All 19 processing node kinds</li>
+      
+      <li style="--sd-delay:180ms"><span class="sd-tick" aria-hidden="true">&#10003;</span>REST · GraphQL · CLI · desktop</li>
+      
+      <li style="--sd-delay:270ms"><span class="sd-tick" aria-hidden="true">&#10003;</span>Pipeline editor &amp; chat agent</li>
+      
+      <li style="--sd-delay:360ms"><span class="sd-tick" aria-hidden="true">&#10003;</span>Helm chart &amp; container images</li>
+      
+    </ul>
+  </div>
+  <div class="sd-ledger-col sd-ledger-studio">
+    <p class="sd-ledger-head">Studio adds</p>
+    <ul>
+      
+      <li style="--sd-delay:450ms"><span class="sd-plus" aria-hidden="true">+</span>SSO, SCIM and the audit trail</li>
+      
+      <li style="--sd-delay:540ms"><span class="sd-plus" aria-hidden="true">+</span>S3 storage backend &amp; tiering</li>
+      
+      <li style="--sd-delay:630ms"><span class="sd-plus" aria-hidden="true">+</span>Commercially cleared models</li>
+      
+      <li style="--sd-delay:720ms"><span class="sd-plus" aria-hidden="true">+</span>LTS line &amp; signed builds</li>
+      
+      <li style="--sd-delay:810ms"><span class="sd-plus" aria-hidden="true">+</span>A support agreement</li>
+      
+    </ul>
+  </div>
+  
+  <span class="sd-ledger-seam"></span>
+</div>
+
+      </div>
+    </div>
+    <div class="sd-wrap">
+      <ol class="sd-rules">
+        
+        <li class="sd-rule reveal" data-reveal-delay="0">
+          <span class="sd-rule-index">01</span>
+          <h3>Nothing is taken away</h3>
+          <p>A capability that has shipped open source stays open source. Studio is additive — this page is the record, and it is dated.</p>
+        </li>
+        
+        <li class="sd-rule reveal" data-reveal-delay="1">
+          <span class="sd-rule-index">02</span>
+          <h3>No metered processing</h3>
+          <p>Studio does not count your minutes, frames or assets. You bought the hardware; run it until it melts.</p>
+        </li>
+        
+        <li class="sd-rule reveal" data-reveal-delay="2">
+          <span class="sd-rule-index">03</span>
+          <h3>It still runs air-gapped</h3>
+          <p>A Studio install works with no route to us. Entitlement is a file you hold, not a service you depend on.</p>
+        </li>
+        
+      </ol>
+    </div>
+  </section>
+  
+
+  
+  <section class="sd-panels" id="what-you-get">
+    
+    <article class="sd-panel">
+      <div class="sd-wrap sd-split">
+        <div class="sd-split-text">
+          <p class="sd-eyebrow reveal">Access</p>
+          <h2 class="sd-title sd-title-sm reveal">Everyone signs in the way your company already signs in.</h2>
+          <p class="sd-lead reveal">Studio wires MetaLoom into the identity provider you run: OIDC and SAML single sign-on, directory groups mapped onto MetaLoom roles, accounts provisioned and — the part that matters at an audit — de-provisioned automatically.</p>
+          <ul class="sd-chips reveal">
+            <li>SSO · OIDC &amp; SAML</li><li>SCIM provisioning</li><li>Group → role mapping</li><li>Audit trail</li>
+          </ul>
+          
+          <a class="sd-link reveal" href="/docs/loom/authentication/">How authentication works today <span aria-hidden="true">&rarr;</span></a>
+          
+        </div>
+        <div class="sd-split-art reveal">
+          <div class="sd-art-frame">
+            
+<div class="sd-art sd-art-identity" aria-hidden="true">
+  <div class="sd-idp-row">
+    <div class="sd-idp-box">
+      <span class="sd-idp-kicker">your directory</span>
+      <span class="sd-idp-names">Keycloak · Okta · Entra ID</span>
+    </div>
+    <div class="sd-idp-wire">
+      <svg viewBox="0 0 90 24" width="90" height="24">
+        <path class="sd-wire-track" d="M2 12 H88"/>
+        <path class="sd-wire-flow" d="M2 12 H88"/>
+      </svg>
+      <span class="sd-idp-token">OIDC</span>
+    </div>
+    <div class="sd-idp-box sd-idp-box-target">
+      <span class="sd-idp-kicker">metaloom</span>
+      <span class="sd-idp-names">one session</span>
+    </div>
+  </div>
+
+  <ul class="sd-map">
+    <li style="--sd-delay:.55s"><code>editors@acme.tv</code><span class="sd-map-arrow">&rarr;</span><b>Editor</b></li>
+    <li style="--sd-delay:.7s"><code>archive-ro@acme.tv</code><span class="sd-map-arrow">&rarr;</span><b>Reader</b></li>
+    <li style="--sd-delay:.85s"><code>ops@acme.tv</code><span class="sd-map-arrow">&rarr;</span><b>Admin</b></li>
+    <li class="sd-map-gone" style="--sd-delay:1s"><code>l.turner@acme.tv</code><span class="sd-map-arrow">&rarr;</span><b>revoked</b></li>
+  </ul>
+
+  <p class="sd-audit"><span class="sd-audit-dot"></span>14:02:11 &nbsp;j.schuett&nbsp; opened &nbsp;A001_C003&nbsp; &middot; granted via <em>editors@acme.tv</em></p>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sd-panel sd-panel-flip">
+      <div class="sd-wrap sd-split">
+        <div class="sd-split-text">
+          <p class="sd-eyebrow reveal">Storage</p>
+          <h2 class="sd-title sd-title-sm reveal">Petabytes, on the tier they belong on.</h2>
+          <p class="sd-lead reveal">Point Studio at S3-compatible object storage — MinIO, Ceph, a rack of your own or a provider you already pay — and let cold material fall through to cheap tiers while the index stays instant. Multi-site installs replicate only what they need.</p>
+          <ul class="sd-chips reveal">
+            <li>S3-compatible backends</li><li>Hot / warm / cold tiering</li><li>Multi-site replication</li><li>Bring your own bucket</li>
+          </ul>
+          
+          <a class="sd-link reveal" href="/features/">Storage on the roadmap <span aria-hidden="true">&rarr;</span></a>
+          
+        </div>
+        <div class="sd-split-art reveal">
+          <div class="sd-art-frame">
+            
+<div class="sd-art sd-art-storage" aria-hidden="true">
+  <div class="sd-tier-index">
+    <span class="sd-tier-index-label">index &amp; metadata</span>
+    <span class="sd-tier-index-note">always hot &middot; unchanged</span>
+  </div>
+
+  <div class="sd-tiers">
+    <div class="sd-tier sd-tier-hot">
+      <div class="sd-tier-head"><b>NVMe</b><span>working set</span></div>
+      <div class="sd-tier-bar"><span style="width:22%"></span></div>
+      <span class="sd-tier-size">18 TB</span>
+    </div>
+    <div class="sd-tier sd-tier-warm">
+      <div class="sd-tier-head"><b>S3 standard</b><span>this season</span></div>
+      <div class="sd-tier-bar"><span style="width:58%"></span></div>
+      <span class="sd-tier-size">440 TB</span>
+    </div>
+    <div class="sd-tier sd-tier-cold">
+      <div class="sd-tier-head"><b>S3 glacier / tape</b><span>the archive</span></div>
+      <div class="sd-tier-bar"><span style="width:92%"></span></div>
+      <span class="sd-tier-size">3.1 PB</span>
+    </div>
+    
+    <span class="sd-drop" style="--sd-delay:0s;   left:22%"></span>
+    <span class="sd-drop" style="--sd-delay:1.6s; left:54%"></span>
+    <span class="sd-drop" style="--sd-delay:3.1s; left:76%"></span>
+  </div>
+
+  <p class="sd-tier-foot">
+    <span class="sd-pill sd-pill-accent">MinIO</span>
+    <span class="sd-pill">Ceph</span>
+    <span class="sd-pill">any S3 API</span>
+  </p>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sd-panel">
+      <div class="sd-wrap sd-split">
+        <div class="sd-split-text">
+          <p class="sd-eyebrow reveal">Licensing</p>
+          <h2 class="sd-title sd-title-sm reveal">Models you are actually allowed to sell with.</h2>
+          <p class="sd-lead reveal">Two of MetaLoom&#39;s strongest defaults are non-commercial: the InspireFace packs behind face recognition and Ideogram 4.0 behind image generation. Studio ships a cleared bundle — checked, pinned, versioned and named in your agreement — so the legal question is answered before the pipeline runs, not after a client asks.</p>
+          <ul class="sd-chips reveal">
+            <li>Cleared model bundle</li><li>Written provenance</li><li>Pinned versions</li><li>Indemnity</li>
+          </ul>
+          
+          <a class="sd-link reveal" href="/docs/legal/model-licenses/">The license inventory today <span aria-hidden="true">&rarr;</span></a>
+          
+        </div>
+        <div class="sd-split-art reveal">
+          <div class="sd-art-frame">
+            
+<div class="sd-art sd-art-licensing" aria-hidden="true">
+  <ul class="sd-lic-list">
+    <li class="sd-lic sd-lic-blocked" style="--sd-delay:.1s">
+      <span class="sd-lic-mark">&#10005;</span>
+      <span class="sd-lic-body">
+        <b>InspireFace model packs</b>
+        <em>academic use only &middot; blocks facedetect &amp; facedescription</em>
+      </span>
+    </li>
+    <li class="sd-lic sd-lic-blocked" style="--sd-delay:.25s">
+      <span class="sd-lic-mark">&#10005;</span>
+      <span class="sd-lic-body">
+        <b>Ideogram 4.0</b>
+        <em>non-commercial model agreement &middot; blocks imagegen</em>
+      </span>
+    </li>
+    <li class="sd-lic sd-lic-cond" style="--sd-delay:.4s">
+      <span class="sd-lic-mark">!</span>
+      <span class="sd-lic-body">
+        <b>Gemma &middot; gated Llama derivatives</b>
+        <em>conditional terms &middot; read before shipping</em>
+      </span>
+    </li>
+  </ul>
+
+  <div class="sd-lic-swap" aria-hidden="true">&darr;</div>
+
+  <div class="sd-lic-cleared" style="--sd-delay:.9s">
+    <span class="sd-lic-stamp">cleared</span>
+    <b>Studio model bundle</b>
+    <em>pinned versions &middot; provenance on paper &middot; named in your agreement</em>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sd-panel sd-panel-flip">
+      <div class="sd-wrap sd-split">
+        <div class="sd-split-text">
+          <p class="sd-eyebrow reveal">Operations</p>
+          <h2 class="sd-title sd-title-sm reveal">Upgrades that are somebody's job.</h2>
+          <p class="sd-lead reveal">Signed images with an SBOM, a supported Helm chart, an LTS line that gets security fixes without feature churn, backup and restore that has been rehearsed against a real archive, and dashboards that were not drawn during the incident.</p>
+          <ul class="sd-chips reveal">
+            <li>Signed images &#43; SBOM</li><li>LTS line</li><li>Supported Helm chart</li><li>Tested backup &amp; restore</li>
+          </ul>
+          
+          <a class="sd-link reveal" href="/docs/deployment/">Container images <span aria-hidden="true">&rarr;</span></a>
+          
+        </div>
+        <div class="sd-split-art reveal">
+          <div class="sd-art-frame">
+            
+<div class="sd-art sd-art-operations" aria-hidden="true">
+  <div class="sd-lane">
+    <div class="sd-lane-label">latest</div>
+    <div class="sd-lane-track">
+      <span class="sd-tag" style="--sd-delay:.1s;left:4%">1.1</span>
+      <span class="sd-tag" style="--sd-delay:.3s;left:34%">1.2</span>
+      <span class="sd-tag" style="--sd-delay:.5s;left:64%">1.3</span>
+      <span class="sd-tag sd-tag-next" style="--sd-delay:.7s;left:92%">&hellip;</span>
+    </div>
+  </div>
+
+  <div class="sd-lane sd-lane-lts">
+    <div class="sd-lane-label">1.0 LTS</div>
+    <div class="sd-lane-track">
+      <span class="sd-tag sd-tag-fix" style="--sd-delay:.9s;left:16%">.1</span>
+      <span class="sd-tag sd-tag-fix" style="--sd-delay:1.05s;left:44%">.2</span>
+      <span class="sd-tag sd-tag-fix" style="--sd-delay:1.2s;left:72%">.3</span>
+      <span class="sd-lane-note">security &amp; correctness only</span>
+    </div>
+  </div>
+
+  <div class="sd-sig">
+    <span class="sd-sig-badge">
+      <svg viewBox="0 0 16 20" width="13" height="16" aria-hidden="true">
+        <path d="M8 1 L15 4 V10 C15 15 8 19 8 19 C8 19 1 15 1 10 V4 Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M5 10 L7 12.4 L11.4 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      signed
+    </span>
+    <code>loom-server:1.0.3 &nbsp;sha256:9f2c…a41d</code>
+  </div>
+  <p class="sd-sig-foot">SBOM attached &middot; signature verifiable in your own registry</p>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sd-panel">
+      <div class="sd-wrap sd-split">
+        <div class="sd-split-text">
+          <p class="sd-eyebrow reveal">Support</p>
+          <h2 class="sd-title sd-title-sm reveal">A name, not a queue.</h2>
+          <p class="sd-lead reveal">A support agreement with response times written into it, an engineer who has already seen your topology, and a hand on the migration from the demo container to the rack. Roadmap conversations go both ways — Studio customers are why features get ordered the way they do.</p>
+          <ul class="sd-chips reveal">
+            <li>Response times in writing</li><li>Named engineer</li><li>Migration support</li><li>Roadmap input</li>
+          </ul>
+          
+          <a class="sd-link reveal" href="#early-access">Talk to us about it <span aria-hidden="true">&rarr;</span></a>
+          
+        </div>
+        <div class="sd-split-art reveal">
+          <div class="sd-art-frame">
+            
+<div class="sd-art sd-art-support" aria-hidden="true">
+  <div class="sd-sla-head">
+    <span class="sd-sla-kicker">response times, written down</span>
+    <span class="sd-sla-clock">
+      <svg viewBox="0 0 32 32" width="26" height="26">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".35"/>
+        <line class="sd-sla-hand" x1="16" y1="16" x2="16" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="1.6" fill="currentColor"/>
+      </svg>
+    </span>
+  </div>
+
+  <ul class="sd-sla">
+    <li style="--sd-delay:.15s"><span class="sd-sev sd-sev-1">P1</span><span class="sd-sla-what">archive down</span><b>1 h</b></li>
+    <li style="--sd-delay:.3s"><span class="sd-sev sd-sev-2">P2</span><span class="sd-sla-what">pipeline stalled</span><b>4 h</b></li>
+    <li style="--sd-delay:.45s"><span class="sd-sev sd-sev-3">P3</span><span class="sd-sla-what">question, upgrade, review</span><b>next day</b></li>
+  </ul>
+
+  <div class="sd-engineer" style="--sd-delay:.7s">
+    <span class="sd-engineer-avatar" aria-hidden="true"></span>
+    <span class="sd-engineer-body">
+      <b>your engineer</b>
+      <em>has your topology, your node set and your last incident in front of them</em>
+    </span>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="sd-panel sd-panel-flip">
+      <div class="sd-wrap sd-split">
+        <div class="sd-split-text">
+          <p class="sd-eyebrow reveal">Fit</p>
+          <h2 class="sd-title sd-title-sm reveal">The node your workflow needs, built and maintained.</h2>
+          <p class="sd-lead reveal">Every real pipeline hits one step that is specific to the house: a legacy MAM, a delivery spec, a codec nobody else has, a naming convention from 2009. Studio covers custom nodes and connectors as part of the engagement — kept working across upgrades instead of rotting in a fork.</p>
+          <ul class="sd-chips reveal">
+            <li>Custom nodes</li><li>Connectors &amp; exports</li><li>Maintained across upgrades</li><li>OEM &amp; white-label</li>
+          </ul>
+          
+          <a class="sd-link reveal" href="/docs/playbooks/python-node/">Writing your own node <span aria-hidden="true">&rarr;</span></a>
+          
+        </div>
+        <div class="sd-split-art reveal">
+          <div class="sd-art-frame">
+            
+<div class="sd-art sd-art-integrations" aria-hidden="true">
+  <div class="sd-flow">
+    <span class="sd-flow-node">ingest</span>
+    <span class="sd-flow-wire"></span>
+    <span class="sd-flow-node">whisper</span>
+    <span class="sd-flow-wire"></span>
+    <span class="sd-flow-slot">
+      <span class="sd-flow-custom">
+        <b>your node</b>
+        <em>legacy MAM export</em>
+      </span>
+    </span>
+    <span class="sd-flow-wire sd-flow-wire-late"></span>
+    <span class="sd-flow-node">deliver</span>
+  </div>
+
+  <ul class="sd-conn">
+    <li style="--sd-delay:.9s">Premiere &amp; Resolve handoff</li>
+    <li style="--sd-delay:1s">MAM / DAM connectors</li>
+    <li style="--sd-delay:1.1s">House delivery specs</li>
+    <li style="--sd-delay:1.2s">That one codec</li>
+  </ul>
+
+  <p class="sd-conn-foot">maintained against every upgrade &middot; not a fork you inherit</p>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+    
+  </section>
+
+  
+  
+  <section class="sd-numbers">
+    <div class="sd-wrap">
+      <dl class="sd-numbers-grid">
+        
+        <div class="sd-number reveal" data-reveal-delay="0">
+          <dt class="sd-number-value" data-count-up>19</dt>
+          <dd class="sd-number-label">processing nodes — every one of them open source</dd>
+        </div>
+        
+        <div class="sd-number reveal" data-reveal-delay="1">
+          <dt class="sd-number-value" data-count-up>0</dt>
+          <dd class="sd-number-label">minutes, frames or assets metered</dd>
+        </div>
+        
+        <div class="sd-number reveal" data-reveal-delay="2">
+          <dt class="sd-number-value" data-count-up>100%</dt>
+          <dd class="sd-number-label">of Studio runs on hardware you own</dd>
+        </div>
+        
+        <div class="sd-number reveal" data-reveal-delay="3">
+          <dt class="sd-number-value" data-count-up>1</dt>
+          <dd class="sd-number-label">agreement, one invoice, one person to call</dd>
+        </div>
+        
+      </dl>
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section class="sd-section sd-editions" id="editions">
+    <div class="sd-bg-media">
+      <img src="/images/scenery/grid-lights_hu_e1a4d1e6aa1dc8ef.webp" alt="" aria-hidden="true" loading="lazy">
+      <div class="sd-bg-veil"></div>
+    </div>
+    <div class="sd-wrap">
+      <div class="sd-section-head">
+        <p class="sd-eyebrow reveal">Where the line is</p>
+        <h2 class="sd-title reveal">Two editions. One codebase.</h2>
+        <p class="sd-lead reveal">Community is the whole platform and always will be. Studio is the same software with the organisational parts attached.</p>
+      </div>
+
+      
+      <div class="sd-table-scroll reveal">
+        <table class="sd-table">
+          <caption class="sr-only">What the Community and Studio editions each include</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="sd-th-feature"><span class="sr-only">Capability</span></th>
+              <th scope="col">
+                <span class="sd-th-name">Community</span>
+                <span class="sd-th-note">Apache 2.0 · free, forever</span>
+              </th>
+              <th scope="col" class="sd-th-studio">
+                <span class="sd-th-name">Studio</span>
+                <span class="sd-th-note">Commercial · pricing with 1.0.0</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <th scope="row">Loom server, Cortex engine, all 19 node kinds</th>
+              <td><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Self-hosted, unmetered, air-gap capable</th>
+              <td><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">REST · GraphQL · CLI · web &amp; desktop UI</th>
+              <td><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Pipeline editor, chat agent, skills &amp; memory</th>
+              <td><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Community support — Discord and the issue tracker</th>
+              <td><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">SSO (OIDC / SAML), SCIM provisioning, audit trail</th>
+              <td><span class="sd-no" aria-hidden="true">&ndash;</span><span class="sr-only">not included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">S3-compatible object storage, tiering, multi-site</th>
+              <td><span class="sd-no" aria-hidden="true">&ndash;</span><span class="sr-only">not included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Commercially cleared model bundle &#43; indemnity</th>
+              <td><span class="sd-no" aria-hidden="true">&ndash;</span><span class="sr-only">not included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Signed builds, SBOM and a maintained LTS line</th>
+              <td><span class="sd-no" aria-hidden="true">&ndash;</span><span class="sr-only">not included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Support agreement with written response times</th>
+              <td><span class="sd-no" aria-hidden="true">&ndash;</span><span class="sr-only">not included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+            <tr>
+              <th scope="row">Custom nodes, connectors and OEM terms</th>
+              <td><span class="sd-no" aria-hidden="true">&ndash;</span><span class="sr-only">not included</span></td>
+              <td class="sd-td-studio"><span class="sd-yes" aria-hidden="true">&#10003;</span><span class="sr-only">included</span></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <p class="sd-table-note reveal">No feature has ever moved from the left column to the right one, and none will.</p>
+    </div>
+  </section>
+  
+
+  
+  
+  <section class="sd-section sd-audiences">
+    <div class="sd-wrap">
+      <div class="sd-section-head">
+        <p class="sd-eyebrow reveal">Who Studio is for</p>
+        <h2 class="sd-title reveal">Not everyone needs a vendor. Some people cannot deploy without one.</h2>
+      </div>
+      <div class="sd-cards sd-cards-3">
+        
+        <div class="sd-card sd-card-icon reveal" data-reveal-delay="0">
+          <i class="ti-video-camera" aria-hidden="true"></i>
+          <h3>Post houses under contract</h3>
+          <p>Client footage under NDA, deliverables with clearance requirements, and an auditor who wants to know which model touched the frame.</p>
+        </div>
+        
+        <div class="sd-card sd-card-icon reveal" data-reveal-delay="1">
+          <i class="ti-archive" aria-hidden="true"></i>
+          <h3>Broadcast &amp; public archives</h3>
+          <p>Procurement needs a counterparty, retention needs an audit trail, and the material outlives everyone who set the system up.</p>
+        </div>
+        
+        <div class="sd-card sd-card-icon reveal" data-reveal-delay="2">
+          <i class="ti-package" aria-hidden="true"></i>
+          <h3>Teams building on MetaLoom</h3>
+          <p>You are embedding the engine in your own product. OEM terms, a roadmap you can plan against, and fixes that land upstream.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section class="sd-section sd-cta" id="early-access">
+    <div class="sd-bg-media">
+      <img src="/images/scenery/neon-lines_hu_4e153c0283f5b8e3.webp" alt="" aria-hidden="true" loading="lazy">
+      <div class="sd-bg-veil"></div>
+    </div>
+    <div class="sd-wrap sd-cta-inner">
+      <p class="sd-eyebrow reveal">Early access</p>
+      <h2 class="sd-title reveal">Studio is being built alongside 1.0.0.</h2>
+      <p class="sd-lead reveal">Nothing is for sale yet and there is no price list to show you. What exists is a roadmap and a short list of people whose problems are shaping it. If the page above described your situation, say so — that is the whole application process.</p>
+      
+      <dl class="sd-facts reveal">
+        
+        <div class="sd-fact">
+          <dt>Platform</dt>
+          <dd>1.0.0-SNAPSHOT, not released</dd>
+        </div>
+        
+        <div class="sd-fact">
+          <dt>Studio</dt>
+          <dd>in design — see the plan</dd>
+        </div>
+        
+        <div class="sd-fact">
+          <dt>Pricing</dt>
+          <dd>announced with 1.0.0</dd>
+        </div>
+        
+      </dl>
+      
+      <div class="sd-hero-actions reveal">
+        <a class="sd-btn sd-btn-primary" href="mailto:hello@metaloom.io?subject=MetaLoom%20Studio%20early%20access">Email us about Studio</a>
+        <a class="sd-btn sd-btn-ghost" href="/docs/">Read the docs</a>
+        <a class="sd-btn sd-btn-plain" href="https://discord.gg/NFdnFcSbfA" rel="noopener">Join the Discord</a>
+      </div>
+      <p class="sd-cta-note reveal">An email reaches a person, not a funnel. There is no mailing list to add you to yet, so nothing happens to your address except a reply.</p>
+    </div>
+  </section>
+  
+
+</main>
+
+
+
+<script src="/js/reveal.min.18964114a6d192251fbf48609c768ce23ee9ec216abaad0b28e5b41e5cd45f2c6912cdf62d5e82063eeccd507af1454b.js" integrity="sha384-GJZBFKbRkiUfv0hgnHaM4j7p7CFquq0LKOW0HlzUXyxpEs32LV6CBj7szVB68UVL" defer></script>
+
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/NFdnFcSbfA" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

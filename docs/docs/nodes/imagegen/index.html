@@ -97,7 +97,7 @@
 					
 					
 					<li class="nav-item">
-						<a class="nav-link" href="/studios">Studios</a>
+						<a class="nav-link" href="/tour">Tour</a>
 					</li>
 					
 					
@@ -105,6 +105,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
 					</li>
 					
 					
@@ -240,8 +247,10 @@ and attaches it to the asset.</p>
 </div>
 <div class="paragraph">
 <p>The diffusion model runs behind a small HTTP sidecar, so the node stays a pure client and needs no
-model runtime of its own. The sidecar is model-agnostic: it ships with <strong>SDXL-Turbo</strong> by default
-(ungated, fast) and can serve other diffusers-compatible models.</p>
+model runtime of its own. The sidecar is model-agnostic, and two are shipped: one serving
+<strong>SDXL-Turbo</strong> by default (ungated, fast) and one serving <strong>Mage-Flow</strong>, whose weights are MIT
+licensed and may therefore be used commercially. Both speak the same contract — pick one with the
+<code>port</code> option.</p>
 </div>
 <div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;imagegen&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;image sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the PNG stays in the local imagegen_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;generate (text-to-image)&#34;,&#34;note&#34;:&#34;mode GENERATE · prompt from node config&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;configured prompt&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;imagegen_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;imagegen_path&#34;,&#34;d&#34;:&#34;local PNG path&#34;}]},{&#34;name&#34;:&#34;remix (image-to-image)&#34;,&#34;note&#34;:&#34;mode REMIX · source image + prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;source&#34;,&#34;d&#34;:&#34;the asset image&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;configured prompt&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;imagegen_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;imagegen_path&#34;,&#34;d&#34;:&#34;local PNG path&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
@@ -343,6 +352,43 @@ curl -s -X POST localhost:9200/generate \
   -d &#39;{&#34;prompt&#34;:&#34;a red panda astronaut, studio lighting&#34;}&#39; -o out.png</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_choosing_the_model">Choosing the model</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Sidecar</th>
+<th class="tableblock halign-left valign-top">Default port</th>
+<th class="tableblock halign-left valign-top">Weights</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sidecars/ideogram-sidecar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>9200</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SDXL-Turbo — <strong>non-commercial</strong> community licence (Ideogram 4 optional, gated, also non-commercial)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sidecars/mage-flow-sidecar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>9210</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mage-Flow 4B — <strong>MIT</strong>, commercial use permitted. Stronger prompt following and legible text, and it also handles <code>REMIX</code> as an instruction edit</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For Mage-Flow, set <code>steps</code> to match the checkpoint: <code>4</code> for the default Turbo variant, <code>20</code> for the
+RL-aligned one, <code>30</code> for Base. The node always sends <code>steps</code>, so leaving it at the <code>30</code> default would
+run a 4-step model seven times longer than necessary. Its <code>strength</code> option has no effect on
+Mage-Flow, which edits from an instruction rather than a denoise strength. Mage-Flow needs a GPU with
+at least 24 GB; it also applies a content filter that cannot be disabled, and a rejected prompt is
+reported as an error rather than producing an image.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -393,7 +439,8 @@ records that the node ran for the asset.</p>
 			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
 				<h2 data-toc-skip>Explore</h2>
 				<ul>
-					<li><a href="/studios/">For studios</a></li>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
 					<li><a href="/features/">Features</a></li>
 					<li><a href="/announcements/">Announcements</a></li>
 					<li><a href="/blog/">Blog</a></li>

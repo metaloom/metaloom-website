@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Script | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="The script node runs a small piece of code you write as a step in your pipeline. It reads the media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare — a …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/script/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Script | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/script/">
+    <meta property="og:description" content="The script node runs a small piece of code you write as a step in your pipeline. It reads the media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare — a …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Script">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Script | MetaLoom">
+    <meta name="twitter:description" content="The script node runs a small piece of code you write as a step in your pipeline. It reads the media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare — a …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Script">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Script</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The script node runs <strong>a small piece of code you write</strong> as a step in your pipeline. It reads the
+media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare —
+a text, a number, a list of texts, a block of JSON, a set of timeframes, or images.</p>
+</div>
+<div class="paragraph">
+<p>It exists for the gap between &#34;one of the built-in nodes already does this&#34; and &#34;we need a new node
+built and released&#34;. Turning a transcript into chapter marks, thresholding a quality metric into a
+tag, reshaping a language model’s answer into structured fields — each is a few lines of code, and
+each would otherwise be a development project.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;script&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;No external service&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType script, variant = node id) · asset_segment_comp for timeframes&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;transcript → chapter marks&#34;,&#34;note&#34;:&#34;one text in, a timeline and two scalars out&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;whisper_result&#34;,&#34;d&#34;:&#34;transcript JSON&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;chapter_frames&#34;,&#34;d&#34;:&#34;timeframes&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;chapter_titles&#34;,&#34;d&#34;:&#34;list of titles&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;chapter_count&#34;}]},{&#34;name&#34;:&#34;metric → tag&#34;,&#34;note&#34;:&#34;threshold an upstream number&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;blurriness&#34;,&#34;d&#34;:&#34;quality metric&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;label&#34;,&#34;l&#34;:&#34;sharpness_tag&#34;,&#34;d&#34;:&#34;sharp / soft / blurry&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>script</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any asset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The media item, plus the outputs of any upstream nodes you connect</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whatever you declare — see <a href="#outputs">Declaring outputs</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Languages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaScript</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None. The script runs inside the Cortex worker; no external service is involved</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> (one row per script node), and <code>asset_segment_comp</code> for timeframe outputs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="writing">Writing a script</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The script runs once per media item. Six values are available to it:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">What it gives you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The current item: <code>path</code>, <code>absolutePath</code>, <code>size</code>, <code>sha512</code>, <code>isVideo</code>, <code>isImage</code>, <code>isAudio</code>, <code>isDocument</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>upstream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Outputs of upstream nodes: <code>upstream[&#39;whisper&#39;][&#39;whisper_result&#39;]</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>params</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The constants you set in the node’s <strong>Parameters</strong> field, so one script can be reused with different settings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>out</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How you produce results — <code>out.text</code>, <code>out.number</code>, <code>out.integer</code>, <code>out.bool</code>, <code>out.json</code>, <code>out.list</code>, <code>out.timeframes</code>, <code>out.image</code>, <code>out.path</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.info</code>, <code>log.warn</code>, <code>log.error</code> — written to the worker log, prefixed with the node’s name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ctx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ctx.skip(&#39;reason&#39;)</code> to record the item as skipped, <code>ctx.fail(&#39;reason&#39;)</code> to record it as failed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A complete example — turning a transcript into chapter marks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const re = new RegExp(params.pattern, &#39;i&#39;);
+const transcript = JSON.parse(upstream[&#39;whisper&#39;][&#39;whisper_result&#39;]);
+
+const frames = transcript.segments
+  .filter(s =&gt; re.test(s.text))
+  .map(s =&gt; ({ startMs: Math.round(s.start * 1000),
+               endMs:   Math.round(s.end   * 1000),
+               label:   s.text.trim() }));
+
+if (frames.length === 0) {
+  ctx.skip(&#39;no chapter markers in transcript&#39;);
+}
+
+out.timeframes(&#39;chapter_frames&#39;, frames);
+out.list(&#39;chapter_titles&#39;, frames.map(f =&gt; f.label));
+out.integer(&#39;chapter_count&#39;, frames.length);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="outputs">Declaring outputs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Outputs are declared in the node’s <strong>Outputs</strong> field, not discovered from the script. This is what lets
+the pipeline editor draw the node’s output connectors so you can wire the next node to them before
+the script has ever run.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  { &#34;key&#34;: &#34;chapter_frames&#34;, &#34;type&#34;: &#34;TIMEFRAMES&#34; },
+  { &#34;key&#34;: &#34;chapter_titles&#34;, &#34;type&#34;: &#34;TEXT_LIST&#34; },
+  { &#34;key&#34;: &#34;chapter_count&#34;,  &#34;type&#34;: &#34;INTEGER&#34; }
+]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">The script provides</th>
+<th class="tableblock halign-left valign-top">Stored as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRING</code>, <code>TEXT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INTEGER</code>, <code>NUMBER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BOOLEAN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> / <code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JSON</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TEXT_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an array of strings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TIMEFRAMES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an array of <code>{ startMs, endMs, label }</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a real timeline on the asset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IMAGE</code>, <code>IMAGE_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">image bytes, base64, or a path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an image file in the worker’s cache</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a file path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A single item can produce several multi-valued outputs at once — that is how one transcript becomes a
+whole timeline of chapter marks plus a list of titles plus a count, in one pass.</p>
+</div>
+<div class="paragraph">
+<p>Writing to a key you have not declared stops the node with an error naming the key. That is
+deliberate: a typo that was silently dropped would leave your pipeline claiming a connection carries
+data that never arrives.</p>
+</div>
+<div class="paragraph">
+<p><strong>Timeframes</strong> are stored as a real timeline against the asset, so they can be queried and displayed
+rather than sitting in an opaque blob. Each timeframe output is filed under a <strong>segment type</strong> —
+<code>CHAPTER</code> (the default), <code>SCENE</code>, <code>SILENCE</code> or <code>SHOT</code>. Set it with <code>&#34;segmentType&#34;: &#34;SCENE&#34;</code> alongside
+the key and type. If one node declares two timeframe outputs, give them different segment types.</p>
+</div>
+<div class="paragraph">
+<p><strong>Images</strong> are written to the worker that ran the script, and the output carries their file paths.
+Because those paths are local to that worker, keep the nodes that consume them in the same affinity
+group.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Engine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The script language. <code>js</code> (JavaScript) is currently the only one</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Script</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The script body, run once per media item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Outputs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The declared outputs — see <a href="#outputs">Declaring outputs</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Parameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constants handed to the script as <code>params</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Required Inputs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[&#39;nodeId:outputKey&#39;, …​]</code> that must all be present, or the item is skipped rather than failed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Trusted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the script runs with the worker’s full privileges (default) — see <a href="#safety">Safety and performance</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Allow Network</code> / <code>Allow Filesystem</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extra capabilities, off by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Timeout (ms)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long one item may take before the script is stopped (default 10 s)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Statement Limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A second guard against a script that loops forever</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Max Output Bytes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cap on the size of a single item’s results (default 1 MB)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Max Log Lines</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cap on <code>log.*</code> calls per item (default 200)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>Required Inputs</code> is what makes a script safe to hang off an optional branch: if an OCR node only
+runs for images, a script downstream of it skips videos quietly instead of reporting a failure for
+every one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="safety">Safety and performance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Anyone who can edit a pipeline can run code on a worker.</strong> A script node is not a sandboxed
+plugin by default — treat permission to edit pipelines as equivalent to permission to run code, and
+grant it accordingly.</p>
+</div>
+<div class="paragraph">
+<p>Three controls are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Trusted off.</strong> Turning off <strong>Trusted</strong> denies the script access to the host system: no Java
+classes, no files, no network, no threads. Use it for scripts that only need to reshape data.</p>
+</li>
+<li>
+<p><strong>Limits.</strong> The timeout and statement limit always apply, in both modes. A script that loops
+forever is stopped and the item recorded as failed; it cannot occupy a worker indefinitely.</p>
+</li>
+<li>
+<p><strong>Turning the node off entirely.</strong> Adding <code>script</code> to a worker’s node blacklist means that worker
+will refuse script work. If no worker accepts it, pipelines containing a script node are rejected
+when you try to run them, with a clear message — see
+<a href="../../cortex/configuration/">Cortex Configuration</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>On performance: scripts are interpreted, which is ample for shaping data and wrong for heavy
+per-pixel or per-frame computation. If you find yourself writing a tight loop over image data, that
+is the signal to build a proper node instead.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Derive a timeline</strong> — turn a transcript, a caption set or a detection list into chapter marks.</p>
+</li>
+<li>
+<p><strong>Classify on a threshold</strong> — convert a quality metric or a sentiment score into a simple label.</p>
+</li>
+<li>
+<p><strong>Reshape model output</strong> — pull structured fields out of a language model’s free-text answer.</p>
+</li>
+<li>
+<p><strong>Bridge two nodes</strong> — rename, filter or combine upstream outputs so the next node gets what it
+expects.</p>
+</li>
+<li>
+<p><strong>Prototype</strong> — try out a processing idea in a live pipeline before committing to building a node
+for it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/NFdnFcSbfA" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

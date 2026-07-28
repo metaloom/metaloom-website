@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Scene Layout | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="Detection tells you what is in a picture and where its box sits. Scene layout tells you how those things relate to each other — which is in front, which is behind, which one is hiding part of another, …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/scene-layout/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Scene Layout | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/scene-layout/">
+    <meta property="og:description" content="Detection tells you what is in a picture and where its box sits. Scene layout tells you how those things relate to each other — which is in front, which is behind, which one is hiding part of another, …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Scene Layout">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Scene Layout | MetaLoom">
+    <meta name="twitter:description" content="Detection tells you what is in a picture and where its box sits. Scene layout tells you how those things relate to each other — which is in front, which is behind, which one is hiding part of another, …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Scene Layout">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Scene Layout</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>Detection tells you <strong>what</strong> is in a picture and where its box sits. Scene layout tells you <strong>how
+those things relate to each other</strong> — which is in front, which is behind, which one is hiding part
+of another, and which are standing side by side.</p>
+</div>
+<div class="paragraph">
+<p>The difference matters more than it sounds. Two boxes that overlap in a photograph might be a person
+standing in front of a car, or a person visible through the car’s window. Nothing in a flat 2D box
+can tell those apart, because the difference is depth. This node joins your detections to a
+<a href="../depthmap/">depth map</a> and reads the answer off both together.</p>
+</div>
+<div class="paragraph">
+<p>It runs no model of its own — it is arithmetic over boxes and depth, so it is fast, it costs no GPU
+time, and every conclusion it reaches comes with the numbers behind it.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;scene-layout&#34;,&#34;applies&#34;:&#34;Images with depth + detections&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType scene-layout)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;faces in a photo&#34;,&#34;note&#34;:&#34;depthmap + facedetect upstream&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;depthmap_meta&#34;,&#34;d&#34;:&#34;depth map from the depthmap node&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;d&#34;:&#34;boxes from face detection&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;scene_layout_result&#34;,&#34;d&#34;:&#34;objects, bands, relations, phrases&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;scene_layout_object_count&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;scene_layout_relation_count&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scene-layout</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images that have both a depth map and at least two detections</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A depth map from <a href="../depthmap/">Depth Map</a>, plus bounding boxes from <a href="../facedetect/">Face Detection</a> (or any other detector)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scene_layout_result</code> (JSON String), <code>scene_layout_object_count</code> (Number), <code>scene_layout_relation_count</code> (Number)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None of its own — no model, no sidecar, no GPU</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> — one layout per asset</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_what_it_produces">What it produces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For every detected object: where it sits in depth, and which <strong>band</strong> of the scene it belongs to —
+foreground, midground or background. Between every pair: the relations that hold, each with a
+confidence and the measurements behind it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;objects&#34;: [
+    { &#34;id&#34;: &#34;face-0&#34;, &#34;label&#34;: &#34;face&#34;,
+      &#34;bbox&#34;: { &#34;x&#34;: 40, &#34;y&#34;: 40, &#34;w&#34;: 80, &#34;h&#34;: 80 },
+      &#34;depth&#34;: { &#34;near&#34;: 0.82, &#34;spread&#34;: 0.06, &#34;band&#34;: &#34;FOREGROUND&#34; } },
+    { &#34;id&#34;: &#34;face-1&#34;, &#34;label&#34;: &#34;face&#34;,
+      &#34;bbox&#34;: { &#34;x&#34;: 280, &#34;y&#34;: 40, &#34;w&#34;: 80, &#34;h&#34;: 80 },
+      &#34;depth&#34;: { &#34;near&#34;: 0.14, &#34;spread&#34;: 0.08, &#34;band&#34;: &#34;BACKGROUND&#34; } }
+  ],
+  &#34;relations&#34;: [
+    { &#34;subject&#34;: &#34;face-0&#34;, &#34;predicate&#34;: &#34;IN_FRONT_OF&#34;, &#34;object&#34;: &#34;face-1&#34;,
+      &#34;confidence&#34;: 0.91, &#34;evidence&#34;: { &#34;deltaNear&#34;: 0.68, &#34;z&#34;: 9.7 } },
+    { &#34;subject&#34;: &#34;face-0&#34;, &#34;predicate&#34;: &#34;LEFT_OF&#34;, &#34;object&#34;: &#34;face-1&#34;,
+      &#34;confidence&#34;: 0.74, &#34;evidence&#34;: { &#34;gapRatio&#34;: 1.5 } }
+  ],
+  &#34;phrases&#34;: [
+    &#34;face-0 is in the foreground&#34;,
+    &#34;face-1 is in the background&#34;,
+    &#34;face-0 is in front of face-1&#34;
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>phrases</code> list is the same information written as plain English. It is there so you can drop it
+straight into a caption prompt or a search index without teaching either one to read the structured
+form.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_relations_it_can_assert">The relations it can assert</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Relation</th>
+<th class="tableblock halign-left valign-top">Means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IN_FRONT_OF</code> / <code>BEHIND</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One is measurably nearer the camera than the other</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SAME_DEPTH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The difference is within the measurement’s own margin of error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OCCLUDES</code> / <code>OCCLUDED_BY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">They overlap in the frame <strong>and</strong> differ in depth, so one hides part of the other</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CONTAINS</code> / <code>INSIDE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One box sits almost entirely within the other</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LEFT_OF</code> / <code>RIGHT_OF</code> / <code>ABOVE</code> / <code>BELOW</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Placement in the frame, only where they are genuinely separated on that axis</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NEXT_TO</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Close together and at the same depth</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_why_it_says_same_depth_more_often_than_you_might_expect">Why it says &#34;same depth&#34; more often than you might expect</h3>
+<div class="paragraph">
+<p>Depth estimated from a single photograph is an estimate, and how trustworthy it is varies across a
+picture — flat walls, glass, motion blur and sky are all unreliable. So the node measures how
+<strong>consistent</strong> each object’s depth is, and only claims an ordering when the gap between two objects is
+larger than that uncertainty.</p>
+</div>
+<div class="paragraph">
+<p>The practical effect is that it declines to guess. Two people standing at roughly the same distance
+come back as <code>SAME_DEPTH</code> rather than being confidently put in an order the picture does not
+actually support. You can make it bolder or more cautious with <code>depthZThreshold</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>SceneLayoutNodeOptions</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthNodeId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream node provides the depth map. Defaults to <code>depthmap</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detectionSources</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream detector nodes provide boxes, in priority order. Defaults to <code>facedetect</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allowLoomFallback</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read detections back from the server when no upstream node supplied them. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthZThreshold</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much clearer than the noise a depth gap must be before an ordering is asserted. Default 1.0; lower is bolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>coreInset</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much of each box’s edge to ignore when measuring its depth. Default 0.25, i.e. measure the middle half</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>foregroundQuantile</code> / <code>backgroundQuantile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where the band boundaries sit within the scene’s own depth range. Defaults 0.66 and 0.33</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>occlusionMinOverlap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much overlap is needed before occlusion is reported. Default 0.05</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>containmentRatio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much of a box must lie inside another to call it contained. Default 0.85</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nextToMaxGap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How close two same-depth objects must be to count as adjacent. Default 0.5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxObjects</code> / <code>maxRelations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bounds, default 40 and 200. Anything dropped is reported in the result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>emitPhrases</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include the plain-English sentences. On by default</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Captions that get prepositions right</strong> — &#34;a woman standing in front of a red car&#34; instead of a
+model guessing from a flat image.</p>
+</li>
+<li>
+<p><strong>Searchable spatial facts</strong> — find every photo with a person in the foreground, or two subjects
+side by side.</p>
+</li>
+<li>
+<p><strong>Editorial selection</strong> — pick the frame where the subject is genuinely in front, not merely
+overlapping.</p>
+</li>
+<li>
+<p><strong>Review and compliance</strong> — flag pictures where a face is in the background or behind glass, when
+only the foreground subject is the one you care about.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_you_need_first">What you need first</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This node reads other nodes&#39; work, so both have to be in your pipeline ahead of it:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="../depthmap/">Depth Map</a> — required. Put it in the <strong>same affinity group</strong> as this node, so
+both run on the same machine.</p>
+</li>
+<li>
+<p>A detector — <a href="../facedetect/">Face Detection</a> today. At present that means the node relates
+faces to faces; once object detection is available it will relate people to cars and everything
+else without any change here, because it does not care which detector produced a box.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/NFdnFcSbfA" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

@@ -97,7 +97,7 @@
 					
 					
 					<li class="nav-item">
-						<a class="nav-link" href="/studios">Studios</a>
+						<a class="nav-link" href="/tour">Tour</a>
 					</li>
 					
 					
@@ -105,6 +105,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
 					</li>
 					
 					
@@ -283,6 +290,16 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Describe detected faces with a vision model</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="depthmap/">Depth Map</a> (<code>depthmap</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Estimate how far each part of a photo is from the camera</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="scene-layout/">Scene Layout</a> (<code>scene-layout</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image (from depth + detections)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Work out what is in front of, behind or next to what</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -351,6 +368,11 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Route items down PASS/REJECT branches</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="script/">Script</a> (<code>script</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run your own code as a pipeline step and emit declared outputs</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/">Loom Sync</a> (<code>loom</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Batch hash results back to Loom</p></td>
@@ -414,8 +436,12 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sentiment</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A depth sidecar (Depth Anything V2 Small; CPU is enough, GPU is much faster)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthmap</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, filters, dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, <code>script</code>, <code>scene-layout</code>, filters, dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -497,6 +523,13 @@ small HTTP sidecar.</p>
 OCR output, captions or LLM answers — as positive, neutral or negative with a signed polarity value,
 using dedicated German and English models behind a small HTTP sidecar.</p>
 </dd>
+<dt class="hdlist1">Depth and spatial layout</dt>
+<dd>
+<p><a href="depthmap/"><code>depthmap</code></a> works out how far each part of a photo is from the camera, from the photo
+alone, and <a href="scene-layout/"><code>scene-layout</code></a> uses that to say how the detected things relate — which
+is in front, which is behind, which one hides part of another. Together they turn a flat list of
+boxes into a scene you can caption accurately and search spatially.</p>
+</dd>
 <dt class="hdlist1">Consistency checking</dt>
 <dd>
 <p><a href="consistency/"><code>consistency</code></a> validates that stored metadata — hashes, dimensions, codec
@@ -570,7 +603,8 @@ and the build and run commands.</p>
 			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
 				<h2 data-toc-skip>Explore</h2>
 				<ul>
-					<li><a href="/studios/">For studios</a></li>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
 					<li><a href="/features/">Features</a></li>
 					<li><a href="/announcements/">Announcements</a></li>
 					<li><a href="/blog/">Blog</a></li>
