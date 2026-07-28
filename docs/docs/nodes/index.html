@@ -336,6 +336,11 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Video</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Optical-flow scene boundaries</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="dominant-color/">Dominant Colour</a> (<code>dominant-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Work out which colours a picture is made of, as HEX and in words (English and German)</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -363,6 +368,11 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enumerate media from disk</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="s3-source/">S3 Source</a> (<code>s3-source</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">— (source)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enumerate media from S3-compatible object storage, picking up only what changed</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="filters/">Filters</a> (<code>filter-*</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">— (routing)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Route items down PASS/REJECT branches</p></td>
@@ -376,6 +386,11 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/">Loom Sync</a> (<code>loom</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Batch hash results back to Loom</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="s3-sink/">S3 Sink</a> (<code>s3-sink</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upload produced files to an S3 bucket and register them as assets</p></td>
 </tr>
 </tbody>
 </table>
@@ -440,8 +455,12 @@ carry:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthmap</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3-compatible object storage (AWS S3, MinIO, Ceph)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3-source</code>, <code>s3-sink</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, <code>script</code>, <code>scene-layout</code>, filters, dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, filters, dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -529,6 +548,13 @@ using dedicated German and English models behind a small HTTP sidecar.</p>
 alone, and <a href="scene-layout/"><code>scene-layout</code></a> uses that to say how the detected things relate — which
 is in front, which is behind, which one hides part of another. Together they turn a flat list of
 boxes into a scene you can caption accurately and search spatially.</p>
+</dd>
+<dt class="hdlist1">Colour analysis</dt>
+<dd>
+<p><a href="dominant-color/"><code>dominant-color</code></a> works out which colours a picture is actually made of — the
+whole frame, a fixed region, or every detected face — and reports each one as HEX, RGB, HSL and
+CIELAB alongside a name a person would use, in English and German. It needs no model and no GPU, so
+it can run over an entire archive cheaply.</p>
 </dd>
 <dt class="hdlist1">Consistency checking</dt>
 <dd>

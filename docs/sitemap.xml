@@ -94,6 +94,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/dominant-color/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/cortex/examples/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/examples/</loc>
@@ -163,6 +165,10 @@
     <loc>https://metaloom.io/docs/loom/rest-api/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/rest/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/nodes/s3-sink/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/nodes/s3-source/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/scene-detection/</loc>
   </url><url>

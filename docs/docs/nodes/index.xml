@@ -36,6 +36,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The depth map node works out &lt;strong&gt;how far each part of a photo is from the camera&lt;/strong&gt;, from the photo&#xA;alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a&#xA;greyscale map comes out in which bright means close and dark means far.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Dominant Colour</title>
+      <link>https://metaloom.io/docs/nodes/dominant-color/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/dominant-color/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Colour is one of the first things anyone notices about a picture and one of the last things most&#xA;media systems can actually search on. This node closes that gap: it works out which colours a photo&#xA;is really made of, and reports each one both as a precise value and as a word a person would use.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Face Description</title>
       <link>https://metaloom.io/docs/nodes/facedescription/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -111,6 +118,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/quality/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The quality node measures &lt;strong&gt;perceptual quality metrics&lt;/strong&gt; of an image or video — resolution,&#xA;blurriness (via a Laplacian measure) and bitrate — so low-quality assets can be flagged or filtered.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>S3 Sink</title>
+      <link>https://metaloom.io/docs/nodes/s3-sink/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/s3-sink/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 sink is an &lt;strong&gt;output node&lt;/strong&gt;. It takes the files other nodes produce — contact sheets, depth&#xA;maps, generated images, speech audio — uploads them to an S3 bucket, and registers each one in&#xA;Loom as an asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>S3 Source</title>
+      <link>https://metaloom.io/docs/nodes/s3-source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/s3-source/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a media&#xA;item, it &lt;strong&gt;enumerates&lt;/strong&gt; objects from S3-compatible object storage (AWS S3, MinIO, Ceph) and feeds each&#xA;one into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene Detection</title>

@@ -226,6 +226,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The depth map node works out &lt;strong&gt;how far each part of a photo is from the camera&lt;/strong&gt;, from the photo&#xA;alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a&#xA;greyscale map comes out in which bright means close and dark means far.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Dominant Colour</title>
+      <link>https://metaloom.io/docs/nodes/dominant-color/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/dominant-color/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Colour is one of the first things anyone notices about a picture and one of the last things most&#xA;media systems can actually search on. This node closes that gap: it works out which colours a photo&#xA;is really made of, and reports each one both as a precise value and as a word a person would use.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Examples</title>
       <link>https://metaloom.io/docs/cortex/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -434,6 +441,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/rest/</guid>
       <description>&lt;div class=&#34;admonitionblock tip&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;div class=&#34;title&#34;&gt;Tip&lt;/div&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;title&#34;&gt;Try the example&lt;/div&gt;&#xA;&lt;a href=&#34;https://demo.metaloom.io/api/v1/demo/assets&#34; class=&#34;bare&#34;&gt;https://demo.metaloom.io/api/v1/demo/assets&lt;/a&gt;&#xA;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_api_endpoints&#34;&gt;API endpoints&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;table class=&#34;tableblock frame-all grid-all stretch&#34;&gt;&#xA;&lt;colgroup&gt;&#xA;&lt;col style=&#34;width: 50%;&#34;/&gt;&#xA;&lt;col style=&#34;width: 50%;&#34;/&gt;&#xA;&lt;/colgroup&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th class=&#34;tableblock halign-left valign-top&#34;&gt;Description&lt;/th&gt;&#xA;&lt;th class=&#34;tableblock halign-left valign-top&#34;&gt;API endpoint&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td class=&#34;tableblock halign-left valign-top&#34;&gt;&lt;p class=&#34;tableblock&#34;&gt;Get the asset with the given UUID.&lt;/p&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;tableblock halign-left valign-top&#34;&gt;&lt;p class=&#34;tableblock&#34;&gt;&lt;code&gt;&lt;code&gt;GET /api/v1/:projectName/assets/:assetUuid&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&#xA;&#x9;&amp;#34;uuid&amp;#34;: &amp;#34;b5f26d5f-4ab0-4f99-a2f1-7be9f20e7a15&amp;#34;,&#xA;&#x9;&amp;#34;filename&amp;#34;: &amp;#34;sample.mp4&amp;#34;&#xA;}&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>S3 Sink</title>
+      <link>https://metaloom.io/docs/nodes/s3-sink/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/s3-sink/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 sink is an &lt;strong&gt;output node&lt;/strong&gt;. It takes the files other nodes produce — contact sheets, depth&#xA;maps, generated images, speech audio — uploads them to an S3 bucket, and registers each one in&#xA;Loom as an asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>S3 Source</title>
+      <link>https://metaloom.io/docs/nodes/s3-source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/s3-source/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a media&#xA;item, it &lt;strong&gt;enumerates&lt;/strong&gt; objects from S3-compatible object storage (AWS S3, MinIO, Ceph) and feeds each&#xA;one into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene Detection</title>

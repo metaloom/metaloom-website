@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Dominant Colour | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="Colour is one of the first things anyone notices about a picture and one of the last things most media systems can actually search on. This node closes that gap: it works out which colours a photo is …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/dominant-color/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dominant Colour | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/dominant-color/">
+    <meta property="og:description" content="Colour is one of the first things anyone notices about a picture and one of the last things most media systems can actually search on. This node closes that gap: it works out which colours a photo is …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Dominant Colour">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Dominant Colour | MetaLoom">
+    <meta name="twitter:description" content="Colour is one of the first things anyone notices about a picture and one of the last things most media systems can actually search on. This node closes that gap: it works out which colours a photo is …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Dominant Colour">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="docs-page-header">
+          <h1>Dominant Colour</h1>
+        </div>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>Colour is one of the first things anyone notices about a picture and one of the last things most
+media systems can actually search on. This node closes that gap: it works out which colours a photo
+is really made of, and reports each one both as a precise value and as a word a person would use.</p>
+</div>
+<div class="paragraph">
+<p>So the same result gives you <code>#E2711D</code> for your design tools, and &#34;vivid orange&#34; — or <strong>kräftiges
+Orange</strong> — for your search box, your caption prompt and your editors.</p>
+</div>
+<div class="paragraph">
+<p>It runs no model. All of it is arithmetic, so it costs no GPU time, needs nothing installed
+alongside it, and finishes in milliseconds.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dominant-color&#34;,&#34;applies&#34;:&#34;Images&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType dominant-color)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;whole picture&#34;,&#34;note&#34;:&#34;nothing upstream needed&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the picture&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;dominant_color_result&#34;,&#34;d&#34;:&#34;every region, with its full palette&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_hex&#34;,&#34;d&#34;:&#34;#E2711D&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_term&#34;,&#34;d&#34;:&#34;orange&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_name_en&#34;,&#34;d&#34;:&#34;vivid orange&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_name_de&#34;,&#34;d&#34;:&#34;kräftiges Orange&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;dominant_color_region_count&#34;}]},{&#34;name&#34;:&#34;per detected face&#34;,&#34;note&#34;:&#34;facedetect upstream&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the picture&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;d&#34;:&#34;boxes from face detection&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;dominant_color_result&#34;,&#34;d&#34;:&#34;one palette per box, plus the whole frame&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;dominant_color_region_count&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dominant-color</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The picture. Optionally bounding boxes from <a href="../facedetect/">Face Detection</a> or any other detector</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dominant_color_result</code> (JSON String), <code>dominant_color_hex</code>, <code>dominant_color_term</code>, <code>dominant_color_name_en</code>, <code>dominant_color_name_de</code> (Text), <code>dominant_color_region_count</code> (Number)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None — no model, no sidecar, no GPU</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> — one row per asset, holding every region</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_what_it_produces">What it produces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For each area it measures: the dominant colour, the ranked palette behind it, and how much of the
+area each colour accounts for.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;image&#34;: { &#34;width&#34;: 1920, &#34;height&#34;: 1080 },
+  &#34;regions&#34;: [
+    {
+      &#34;id&#34;: &#34;whole&#34;, &#34;kind&#34;: &#34;IMAGE&#34;, &#34;pixels&#34;: 39204,
+      &#34;dominant&#34;: {
+        &#34;share&#34;: 0.4712,
+        &#34;hex&#34;: &#34;#E2711D&#34;,
+        &#34;rgb&#34;: { &#34;r&#34;: 226, &#34;g&#34;: 113, &#34;b&#34;: 29 },
+        &#34;hsl&#34;: { &#34;h&#34;: 30.5, &#34;s&#34;: 77.3, &#34;l&#34;: 50.0 },
+        &#34;lab&#34;: { &#34;l&#34;: 60.13, &#34;a&#34;: 38.21, &#34;b&#34;: 62.35 },
+        &#34;lch&#34;: { &#34;c&#34;: 73.13, &#34;h&#34;: 58.5 },
+        &#34;name&#34;: { &#34;term&#34;: &#34;orange&#34;, &#34;en&#34;: &#34;vivid orange&#34;, &#34;de&#34;: &#34;kräftiges Orange&#34; }
+      },
+      &#34;palette&#34;: [
+        { &#34;share&#34;: 0.4712, &#34;hex&#34;: &#34;#E2711D&#34;, &#34;name&#34;: { &#34;en&#34;: &#34;vivid orange&#34;, &#34;de&#34;: &#34;kräftiges Orange&#34; } },
+        { &#34;share&#34;: 0.3105, &#34;hex&#34;: &#34;#6B4E8C&#34;, &#34;name&#34;: { &#34;en&#34;: &#34;dark purple&#34;, &#34;de&#34;: &#34;dunkles Violett&#34; } },
+        { &#34;share&#34;: 0.2183, &#34;hex&#34;: &#34;#F2C57C&#34;, &#34;name&#34;: { &#34;en&#34;: &#34;light yellow&#34;, &#34;de&#34;: &#34;helles Gelb&#34; } }
+      ]
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>share</code> values tell you how much of the picture each colour covers, so you can render a real
+proportional swatch strip rather than a list of equal chips.</p>
+</div>
+<div class="sect2">
+<h3 id="_three_ways_to_give_a_colour_a_name">Three ways to give a colour a name</h3>
+<div class="paragraph">
+<p>Each colour comes back with three labels, and they are meant for different jobs:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>term</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering, facets and grouping. One of eleven stable words — red, orange, yellow, green, blue, purple, pink, brown, black, grey, white — that never changes when the wording is refined</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>en</code> / <code>de</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Showing to people, and feeding caption prompts. Fuller descriptions like &#34;dark greyish blue&#34; or <strong>dunkles graustichiges Blau</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hex</code> / <code>rgb</code> / <code>hsl</code> / <code>lab</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Design tools, palettes and exact comparisons</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_why_the_names_sound_like_a_person_picked_them">Why the names sound like a person picked them</h3>
+<div class="paragraph">
+<p>Computers usually name colours by finding the closest entry in a long list, which produces
+&#34;lightsteelblue3&#34; and similar. This node does something closer to what people do: it decides the
+basic colour first, then describes it.</p>
+</div>
+<div class="paragraph">
+<p>The basic colour is chosen in a <strong>perceptual</strong> colour space — one built so that the distance between
+two colours matches how different they look to a human eye, which is not true of raw RGB. The
+description is then built from how light and how saturated the colour is, giving pairs like &#34;pale
+blue&#34; and &#34;deep blue&#34;, or <strong>blasses Blau</strong> and <strong>tiefes Blau</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Two consequences worth knowing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Greys, blacks and whites are never given a hue.</strong> Below a saturation threshold the node stops
+asking &#34;which colour is this?&#34; and answers on brightness alone, so you get &#34;light grey&#34; rather
+than a technically-correct-but-absurd &#34;light greyish orange&#34;.</p>
+</li>
+<li>
+<p><strong>German is generated, not translated.</strong> Both languages come from the same decision, so they can
+never drift apart or describe the same colour differently.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_colouring_in_parts_of_a_picture">Colouring in parts of a picture</h3>
+<div class="paragraph">
+<p>Point a detector at the image first and the node measures every box it finds, alongside the whole
+frame. That turns &#34;this photo is mostly blue&#34; into &#34;this <strong>person</strong> is wearing blue&#34;.</p>
+</div>
+<div class="paragraph">
+<p>You can also pin it to a fixed area — a logo corner, a lower third, a product region — without any
+detector at all, using the <code>region</code> options below.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>DominantColorNodeOptions</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clusterCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many colours to pull out of each area. Default 5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxSamples</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many pixels to look at per area. Default 40,000 — enough for a stable answer on any size of picture</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>includeWholeImage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Measure the whole frame. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useDetections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Measure every detected box as well. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detectionSources</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream detector nodes supply the boxes. Defaults to <code>facedetect</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>regionX</code> / <code>regionY</code> / <code>regionW</code> / <code>regionH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A fixed area to measure. Given as fractions of the picture by default; set <code>regionCoordinates</code> to <code>ABSOLUTE_PIXELS</code> to use pixels instead. Leave the width and height at 0 to switch it off</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alphaThreshold</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How opaque a pixel must be to count. Transparent areas are ignored rather than treated as white, so a logo on a transparent background reports its own colours. Default 128</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minRegionPixels</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Areas smaller than this are skipped — there is nothing meaningful to measure. Default 64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxRegions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on detected areas, largest first. Default 32. Anything dropped is reported in the result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>emitPalette</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return the full ranked palette, not only the top colour. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>achromaticChroma</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How unsaturated a colour must be before it is called grey, black or white instead of being given a hue. Default 12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>blackLightness</code> / <code>whiteLightness</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where black ends and white begins on the brightness scale. Defaults 20 and 85</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>seed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same picture always produces the same palette. Change this only if you want a different-but-still-repeatable result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Search and filter by colour</strong> — &#34;show me the orange product shots&#34;, &#34;find the photos with a
+green background&#34;.</p>
+</li>
+<li>
+<p><strong>Brand compliance</strong> — check that assets actually use the brand palette, and flag the ones that
+drift.</p>
+</li>
+<li>
+<p><strong>Better captions</strong> — feed &#34;vivid orange sky, dark purple hills&#34; into a caption prompt instead of
+hoping the model notices.</p>
+</li>
+<li>
+<p><strong>Automatic theming</strong> — pull a page or player accent colour straight from the hero image.</p>
+</li>
+<li>
+<p><strong>Design handoff</strong> — hand editors a real palette with proportions, in HEX and in words.</p>
+</li>
+<li>
+<p><strong>Bilingual catalogues</strong> — the same asset is searchable as &#34;blue&#34; and as <strong>Blau</strong> with no extra work.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_good_to_know">Good to know</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Video is not supported yet.</strong> Colour changes shot to shot, so a single answer for a whole clip
+would be misleading. Run it on stills, or on extracted frames.</p>
+</li>
+<li>
+<p><strong>A picture that cannot be opened is reported as a failure</strong>, not quietly skipped — so a corrupt
+file shows up in the run summary instead of disappearing. CMYK JPEGs are the common case Java
+cannot decode.</p>
+</li>
+<li>
+<p><strong>Cyan and teal are reported as blue</strong>, and turquoise as light blue. The eleven basic colour words
+are chosen because they exist in every language; finer shades are always available as HEX.</p>
+</li>
+<li>
+<p><strong>The result is repeatable.</strong> The same picture and settings always give the same palette, so
+cached results and search facets stay stable.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/NFdnFcSbfA" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>
