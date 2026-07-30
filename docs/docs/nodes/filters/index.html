@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Filters | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -244,7 +251,7 @@
 splits the pipeline into a <strong>PASS</strong> and a <strong>REJECT</strong> branch, so downstream nodes only run on the items
 that match. They are a pipeline-only construct (they have no standalone Cortex node).</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;filter-*&#34;,&#34;applies&#34;:&#34;Routing node&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;nothing \u2014 the branch decision is the result&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;filter-mimetype&#34;,&#34;note&#34;:&#34;downstream nodes depend on PASS or REJECT&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;file&#34;,&#34;l&#34;:&#34;the item&#34;,&#34;d&#34;:&#34;MIME type matched&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;PASS branch&#34;,&#34;d&#34;:&#34;e.g. video-only nodes&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;REJECT branch&#34;,&#34;d&#34;:&#34;skipped or routed elsewhere&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;filter_passed&#34;}]},{&#34;name&#34;:&#34;filter-quality&#34;,&#34;note&#34;:&#34;evaluates upstream metrics against thresholds&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;quality metrics&#34;,&#34;d&#34;:&#34;blurriness, resolution&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;PASS branch&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;REJECT branch&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;filter_reason&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;filter-*&#34;,&#34;applies&#34;:&#34;Routing node&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;nothing \u2014 the branch decision is the result&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;filter-mimetype&#34;,&#34;note&#34;:&#34;matches the MIME type of the item&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item whose MIME type is matched&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;passed&#34;,&#34;d&#34;:&#34;the verdict, with its reason — downstream nodes subscribe to its PASS or REJECT branch&#34;}]},{&#34;name&#34;:&#34;filter-quality&#34;,&#34;note&#34;:&#34;evaluates metrics against thresholds&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;quality&#34;,&#34;l&#34;:&#34;quality&#34;,&#34;d&#34;:&#34;the metrics port of the quality node, wired in&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;passed&#34;,&#34;d&#34;:&#34;the verdict, with its reason — downstream nodes subscribe to its PASS or REJECT branch&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -260,12 +267,12 @@ that match. They are a pipeline-only construct (they have no standalone Cortex n
 <td class="tableblock halign-left valign-top"><p class="tableblock">— (routing; sits between other nodes)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The item, plus upstream outputs the filter evaluates (e.g. a quality filter reads the <a href="../quality/">quality</a> metrics)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One per kind — <code>media</code> for the type, date, size and blacklist filters; <code>quality</code> for the quality filter (connect <a href="../quality/">Quality</a>&#39;s <code>metrics</code>); <code>text</code> or <code>value</code> for the text and threshold filters</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter_passed</code> (Boolean), <code>filter_reason</code> (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>passed</code> — the verdict, carrying both the outcome and the reason for it</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -278,8 +285,8 @@ that match. They are a pipeline-only construct (they have no standalone Cortex n
 </tbody>
 </table>
 <div class="paragraph">
-<p>Downstream nodes declare a <strong>conditional dependency</strong> on the filter’s <code>PASS</code> or <code>REJECT</code> branch; a node
-whose required branch does not match is skipped.</p>
+<p>Downstream nodes connect to the <code>passed</code> port and declare which branch they want — <code>PASS</code> or
+<code>REJECT</code>. A node whose branch does not match is skipped for that item.</p>
 </div>
 <div class="sect1">
 <h2 id="_available_filters">Available Filters</h2>

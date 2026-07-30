@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Image Generation | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -252,7 +259,7 @@ model runtime of its own. The sidecar is model-agnostic, and two are shipped: on
 licensed and may therefore be used commercially. Both speak the same contract — pick one with the
 <code>port</code> option.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;imagegen&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;image sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the PNG stays in the local imagegen_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;generate (text-to-image)&#34;,&#34;note&#34;:&#34;mode GENERATE · prompt from node config&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;configured prompt&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;imagegen_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;imagegen_path&#34;,&#34;d&#34;:&#34;local PNG path&#34;}]},{&#34;name&#34;:&#34;remix (image-to-image)&#34;,&#34;note&#34;:&#34;mode REMIX · source image + prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;source&#34;,&#34;d&#34;:&#34;the asset image&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;configured prompt&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;imagegen_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;imagegen_path&#34;,&#34;d&#34;:&#34;local PNG path&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;imagegen&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;image sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the PNG stays in the local imagegen_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;generate (text-to-image)&#34;,&#34;note&#34;:&#34;mode GENERATE · prompt from node config&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;the prompt set on the node — nothing upstream is needed&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;image&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;the generated PNG, in the worker local imagegen_bin cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]},{&#34;name&#34;:&#34;remix (image-to-image)&#34;,&#34;note&#34;:&#34;mode REMIX · source image + prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the source picture, repainted rather than replaced&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;the prompt set on the node, steering the repaint&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;image&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;the generated PNG, in the worker local imagegen_bin cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -268,12 +275,12 @@ licensed and may therefore be used commercially. Both speak the same contract �
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image assets</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A generation <code>prompt</code> from the node configuration; in <code>REMIX</code> mode also the asset’s own image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A generation <code>prompt</code> from the node configuration; in <code>REMIX</code> mode also <code>media</code>, the asset’s own image</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>imagegen_flag</code> (String), <code>imagegen_path</code> (String, local path of the generated PNG)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> (the generated PNG, ready for <a href="../s3-sink/">S3 Sink</a>), <code>flag</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>

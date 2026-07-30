@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Captioning | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -244,7 +251,7 @@
 shows — for both <strong>images</strong> and <strong>videos</strong> using a vision-language model. Images are described from a
 single still frame; videos are described from their temporal content (what happens across the clip).</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;captioning&#34;,&#34;applies&#34;:&#34;Image · Video&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;image&#34;,&#34;note&#34;:&#34;still-frame caption (SmolVLM)&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;one-sentence description&#34;}]},{&#34;name&#34;:&#34;video · whole&#34;,&#34;note&#34;:&#34;videoStrategy: WHOLE&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;N frames sampled evenly&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;single description of the clip&#34;}]},{&#34;name&#34;:&#34;video · scene&#34;,&#34;note&#34;:&#34;videoStrategy: SCENE&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;segmented into scenes first&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;per-scene caption timeline&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;captioning&#34;,&#34;applies&#34;:&#34;Image · Video&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;image&#34;,&#34;note&#34;:&#34;still-frame caption (SmolVLM)&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;a still picture — wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;caption&#34;,&#34;l&#34;:&#34;caption&#34;,&#34;d&#34;:&#34;one sentence describing what the picture shows&#34;}]},{&#34;name&#34;:&#34;video · whole&#34;,&#34;note&#34;:&#34;videoStrategy: WHOLE&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;N frames sampled evenly — wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;caption&#34;,&#34;l&#34;:&#34;caption&#34;,&#34;d&#34;:&#34;a single description of the whole clip&#34;}]},{&#34;name&#34;:&#34;video · scene&#34;,&#34;note&#34;:&#34;videoStrategy: SCENE&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;segmented into scenes first — wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;caption&#34;,&#34;l&#34;:&#34;caption&#34;,&#34;d&#34;:&#34;a caption per scene, as a timeline over the clip&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -260,12 +267,12 @@ single still frame; videos are described from their temporal content (what happe
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> or <code>video</code> — exactly one of the two is wired</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>caption_result</code> (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>caption</code> — connect it to <a href="../sentiment/">Sentiment Analysis</a>, <a href="../tts/">Text-to-Speech</a> or a <a href="../script/">script</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>

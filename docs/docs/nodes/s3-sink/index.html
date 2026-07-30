@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>S3 Sink | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -250,7 +257,7 @@ thumbnail it cannot reach, a re-run on a different machine recomputes work that 
 and replacing a worker loses everything it produced. The sink is what makes produced media
 durable.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;s3-sink&#34;,&#34;applies&#34;:&#34;Output node&#34;,&#34;badge&#34;:&#34;needs S3 credentials&#34;,&#34;persist&#34;:&#34;bucket object + a new asset per file&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;publish artifacts&#34;,&#34;note&#34;:&#34;default: picks up what upstream produced&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;thumbnail / depth map / audio&#34;,&#34;d&#34;:&#34;produced by an upstream node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;s3:// object&#34;,&#34;d&#34;:&#34;one per file&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;asset&#34;,&#34;d&#34;:&#34;registered in Loom&#34;}]},{&#34;name&#34;:&#34;archive originals&#34;,&#34;note&#34;:&#34;option: includeSource&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;the media item&#34;,&#34;d&#34;:&#34;as it entered the pipeline&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;s3:// object&#34;,&#34;d&#34;:&#34;the original, archived&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;s3-sink&#34;,&#34;applies&#34;:&#34;Output node&#34;,&#34;badge&#34;:&#34;needs S3 credentials&#34;,&#34;persist&#34;:&#34;bucket object + a new asset per file&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;publish artifacts&#34;,&#34;note&#34;:&#34;wire in whatever the producing nodes emit&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;artifacts&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per produced file — contact sheets, depth maps, generated images, speech audio&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;every upload with its object location, size, type and outcome&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many files reached the bucket&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE, or FAILED when failOnPartial is set and an upload did not succeed&#34;}]},{&#34;name&#34;:&#34;archive originals&#34;,&#34;note&#34;:&#34;option: includeSource&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;opt&#34;:true,&#34;d&#34;:&#34;the media item as it entered the pipeline; picked up from the item, not wired in&#34;},{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;artifacts&#34;,&#34;c&#34;:&#34;many&#34;,&#34;opt&#34;:true,&#34;d&#34;:&#34;produced files as well, if any are connected&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the archived original with its object location&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many files reached the bucket&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -266,12 +273,12 @@ durable.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any media (what matters is what upstream produced)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The media item, plus any upstream file outputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>artifacts</code> (<strong>many</strong>) — every produced file connected to it. Archiving originals as well is the <code>includeSource</code> option, not a second connection</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3_sink_flag</code>, <code>s3_sink_count</code>, <code>s3_sink_result</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>result</code> (the per-upload index), <code>count</code> (Integer), <code>flag</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -287,16 +294,16 @@ durable.</p>
 <h2 id="_what_it_uploads">What it uploads</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, <strong>everything the upstream nodes produced</strong> — the sink recognises file outputs
-automatically, so putting it after a thumbnail node just works with no configuration.</p>
+<p>Everything connected to its <code>artifacts</code> port. That port carries a <strong>sequence</strong>, so several producers
+can feed it at once and each file arrives as its own element: connect
+<a href="../thumbnail/">Thumbnail</a>&#39;s <code>thumbnail</code>, <a href="../depthmap/">Depth Map</a>&#39;s <code>map</code>,
+<a href="../imagegen/">Image Generation</a>&#39;s <code>image</code> and <a href="../tts/">Text-to-Speech</a>&#39;s <code>audio</code> to the same
+port and the sink uploads all four.</p>
 </div>
 <div class="paragraph">
-<p>To be explicit instead, list what you want in <strong>Artifacts</strong>, as <code>nodeId:outputKey</code> pairs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>[&#34;thumbnail:thumbnail_path&#34;, &#34;depthmap:depthmap_path&#34;]</code></pre>
-</div>
+<p>The port only accepts artifact types — worker-local produced files. That is deliberate: a media
+reference that merely <strong>points</strong> at something is not a file this node can upload, and the editor
+refuses the connection rather than letting the run fail.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -305,8 +312,8 @@ automatically, so putting it after a thumbnail node just works with no configura
 <div class="title">Note</div>
 </td>
 <td class="content">
-Images produced by a <strong>Script</strong> node must always be listed explicitly. Their output names are
-chosen by whoever wrote the script, so they cannot be recognised automatically.
+A <a href="../script/">Script</a> node that emits images exposes them as ports too, named by whoever
+declared the outputs. Connect those ports the same way.
 </td>
 </tr>
 </tbody></table>
@@ -345,7 +352,8 @@ in Loom rather than only in a log file.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>which produces keys like <code>cortex/thumbnail/thumbnail_path/e7c2/e7c22b99…c019629.thumb</code>.</p>
+<p>which produces keys like <code>cortex/thumbnail/thumbnail/e7c2/e7c22b99…c019629.thumb</code> — <code>{sourceNode}</code>
+is the node the file came from and <code>{sourceKey}</code> is the port it left by.</p>
 </div>
 <div class="paragraph">
 <p>Because the key is derived from the file’s own content hash, the same file always lands in the
@@ -396,14 +404,6 @@ Using <code>{sha512}</code> requires a hashing node earlier in the pipeline.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyTemplate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Where objects are stored, as described above</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>artifacts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Explicit <code>nodeId:outputKey</code> list. Empty means &#34;detect automatically&#34;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>autoDiscover</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to detect file outputs when no explicit list is given</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>includeSource</code></p></td>

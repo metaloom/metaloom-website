@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Announcements on MetaLoom</title>
-    <link>https://metaloom.io/announcements/</link>
+    <link>http://localhost:1313/announcements/</link>
     <description>Recent content in Announcements on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Jul 2026 10:00:00 +0200</lastBuildDate>
-    <atom:link href="https://metaloom.io/announcements/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/announcements/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MetaLoom 1.0.0</title>
-      <link>https://metaloom.io/announcements/metaloom-1-0-0/</link>
+      <link>http://localhost:1313/announcements/metaloom-1-0-0/</link>
       <pubDate>Mon, 27 Jul 2026 10:00:00 +0200</pubDate>
-      <guid>https://metaloom.io/announcements/metaloom-1-0-0/</guid>
+      <guid>http://localhost:1313/announcements/metaloom-1-0-0/</guid>
       <description>&lt;div class=&#34;admonitionblock important&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;i class=&#34;fa icon-important&#34; title=&#34;Important&#34;&gt;&lt;/i&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;MetaLoom 1.0.0 has not been released yet.&lt;/strong&gt; This page describes the scope of the upcoming&#xA;release so you can judge whether it fits your setup. No &lt;code&gt;1.0.0&lt;/code&gt; container images or Maven&#xA;artifacts are published — everything currently builds from source at &lt;code&gt;1.0.0-SNAPSHOT&lt;/code&gt;. The&#xA;release date is not fixed; follow the &lt;a href=&#34;https://discord.gg/NFdnFcSbfA&#34;&gt;Discord&lt;/a&gt; or the&#xA;&lt;a href=&#34;../../blog/&#34;&gt;blog&lt;/a&gt; to hear about it first.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

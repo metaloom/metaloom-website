@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Sentiment Analysis | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The sentiment node scores the tone of text your pipeline has already produced. It does not look at the media itself — it takes text from an upstream node (Tika document content, OCR text, a caption, …">
+	<meta name="description" content="The sentiment node scores the tone of text your pipeline has already produced. It does not look at the media itself — it has a single text input port that accepts any text type, so you can connect …">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/sentiment/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Sentiment Analysis | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/sentiment/">
-    <meta property="og:description" content="The sentiment node scores the tone of text your pipeline has already produced. It does not look at the media itself — it takes text from an upstream node (Tika document content, OCR text, a caption, …">
+    <meta property="og:description" content="The sentiment node scores the tone of text your pipeline has already produced. It does not look at the media itself — it has a single text input port that accepts any text type, so you can connect …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Sentiment Analysis">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Sentiment Analysis | MetaLoom">
-    <meta name="twitter:description" content="The sentiment node scores the tone of text your pipeline has already produced. It does not look at the media itself — it takes text from an upstream node (Tika document content, OCR text, a caption, …">
+    <meta name="twitter:description" content="The sentiment node scores the tone of text your pipeline has already produced. It does not look at the media itself — it has a single text input port that accepts any text type, so you can connect …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Sentiment Analysis">
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -241,10 +248,11 @@
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
 <p>The sentiment node <strong>scores the tone of text</strong> your pipeline has already produced. It does not look
-at the media itself — it takes text from an <strong>upstream</strong> node (<a href="../tika/">Tika</a> document content,
-<a href="../ocr/">OCR</a> text, a <a href="../captioning/">caption</a>, or a <a href="../vlm/">VLM</a> /
-<a href="../llm/">LLM</a> answer) and labels it <strong>positive</strong>, <strong>neutral</strong> or <strong>negative</strong>, with a confidence
-score and a signed polarity value you can sort and filter on.</p>
+at the media itself — it has a single <code>text</code> input port that accepts any text type, so you can
+connect <a href="../tika/">Tika</a> document content, <a href="../ocr/">OCR</a> text, a <a href="../captioning/">caption</a>,
+or a <a href="../vlm/">VLM</a> / <a href="../llm/">LLM</a> answer to it. The node labels whatever arrives
+<strong>positive</strong>, <strong>neutral</strong> or <strong>negative</strong>, with a confidence score and a signed polarity value you
+can sort and filter on.</p>
 </div>
 <div class="paragraph">
 <p>German and English are handled by dedicated models — German with <code>german-sentiment-bert</code>, English
@@ -252,7 +260,7 @@ with a RoBERTa model trained on social text — rather than one generic multilin
 language specialist is measurably better on its own language. Both run behind a small HTTP sidecar,
 so the node stays a pure client and needs no model runtime of its own.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;sentiment&#34;,&#34;applies&#34;:&#34;Any asset with upstream text&#34;,&#34;badge&#34;:&#34;Sentiment sidecar&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType sentiment, variant = source output key)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;default (documents)&#34;,&#34;note&#34;:&#34;first non-empty of tika · ocr · captioning · vlm · llm&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;tika_content&#34;,&#34;d&#34;:&#34;extracted document text&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;label&#34;,&#34;l&#34;:&#34;sentiment_label&#34;,&#34;d&#34;:&#34;POSITIVE / NEUTRAL / NEGATIVE&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;sentiment_score&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;sentiment_result&#34;,&#34;d&#34;:&#34;full distribution + polarity&#34;}]},{&#34;name&#34;:&#34;from a caption&#34;,&#34;note&#34;:&#34;textSources captioning:caption_result&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;caption_result&#34;,&#34;d&#34;:&#34;generated caption&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;label&#34;,&#34;l&#34;:&#34;sentiment_label&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;sentiment_score&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;sentiment_result&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;sentiment&#34;,&#34;applies&#34;:&#34;Any asset with upstream text&#34;,&#34;badge&#34;:&#34;Sentiment sidecar&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType sentiment, one row per wired text source)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;document text&#34;,&#34;note&#34;:&#34;the tika content port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here a document body extracted by Tika&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;label&#34;,&#34;d&#34;:&#34;POSITIVE, NEUTRAL or NEGATIVE&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;score&#34;,&#34;d&#34;:&#34;how confident the model is in that label, 0 to 1&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the full distribution, the signed polarity, the language and the model used&#34;}]},{&#34;name&#34;:&#34;a caption&#34;,&#34;note&#34;:&#34;the captioning caption port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here a generated caption&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;label&#34;,&#34;d&#34;:&#34;POSITIVE, NEUTRAL or NEGATIVE&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;score&#34;,&#34;d&#34;:&#34;how confident the model is in that label, 0 to 1&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the full distribution, the signed polarity, the language and the model used&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -268,12 +276,12 @@ so the node stays a pure client and needs no model runtime of its own.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any asset (the text comes from an upstream node, not from the media)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text from an upstream node output — configurable, defaults to the first non-empty of <code>tika</code>, <code>ocr</code>, <code>captioning</code>, <code>vlm</code>, <code>llm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code> — accepts any text type, so a document body, an OCR result, a caption or a transcript can all be wired into it</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sentiment_label</code> (String), <code>sentiment_score</code> (Number), <code>sentiment_result</code> (JSON String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>label</code> (String), <code>score</code> (Number), <code>result</code> (the structure below)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Languages</p></td>
@@ -285,7 +293,7 @@ so the node stays a pure client and needs no model runtime of its own.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> — one row per text source, discriminated by the source output key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> — one row per text source, discriminated by the port the text was connected from</p></td>
 </tr>
 </tbody>
 </table>
@@ -301,7 +309,7 @@ so the node stays a pure client and needs no model runtime of its own.</p>
   &#34;scores&#34;: { &#34;positive&#34;: 0.06, &#34;neutral&#34;: 0.07, &#34;negative&#34;: 0.87 },
   &#34;lang&#34;: &#34;de&#34;,
   &#34;model&#34;: &#34;oliverguhr/german-sentiment-bert&#34;,
-  &#34;source&#34;: { &#34;nodeId&#34;: &#34;tika&#34;, &#34;outputKey&#34;: &#34;tika_content&#34; },
+  &#34;source&#34;: { &#34;node&#34;: &#34;tika&#34;, &#34;port&#34;: &#34;content&#34; },
   &#34;textChars&#34;: 4211,
   &#34;chunks&#34;: 12
 }</code></pre>
@@ -349,19 +357,17 @@ and combines them weighted by length — so a long complaint is not diluted by a
 <td class="tableblock halign-left valign-top"><p class="tableblock">Override the sidecar’s German / English model — e.g. a finance-specific German model</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>textSources</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ordered <code>nodeId:outputKey</code> list; the first one with text wins (default <code>tika:tika_content</code>, <code>ocr:ocr_text</code>, <code>captioning:caption_result</code>, <code>vlm:vlm_result</code>, <code>llm:llm_result</code>)</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxChars</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on the text sent for analysis (default <code>200000</code>)</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Because <code>textSources</code> is an ordered list, one pipeline configuration covers mixed collections: a PDF
-is scored from its Tika text, a scanned page from its OCR text, and a photo from its caption —
-without separate node instances.</p>
+<p>There is no option naming where the text comes from: the <code>text</code> port accepts any text type, so you
+draw a connection instead. A PDF pipeline wires <a href="../tika/">Tika</a>&#39;s <code>content</code> into it, a scan
+pipeline wires <a href="../ocr/">OCR</a>&#39;s <code>text</code>, and a photo pipeline wires
+<a href="../captioning/">captioning</a>&#39;s <code>caption</code>. Wanting all three in one pipeline means one sentiment
+node per source, each with its own row.</p>
 </div>
 </div>
 </div>

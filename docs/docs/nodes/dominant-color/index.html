@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Dominant Colour | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -252,7 +259,7 @@ Orange</strong> — for your search box, your caption prompt and your editors.</
 <p>It runs no model. All of it is arithmetic, so it costs no GPU time, needs nothing installed
 alongside it, and finishes in milliseconds.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dominant-color&#34;,&#34;applies&#34;:&#34;Images&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType dominant-color)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;whole picture&#34;,&#34;note&#34;:&#34;nothing upstream needed&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the picture&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;dominant_color_result&#34;,&#34;d&#34;:&#34;every region, with its full palette&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_hex&#34;,&#34;d&#34;:&#34;#E2711D&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_term&#34;,&#34;d&#34;:&#34;orange&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_name_en&#34;,&#34;d&#34;:&#34;vivid orange&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;dominant_color_name_de&#34;,&#34;d&#34;:&#34;kräftiges Orange&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;dominant_color_region_count&#34;}]},{&#34;name&#34;:&#34;per detected face&#34;,&#34;note&#34;:&#34;facedetect upstream&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the picture&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;d&#34;:&#34;boxes from face detection&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;dominant_color_result&#34;,&#34;d&#34;:&#34;one palette per box, plus the whole frame&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;dominant_color_region_count&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dominant-color&#34;,&#34;applies&#34;:&#34;Images&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType dominant-color)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;whole picture&#34;,&#34;note&#34;:&#34;nothing wired in but the picture&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the picture to measure&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;color&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;every measured area with its ranked palette and each colour share&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;hex&#34;,&#34;d&#34;:&#34;the dominant colour as a hex triplet, e.g. #E2711D&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;term&#34;,&#34;d&#34;:&#34;one of eleven stable basic colour words, for facets and grouping&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;name_en&#34;,&#34;d&#34;:&#34;the fuller English name, e.g. vivid orange&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;name_de&#34;,&#34;d&#34;:&#34;the same colour named in German, e.g. kräftiges Orange&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;region_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many areas were measured&#34;}]},{&#34;name&#34;:&#34;per detected face&#34;,&#34;note&#34;:&#34;a detections port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the picture to measure&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;opt&#34;:true,&#34;d&#34;:&#34;one element per detected box; each box is measured on its own&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;color&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;one palette per box, plus one for the whole frame&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;region_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many areas were measured&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -268,12 +275,12 @@ alongside it, and finishes in milliseconds.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Images</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The picture. Optionally bounding boxes from <a href="../facedetect/">Face Detection</a> or any other detector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> (the picture), plus an optional <code>detections</code> (<strong>many</strong>) — connect the <code>detections</code> port of <a href="../facedetect/">Face Detection</a> or any other detector</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dominant_color_result</code> (JSON String), <code>dominant_color_hex</code>, <code>dominant_color_term</code>, <code>dominant_color_name_en</code>, <code>dominant_color_name_de</code> (Text), <code>dominant_color_region_count</code> (Number)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>result</code> (the full palette structure), <code>hex</code>, <code>term</code>, <code>name_en</code>, <code>name_de</code> (String), <code>region_count</code> (Integer)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -387,8 +394,10 @@ never drift apart or describe the same colour differently.</p>
 <div class="sect2">
 <h3 id="_colouring_in_parts_of_a_picture">Colouring in parts of a picture</h3>
 <div class="paragraph">
-<p>Point a detector at the image first and the node measures every box it finds, alongside the whole
-frame. That turns &#34;this photo is mostly blue&#34; into &#34;this <strong>person</strong> is wearing blue&#34;.</p>
+<p>Connect a detector to the <code>detections</code> port and the node measures every box that arrives, alongside
+the whole frame. That turns &#34;this photo is mostly blue&#34; into &#34;this <strong>person</strong> is wearing blue&#34;. The
+port carries a sequence, so it does not matter whether the detector found one box or thirty — and it
+does not matter which detector produced them.</p>
 </div>
 <div class="paragraph">
 <p>You can also pin it to a fixed area — a logo corner, a lower third, a product region — without any
@@ -429,11 +438,7 @@ detector at all, using the <code>region</code> options below.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>useDetections</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Measure every detected box as well. On by default</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detectionSources</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream detector nodes supply the boxes. Defaults to <code>facedetect</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Measure every detected box as well. On by default. The boxes come from whatever is connected to the <code>detections</code> port — there is no node to name</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>regionX</code> / <code>regionY</code> / <code>regionW</code> / <code>regionH</code></p></td>

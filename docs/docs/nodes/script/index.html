@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Script | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -250,7 +257,7 @@ built and released&#34;. Turning a transcript into chapter marks, thresholding a
 tag, reshaping a language model’s answer into structured fields — each is a few lines of code, and
 each would otherwise be a development project.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;script&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;No external service&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType script, variant = node id) · asset_segment_comp for timeframes&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;transcript → chapter marks&#34;,&#34;note&#34;:&#34;one text in, a timeline and two scalars out&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;whisper_result&#34;,&#34;d&#34;:&#34;transcript JSON&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;chapter_frames&#34;,&#34;d&#34;:&#34;timeframes&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;chapter_titles&#34;,&#34;d&#34;:&#34;list of titles&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;chapter_count&#34;}]},{&#34;name&#34;:&#34;metric → tag&#34;,&#34;note&#34;:&#34;threshold an upstream number&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;blurriness&#34;,&#34;d&#34;:&#34;quality metric&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;label&#34;,&#34;l&#34;:&#34;sharpness_tag&#34;,&#34;d&#34;:&#34;sharp / soft / blurry&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;script&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;No external service&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType script, variant = node id) · asset_segment_comp for timeframes&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;transcript → chapter marks&#34;,&#34;note&#34;:&#34;one text in, a timeline and two scalars out&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;data&#34;,&#34;d&#34;:&#34;whatever you connect — here a transcript to slice into chapters&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;segments&#34;,&#34;l&#34;:&#34;chapter_frames&#34;,&#34;d&#34;:&#34;declared TIMEFRAMES — one timeline stored against the asset&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;chapter_titles&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;declared TEXT_LIST — one element per chapter title&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;chapter_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;declared INTEGER — how many chapter marks were found&#34;}]},{&#34;name&#34;:&#34;metric → tag&#34;,&#34;note&#34;:&#34;threshold a value you wire in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;data&#34;,&#34;d&#34;:&#34;whatever you connect — here a blurriness score&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;sharpness_tag&#34;,&#34;d&#34;:&#34;declared STRING — sharp, soft or blurry&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -266,12 +273,12 @@ each would otherwise be a development project.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any asset</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The media item, plus the outputs of any upstream nodes you connect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code>, plus <code>data</code> for whatever you connect from upstream</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whatever you declare — see <a href="#outputs">Declaring outputs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whatever you declare — see <a href="#outputs">Declaring outputs</a>. A list type becomes a <strong>many</strong> port</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Languages</p></td>
@@ -311,7 +318,7 @@ each would otherwise be a development project.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>upstream</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Outputs of upstream nodes: <code>upstream[&#39;whisper&#39;][&#39;whisper_result&#39;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What arrived on the connected inputs, keyed by node and port: <code>upstream[&#39;whisper&#39;][&#39;transcript&#39;]</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>params</code></p></td>
@@ -337,7 +344,7 @@ each would otherwise be a development project.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">const re = new RegExp(params.pattern, &#39;i&#39;);
-const transcript = JSON.parse(upstream[&#39;whisper&#39;][&#39;whisper_result&#39;]);
+const transcript = JSON.parse(upstream[&#39;whisper&#39;][&#39;transcript&#39;]);
 
 const frames = transcript.segments
   .filter(s =&gt; re.test(s.text))
@@ -361,8 +368,8 @@ out.integer(&#39;chapter_count&#39;, frames.length);</code></pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Outputs are declared in the node’s <strong>Outputs</strong> field, not discovered from the script. This is what lets
-the pipeline editor draw the node’s output connectors so you can wire the next node to them before
-the script has ever run.</p>
+the pipeline editor draw the node’s output ports — with their types and their cardinality — so you
+can wire the next node to them before the script has ever run.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -410,17 +417,22 @@ the script has ever run.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>TEXT_LIST</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">an array of strings</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a field in the node’s JSON result. The port is <strong>many</strong> — one element per string</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>TIMEFRAMES</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">an array of <code>{ startMs, endMs, label }</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a real timeline on the asset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a real timeline on the asset. The port is <strong>one</strong>: the timeline is a single value, however many segments it holds</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IMAGE</code>, <code>IMAGE_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IMAGE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">image bytes, base64, or a path</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">an image file in the worker’s cache</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IMAGE_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an array of those</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">one image file each. The port is <strong>many</strong> — one element per image</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PATH</code></p></td>
@@ -429,6 +441,12 @@ the script has ever run.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The list types are the pipeline’s fan-out: a <strong>many</strong> port hands the next node one element at a time,
+so a script that emits ten titles runs whatever you connect ten times, without you writing a loop.
+Every other type is a single value, <code>TIMEFRAMES</code> included — a timeline is one thing, not a sequence
+of segments.</p>
+</div>
 <div class="paragraph">
 <p>A single item can produce several multi-valued outputs at once — that is how one transcript becomes a
 whole timeline of chapter marks plus a list of titles plus a count, in one pass.</p>
@@ -445,9 +463,9 @@ rather than sitting in an opaque blob. Each timeframe output is filed under a <s
 the key and type. If one node declares two timeframe outputs, give them different segment types.</p>
 </div>
 <div class="paragraph">
-<p><strong>Images</strong> are written to the worker that ran the script, and the output carries their file paths.
-Because those paths are local to that worker, keep the nodes that consume them in the same affinity
-group.</p>
+<p><strong>Images</strong> are written to the worker that ran the script, and the port carries them as artifacts, which
+is what lets you connect them straight to <a href="../s3-sink/">S3 Sink</a>. Because the files are local to
+that worker, keep the nodes that consume them in the same affinity group.</p>
 </div>
 </div>
 </div>
@@ -484,7 +502,7 @@ group.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Required Inputs</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[&#39;nodeId:outputKey&#39;, …​]</code> that must all be present, or the item is skipped rather than failed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connected inputs that must all carry a value, or the item is skipped rather than failed</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Trusted</code></p></td>

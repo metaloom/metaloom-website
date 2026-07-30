@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Text-to-Speech (TTS) | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The TTS node generates narration audio from text. Unlike the analysis nodes, which describe a property of the media itself, TTS takes text produced by an upstream node — an LLM summary, a caption, or …">
+	<meta name="description" content="The TTS node generates narration audio from text. Unlike the analysis nodes, which describe a property of the media itself, TTS has a single text input port that accepts any text type — connect an LLM …">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/tts/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Text-to-Speech (TTS) | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/tts/">
-    <meta property="og:description" content="The TTS node generates narration audio from text. Unlike the analysis nodes, which describe a property of the media itself, TTS takes text produced by an upstream node — an LLM summary, a caption, or …">
+    <meta property="og:description" content="The TTS node generates narration audio from text. Unlike the analysis nodes, which describe a property of the media itself, TTS has a single text input port that accepts any text type — connect an LLM …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Text-to-Speech (TTS)">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Text-to-Speech (TTS) | MetaLoom">
-    <meta name="twitter:description" content="The TTS node generates narration audio from text. Unlike the analysis nodes, which describe a property of the media itself, TTS takes text produced by an upstream node — an LLM summary, a caption, or …">
+    <meta name="twitter:description" content="The TTS node generates narration audio from text. Unlike the analysis nodes, which describe a property of the media itself, TTS has a single text input port that accepts any text type — connect an LLM …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Text-to-Speech (TTS)">
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -241,15 +248,15 @@
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
 <p>The TTS node <strong>generates narration audio from text</strong>. Unlike the analysis nodes, which describe a
-property of the media itself, TTS takes text produced by an <strong>upstream</strong> node — an
-<a href="../llm/">LLM</a> summary, a <a href="../captioning/">caption</a>, or a translated
-<a href="../whisper/">transcript</a> — and synthesizes speech, attaching the audio to the asset.</p>
+property of the media itself, TTS has a single <code>text</code> input port that accepts any text type — connect
+an <a href="../llm/">LLM</a> summary, a <a href="../captioning/">caption</a>, or a translated
+<a href="../whisper/">transcript</a> to it — and synthesizes speech, attaching the audio to the asset.</p>
 </div>
 <div class="paragraph">
 <p>German is synthesized with <strong>Orpheus-3B / Kartoffel</strong> and English with <strong>Kokoro</strong>. Both run behind a
 small HTTP sidecar, so the node stays a pure client and needs no model runtime of its own.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;tts&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;TTS sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the WAV stays in the local tts_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;default source (llm)&#34;,&#34;note&#34;:&#34;sourceNodeId llm \u00b7 sourceOutputKey llm_result&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;llm_result&#34;,&#34;d&#34;:&#34;upstream LLM summary&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;tts_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;tts_path&#34;,&#34;d&#34;:&#34;local WAV path&#34;}]},{&#34;name&#34;:&#34;from a transcript&#34;,&#34;note&#34;:&#34;sourceNodeId whisper \u00b7 voice per language&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;whisper_result&#34;,&#34;d&#34;:&#34;translated transcript&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;tts_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;tts_path&#34;,&#34;d&#34;:&#34;local WAV path&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;tts&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;TTS sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the WAV stays in the local tts_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;narrate an LLM summary&#34;,&#34;note&#34;:&#34;an llm result port wired into text&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;the words to speak \u2014 here a summary written by the LLM node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;audio&#34;,&#34;ct&#34;:&#34;artifact/audio&#34;,&#34;d&#34;:&#34;a WAV in the worker local tts_bin cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]},{&#34;name&#34;:&#34;narrate a transcript&#34;,&#34;note&#34;:&#34;a whisper transcript port wired into text \u00b7 voice per language&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;the words to speak \u2014 here a translated transcript&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;audio&#34;,&#34;ct&#34;:&#34;artifact/audio&#34;,&#34;d&#34;:&#34;a WAV in the worker local tts_bin cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -265,12 +272,12 @@ small HTTP sidecar, so the node stays a pure client and needs no model runtime o
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any asset (the audio is generated from upstream text, not from the media)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text from an upstream node output — configurable, defaults to the <code>llm</code> node’s <code>llm_result</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code> — accepts any text type, so an LLM answer, a caption or a transcript can be wired straight into it</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts_flag</code> (String), <code>tts_path</code> (String, local path of the generated WAV)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>audio</code> (the generated WAV, ready for <a href="../s3-sink/">S3 Sink</a>), <code>flag</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -312,12 +319,12 @@ small HTTP sidecar, so the node stays a pure client and needs no model runtime o
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>voice</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Voice id for the selected engine (default <code>Jakob</code>; English e.g. <code>af_heart</code>)</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sourceNodeId</code> / <code>sourceOutputKey</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream node output supplies the text (default <code>llm</code> / <code>llm_result</code>)</p></td>
-</tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Nothing configures where the words come from — connect a port to <code>text</code> and the node speaks whatever
+arrives on it.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

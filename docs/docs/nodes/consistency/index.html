@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Consistency | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -244,7 +251,7 @@
 (runs of empty bytes) that indicate a truncated or partially-downloaded file. Running it early lets a
 pipeline skip expensive processing on broken media.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;consistency&#34;,&#34;applies&#34;:&#34;Video \u00b7 Audio&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;asset consistency block + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;file&#34;,&#34;l&#34;:&#34;media file&#34;,&#34;d&#34;:&#34;scanned for zero chunks&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;zero_chunk_count&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;is_complete&#34;,&#34;d&#34;:&#34;read by downstream nodes&#34;}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;consistency&#34;,&#34;applies&#34;:&#34;Video \u00b7 Audio&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;asset consistency block + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the file bytes, scanned for runs of empty bytes&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;zero_chunk_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many empty byte runs the scan found&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;is_complete&#34;,&#34;d&#34;:&#34;false when the file looks truncated or partly downloaded&#34;}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -260,12 +267,12 @@ pipeline skip expensive processing on broken media.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Video, Audio</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zero_chunk_count</code> (Long), <code>is_complete</code> (Boolean)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zero_chunk_count</code> (Integer), <code>is_complete</code> (Boolean)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -278,8 +285,8 @@ pipeline skip expensive processing on broken media.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Downstream nodes read <code>is_complete</code> to decide whether to proceed — for example
-<a href="../thumbnail/">Thumbnail</a> skips incomplete videos.</p>
+<p>Connect <code>is_complete</code> to a downstream node that should not waste time on a broken file — for example
+<a href="../thumbnail/">Thumbnail</a>, whose optional <code>is_complete</code> port makes it skip incomplete videos.</p>
 </div>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>

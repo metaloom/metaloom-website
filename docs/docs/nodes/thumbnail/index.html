@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Thumbnail | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -243,7 +250,7 @@
 <p>The thumbnail node generates a <strong>contact-sheet preview</strong> (a tiled grid of frames) for a video, giving
 the UI a fast visual summary of the content.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;thumbnail&#34;,&#34;applies&#34;:&#34;Video only&#34;,&#34;badge&#34;:&#34;OpenCV / video4j native&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (image bytes stay in the local cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;default grid&#34;,&#34;note&#34;:&#34;tileSize \u00b7 cols \u00b7 rows from the node options&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video file&#34;,&#34;d&#34;:&#34;frames extracted per tile&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;is_complete&#34;,&#34;d&#34;:&#34;from consistency; skips broken media&#34;,&#34;opt&#34;:true}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;thumbnail_flag&#34;},{&#34;t&#34;:&#34;path&#34;,&#34;l&#34;:&#34;thumbnail_path&#34;,&#34;d&#34;:&#34;local .thumb contact sheet&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;thumbnail&#34;,&#34;applies&#34;:&#34;Video only&#34;,&#34;badge&#34;:&#34;OpenCV / video4j native&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (image bytes stay in the local cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;default grid&#34;,&#34;note&#34;:&#34;tileSize \u00b7 cols \u00b7 rows from the node options&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;one frame is extracted per tile of the grid&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;is_complete&#34;,&#34;d&#34;:&#34;wire the consistency verdict here to skip truncated files&#34;,&#34;opt&#34;:true}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;thumbnail&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;a tiled .thumb contact sheet in the worker local cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -259,12 +266,12 @@ the UI a fast visual summary of the content.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Video only</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reads upstream <a href="../consistency/"><code>consistency</code></a> <code>is_complete</code> to skip incomplete videos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code>, plus an optional <code>is_complete</code> — connect <a href="../consistency/">Consistency</a>&#39;s <code>is_complete</code> port to skip incomplete videos</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>thumbnail_flag</code> (String), <code>thumbnail_path</code> (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>thumbnail</code> (the contact sheet, the file <a href="../s3-sink/">S3 Sink</a> uploads), <code>flag</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>

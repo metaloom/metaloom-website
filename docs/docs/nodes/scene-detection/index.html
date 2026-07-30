@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Scene Detection | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -243,7 +250,7 @@
 <p>The scene detection node finds <strong>scene boundaries</strong> (cuts) in a video using optical-flow analysis, and
 emits the resulting segments. Each run replaces the whole segment set for the asset.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;scene-detection&#34;,&#34;applies&#34;:&#34;Video only&#34;,&#34;badge&#34;:&#34;OpenCV / video4j native&#34;,&#34;persist&#34;:&#34;asset_segment_comp (whole-set replace) + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video file&#34;,&#34;d&#34;:&#34;optical-flow analysis&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;segments&#34;,&#34;l&#34;:&#34;scene_detection&#34;,&#34;d&#34;:&#34;one segment per scene&#34;},{&#34;t&#34;:&#34;timeframe&#34;,&#34;l&#34;:&#34;scene boundaries&#34;,&#34;d&#34;:&#34;cut timestamps&#34;}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;scene-detection&#34;,&#34;applies&#34;:&#34;Video only&#34;,&#34;badge&#34;:&#34;OpenCV / video4j native&#34;,&#34;persist&#34;:&#34;asset_segment_comp (whole-set replace) + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the clip, decoded for optical-flow analysis&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;segments&#34;,&#34;l&#34;:&#34;scenes&#34;,&#34;d&#34;:&#34;one timeline for the whole clip, holding a segment per detected scene with its cut timestamps&#34;}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -259,12 +266,12 @@ emits the resulting segments. Each run replaces the whole segment set for the as
 <td class="tableblock halign-left valign-top"><p class="tableblock">Video only</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scene_detection</code> (String / JSON list of scene boundaries)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scenes</code> — a <strong>single</strong> timeline covering the clip, not one element per scene. The segments live inside it</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>

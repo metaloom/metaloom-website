@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
-	<title>Containers | MetaLoom</title>
+	<title>Pipeline Editor | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Cortex is distributed as the metaloom/cortex-server image. It runs as a daemon: it connects to a Loom server, registers, and serves node tasks. See Container Images for the image overview.">
+	<meta name="description" content="Design MetaLoom processing pipelines in your browser and press Play to watch assets flow through the typed-port graph — no server required.">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/cortex/containers/">
+<link rel="canonical" href="https://metaloom.io/pipeline-editor/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Containers | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/cortex/containers/">
-    <meta property="og:description" content="Cortex is distributed as the metaloom/cortex-server image. It runs as a daemon: it connects to a Loom server, registers, and serves node tasks. See Container Images for the image overview.">
+    <meta property="og:title" content="Pipeline Editor | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/pipeline-editor/">
+    <meta property="og:description" content="Design MetaLoom processing pipelines in your browser and press Play to watch assets flow through the typed-port graph — no server required.">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Containers">
+    <meta property="og:image:alt" content="Pipeline Editor">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Containers | MetaLoom">
-    <meta name="twitter:description" content="Cortex is distributed as the metaloom/cortex-server image. It runs as a daemon: it connects to a Loom server, registers, and serves node tasks. See Container Images for the image overview.">
+    <meta name="twitter:title" content="Pipeline Editor | MetaLoom">
+    <meta name="twitter:description" content="Design MetaLoom processing pipelines in your browser and press Play to watch assets flow through the typed-port graph — no server required.">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Containers">
+    <meta name="twitter:image:alt" content="Pipeline Editor">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -59,6 +59,10 @@
 
 	
 	
+	
+	<link rel="stylesheet" href="/css/pipeline-editor.min.css" media="screen">
+	
+	
 
 	<!--Favicon-->
 	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
@@ -72,7 +76,6 @@
 <body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
   <div id="content">
     
-
 
 
 <section class="sticky-top navigation">
@@ -117,8 +120,8 @@
 					
 					
 					
-					<li class="nav-item">
-						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -138,8 +141,8 @@
 					
 					
 					
-					<li class="nav-item is-active">
-						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					<li class="nav-item">
+						<a class="nav-link" href="/docs">Docs</a>
 					</li>
 					
 				</ul>
@@ -151,230 +154,13 @@
 </section>
 
 
-<section class="section docs-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 d-none d-lg-block">
-        <div class="docs-sidebar toc-sticky-top">
-          <div class="docs-sidebar-title">On this page</div>
-          <nav id="toc"></nav>
-          
-          
-          <nav class="docs-topics" aria-label="Documentation topics">
-            <div class="docs-sidebar-title">Topics</div>
-            <ul>
-              
-              
-              <li>
-                <a href="/docs/getting-started/">Getting Started</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/deployment/">Container Images</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/playbooks/">Playbooks</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/legal/">Legal &amp; Licensing</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cli/">Command Line</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cortex/" class="is-current">Cortex</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/loom/">Loom</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/ui/">Loom UI</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/nodes/">Nodes</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/operation/">Operation</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/pipeline/">Pipeline Mechanism</a>
-              </li>
-              
-              
-              
-              
-            </ul>
-          </nav>
-          
-        </div>
-      </div>
-      <div class="col-lg-9">
-        <div class="docs-page-header">
-          <h1>Containers</h1>
-        </div>
-        <div class="post-single-content docs-main-content">
-          <div class="paragraph">
-<p>Cortex is distributed as the <code>metaloom/cortex-server</code> image. It runs as a <strong>daemon</strong>: it connects to a
-Loom server, registers, and serves node tasks. See <a href="../../deployment/">Container Images</a> for the
-image overview.</p>
-</div>
-<div class="sect1">
-<h2 id="_running_with_docker">Running with Docker</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">docker run -d \
-  --name cortex \
-  --network dev \
-  -p 8093:8093 \
-  -e LOOM_HOST=loom \
-  -e LOOM_PORT=8092 \
-  -e LOOM_TOKEN=&lt;jwt&gt; \
-  -v /media/assets:/data \
-  metaloom/cortex-server:latest</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The media at <code>/data</code> must be the <strong>same</strong> paths Loom hands out — Loom sends a <strong>reference</strong> (a path),
-never the bytes, so the worker needs to see the shared media mount itself.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_docker_compose_with_loom">Docker Compose with Loom</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">version: &#34;3.8&#34;
-services:
-  postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: loom
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
+<main class="pe-page">
+  <div id="ml-pipeline-editor"
+       data-descriptors="/pipeline-editor/node-descriptors.json"></div>
+</main>
 
-  loom:
-    image: metaloom/loom-server:latest
-    depends_on: [postgres]
-    ports:
-      - &#34;8092:8092&#34;
-    environment:
-      LOOM_DB_HOST: postgres
-      LOOM_DB_PASSWORD: secret
 
-  cortex:
-    image: metaloom/cortex-server:latest
-    depends_on: [loom]
-    environment:
-      LOOM_HOST: loom
-      LOOM_PORT: &#34;8092&#34;
-    volumes:
-      - /media/assets:/data</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_kubernetes_deployment">Kubernetes Deployment</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Because Cortex is a long-running worker (not a batch job), deploy it as a <code>Deployment</code> and scale the
-replica count to add processing capacity. Point each replica at the Loom service and wire the
-monitoring port to probes:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: cortex
-spec:
-  replicas: 3
-  selector:
-    matchLabels: { app: cortex }
-  template:
-    metadata:
-      labels: { app: cortex }
-    spec:
-      containers:
-        - name: cortex
-          image: metaloom/cortex-server:latest
-          env:
-            - name: LOOM_HOST
-              value: loom.svc.cluster.local
-            - name: LOOM_PORT
-              value: &#34;8092&#34;
-          ports:
-            - containerPort: 8093
-          livenessProbe:
-            httpGet: { path: /api/health, port: 8093 }
-          readinessProbe:
-            httpGet: { path: /api/ready, port: 8093 }
-          volumeMounts:
-            - name: media
-              mountPath: /data
-      volumes:
-        - name: media
-          persistentVolumeClaim:
-            claimName: media-pvc</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tbody><tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-To pin heavy node kinds (e.g. <code>facedetect</code>, <code>whisper</code>) to GPU nodes, run a second Deployment that
-advertises only those kinds and schedule it onto the GPU node pool. Loom routes each node task to a
-worker that accepts its kind. See <a href="../configuration/">Configuration</a>.
-</td>
-</tr>
-</tbody></table>
-</div>
-</div>
-</div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<script src="/js/pipeline-editor.min.3318b0c894c7f1617305abb5ce0de0bd9a865613f6a1ba0ad62b69ddb89b0f3bf9d9eb6d719b677d8177c35b7e9161d0.js" integrity="sha384-MxiwyJTH8WFzBau1zg3gvZqGVhP2oboK1itp3bibDzv52ettcZtnfYF3w1t&#43;kWHQ" defer></script>
 
   </div><!-- Footer -->
 

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Face Description | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. It runs after Face Detection and skips work when no faces were …">
+	<meta name="description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. Its detections port carries a sequence — one element per detected …">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/facedescription/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Face Description | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/facedescription/">
-    <meta property="og:description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. It runs after Face Detection and skips work when no faces were …">
+    <meta property="og:description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. Its detections port carries a sequence — one element per detected …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Face Description">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Face Description | MetaLoom">
-    <meta name="twitter:description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. It runs after Face Detection and skips work when no faces were …">
+    <meta name="twitter:description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. Its detections port carries a sequence — one element per detected …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Face Description">
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -241,10 +248,12 @@
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
 <p>The face description node produces a <strong>natural-language description</strong> of the faces detected in an
-asset, using a vision-language model. It runs after <a href="../facedetect/">Face Detection</a> and skips work
-when no faces were found.</p>
+asset, using a vision-language model. Its <code>detections</code> port carries a <strong>sequence</strong> — one element per
+detected face — and the node describes each element in turn, so a picture with three faces comes back
+with three descriptions in the same order. A sequence with no elements means there is nothing to
+describe and no model call is made.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;facedescription&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;,&#34;d&#34;:&#34;from facedetect; zero skips the node&#34;},{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detected faces&#34;,&#34;d&#34;:&#34;cropped from the bounding boxes&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;face_description&#34;}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;facedescription&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected face, cropped from its bounding box&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;descriptions&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one short description per incoming face, in the same order&#34;}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -260,12 +269,12 @@ when no faces were found.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image (video is stubbed / not yet implemented)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Upstream <a href="../facedetect/"><code>facedetect</code></a> output (reads <code>face_count</code> to skip when zero)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detections</code> (<strong>many</strong>) — connect the <code>detections</code> port of <a href="../facedetect/">Face Detection</a>; the crops travel with the elements, so the picture itself is not wired in</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>face_description</code> (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>descriptions</code> (<strong>many</strong> — one per incoming face, aligned with the input sequence)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -281,8 +290,8 @@ when no faces were found.</p>
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Uses the model-service connection shared with the LLM/captioning family. The node only acts on assets
-where the upstream face detector reported at least one face.</p>
+<p>Uses the model-service connection shared with the LLM/captioning family. There is nothing to
+configure about where the faces come from — connect the <code>detections</code> port and the node follows it.</p>
 </div>
 </div>
 </div>

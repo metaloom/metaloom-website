@@ -2,521 +2,521 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MetaLoom</title>
-    <link>https://metaloom.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Jul 2026 10:00:00 +0200</lastBuildDate>
-    <atom:link href="https://metaloom.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploying with Docker</title>
-      <link>https://metaloom.io/docs/playbooks/docker/</link>
+      <link>http://localhost:1313/docs/playbooks/docker/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/playbooks/docker/</guid>
+      <guid>http://localhost:1313/docs/playbooks/docker/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This playbook builds a &lt;strong&gt;production-shaped MetaLoom stack on a single host&lt;/strong&gt; with Docker or Podman:&#xA;PostgreSQL, the Loom server, and one or more Cortex workers that actually process media. It is the&#xA;step up from the all-in-one demo image — separate containers, real volumes, and state that survives a&#xA;restart.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Getting Started</title>
-      <link>https://metaloom.io/docs/getting-started/</link>
+      <link>http://localhost:1313/docs/getting-started/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/getting-started/</guid>
+      <guid>http://localhost:1313/docs/getting-started/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This guide gets a full MetaLoom stack running locally in a few minutes using the demo container.&#xA;No build tools or configuration files are required.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Deploying on Kubernetes</title>
-      <link>https://metaloom.io/docs/playbooks/kubernetes/</link>
+      <link>http://localhost:1313/docs/playbooks/kubernetes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/playbooks/kubernetes/</guid>
+      <guid>http://localhost:1313/docs/playbooks/kubernetes/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This playbook runs MetaLoom in a cluster: the Loom server, a pool of Cortex workers, and — the part&#xA;that needs real attention — the &lt;strong&gt;service account and RBAC that let the chat agent spawn per-session&#xA;sandbox Pods&lt;/strong&gt;. It ends with how to package the whole thing as a Helm chart.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Helm Charts</title>
-      <link>https://metaloom.io/docs/deployment/helm/</link>
+      <link>http://localhost:1313/docs/deployment/helm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/deployment/helm/</guid>
+      <guid>http://localhost:1313/docs/deployment/helm/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;MetaLoom ships two Helm charts for deploying on Kubernetes — one per component. They live in the&#xA;&lt;code&gt;helm/&lt;/code&gt; directory of the source repository.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Transcribing for the Chat Agent</title>
-      <link>https://metaloom.io/docs/playbooks/transcription/</link>
+      <link>http://localhost:1313/docs/playbooks/transcription/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/playbooks/transcription/</guid>
+      <guid>http://localhost:1313/docs/playbooks/transcription/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The chat agent can only answer from what has been extracted. Ask it &amp;#34;which clip mentions the launch&#xA;date?&amp;#34; and it calls &lt;code&gt;search_transcript&lt;/code&gt; — which returns nothing at all until something has actually&#xA;transcribed your media.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene-Level Video Analysis</title>
-      <link>https://metaloom.io/docs/playbooks/scene-analysis/</link>
+      <link>http://localhost:1313/docs/playbooks/scene-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/playbooks/scene-analysis/</guid>
+      <guid>http://localhost:1313/docs/playbooks/scene-analysis/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A two-hour recording is one asset, and that is the problem: &amp;#34;show me the part about pricing&amp;#34; has no&#xA;answer when the only unit of retrieval is the whole file. This playbook cuts video into &lt;strong&gt;scenes&lt;/strong&gt; and&#xA;then describes those scenes — from the soundtrack, from the picture, or both.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Translating Content</title>
-      <link>https://metaloom.io/docs/playbooks/translation/</link>
+      <link>http://localhost:1313/docs/playbooks/translation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/playbooks/translation/</guid>
+      <guid>http://localhost:1313/docs/playbooks/translation/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any&#xA;pipeline, because each has a different answer today:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>A Custom Node in Python</title>
-      <link>https://metaloom.io/docs/playbooks/python-node/</link>
+      <link>http://localhost:1313/docs/playbooks/python-node/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/playbooks/python-node/</guid>
+      <guid>http://localhost:1313/docs/playbooks/python-node/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The built-in nodes cover hashing, transcription, OCR, faces and scenes — but not your domain. This&#xA;playbook adds a &lt;strong&gt;node of your own, written in Python&lt;/strong&gt;, and gets Loom dispatching real pipeline work&#xA;to it.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>MetaLoom 1.0.0</title>
-      <link>https://metaloom.io/announcements/metaloom-1-0-0/</link>
+      <link>http://localhost:1313/announcements/metaloom-1-0-0/</link>
       <pubDate>Mon, 27 Jul 2026 10:00:00 +0200</pubDate>
-      <guid>https://metaloom.io/announcements/metaloom-1-0-0/</guid>
+      <guid>http://localhost:1313/announcements/metaloom-1-0-0/</guid>
       <description>&lt;div class=&#34;admonitionblock important&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;i class=&#34;fa icon-important&#34; title=&#34;Important&#34;&gt;&lt;/i&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;MetaLoom 1.0.0 has not been released yet.&lt;/strong&gt; This page describes the scope of the upcoming&#xA;release so you can judge whether it fits your setup. No &lt;code&gt;1.0.0&lt;/code&gt; container images or Maven&#xA;artifacts are published — everything currently builds from source at &lt;code&gt;1.0.0-SNAPSHOT&lt;/code&gt;. The&#xA;release date is not fixed; follow the &lt;a href=&#34;https://discord.gg/NFdnFcSbfA&#34;&gt;Discord&lt;/a&gt; or the&#xA;&lt;a href=&#34;../../blog/&#34;&gt;blog&lt;/a&gt; to hear about it first.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Video Fingerprinting</title>
-      <link>https://metaloom.io/blog/video-fingerprinting/</link>
+      <link>http://localhost:1313/blog/video-fingerprinting/</link>
       <pubDate>Mon, 21 Jun 2021 21:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/video-fingerprinting/</guid>
+      <guid>http://localhost:1313/blog/video-fingerprinting/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;In this post I want to share my experiments on how to generate video fingerprints.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Day4 - Vert.x jOOQ PoC</title>
-      <link>https://metaloom.io/blog/day4-vertx-jooq-poc/</link>
+      <link>http://localhost:1313/blog/day4-vertx-jooq-poc/</link>
       <pubDate>Wed, 19 May 2021 21:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/day4-vertx-jooq-poc/</guid>
-      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;In this post I want to present a &lt;a href=&#34;https://github.com/metaloom/poc-vertx-jooq&#34;&gt;reactive database layer proof of concept implementation&lt;/a&gt; I did which will hopefully make its way into my &lt;a href=&#34;https://metaloom.io/blog/day0-let-there-be-loom/&#34;&gt;MetaLoom project&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>http://localhost:1313/blog/day4-vertx-jooq-poc/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;In this post I want to present a &lt;a href=&#34;https://github.com/metaloom/poc-vertx-jooq&#34;&gt;reactive database layer proof of concept implementation&lt;/a&gt; I did which will hopefully make its way into my &lt;a href=&#34;http://localhost:1313/blog/day0-let-there-be-loom/&#34;&gt;MetaLoom project&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Day3 - Vert.x Dagger PoC</title>
-      <link>https://metaloom.io/blog/day3-vertx-dagger-poc/</link>
+      <link>http://localhost:1313/blog/day3-vertx-dagger-poc/</link>
       <pubDate>Mon, 17 May 2021 14:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/day3-vertx-dagger-poc/</guid>
+      <guid>http://localhost:1313/blog/day3-vertx-dagger-poc/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_dagger_vert_x&#34;&gt;Dagger /  Vert.x&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;In this post I want to show a proof of concept project that makes use of &lt;a href=&#34;https://vertx.io/&#34;&gt;Eclipse Vert.x 4.0.3&lt;/a&gt; and &lt;a href=&#34;https://dagger.dev/&#34;&gt;Dagger 2.35.1&lt;/a&gt; dependency injection.&#xA;The &lt;a href=&#34;https://github.com/metaloom/poc-vertx-dagger&#34;&gt;PoC project&lt;/a&gt; contains a modularized Vert.x application that is using Maven modules and dependency injection.&#xA;Vert.x is a project which provides libraries that can be used to create reactive applications on the JVM. The PoC contains a simple HTTP server.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Day2 - Project Setup</title>
-      <link>https://metaloom.io/blog/day2-project-setup/</link>
+      <link>http://localhost:1313/blog/day2-project-setup/</link>
       <pubDate>Sun, 16 May 2021 14:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/day2-project-setup/</guid>
+      <guid>http://localhost:1313/blog/day2-project-setup/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_disclaimer&#34;&gt;Disclaimer&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;ulist&#34;&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Coke vs. Sprite&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Ketchup vs. Majo&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Eclipse vs. IntelliJ&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Java vs. Kotlin vs. Rust&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Day1 - Project Design</title>
-      <link>https://metaloom.io/blog/day1-project-design/</link>
+      <link>http://localhost:1313/blog/day1-project-design/</link>
       <pubDate>Thu, 13 May 2021 14:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/day1-project-design/</guid>
+      <guid>http://localhost:1313/blog/day1-project-design/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_basics&#34;&gt;Basics&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;For Loom I knew what kind of building blocks were required since it is basically just a continuation of my work on Mesh.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Day0 - Let there be Loom</title>
-      <link>https://metaloom.io/blog/day0-let-there-be-loom/</link>
+      <link>http://localhost:1313/blog/day0-let-there-be-loom/</link>
       <pubDate>Wed, 12 May 2021 14:51:12 +0600</pubDate>
-      <guid>https://metaloom.io/blog/day0-let-there-be-loom/</guid>
+      <guid>http://localhost:1313/blog/day0-let-there-be-loom/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_what_is_loom&#34;&gt;What is Loom?&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom is a headless media asset management server platform. It provides tools to inventory your media assets and extract the most information from them. The Loom Sever can be used to query the data in a structured way with either REST or GraphQL. Additional metadata can be stored in Loom alongside to your assets.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Administration Guide</title>
-      <link>https://metaloom.io/docs/test/</link>
+      <link>http://localhost:1313/docs/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/test/</guid>
+      <guid>http://localhost:1313/docs/test/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_docs&#34;&gt;Docs&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;sect2&#34;&gt;&#xA;&lt;h3 id=&#34;_a&#34;&gt;A&lt;/h3&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect2&#34;&gt;&#xA;&lt;h3 id=&#34;_b&#34;&gt;B&lt;/h3&gt;&#xA;&lt;div class=&#34;sect3&#34;&gt;&#xA;&lt;h4 id=&#34;_c&#34;&gt;C&lt;/h4&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The docs&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>AI Code Generation Disclosure</title>
-      <link>https://metaloom.io/docs/legal/ai-disclosure/</link>
+      <link>http://localhost:1313/docs/legal/ai-disclosure/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/legal/ai-disclosure/</guid>
+      <guid>http://localhost:1313/docs/legal/ai-disclosure/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;AI-assisted code generation was used in building MetaLoom.&lt;/strong&gt; This page states when that started,&#xA;what it covers, and what it does not change. It exists because you should not have to reverse-engineer&#xA;the provenance of a codebase you are considering deploying.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Artifacts</title>
-      <link>https://metaloom.io/docs/cortex/artifacts/</link>
+      <link>http://localhost:1313/docs/cortex/artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/artifacts/</guid>
+      <guid>http://localhost:1313/docs/cortex/artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex publishes JVM modules and container deployment assets separately.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_artifacts&#34;&gt;Maven Artifacts&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;See &lt;a href=&#34;../maven-artifacts/&#34;&gt;Maven Artifacts&lt;/a&gt; for the BOM-backed module list and node dependencies.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Artifacts</title>
-      <link>https://metaloom.io/docs/loom/artifacts/</link>
+      <link>http://localhost:1313/docs/loom/artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/artifacts/</guid>
+      <guid>http://localhost:1313/docs/loom/artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom publishes JVM artifacts, a command line client and container deployment assets separately.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_artifacts&#34;&gt;Maven Artifacts&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;See &lt;a href=&#34;../maven-artifacts/&#34;&gt;Maven Artifacts&lt;/a&gt; for the BOM and the primary client and shared model modules.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Authentication</title>
-      <link>https://metaloom.io/docs/loom/authentication/</link>
+      <link>http://localhost:1313/docs/loom/authentication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/authentication/</guid>
+      <guid>http://localhost:1313/docs/loom/authentication/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom uses JWT (JSON Web Token) bearer tokens for API authentication.&#xA;OAuth2 integration is also available.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Captioning</title>
-      <link>https://metaloom.io/docs/nodes/captioning/</link>
+      <link>http://localhost:1313/docs/nodes/captioning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/captioning/</guid>
+      <guid>http://localhost:1313/docs/nodes/captioning/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The captioning node generates a &lt;strong&gt;natural-language caption&lt;/strong&gt; — a short description of what the media&#xA;shows — for both &lt;strong&gt;images&lt;/strong&gt; and &lt;strong&gt;videos&lt;/strong&gt; using a vision-language model. Images are described from a&#xA;single still frame; videos are described from their temporal content (what happens across the clip).&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Chat &amp; AI Agent</title>
-      <link>https://metaloom.io/docs/loom/chat/</link>
+      <link>http://localhost:1313/docs/loom/chat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/chat/</guid>
+      <guid>http://localhost:1313/docs/loom/chat/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom ships with a built-in &lt;strong&gt;AI assistant&lt;/strong&gt; — an OpenAI-style chat, backed by a &lt;strong&gt;server-side agentic&#xA;loop&lt;/strong&gt; that runs inside the Loom backend. Users converse with their asset domain in natural language&#xA;(&amp;#34;find beach videos&amp;#34;, &amp;#34;what tasks are open for me?&amp;#34;, &amp;#34;summarize this clip’s transcript&amp;#34;) and the&#xA;agent answers by calling Loom’s own tools with the caller’s permissions.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Command Line</title>
-      <link>https://metaloom.io/docs/cli/</link>
+      <link>http://localhost:1313/docs/cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cli/</guid>
+      <guid>http://localhost:1313/docs/cli/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;code&gt;metaloom&lt;/code&gt; is a command line client for a Loom server. It talks to the same REST API the web&#xA;interface uses, so anything you can do in the UI you can script.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Configuration</title>
-      <link>https://metaloom.io/docs/configuration/</link>
+      <link>http://localhost:1313/docs/configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/configuration/</guid>
+      <guid>http://localhost:1313/docs/configuration/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;MetaLoom has two independently configured runtime components. This page is a hub; follow the links for&#xA;the full settings tables.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Configuration</title>
-      <link>https://metaloom.io/docs/cortex/configuration/</link>
+      <link>http://localhost:1313/docs/cortex/configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/configuration/</guid>
+      <guid>http://localhost:1313/docs/cortex/configuration/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex is a daemon and is configured primarily through &lt;strong&gt;environment variables&lt;/strong&gt;, which is convenient&#xA;for container-based deployments. A &lt;code&gt;cortex&lt;/code&gt; CLI wrapper (picocli) also exists for local runs, but in a&#xA;typical online deployment you just set environment variables and start the process — it connects to&#xA;Loom, registers, and serves node tasks.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Configuration</title>
-      <link>https://metaloom.io/docs/loom/configuration/</link>
+      <link>http://localhost:1313/docs/loom/configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/configuration/</guid>
+      <guid>http://localhost:1313/docs/loom/configuration/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom is configured through a YAML file (&lt;code&gt;loom.yml&lt;/code&gt;) with &lt;strong&gt;environment-variable overrides&lt;/strong&gt; layered on&#xA;top. The resolution order is:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Consistency</title>
-      <link>https://metaloom.io/docs/nodes/consistency/</link>
+      <link>http://localhost:1313/docs/nodes/consistency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/consistency/</guid>
+      <guid>http://localhost:1313/docs/nodes/consistency/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The consistency node checks that a media file is complete and not corrupt by counting &lt;strong&gt;zero chunks&lt;/strong&gt;&#xA;(runs of empty bytes) that indicate a truncated or partially-downloaded file. Running it early lets a&#xA;pipeline skip expensive processing on broken media.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Containers</title>
-      <link>https://metaloom.io/docs/cortex/containers/</link>
+      <link>http://localhost:1313/docs/cortex/containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/containers/</guid>
+      <guid>http://localhost:1313/docs/cortex/containers/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex is distributed as the &lt;code&gt;metaloom/cortex-server&lt;/code&gt; image. It runs as a &lt;strong&gt;daemon&lt;/strong&gt;: it connects to a&#xA;Loom server, registers, and serves node tasks. See &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt; for the&#xA;image overview.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Containers</title>
-      <link>https://metaloom.io/docs/loom/containers/</link>
+      <link>http://localhost:1313/docs/loom/containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/containers/</guid>
+      <guid>http://localhost:1313/docs/loom/containers/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server is distributed as the &lt;code&gt;metaloom/loom-server&lt;/code&gt; image (JVM and &lt;code&gt;-native&lt;/code&gt; variants). For a&#xA;zero-config first run, use the all-in-one &lt;code&gt;metaloom/loom-demo&lt;/code&gt; image instead — see&#xA;&lt;a href=&#34;../../getting-started/&#34;&gt;Getting Started&lt;/a&gt;. The full image list is on &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Deduplication</title>
-      <link>https://metaloom.io/docs/nodes/dedup/</link>
+      <link>http://localhost:1313/docs/nodes/dedup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/dedup/</guid>
+      <guid>http://localhost:1313/docs/nodes/dedup/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist:&#xA;one by exact content hash, one by perceptual video fingerprint.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Depth Map</title>
-      <link>https://metaloom.io/docs/nodes/depthmap/</link>
+      <link>http://localhost:1313/docs/nodes/depthmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/depthmap/</guid>
+      <guid>http://localhost:1313/docs/nodes/depthmap/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The depth map node works out &lt;strong&gt;how far each part of a photo is from the camera&lt;/strong&gt;, from the photo&#xA;alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a&#xA;greyscale map comes out in which bright means close and dark means far.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Dominant Colour</title>
-      <link>https://metaloom.io/docs/nodes/dominant-color/</link>
+      <link>http://localhost:1313/docs/nodes/dominant-color/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/dominant-color/</guid>
+      <guid>http://localhost:1313/docs/nodes/dominant-color/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Colour is one of the first things anyone notices about a picture and one of the last things most&#xA;media systems can actually search on. This node closes that gap: it works out which colours a photo&#xA;is really made of, and reports each one both as a precise value and as a word a person would use.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Examples</title>
-      <link>https://metaloom.io/docs/cortex/examples/</link>
+      <link>http://localhost:1313/docs/cortex/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/examples/</guid>
+      <guid>http://localhost:1313/docs/cortex/examples/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;examples/&lt;/code&gt; directory of the source repository contains three customer-facing examples showing how&#xA;to extend Cortex with your own processing logic. They are deliberately lightweight: your code depends&#xA;only on the slim Cortex node API (or, for Python, nothing but the wire protocol) and the Loom REST&#xA;client — never on the Loom database, jOOQ or Postgres.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Examples</title>
-      <link>https://metaloom.io/docs/loom/examples/</link>
+      <link>http://localhost:1313/docs/loom/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/examples/</guid>
+      <guid>http://localhost:1313/docs/loom/examples/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;/examples&lt;/code&gt; directory of the source repository contains runnable example projects.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_listing_examples&#34;&gt;Listing Examples&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;examples/&lt;/code&gt; Maven module contains sub-projects for both Loom and Cortex use cases.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Face Description</title>
-      <link>https://metaloom.io/docs/nodes/facedescription/</link>
+      <link>http://localhost:1313/docs/nodes/facedescription/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/facedescription/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face description node produces a &lt;strong&gt;natural-language description&lt;/strong&gt; of the faces detected in an&#xA;asset, using a vision-language model. It runs after &lt;a href=&#34;../facedetect/&#34;&gt;Face Detection&lt;/a&gt; and skips work&#xA;when no faces were found.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>http://localhost:1313/docs/nodes/facedescription/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face description node produces a &lt;strong&gt;natural-language description&lt;/strong&gt; of the faces detected in an&#xA;asset, using a vision-language model. Its &lt;code&gt;detections&lt;/code&gt; port carries a &lt;strong&gt;sequence&lt;/strong&gt; — one element per&#xA;detected face — and the node describes each element in turn, so a picture with three faces comes back&#xA;with three descriptions in the same order. A sequence with no elements means there is nothing to&#xA;describe and no model call is made.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Face Detection</title>
-      <link>https://metaloom.io/docs/nodes/facedetect/</link>
+      <link>http://localhost:1313/docs/nodes/facedetect/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/facedetect/</guid>
+      <guid>http://localhost:1313/docs/nodes/facedetect/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face detection node finds faces in images and video frames and, optionally, computes &lt;strong&gt;face&#xA;embeddings&lt;/strong&gt; (vectors) that can be used for recognition and clustering. Video is processed by scanning&#xA;frames at a configurable rate.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Features</title>
-      <link>https://metaloom.io/docs/loom/features/</link>
+      <link>http://localhost:1313/docs/loom/features/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/features/</guid>
+      <guid>http://localhost:1313/docs/loom/features/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.&#xA;Each section below links to the reference page that covers the feature in depth.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Filesystem Source</title>
-      <link>https://metaloom.io/docs/nodes/filesystem-source/</link>
+      <link>http://localhost:1313/docs/nodes/filesystem-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/filesystem-source/</guid>
+      <guid>http://localhost:1313/docs/nodes/filesystem-source/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The filesystem source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a&#xA;media item, it &lt;strong&gt;enumerates&lt;/strong&gt; media from disk (a directory tree walked recursively, or a set of path&#xA;globs) and feeds each file into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Filters</title>
-      <link>https://metaloom.io/docs/nodes/filters/</link>
+      <link>http://localhost:1313/docs/nodes/filters/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/filters/</guid>
+      <guid>http://localhost:1313/docs/nodes/filters/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Filter nodes are &lt;strong&gt;routing&lt;/strong&gt; nodes. Instead of producing metadata, a filter evaluates each item and&#xA;splits the pipeline into a &lt;strong&gt;PASS&lt;/strong&gt; and a &lt;strong&gt;REJECT&lt;/strong&gt; branch, so downstream nodes only run on the items&#xA;that match. They are a pipeline-only construct (they have no standalone Cortex node).&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Fingerprint</title>
-      <link>https://metaloom.io/docs/nodes/fingerprint/</link>
+      <link>http://localhost:1313/docs/nodes/fingerprint/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/fingerprint/</guid>
+      <guid>http://localhost:1313/docs/nodes/fingerprint/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The fingerprint node computes a &lt;strong&gt;perceptual, multi-sector video fingerprint&lt;/strong&gt;. Unlike a content hash,&#xA;the fingerprint is robust to transcoding, resolution changes and minor edits, so it can identify the&#xA;&lt;strong&gt;same footage&lt;/strong&gt; even when the file bytes differ.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>GraphQL API</title>
-      <link>https://metaloom.io/docs/loom/graphql-api/</link>
+      <link>http://localhost:1313/docs/loom/graphql-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/graphql-api/</guid>
+      <guid>http://localhost:1313/docs/loom/graphql-api/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset&#xA;together with its components and locations in a single request, selecting exactly the fields you&#xA;need.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Hashing</title>
-      <link>https://metaloom.io/docs/nodes/hash/</link>
+      <link>http://localhost:1313/docs/nodes/hash/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/hash/</guid>
+      <guid>http://localhost:1313/docs/nodes/hash/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The hashing nodes compute content hashes of a media file. They are the foundation of asset identity in&#xA;MetaLoom: the SHA-512 hash is the content key used to look an asset up, avoid recomputation, and match&#xA;against blacklists. Four kinds live in the same module and can be toggled independently.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Helm Chart</title>
-      <link>https://metaloom.io/docs/loom/helm-chart/</link>
+      <link>http://localhost:1313/docs/loom/helm-chart/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/helm-chart/</guid>
+      <guid>http://localhost:1313/docs/loom/helm-chart/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Kubernetes is the supported production deployment path for Loom. There are two Helm charts in the&#xA;source repository — &lt;code&gt;helm/loom&lt;/code&gt; for the server and &lt;code&gt;helm/cortex&lt;/code&gt; for the workers.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Image Generation</title>
-      <link>https://metaloom.io/docs/nodes/imagegen/</link>
+      <link>http://localhost:1313/docs/nodes/imagegen/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/imagegen/</guid>
+      <guid>http://localhost:1313/docs/nodes/imagegen/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The image-generation node &lt;strong&gt;generates a new image with a diffusion model&lt;/strong&gt;. Unlike the analysis&#xA;nodes, which describe a property of the media itself, &lt;code&gt;imagegen&lt;/code&gt; produces a fresh image — either&#xA;from a text prompt (&lt;code&gt;GENERATE&lt;/code&gt;) or by remixing the asset’s own image guided by a prompt (&lt;code&gt;REMIX&lt;/code&gt;) —&#xA;and attaches it to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Impressum</title>
-      <link>https://metaloom.io/docs/legal/impressum/</link>
+      <link>http://localhost:1313/docs/legal/impressum/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/legal/impressum/</guid>
+      <guid>http://localhost:1313/docs/legal/impressum/</guid>
       <description>&lt;div class=&#34;admonitionblock note&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;i class=&#34;fa icon-note&#34; title=&#34;Note&#34;&gt;&lt;/i&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This page is in &lt;strong&gt;German&lt;/strong&gt;: it is the legal disclosure required of a website operated from&#xA;Austria (§ 5 E-Commerce-Gesetz, § 25 Mediengesetz). The rest of the site — including the&#xA;&lt;a href=&#34;../&#34;&gt;licensing information&lt;/a&gt; — is in English.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Java Client Usage</title>
-      <link>https://metaloom.io/docs/loom/java-client/</link>
+      <link>http://localhost:1313/docs/loom/java-client/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/java-client/</guid>
+      <guid>http://localhost:1313/docs/loom/java-client/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;loom-rest-client&lt;/code&gt; module provides a typed HTTP client for JVM applications.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_dependency&#34;&gt;Maven Dependency&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&amp;lt;dependency&amp;gt;&#xA;    &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt;&#xA;    &amp;lt;artifactId&amp;gt;loom-rest-client&amp;lt;/artifactId&amp;gt;&#xA;    &amp;lt;version&amp;gt;1.0.0-SNAPSHOT&amp;lt;/version&amp;gt;&#xA;&amp;lt;/dependency&amp;gt;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Johannes Schüth</title>
-      <link>https://metaloom.io/author/jotschi/</link>
+      <link>http://localhost:1313/author/jotschi/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/author/jotschi/</guid>
+      <guid>http://localhost:1313/author/jotschi/</guid>
       <description>&lt;p&gt;Johannes main focus is backend development. But he does not mind devops and the occasional frontend development. He recharges his coding battery by outdoor photography or working on his IBM 5150. Besides retro computing his hobbies also include electronics and astronomy.&lt;/p&gt;</description>
     </item>
     <item>
       <title>LLM Enrichment</title>
-      <link>https://metaloom.io/docs/nodes/llm/</link>
+      <link>http://localhost:1313/docs/nodes/llm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/llm/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, each producing its own output.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>http://localhost:1313/docs/nodes/llm/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Loom Sync</title>
-      <link>https://metaloom.io/docs/nodes/loom/</link>
+      <link>http://localhost:1313/docs/nodes/loom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/loom/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom sync node is a &lt;strong&gt;sink&lt;/strong&gt;: it accumulates hash results from upstream nodes and writes them back&#xA;to the Loom backend in batches, keeping the number of REST calls low on large runs.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>http://localhost:1313/docs/nodes/loom/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom sync node is a &lt;strong&gt;sink&lt;/strong&gt;: it accumulates hash results and writes them back to the Loom&#xA;backend in batches, keeping the number of REST calls low on large runs. It has one input port per&#xA;algorithm, and each port accepts only that algorithm’s hash type — so which column a hash lands in&#xA;follows from the connection you drew, never from what an upstream node happens to be called.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Loom UI</title>
-      <link>https://metaloom.io/docs/ui/</link>
+      <link>http://localhost:1313/docs/ui/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/ui/</guid>
+      <guid>http://localhost:1313/docs/ui/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Loom UI&lt;/strong&gt; is the browser-based management interface for a Loom server. It is a single-page&#xA;application (React, Vite and Material UI) that is &lt;strong&gt;bundled into the Loom server itself&lt;/strong&gt; — no separate&#xA;deployment is required. Everything you can do through the &lt;a href=&#34;../loom/rest-api/&#34;&gt;REST API&lt;/a&gt; — browsing&#xA;assets, chatting with the AI agent, authoring pipelines, managing users, roles and API keys — is&#xA;available from the UI.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Maven Artifacts</title>
-      <link>https://metaloom.io/docs/cortex/maven-artifacts/</link>
+      <link>http://localhost:1313/docs/cortex/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/maven-artifacts/</guid>
+      <guid>http://localhost:1313/docs/cortex/maven-artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Cortex artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group and should generally be consumed with the shared BOM.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Maven Artifacts</title>
-      <link>https://metaloom.io/docs/loom/maven-artifacts/</link>
+      <link>http://localhost:1313/docs/loom/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/maven-artifacts/</guid>
+      <guid>http://localhost:1313/docs/loom/maven-artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Loom artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_bom_pom&#34;&gt;BOM POM&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Use the BOM to align versions across Loom and Cortex modules:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Metrics</title>
-      <link>https://metaloom.io/docs/cortex/metrics/</link>
+      <link>http://localhost:1313/docs/cortex/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/metrics/</guid>
+      <guid>http://localhost:1313/docs/cortex/metrics/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on its monitoring port —&#xA;the same server that serves the health and readiness probes. All Cortex meters are prefixed&#xA;&lt;code&gt;cortex_&lt;/code&gt;. For the server-side counterpart see &lt;a href=&#34;../../loom/metrics/&#34;&gt;Loom Metrics&lt;/a&gt;; for liveness&#xA;and readiness see &lt;a href=&#34;../monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Metrics</title>
-      <link>https://metaloom.io/docs/loom/metrics/</link>
+      <link>http://localhost:1313/docs/loom/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/metrics/</guid>
+      <guid>http://localhost:1313/docs/loom/metrics/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on a dedicated monitoring&#xA;port. All Loom meters are prefixed &lt;code&gt;loom_&lt;/code&gt;. For Cortex worker metrics see&#xA;&lt;a href=&#34;../../cortex/metrics/&#34;&gt;Cortex Metrics&lt;/a&gt;; for health and readiness endpoints see&#xA;&lt;a href=&#34;../../cortex/monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Model Licenses</title>
-      <link>https://metaloom.io/docs/legal/model-licenses/</link>
+      <link>http://localhost:1313/docs/legal/model-licenses/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/legal/model-licenses/</guid>
+      <guid>http://localhost:1313/docs/legal/model-licenses/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;MetaLoom ships &lt;strong&gt;no model weights&lt;/strong&gt;. Every &lt;a href=&#34;../../nodes/&#34;&gt;node&lt;/a&gt; that needs a model references it by&#xA;file path, repository id or endpoint URL, and you provide the model. That means the license you have&#xA;to satisfy is the one attached to the model you point the node at — not the Apache-2.0 license of&#xA;MetaLoom itself.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Monitoring API</title>
-      <link>https://metaloom.io/docs/cortex/monitoring/</link>
+      <link>http://localhost:1313/docs/cortex/monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/monitoring/</guid>
+      <guid>http://localhost:1313/docs/cortex/monitoring/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt;, &lt;strong&gt;readiness&lt;/strong&gt; and&#xA;&lt;strong&gt;Prometheus metrics&lt;/strong&gt; endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.&#xA;Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated&#xA;monitoring port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>OCR</title>
-      <link>https://metaloom.io/docs/nodes/ocr/</link>
+      <link>http://localhost:1313/docs/nodes/ocr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/ocr/</guid>
+      <guid>http://localhost:1313/docs/nodes/ocr/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OCR node extracts text from images and document scans using &lt;strong&gt;Tesseract&lt;/strong&gt; (via Tess4J). The&#xA;recognized text is stored so it can be indexed and searched.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Operation</title>
-      <link>https://metaloom.io/docs/operation/</link>
+      <link>http://localhost:1313/docs/operation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/operation/</guid>
+      <guid>http://localhost:1313/docs/operation/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;How Loom and Cortex operate together at runtime.&#xA;Loom is the brain; Cortex is the muscle. Loom stores assets, owns pipeline definitions and &lt;strong&gt;drives&lt;/strong&gt;&#xA;processing runs; Cortex is a fleet of worker daemons that register with Loom and execute the individual&#xA;tasks Loom hands them.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Pipeline Mechanism</title>
-      <link>https://metaloom.io/docs/pipeline/</link>
+      <link>http://localhost:1313/docs/pipeline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/pipeline/</guid>
+      <guid>http://localhost:1313/docs/pipeline/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A &lt;strong&gt;pipeline&lt;/strong&gt; is a directed acyclic graph (DAG) of processing nodes applied to media assets.&#xA;Pipelines are &lt;strong&gt;authored in the Loom UI&lt;/strong&gt;, &lt;strong&gt;stored on Loom&lt;/strong&gt; (versioned in the database), and&#xA;&lt;strong&gt;executed by Loom’s pipeline engine&lt;/strong&gt;, which delegates the individual node tasks to registered&#xA;&lt;a href=&#34;../cortex/&#34;&gt;Cortex&lt;/a&gt; workers.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Quality</title>
-      <link>https://metaloom.io/docs/nodes/quality/</link>
+      <link>http://localhost:1313/docs/nodes/quality/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/quality/</guid>
+      <guid>http://localhost:1313/docs/nodes/quality/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The quality node measures &lt;strong&gt;perceptual quality metrics&lt;/strong&gt; of an image or video — resolution,&#xA;blurriness (via a Laplacian measure) and bitrate — so low-quality assets can be flagged or filtered.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>REST API</title>
-      <link>https://metaloom.io/docs/loom/rest-api/</link>
+      <link>http://localhost:1313/docs/loom/rest-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/loom/rest-api/</guid>
+      <guid>http://localhost:1313/docs/loom/rest-api/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes its full functionality via a versioned REST API.&#xA;All endpoints are rooted at &lt;code&gt;/api/v1&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>REST API</title>
-      <link>https://metaloom.io/docs/rest/</link>
+      <link>http://localhost:1313/docs/rest/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/rest/</guid>
+      <guid>http://localhost:1313/docs/rest/</guid>
       <description>&lt;div class=&#34;admonitionblock tip&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;div class=&#34;title&#34;&gt;Tip&lt;/div&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;title&#34;&gt;Try the example&lt;/div&gt;&#xA;&lt;a href=&#34;https://demo.metaloom.io/api/v1/demo/assets&#34; class=&#34;bare&#34;&gt;https://demo.metaloom.io/api/v1/demo/assets&lt;/a&gt;&#xA;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_api_endpoints&#34;&gt;API endpoints&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;table class=&#34;tableblock frame-all grid-all stretch&#34;&gt;&#xA;&lt;colgroup&gt;&#xA;&lt;col style=&#34;width: 50%;&#34;/&gt;&#xA;&lt;col style=&#34;width: 50%;&#34;/&gt;&#xA;&lt;/colgroup&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th class=&#34;tableblock halign-left valign-top&#34;&gt;Description&lt;/th&gt;&#xA;&lt;th class=&#34;tableblock halign-left valign-top&#34;&gt;API endpoint&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td class=&#34;tableblock halign-left valign-top&#34;&gt;&lt;p class=&#34;tableblock&#34;&gt;Get the asset with the given UUID.&lt;/p&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;tableblock halign-left valign-top&#34;&gt;&lt;p class=&#34;tableblock&#34;&gt;&lt;code&gt;&lt;code&gt;GET /api/v1/:projectName/assets/:assetUuid&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&#xA;&#x9;&amp;#34;uuid&amp;#34;: &amp;#34;b5f26d5f-4ab0-4f99-a2f1-7be9f20e7a15&amp;#34;,&#xA;&#x9;&amp;#34;filename&amp;#34;: &amp;#34;sample.mp4&amp;#34;&#xA;}&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>S3 Sink</title>
-      <link>https://metaloom.io/docs/nodes/s3-sink/</link>
+      <link>http://localhost:1313/docs/nodes/s3-sink/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/s3-sink/</guid>
+      <guid>http://localhost:1313/docs/nodes/s3-sink/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 sink is an &lt;strong&gt;output node&lt;/strong&gt;. It takes the files other nodes produce — contact sheets, depth&#xA;maps, generated images, speech audio — uploads them to an S3 bucket, and registers each one in&#xA;Loom as an asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>S3 Source</title>
-      <link>https://metaloom.io/docs/nodes/s3-source/</link>
+      <link>http://localhost:1313/docs/nodes/s3-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/s3-source/</guid>
+      <guid>http://localhost:1313/docs/nodes/s3-source/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a media&#xA;item, it &lt;strong&gt;enumerates&lt;/strong&gt; objects from S3-compatible object storage (AWS S3, MinIO, Ceph) and feeds each&#xA;one into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene Detection</title>
-      <link>https://metaloom.io/docs/nodes/scene-detection/</link>
+      <link>http://localhost:1313/docs/nodes/scene-detection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/scene-detection/</guid>
+      <guid>http://localhost:1313/docs/nodes/scene-detection/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The scene detection node finds &lt;strong&gt;scene boundaries&lt;/strong&gt; (cuts) in a video using optical-flow analysis, and&#xA;emits the resulting segments. Each run replaces the whole segment set for the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene Layout</title>
-      <link>https://metaloom.io/docs/nodes/scene-layout/</link>
+      <link>http://localhost:1313/docs/nodes/scene-layout/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/scene-layout/</guid>
+      <guid>http://localhost:1313/docs/nodes/scene-layout/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Detection tells you &lt;strong&gt;what&lt;/strong&gt; is in a picture and where its box sits. Scene layout tells you &lt;strong&gt;how&#xA;those things relate to each other&lt;/strong&gt; — which is in front, which is behind, which one is hiding part&#xA;of another, and which are standing side by side.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Script</title>
-      <link>https://metaloom.io/docs/nodes/script/</link>
+      <link>http://localhost:1313/docs/nodes/script/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/script/</guid>
+      <guid>http://localhost:1313/docs/nodes/script/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The script node runs &lt;strong&gt;a small piece of code you write&lt;/strong&gt; as a step in your pipeline. It reads the&#xA;media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare —&#xA;a text, a number, a list of texts, a block of JSON, a set of timeframes, or images.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Sentiment Analysis</title>
-      <link>https://metaloom.io/docs/nodes/sentiment/</link>
+      <link>http://localhost:1313/docs/nodes/sentiment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/sentiment/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The sentiment node &lt;strong&gt;scores the tone of text&lt;/strong&gt; your pipeline has already produced. It does not look&#xA;at the media itself — it takes text from an &lt;strong&gt;upstream&lt;/strong&gt; node (&lt;a href=&#34;../tika/&#34;&gt;Tika&lt;/a&gt; document content,&#xA;&lt;a href=&#34;../ocr/&#34;&gt;OCR&lt;/a&gt; text, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;, or a &lt;a href=&#34;../vlm/&#34;&gt;VLM&lt;/a&gt; /&#xA;&lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; answer) and labels it &lt;strong&gt;positive&lt;/strong&gt;, &lt;strong&gt;neutral&lt;/strong&gt; or &lt;strong&gt;negative&lt;/strong&gt;, with a confidence&#xA;score and a signed polarity value you can sort and filter on.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>http://localhost:1313/docs/nodes/sentiment/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The sentiment node &lt;strong&gt;scores the tone of text&lt;/strong&gt; your pipeline has already produced. It does not look&#xA;at the media itself — it has a single &lt;code&gt;text&lt;/code&gt; input port that accepts any text type, so you can&#xA;connect &lt;a href=&#34;../tika/&#34;&gt;Tika&lt;/a&gt; document content, &lt;a href=&#34;../ocr/&#34;&gt;OCR&lt;/a&gt; text, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;,&#xA;or a &lt;a href=&#34;../vlm/&#34;&gt;VLM&lt;/a&gt; / &lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; answer to it. The node labels whatever arrives&#xA;&lt;strong&gt;positive&lt;/strong&gt;, &lt;strong&gt;neutral&lt;/strong&gt; or &lt;strong&gt;negative&lt;/strong&gt;, with a confidence score and a signed polarity value you&#xA;can sort and filter on.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Speech-to-Text (Whisper)</title>
-      <link>https://metaloom.io/docs/nodes/whisper/</link>
+      <link>http://localhost:1313/docs/nodes/whisper/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/whisper/</guid>
+      <guid>http://localhost:1313/docs/nodes/whisper/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Whisper node transcribes the audio track of a media file into text using a &lt;strong&gt;Whisper&lt;/strong&gt;&#xA;speech-to-text model. The transcript is stored as a first-class component so it can be searched and&#xA;summarized.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Text-to-Speech (TTS)</title>
-      <link>https://metaloom.io/docs/nodes/tts/</link>
+      <link>http://localhost:1313/docs/nodes/tts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/tts/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The TTS node &lt;strong&gt;generates narration audio from text&lt;/strong&gt;. Unlike the analysis nodes, which describe a&#xA;property of the media itself, TTS takes text produced by an &lt;strong&gt;upstream&lt;/strong&gt; node — an&#xA;&lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; summary, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;, or a translated&#xA;&lt;a href=&#34;../whisper/&#34;&gt;transcript&lt;/a&gt; — and synthesizes speech, attaching the audio to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>http://localhost:1313/docs/nodes/tts/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The TTS node &lt;strong&gt;generates narration audio from text&lt;/strong&gt;. Unlike the analysis nodes, which describe a&#xA;property of the media itself, TTS has a single &lt;code&gt;text&lt;/code&gt; input port that accepts any text type — connect&#xA;an &lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; summary, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;, or a translated&#xA;&lt;a href=&#34;../whisper/&#34;&gt;transcript&lt;/a&gt; to it — and synthesizes speech, attaching the audio to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Thumbnail</title>
-      <link>https://metaloom.io/docs/nodes/thumbnail/</link>
+      <link>http://localhost:1313/docs/nodes/thumbnail/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/thumbnail/</guid>
+      <guid>http://localhost:1313/docs/nodes/thumbnail/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The thumbnail node generates a &lt;strong&gt;contact-sheet preview&lt;/strong&gt; (a tiled grid of frames) for a video, giving&#xA;the UI a fast visual summary of the content.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Tika</title>
-      <link>https://metaloom.io/docs/nodes/tika/</link>
+      <link>http://localhost:1313/docs/nodes/tika/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/tika/</guid>
+      <guid>http://localhost:1313/docs/nodes/tika/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Tika node extracts &lt;strong&gt;format metadata and embedded text&lt;/strong&gt; from virtually any file type using Apache&#xA;Tika — images (EXIF), audio/video containers, PDFs and Office documents.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>VLM</title>
-      <link>https://metaloom.io/docs/nodes/vlm/</link>
+      <link>http://localhost:1313/docs/nodes/vlm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/vlm/</guid>
+      <guid>http://localhost:1313/docs/nodes/vlm/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The VLM node reads an image with a &lt;strong&gt;vision-language model&lt;/strong&gt; served over an OpenAI-compatible&#xA;endpoint. It ships an &lt;strong&gt;olmOCR&lt;/strong&gt; preset that transcribes a document page — scans, receipts,&#xA;screenshots, forms — into clean markdown, with tables converted to HTML and equations to LaTeX.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

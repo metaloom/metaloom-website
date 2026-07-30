@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Face Detection | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -244,7 +251,7 @@
 embeddings</strong> (vectors) that can be used for recognition and clustering. Video is processed by scanning
 frames at a configurable rate.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;facedetect&#34;,&#34;applies&#34;:&#34;Image \u00b7 Video&#34;,&#34;badge&#34;:&#34;InspireFace native&#34;,&#34;persist&#34;:&#34;detection rows (bulk upsert) + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;detection&#34;,&#34;note&#34;:&#34;capabilities: detection&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video frames&#34;,&#34;d&#34;:&#34;sampled at videoChopRate&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;face detections&#34;,&#34;d&#34;:&#34;bounding box per face&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;facedetect_flag&#34;}]},{&#34;name&#34;:&#34;detection + recognition&#34;,&#34;note&#34;:&#34;capabilities: detection, recognition&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video frames&#34;,&#34;d&#34;:&#34;sampled at videoChopRate&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;face detections&#34;,&#34;d&#34;:&#34;bounding box per face&#34;},{&#34;t&#34;:&#34;vector&#34;,&#34;l&#34;:&#34;face embeddings&#34;,&#34;d&#34;:&#34;clustered into persons&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;facedetect_flag&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;facedetect&#34;,&#34;applies&#34;:&#34;Image \u00b7 Video&#34;,&#34;badge&#34;:&#34;InspireFace native&#34;,&#34;persist&#34;:&#34;detection rows (bulk upsert) + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;detection&#34;,&#34;note&#34;:&#34;capabilities: detection&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;a still picture \u2014 wire either image or video, never both&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;frames sampled at videoChopRate \u2014 wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many faces the detector found&#34;},{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected face: bounding box, landmarks and focal point&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED for the detector run&#34;}]},{&#34;name&#34;:&#34;detection + recognition&#34;,&#34;note&#34;:&#34;capabilities: detection, recognition&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;a still picture \u2014 wire either image or video, never both&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;frames sampled at videoChopRate \u2014 wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many faces the detector found&#34;},{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected face: bounding box, landmarks and focal point&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED for the detector run&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -260,12 +267,12 @@ frames at a configurable rate.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> or <code>video</code> — exactly one of the two is wired</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>face_count</code> (Integer), <code>facedetect_flag</code> (String), <code>detections</code> (JSON String — the bounding boxes, for downstream nodes such as <a href="../scene-layout/">Scene Layout</a>); boxes and embedding vectors are also persisted as detections</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detections</code> (<strong>many</strong> — one element per detected face, the boxes that feed <a href="../scene-layout/">Scene Layout</a>, <a href="../dominant-color/">Dominant Colour</a> and <a href="../facedescription/">Face Description</a>), <code>face_count</code> (Integer), <code>flag</code> (String). Embedding vectors are <strong>not</strong> a connectable port: with the recognition capability they are written straight to the detection and embedding tables, so face search reads them from Loom rather than through the graph</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -338,7 +345,8 @@ frames at a configurable rate.</p>
 <p><strong>Content moderation / review</strong> — flag assets that contain people.</p>
 </li>
 <li>
-<p>Feed <a href="../facedescription/">Face Description</a> with detected faces.</p>
+<p>Feed <a href="../facedescription/">Face Description</a> by connecting the <code>detections</code> port — it runs once
+per element of the sequence.</p>
 </li>
 </ul>
 </div>

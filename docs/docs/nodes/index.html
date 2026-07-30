@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Nodes | MetaLoom</title>
 
@@ -118,6 +118,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -162,7 +169,9 @@ worker that can run it.</p>
 </div>
 <div class="paragraph">
 <p>A node writes its result back to Loom over the REST API — a typed component plus an
-<code>asset_node_result</code> ledger row. Downstream nodes read a dependency’s <strong>output keys</strong>.</p>
+<code>asset_node_result</code> ledger row. Downstream nodes do not name the node they depend on: they connect to
+one of its <strong>ports</strong>. A port has a name that is local to its node, a content type that says what it
+carries, and a cardinality that says whether it carries one element or a sequence of them.</p>
 </div>
 <div class="paragraph">
 <p>Between them the built-in nodes cover any media file type — images, videos, audio and documents. What
@@ -170,8 +179,10 @@ is actually analysed for a given asset depends entirely on which nodes the pipel
 </div>
 <div class="paragraph">
 <p>Every node page opens with a diagram of that node in a pipeline: what flows in on the left, what comes
-out on the right, and a tab per alternative configuration. Ports are labelled with the data type they
-carry:</p>
+out on the right, and a tab per alternative configuration. <strong>Hover any port</strong> — or tap it, or reach it
+with the keyboard — for a card giving its content type, its cardinality, and what the value actually
+is. A stacked marker on a port means it carries a sequence rather than a single element. The key below
+covers both the type icons and the cardinality:</p>
 </div>
 <div class="ml-nodeviz-legend"></div>
 <div class="paragraph">
@@ -257,18 +268,18 @@ carry:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="tts/">Text-to-Speech</a> (<code>tts</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any (from upstream text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any (text connected to its <code>text</code> port)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Synthesize narration audio (Orpheus/Kartoffel DE, Kokoro EN)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="sentiment/">Sentiment Analysis</a> (<code>sentiment</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any (from upstream text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any (text connected to its <code>text</code> port)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Score the tone of extracted text (German and English)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="llm/">LLM Enrichment</a> (<code>llm</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enrich metadata with a language model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enrich metadata with a language model — one output port per prompt</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="captioning/">Captioning</a> (<code>captioning</code>)</p></td>
@@ -283,12 +294,12 @@ carry:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedetect/">Face Detection</a> (<code>facedetect</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Detect faces + embeddings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detect faces + embeddings — its <code>detections</code> port carries <strong>one element per face</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedescription/">Face Description</a> (<code>facedescription</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Describe detected faces with a vision model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describe detected faces with a vision model, one description per face</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="depthmap/">Depth Map</a> (<code>depthmap</code>)</p></td>
@@ -297,7 +308,7 @@ carry:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="scene-layout/">Scene Layout</a> (<code>scene-layout</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Image (from depth + detections)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image (a depth map and detections connected)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Work out what is in front of, behind or next to what</p></td>
 </tr>
 </tbody>
@@ -338,7 +349,7 @@ carry:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="dominant-color/">Dominant Colour</a> (<code>dominant-color</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image (optionally with detections connected)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Work out which colours a picture is made of, as HEX and in words (English and German)</p></td>
 </tr>
 </tbody>
@@ -375,22 +386,22 @@ carry:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="filters/">Filters</a> (<code>filter-*</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">— (routing)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Route items down PASS/REJECT branches</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Route items down the PASS or REJECT branch of a <code>passed</code> port</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="script/">Script</a> (<code>script</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Run your own code as a pipeline step and emit declared outputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run your own code as a pipeline step and emit declared ports — list outputs fan out</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/">Loom Sync</a> (<code>loom</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Batch hash results back to Loom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Batch hash results back to Loom, one input port per algorithm</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="s3-sink/">S3 Sink</a> (<code>s3-sink</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Upload produced files to an S3 bucket and register them as assets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upload produced files to an S3 bucket and register them as assets — its <code>artifacts</code> port takes <strong>many</strong></p></td>
 </tr>
 </tbody>
 </table>
@@ -492,8 +503,10 @@ makes near-duplicate detection possible at scale via vector similarity search.</
 <dt class="hdlist1">Face detection</dt>
 <dd>
 <p><a href="facedetect/"><code>facedetect</code></a> finds faces in images and video with the InspireFace library, returning
-bounding boxes, facial embeddings and the optimal focal point for cropped thumbnails.
-<a href="facedescription/"><code>facedescription</code></a> then describes those faces with a vision model.</p>
+bounding boxes, facial embeddings and the optimal focal point for cropped thumbnails. Its
+<code>detections</code> port carries one element per face, so <a href="facedescription/"><code>facedescription</code></a>,
+<a href="scene-layout/"><code>scene-layout</code></a> and <a href="dominant-color/"><code>dominant-color</code></a> all work per face
+simply by connecting to it.</p>
 </dd>
 <dt class="hdlist1">Thumbnail generation</dt>
 <dd>
@@ -532,15 +545,15 @@ local cache.</p>
 </dd>
 <dt class="hdlist1">Text-to-speech</dt>
 <dd>
-<p><a href="tts/"><code>tts</code></a> turns upstream text — an <a href="llm/"><code>llm</code></a> summary, a caption, or a translated
-transcript — into narration audio, using Orpheus/Kartoffel for German and Kokoro for English behind a
-small HTTP sidecar.</p>
+<p><a href="tts/"><code>tts</code></a> turns text connected to its <code>text</code> port — an <a href="llm/"><code>llm</code></a> summary, a caption, or
+a translated transcript — into narration audio, using Orpheus/Kartoffel for German and Kokoro for
+English behind a small HTTP sidecar.</p>
 </dd>
 <dt class="hdlist1">Sentiment analysis</dt>
 <dd>
-<p><a href="sentiment/"><code>sentiment</code></a> scores the tone of text the pipeline already produced — document text,
-OCR output, captions or LLM answers — as positive, neutral or negative with a signed polarity value,
-using dedicated German and English models behind a small HTTP sidecar.</p>
+<p><a href="sentiment/"><code>sentiment</code></a> scores the tone of text the pipeline already produced — connect document
+text, OCR output, a caption or an LLM answer to its <code>text</code> port — as positive, neutral or negative
+with a signed polarity value, using dedicated German and English models behind a small HTTP sidecar.</p>
 </dd>
 <dt class="hdlist1">Depth and spatial layout</dt>
 <dd>
@@ -552,7 +565,7 @@ boxes into a scene you can caption accurately and search spatially.</p>
 <dt class="hdlist1">Colour analysis</dt>
 <dd>
 <p><a href="dominant-color/"><code>dominant-color</code></a> works out which colours a picture is actually made of — the
-whole frame, a fixed region, or every detected face — and reports each one as HEX, RGB, HSL and
+whole frame, a fixed region, or every box arriving on its <code>detections</code> port — and reports each one as HEX, RGB, HSL and
 CIELAB alongside a name a person would use, in English and German. It needs no model and no GPU, so
 it can run over an entire archive cheaply.</p>
 </dd>

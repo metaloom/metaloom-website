@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Examples | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -467,14 +474,19 @@ python daemon.py</code></pre>
 </div>
 <div class="paragraph">
 <p>Implement your logic by replacing <code>run_node()</code>, which receives the media path, the per-task <code>options</code>
-and the <code>upstreamOutputs</code>, and returns a <code>NodeResult</code>:</p>
+and the task’s <code>inputs</code> — keyed by this node’s own input <strong>port</strong> ids — and returns a <code>NodeResult</code>
+keyed by its output port ids:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-python" data-lang="python">def run_node(node_kind, media_path, options, upstream):
+<pre class="highlight"><code class="language-python" data-lang="python">def run_node(node_kind, media_path, options, inputs):
     # ... compute whatever you like from media_path ...
-    return NodeResult.completed({&#34;my_output&#34;: value})</code></pre>
+    return NodeResult.completed({&#34;my_output_port&#34;: value})</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The payload envelope each port value travels in, and the descriptor that declares those ports, are
+covered in <a href="../../playbooks/python-node/">A Custom Node in Python</a>.</p>
 </div>
 <div class="paragraph">
 <p>Then advertise the kind via <code>CORTEX_NODE_KINDS</code> so Loom dispatches it to you. Online, a <code>COMPLETED</code>

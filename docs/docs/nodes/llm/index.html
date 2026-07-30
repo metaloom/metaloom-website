@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>LLM Enrichment | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -242,9 +249,10 @@
           <div class="paragraph">
 <p>The LLM node sends asset metadata to a <strong>Large Language Model</strong> and stores the model’s response as
 enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts
-can be configured, each producing its own output.</p>
+can be configured, and <strong>each prompt adds its own output port</strong>, so downstream nodes connect to the
+one answer they care about rather than to the node as a whole.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;llm&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;LLM provider service&#34;,&#34;persist&#34;:&#34;asset_json_comp per prompt + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;one prompt&#34;,&#34;note&#34;:&#34;the prompt id names the output key&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;asset metadata&#34;,&#34;d&#34;:&#34;filename and stored fields&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;upstream text&#34;,&#34;d&#34;:&#34;transcript / tika_content&#34;,&#34;opt&#34;:true}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;llm_result_classify&#34;}]},{&#34;name&#34;:&#34;several prompts&#34;,&#34;note&#34;:&#34;one output per configured prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;asset metadata&#34;,&#34;d&#34;:&#34;filename and stored fields&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;upstream text&#34;,&#34;d&#34;:&#34;transcript / tika_content&#34;,&#34;opt&#34;:true}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;llm_result_classify&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;llm_result_tags&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;llm_result_summary&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;llm&#34;,&#34;applies&#34;:&#34;Any asset&#34;,&#34;badge&#34;:&#34;LLM provider service&#34;,&#34;persist&#34;:&#34;asset_json_comp per prompt + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;one prompt&#34;,&#34;note&#34;:&#34;the prompt id names the port&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the asset — its filename and stored fields are what the prompts see&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;result_classify&#34;,&#34;d&#34;:&#34;the answer to the prompt with id classify — one port per configured prompt&#34;}]},{&#34;name&#34;:&#34;several prompts&#34;,&#34;note&#34;:&#34;one output port per configured prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the asset — its filename and stored fields are what the prompts see&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;result_classify&#34;,&#34;d&#34;:&#34;the answer to the prompt with id classify&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;result_tags&#34;,&#34;d&#34;:&#34;the answer to the prompt with id tags&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;result_summary&#34;,&#34;d&#34;:&#34;the answer to the prompt with id summary — one port per configured prompt&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -260,12 +268,12 @@ can be configured, each producing its own output.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any (operates on the asset’s filename / metadata)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional upstream outputs (e.g. a transcript or extracted text) can be referenced by prompts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> — the asset, whose filename and stored fields the prompts reason over</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>llm_result_{promptId}</code> (String) — one per configured prompt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>result_{promptId}</code> — <strong>one port per configured prompt</strong>, so a <code>summary</code> prompt produces a <code>result_summary</code> port you can connect to <a href="../tts/">Text-to-Speech</a> or <a href="../sentiment/">Sentiment Analysis</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -305,7 +313,7 @@ can be configured, each producing its own output.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>prompts</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A map of prompt definitions; each produces a <code>llm_result_{promptId}</code> output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A map of prompt definitions. Each one adds a <code>result_{promptId}</code> output port, which appears on the node in the editor as soon as the prompt is defined</p></td>
 </tr>
 </tbody>
 </table>

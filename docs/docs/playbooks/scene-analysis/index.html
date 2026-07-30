@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Scene-Level Video Analysis | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -249,13 +256,15 @@ then describes those scenes — from the soundtrack, from the picture, or both.<
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;"/>
-<col style="width: 25%;"/>
-<col style="width: 50%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Output port</th>
 <th class="tableblock halign-left valign-top">Produces</th>
 <th class="tableblock halign-left valign-top">Stored as</th>
 </tr>
@@ -263,27 +272,32 @@ then describes those scenes — from the soundtrack, from the picture, or both.<
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/scene-detection/"><code>scene-detection</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scenes</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scene boundaries from optical-flow analysis</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_segment_comp</code> (whole-set replace)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/whisper/"><code>whisper</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transcript</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transcript with per-utterance start/end times</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_transcript_comp</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/thumbnail/"><code>thumbnail</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>thumbnail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Contact-sheet preview rendered from video frames</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">local <code>thumbnail_bin</code> cache + binary upload</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/quality/"><code>quality</code></a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Resolution / blurriness / bitrate metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metrics</code> (plus <code>blurriness</code>, <code>width</code>, <code>height</code>, <code>fps</code>, <code>frame_count</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resolution / blurriness / frame metrics</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">quality component</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/consistency/"><code>consistency</code></a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>is_complete</code> — is the file whole and decodable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>is_complete</code>, <code>zero_chunk_count</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is the file whole and decodable</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">consistency component</p></td>
 </tr>
 </tbody>
@@ -355,23 +369,36 @@ with dialogue: interviews, lectures, podcasts with video, meeting recordings.</p
       &#34;timeoutMs&#34;: 3600000 }
   ],
   &#34;edges&#34;: [
-    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;,      &#34;target&#34;: &#34;mime&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,        &#34;target&#34;: &#34;hash&#34;,   &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;hash&#34;,        &#34;target&#34;: &#34;consistency&#34; },
-    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;consistency&#34;, &#34;target&#34;: &#34;scenes&#34; },
-    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;consistency&#34;, &#34;target&#34;: &#34;speech&#34; }
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;mime&#34;,        &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;hash&#34;,        &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;consistency&#34;, &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;scenes&#34;,      &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;speech&#34;,      &#34;targetPort&#34;: &#34;video&#34;,  &#34;branch&#34;: &#34;PASS&#34; }
   ]
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>scenes</code> and <code>speech</code> both depend on <code>consistency</code> and nothing on each other, so Loom dispatches them
-independently — potentially to different workers, in parallel. That is the whole reason to model this
-as a graph rather than a script: the GPU box transcribes while the CPU box runs optical flow.</p>
+<p>Every edge names the port at each end; both are mandatory. <code>whisper</code> is wired on its <code>video</code> port
+because this graph is filtered to video — <code>audio</code> and <code>video</code> are alternatives and exactly one of them
+may be connected.</p>
 </div>
 <div class="paragraph">
-<p>The <code>consistency</code> gate is worth the extra node. A truncated download produces a plausible-looking file
-that wastes a half-hour of transcription; checking first is cheap.</p>
+<p><code>scenes</code> and <code>speech</code> depend on the same filter branch and nothing on each other, so Loom dispatches
+them independently — potentially to different workers, in parallel. That is the whole reason to model
+this as a graph rather than a script: the GPU box transcribes while the CPU box runs optical flow.</p>
+</div>
+<div class="paragraph">
+<p><code>consistency</code> is worth the extra node for what it records: a truncated download produces a
+plausible-looking file, and <code>is_complete</code> on the asset is how you find the ones that wasted a
+half-hour of transcription. It is not a gate you wire in front of the expensive nodes, though — its
+verdict is a scalar, and routing is what <a href="../../nodes/filters/">filter nodes</a> and their <code>branch</code>
+edges do.</p>
 </div>
 <div class="sect2">
 <h3 id="_reading_the_result">Reading the result</h3>
@@ -441,17 +468,26 @@ tells you nothing and you need the frames.</p>
     { &#34;id&#34;: &#34;grade&#34;,  &#34;type&#34;: &#34;quality&#34;,         &#34;name&#34;: &#34;Quality metrics&#34; }
   ],
   &#34;edges&#34;: [
-    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;target&#34;: &#34;mime&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;target&#34;: &#34;hash&#34;, &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;scenes&#34; },
-    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;sheet&#34; },
-    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;hash&#34;,   &#34;target&#34;: &#34;grade&#34; }
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;mime&#34;,   &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;hash&#34;,   &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;scenes&#34;, &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;sheet&#34;,  &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; },
+    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
+      &#34;target&#34;: &#34;grade&#34;,  &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; }
   ]
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>That gives you scene boundaries, a contact-sheet preview and quality metrics per video.</p>
+</div>
+<div class="paragraph">
+<p>To keep the contact sheet, wire <code>sheet’s `thumbnail</code> port into an <a href="../../nodes/s3-sink/">S3 Sink</a>:
+the file it renders lives in the worker’s local cache until something uploads it.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -477,9 +513,10 @@ image pipeline (<code>captioning</code> or <code>vlm</code>) over them, linking 
 metadata. Every node in that path is a stock node.</p>
 </li>
 <li>
-<p><strong>Write the node.</strong> A frame-sampling caption node is a natural custom node: read the upstream
-<code>scene_detection</code> output, grab one frame per segment, call the vision model. See
-<a href="../../cortex/examples/">Cortex Examples</a> for the Java and Python paths.</p>
+<p><strong>Write the node.</strong> A frame-sampling caption node is a natural custom node: declare a
+<code>struct/segments</code> input port, wire <code>scene-detection’s `scenes</code> port into it, grab one frame per
+segment, call the vision model. See <a href="../python-node/">A Custom Node in Python</a> for the wire
+protocol, or <a href="../../cortex/examples/">Cortex Examples</a> for the Java path.</p>
 </li>
 </ul>
 </div>
@@ -490,17 +527,27 @@ metadata. Every node in that path is a stock node.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_a_note_on_consistency_and_node_ids">A Note on <code>consistency</code> and Node IDs</h2>
+<h2 id="fanout">Fan-out, and Why Scene Detection Does Not Do It</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some nodes read an upstream result <strong>by node id</strong>, not by kind. <code>thumbnail</code> looks for
-<code>consistency</code> → <code>is_complete</code> and refuses to render a preview for a file reported incomplete (unless
-<code>processIncomplete</code> is set on the worker). If you name that node <code>check</code> instead of <code>consistency</code>, the
-lookup silently finds nothing and the gate quietly stops working.</p>
+<p>A port carries either a single element or a <strong>sequence</strong>, and a sequence is what makes a node run more
+than once per asset. When a <code>MANY</code> output is wired into an input that takes one element, the engine
+dispatches one task per element — and when that branch is later wired into a <code>MANY</code> input, it gathers
+the elements belonging to the same asset back into a single task. Neither needs a merge node or any
+configuration; it follows from the two ports&#39; cardinalities.</p>
 </div>
 <div class="paragraph">
-<p>The same applies to <a href="../../nodes/loom/"><code>loom</code></a>, which reads <code>md5sum</code> → <code>md5</code> and <code>sha256sum</code> →
-<code>sha256</code>. When a playbook names a node a particular way, keep the name.</p>
+<p><a href="../../nodes/scene-detection/"><code>scene-detection</code></a> deliberately does <strong>not</strong> work that way. Its
+<code>scenes</code> port carries <strong>one</strong> element: a single timeline with the cuts inside it, not one element per
+scene. So nothing downstream runs per scene by connecting to it — which is exactly why per-scene
+captioning needs the custom node described above rather than a wiring trick.</p>
+</div>
+<div class="paragraph">
+<p>The built-in node that does fan out is <a href="../../nodes/facedetect/"><code>facedetect</code></a>: its <code>detections</code>
+port emits one element <strong>per detected face</strong>, so <a href="../../nodes/facedescription/"><code>facedescription</code></a>
+— whose input takes one detection — is dispatched once per face. On the gathering side,
+<a href="../../nodes/s3-sink/"><code>s3-sink</code></a> declares its <code>artifacts</code> input as a sequence, so every produced
+file wired into it arrives in one upload task per asset.</p>
 </div>
 </div>
 </div>
@@ -513,32 +560,21 @@ lookup silently finds nothing and the gate quietly stops working.</p>
 <div class="ml-figure">
 <svg viewBox="0 0 900 330" role="img" aria-labelledby="ml-sc-title ml-sc-desc" class="ml-arch-svg">
   <title id="ml-sc-title">Both routes in one graph</title>
-  <desc id="ml-sc-desc">A filesystem source feeds a MIME filter that passes video only, then a sha512 identity node and a consistency check. From the consistency node the graph fans out to four independent nodes — scene detection, whisper, thumbnail and quality — which Loom dispatches in parallel, each producing its own stored component.</desc>
+  <desc id="ml-sc-desc">A filesystem source emits media into a MIME filter that passes video only. The filter&#39;s PASS branch feeds five independent nodes — sha512 and consistency, and then scene detection, whisper, thumbnail and quality — each wired into its own media input port, which Loom dispatches in parallel, each producing its own stored component.</desc>
   <defs>
     <marker id="ml-sc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57cbcc"></path></marker>
   </defs>
 
-  <!-- linear head -->
+  <!-- head -->
   <rect x="16" y="140" width="120" height="44" rx="6" class="ml-box-part"></rect>
   <text x="76" y="160" text-anchor="middle" class="ml-part-title">source</text>
-  <text x="76" y="176" text-anchor="middle" class="ml-part-sub">filesystem</text>
+  <text x="76" y="176" text-anchor="middle" class="ml-part-sub">media</text>
 
-  <rect x="164" y="140" width="120" height="44" rx="6" class="ml-box-part"></rect>
-  <text x="224" y="160" text-anchor="middle" class="ml-part-title">mime</text>
-  <text x="224" y="176" text-anchor="middle" class="ml-part-sub">video/*</text>
+  <rect x="176" y="140" width="130" height="44" rx="6" class="ml-box-part"></rect>
+  <text x="241" y="160" text-anchor="middle" class="ml-part-title">mime</text>
+  <text x="241" y="176" text-anchor="middle" class="ml-part-sub">video/* → passed</text>
 
-  <rect x="312" y="140" width="120" height="44" rx="6" class="ml-box-part"></rect>
-  <text x="372" y="160" text-anchor="middle" class="ml-part-title">sha512</text>
-  <text x="372" y="176" text-anchor="middle" class="ml-part-sub">identity</text>
-
-  <rect x="460" y="140" width="130" height="44" rx="6" class="ml-box-part"></rect>
-  <text x="525" y="160" text-anchor="middle" class="ml-part-title">consistency</text>
-  <text x="525" y="176" text-anchor="middle" class="ml-part-sub">decodable?</text>
-
-  <polyline points="136,162 164,162" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="284,162 312,162" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <text x="298" y="154" text-anchor="middle" class="ml-edge-label">PASS</text>
-  <polyline points="432,162 460,162" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="136,162 176,162" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
 
   <!-- fan-out -->
   <rect x="666" y="16" width="180" height="44" rx="6" class="ml-box-part"></rect>
@@ -557,18 +593,25 @@ lookup silently finds nothing and the gate quietly stops working.</p>
   <text x="756" y="276" text-anchor="middle" class="ml-part-title">quality</text>
   <text x="756" y="292" text-anchor="middle" class="ml-part-sub">resolution · blur</text>
 
-  <polyline points="590,162 628,162 628,38 666,38" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="590,162 628,162 628,118 666,118" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="590,162 628,162 628,198 666,198" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="590,162 628,162 628,278 666,278" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <rect x="386" y="230" width="200" height="44" rx="6" class="ml-box-part"></rect>
+  <text x="486" y="250" text-anchor="middle" class="ml-part-title">sha512 · consistency</text>
+  <text x="486" y="266" text-anchor="middle" class="ml-part-sub">identity · decodable?</text>
+
+  <polyline points="306,162 628,162 628,38 666,38" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="306,162 628,162 628,118 666,118" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="306,162 628,162 628,198 666,198" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="306,162 628,162 628,278 666,278" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="340,162 340,252 386,252" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+
+  <text x="340" y="154" text-anchor="middle" class="ml-edge-label">PASS</text>
 
   <text x="756" y="76" text-anchor="middle" class="ml-edge-label">→ asset_segment_comp</text>
   <text x="756" y="156" text-anchor="middle" class="ml-edge-label">→ asset_transcript_comp</text>
   <text x="756" y="236" text-anchor="middle" class="ml-edge-label">→ binary + local cache</text>
   <text x="756" y="316" text-anchor="middle" class="ml-edge-label">→ quality component</text>
 
-  <text x="300" y="244" text-anchor="middle" class="ml-edge-label">no edges between the four — Loom dispatches them</text>
-  <text x="300" y="262" text-anchor="middle" class="ml-edge-label">independently, possibly to different workers</text>
+  <text x="180" y="290" text-anchor="middle" class="ml-edge-label">every edge leaves the filter&#39;s passed port</text>
+  <text x="180" y="308" text-anchor="middle" class="ml-edge-label">and enters that node&#39;s own media input</text>
 </svg>
 </div>
 <div class="paragraph">
@@ -629,12 +672,19 @@ library path.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whole-set replace: a shorter re-run deletes the surplus segments.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Thumbnails skipped for some files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>consistency</code> node reported them incomplete. That is the gate doing its job — check the file.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scenes and transcript do not line up</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">They are separate components joined on time by the consumer. Nothing in the pipeline aligns them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nothing runs per scene</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scene-detection</code> emits one element — a timeline — not one per scene, so no downstream node fans out
+from it. See <a href="#fanout">Fan-out, and why scene detection does not do it</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline will not save: <code>incompatible content types</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An edge connects two ports whose types do not agree. <code>consistency’s `is_complete</code> is a boolean and
+<code>sha512’s `hash</code> is a hash — neither can feed a node that wants media. Wire those nodes off the
+filter’s <code>passed</code> port, beside the others.</p></td>
 </tr>
 </tbody>
 </table>

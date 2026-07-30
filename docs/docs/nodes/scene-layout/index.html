@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Scene Layout | MetaLoom</title>
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -254,7 +261,7 @@ can tell those apart, because the difference is depth. This node joins your dete
 <p>It runs no model of its own — it is arithmetic over boxes and depth, so it is fast, it costs no GPU
 time, and every conclusion it reaches comes with the numbers behind it.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;scene-layout&#34;,&#34;applies&#34;:&#34;Images with depth + detections&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType scene-layout)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;faces in a photo&#34;,&#34;note&#34;:&#34;depthmap + facedetect upstream&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;depthmap_meta&#34;,&#34;d&#34;:&#34;depth map from the depthmap node&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;d&#34;:&#34;boxes from face detection&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;scene_layout_result&#34;,&#34;d&#34;:&#34;objects, bands, relations, phrases&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;scene_layout_object_count&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;scene_layout_relation_count&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;scene-layout&#34;,&#34;applies&#34;:&#34;Images with depth + detections&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType scene-layout)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;faces in a photo&#34;,&#34;note&#34;:&#34;a depth map and a detections port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;depth&#34;,&#34;l&#34;:&#34;depth&#34;,&#34;d&#34;:&#34;the nearness map from the depth map node — bright is close&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected box, from any detector&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;layout&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;every object with its depth band, the relations between them, and plain-English phrases&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;object_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many boxes made it into the layout&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;relation_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many relations were asserted between them&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -270,12 +277,12 @@ time, and every conclusion it reaches comes with the numbers behind it.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Images that have both a depth map and at least two detections</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A depth map from <a href="../depthmap/">Depth Map</a>, plus bounding boxes from <a href="../facedetect/">Face Detection</a> (or any other detector)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depth</code> — connect the <code>meta</code> port of <a href="../depthmap/">Depth Map</a>; <code>detections</code> (<strong>many</strong>) — connect the <code>detections</code> port of <a href="../facedetect/">Face Detection</a> or any other detector</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scene_layout_result</code> (JSON String), <code>scene_layout_object_count</code> (Number), <code>scene_layout_relation_count</code> (Number)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>result</code> (the layout structure), <code>object_count</code>, <code>relation_count</code> (Integer)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -401,16 +408,8 @@ actually support. You can make it bolder or more cautious with <code>depthZThres
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthNodeId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream node provides the depth map. Defaults to <code>depthmap</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detectionSources</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which upstream detector nodes provide boxes, in priority order. Defaults to <code>facedetect</code></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>allowLoomFallback</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read detections back from the server when no upstream node supplied them. On by default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read detections back from the server when nothing is wired into the <code>detections</code> port. On by default</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthZThreshold</code></p></td>
@@ -477,18 +476,20 @@ only the foreground subject is the one you care about.</p>
 <h2 id="_what_you_need_first">What you need first</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This node reads other nodes&#39; work, so both have to be in your pipeline ahead of it:</p>
+<p>This node works on what other nodes produce, so both have to be in your pipeline ahead of it and
+wired into its two input ports:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="../depthmap/">Depth Map</a> — required. Put it in the <strong>same affinity group</strong> as this node, so
-both run on the same machine.</p>
+<p><a href="../depthmap/">Depth Map</a> — required. Connect its <code>meta</code> port to <code>depth</code>, and put it in the
+<strong>same affinity group</strong> as this node so both run on the same machine.</p>
 </li>
 <li>
-<p>A detector — <a href="../facedetect/">Face Detection</a> today. At present that means the node relates
-faces to faces; once object detection is available it will relate people to cars and everything
-else without any change here, because it does not care which detector produced a box.</p>
+<p>A detector — <a href="../facedetect/">Face Detection</a> today. Connect its <code>detections</code> port to
+<code>detections</code>. At present that means the node relates faces to faces; once object detection is
+available it will relate people to cars and everything else without any change here, because the
+port accepts any detection type and the node never asks which node produced a box.</p>
 </li>
 </ol>
 </div>

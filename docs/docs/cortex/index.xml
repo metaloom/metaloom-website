@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cortex on MetaLoom</title>
-    <link>https://metaloom.io/docs/cortex/</link>
+    <link>http://localhost:1313/docs/cortex/</link>
     <description>Recent content in Cortex on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://metaloom.io/docs/cortex/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/docs/cortex/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Artifacts</title>
-      <link>https://metaloom.io/docs/cortex/artifacts/</link>
+      <link>http://localhost:1313/docs/cortex/artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/artifacts/</guid>
+      <guid>http://localhost:1313/docs/cortex/artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex publishes JVM modules and container deployment assets separately.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_artifacts&#34;&gt;Maven Artifacts&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;See &lt;a href=&#34;../maven-artifacts/&#34;&gt;Maven Artifacts&lt;/a&gt; for the BOM-backed module list and node dependencies.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Configuration</title>
-      <link>https://metaloom.io/docs/cortex/configuration/</link>
+      <link>http://localhost:1313/docs/cortex/configuration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/configuration/</guid>
+      <guid>http://localhost:1313/docs/cortex/configuration/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex is a daemon and is configured primarily through &lt;strong&gt;environment variables&lt;/strong&gt;, which is convenient&#xA;for container-based deployments. A &lt;code&gt;cortex&lt;/code&gt; CLI wrapper (picocli) also exists for local runs, but in a&#xA;typical online deployment you just set environment variables and start the process — it connects to&#xA;Loom, registers, and serves node tasks.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Containers</title>
-      <link>https://metaloom.io/docs/cortex/containers/</link>
+      <link>http://localhost:1313/docs/cortex/containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/containers/</guid>
+      <guid>http://localhost:1313/docs/cortex/containers/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Cortex is distributed as the &lt;code&gt;metaloom/cortex-server&lt;/code&gt; image. It runs as a &lt;strong&gt;daemon&lt;/strong&gt;: it connects to a&#xA;Loom server, registers, and serves node tasks. See &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt; for the&#xA;image overview.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Examples</title>
-      <link>https://metaloom.io/docs/cortex/examples/</link>
+      <link>http://localhost:1313/docs/cortex/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/examples/</guid>
+      <guid>http://localhost:1313/docs/cortex/examples/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;examples/&lt;/code&gt; directory of the source repository contains three customer-facing examples showing how&#xA;to extend Cortex with your own processing logic. They are deliberately lightweight: your code depends&#xA;only on the slim Cortex node API (or, for Python, nothing but the wire protocol) and the Loom REST&#xA;client — never on the Loom database, jOOQ or Postgres.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Maven Artifacts</title>
-      <link>https://metaloom.io/docs/cortex/maven-artifacts/</link>
+      <link>http://localhost:1313/docs/cortex/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/maven-artifacts/</guid>
+      <guid>http://localhost:1313/docs/cortex/maven-artifacts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Cortex artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group and should generally be consumed with the shared BOM.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Metrics</title>
-      <link>https://metaloom.io/docs/cortex/metrics/</link>
+      <link>http://localhost:1313/docs/cortex/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/metrics/</guid>
+      <guid>http://localhost:1313/docs/cortex/metrics/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on its monitoring port —&#xA;the same server that serves the health and readiness probes. All Cortex meters are prefixed&#xA;&lt;code&gt;cortex_&lt;/code&gt;. For the server-side counterpart see &lt;a href=&#34;../../loom/metrics/&#34;&gt;Loom Metrics&lt;/a&gt;; for liveness&#xA;and readiness see &lt;a href=&#34;../monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Monitoring API</title>
-      <link>https://metaloom.io/docs/cortex/monitoring/</link>
+      <link>http://localhost:1313/docs/cortex/monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cortex/monitoring/</guid>
+      <guid>http://localhost:1313/docs/cortex/monitoring/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt;, &lt;strong&gt;readiness&lt;/strong&gt; and&#xA;&lt;strong&gt;Prometheus metrics&lt;/strong&gt; endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.&#xA;Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated&#xA;monitoring port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

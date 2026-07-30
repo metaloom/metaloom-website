@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8">
 	<title>Loom Sync | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The Loom sync node is a sink: it accumulates hash results from upstream nodes and writes them back to the Loom backend in batches, keeping the number of REST calls low on large runs.">
+	<meta name="description" content="The Loom sync node is a sink: it accumulates hash results and writes them back to the Loom backend in batches, keeping the number of REST calls low on large runs. It has one input port per algorithm, …">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/loom/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Loom Sync | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/loom/">
-    <meta property="og:description" content="The Loom sync node is a sink: it accumulates hash results from upstream nodes and writes them back to the Loom backend in batches, keeping the number of REST calls low on large runs.">
+    <meta property="og:description" content="The Loom sync node is a sink: it accumulates hash results and writes them back to the Loom backend in batches, keeping the number of REST calls low on large runs. It has one input port per algorithm, …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Loom Sync">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Loom Sync | MetaLoom">
-    <meta name="twitter:description" content="The Loom sync node is a sink: it accumulates hash results from upstream nodes and writes them back to the Loom backend in batches, keeping the number of REST calls low on large runs.">
+    <meta name="twitter:description" content="The Loom sync node is a sink: it accumulates hash results and writes them back to the Loom backend in batches, keeping the number of REST calls low on large runs. It has one input port per algorithm, …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Loom Sync">
 
@@ -112,6 +112,13 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
 					</li>
 					
 					
@@ -240,10 +247,12 @@
         </div>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The Loom sync node is a <strong>sink</strong>: it accumulates hash results from upstream nodes and writes them back
-to the Loom backend in batches, keeping the number of REST calls low on large runs.</p>
+<p>The Loom sync node is a <strong>sink</strong>: it accumulates hash results and writes them back to the Loom
+backend in batches, keeping the number of REST calls low on large runs. It has one input port per
+algorithm, and each port accepts only that algorithm’s hash type — so which column a hash lands in
+follows from the connection you drew, never from what an upstream node happens to be called.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;loom&#34;,&#34;applies&#34;:&#34;Any file&#34;,&#34;badge&#34;:&#34;needs a Loom connection&#34;,&#34;persist&#34;:&#34;asset hash columns via bulk update (batches of 50)&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;sha512&#34;,&#34;d&#34;:&#34;from the hash node&#34;},{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;md5 / sha256&#34;,&#34;d&#34;:&#34;when enabled&#34;,&#34;opt&#34;:true}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;batched write to Loom&#34;,&#34;d&#34;:&#34;no output keys&#34;}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;loom&#34;,&#34;applies&#34;:&#34;Any file&#34;,&#34;badge&#34;:&#34;needs a Loom connection&#34;,&#34;persist&#34;:&#34;asset hash columns via bulk update (batches of 50)&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;md5&#34;,&#34;ct&#34;:&#34;hash/md5&#34;,&#34;opt&#34;:true,&#34;d&#34;:&#34;connect the hash port of an md5 node to sync that column&#34;},{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;sha256&#34;,&#34;ct&#34;:&#34;hash/sha256&#34;,&#34;opt&#34;:true,&#34;d&#34;:&#34;connect the hash port of a sha256 node&#34;},{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;sha512&#34;,&#34;ct&#34;:&#34;hash/sha512&#34;,&#34;opt&#34;:true,&#34;d&#34;:&#34;connect the hash port of a sha512 node — the content identity&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;batched write&#34;,&#34;d&#34;:&#34;asset hash columns updated fifty rows at a time; no value leaves the node&#34;}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -259,11 +268,11 @@ to the Loom backend in batches, keeping the number of REST calls low on large ru
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any file</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Upstream <a href="../hash/">hash</a> outputs — SHA-512 plus any MD5 / SHA-256</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>, <code>sha256</code>, <code>sha512</code> — each optional, each accepting only its own hash type. Connect the <code>hash</code> port of the matching <a href="../hash/">hash</a> node</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">None — the node has the side effect of bulk-updating the <code>asset</code> rows</p></td>
 </tr>
 <tr>
