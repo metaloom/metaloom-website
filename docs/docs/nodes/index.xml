@@ -2,198 +2,198 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nodes on MetaLoom</title>
-    <link>http://localhost:1313/docs/nodes/</link>
+    <link>https://metaloom.io/docs/nodes/</link>
     <description>Recent content in Nodes on MetaLoom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/docs/nodes/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://metaloom.io/docs/nodes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Captioning</title>
-      <link>http://localhost:1313/docs/nodes/captioning/</link>
+      <link>https://metaloom.io/docs/nodes/captioning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/captioning/</guid>
+      <guid>https://metaloom.io/docs/nodes/captioning/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The captioning node generates a &lt;strong&gt;natural-language caption&lt;/strong&gt; — a short description of what the media&#xA;shows — for both &lt;strong&gt;images&lt;/strong&gt; and &lt;strong&gt;videos&lt;/strong&gt; using a vision-language model. Images are described from a&#xA;single still frame; videos are described from their temporal content (what happens across the clip).&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Consistency</title>
-      <link>http://localhost:1313/docs/nodes/consistency/</link>
+      <link>https://metaloom.io/docs/nodes/consistency/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/consistency/</guid>
+      <guid>https://metaloom.io/docs/nodes/consistency/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The consistency node checks that a media file is complete and not corrupt by counting &lt;strong&gt;zero chunks&lt;/strong&gt;&#xA;(runs of empty bytes) that indicate a truncated or partially-downloaded file. Running it early lets a&#xA;pipeline skip expensive processing on broken media.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Deduplication</title>
-      <link>http://localhost:1313/docs/nodes/dedup/</link>
+      <link>https://metaloom.io/docs/nodes/dedup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/dedup/</guid>
+      <guid>https://metaloom.io/docs/nodes/dedup/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist:&#xA;one by exact content hash, one by perceptual video fingerprint.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Depth Map</title>
-      <link>http://localhost:1313/docs/nodes/depthmap/</link>
+      <link>https://metaloom.io/docs/nodes/depthmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/depthmap/</guid>
+      <guid>https://metaloom.io/docs/nodes/depthmap/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The depth map node works out &lt;strong&gt;how far each part of a photo is from the camera&lt;/strong&gt;, from the photo&#xA;alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a&#xA;greyscale map comes out in which bright means close and dark means far.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Dominant Colour</title>
-      <link>http://localhost:1313/docs/nodes/dominant-color/</link>
+      <link>https://metaloom.io/docs/nodes/dominant-color/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/dominant-color/</guid>
+      <guid>https://metaloom.io/docs/nodes/dominant-color/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Colour is one of the first things anyone notices about a picture and one of the last things most&#xA;media systems can actually search on. This node closes that gap: it works out which colours a photo&#xA;is really made of, and reports each one both as a precise value and as a word a person would use.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Face Description</title>
-      <link>http://localhost:1313/docs/nodes/facedescription/</link>
+      <link>https://metaloom.io/docs/nodes/facedescription/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/facedescription/</guid>
+      <guid>https://metaloom.io/docs/nodes/facedescription/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face description node produces a &lt;strong&gt;natural-language description&lt;/strong&gt; of the faces detected in an&#xA;asset, using a vision-language model. Its &lt;code&gt;detections&lt;/code&gt; port carries a &lt;strong&gt;sequence&lt;/strong&gt; — one element per&#xA;detected face — and the node describes each element in turn, so a picture with three faces comes back&#xA;with three descriptions in the same order. A sequence with no elements means there is nothing to&#xA;describe and no model call is made.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Face Detection</title>
-      <link>http://localhost:1313/docs/nodes/facedetect/</link>
+      <link>https://metaloom.io/docs/nodes/facedetect/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/facedetect/</guid>
+      <guid>https://metaloom.io/docs/nodes/facedetect/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face detection node finds faces in images and video frames and, optionally, computes &lt;strong&gt;face&#xA;embeddings&lt;/strong&gt; (vectors) that can be used for recognition and clustering. Video is processed by scanning&#xA;frames at a configurable rate.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Filesystem Source</title>
-      <link>http://localhost:1313/docs/nodes/filesystem-source/</link>
+      <link>https://metaloom.io/docs/nodes/filesystem-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/filesystem-source/</guid>
+      <guid>https://metaloom.io/docs/nodes/filesystem-source/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The filesystem source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a&#xA;media item, it &lt;strong&gt;enumerates&lt;/strong&gt; media from disk (a directory tree walked recursively, or a set of path&#xA;globs) and feeds each file into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Filters</title>
-      <link>http://localhost:1313/docs/nodes/filters/</link>
+      <link>https://metaloom.io/docs/nodes/filters/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/filters/</guid>
+      <guid>https://metaloom.io/docs/nodes/filters/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Filter nodes are &lt;strong&gt;routing&lt;/strong&gt; nodes. Instead of producing metadata, a filter evaluates each item and&#xA;splits the pipeline into a &lt;strong&gt;PASS&lt;/strong&gt; and a &lt;strong&gt;REJECT&lt;/strong&gt; branch, so downstream nodes only run on the items&#xA;that match. They are a pipeline-only construct (they have no standalone Cortex node).&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Fingerprint</title>
-      <link>http://localhost:1313/docs/nodes/fingerprint/</link>
+      <link>https://metaloom.io/docs/nodes/fingerprint/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/fingerprint/</guid>
+      <guid>https://metaloom.io/docs/nodes/fingerprint/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The fingerprint node computes a &lt;strong&gt;perceptual, multi-sector video fingerprint&lt;/strong&gt;. Unlike a content hash,&#xA;the fingerprint is robust to transcoding, resolution changes and minor edits, so it can identify the&#xA;&lt;strong&gt;same footage&lt;/strong&gt; even when the file bytes differ.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Hashing</title>
-      <link>http://localhost:1313/docs/nodes/hash/</link>
+      <link>https://metaloom.io/docs/nodes/hash/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/hash/</guid>
+      <guid>https://metaloom.io/docs/nodes/hash/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The hashing nodes compute content hashes of a media file. They are the foundation of asset identity in&#xA;MetaLoom: the SHA-512 hash is the content key used to look an asset up, avoid recomputation, and match&#xA;against blacklists. Four kinds live in the same module and can be toggled independently.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Image Generation</title>
-      <link>http://localhost:1313/docs/nodes/imagegen/</link>
+      <link>https://metaloom.io/docs/nodes/imagegen/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/imagegen/</guid>
+      <guid>https://metaloom.io/docs/nodes/imagegen/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The image-generation node &lt;strong&gt;generates a new image with a diffusion model&lt;/strong&gt;. Unlike the analysis&#xA;nodes, which describe a property of the media itself, &lt;code&gt;imagegen&lt;/code&gt; produces a fresh image — either&#xA;from a text prompt (&lt;code&gt;GENERATE&lt;/code&gt;) or by remixing the asset’s own image guided by a prompt (&lt;code&gt;REMIX&lt;/code&gt;) —&#xA;and attaches it to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>LLM Enrichment</title>
-      <link>http://localhost:1313/docs/nodes/llm/</link>
+      <link>https://metaloom.io/docs/nodes/llm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/llm/</guid>
+      <guid>https://metaloom.io/docs/nodes/llm/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Loom Sync</title>
-      <link>http://localhost:1313/docs/nodes/loom/</link>
+      <link>https://metaloom.io/docs/nodes/loom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/loom/</guid>
+      <guid>https://metaloom.io/docs/nodes/loom/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom sync node is a &lt;strong&gt;sink&lt;/strong&gt;: it accumulates hash results and writes them back to the Loom&#xA;backend in batches, keeping the number of REST calls low on large runs. It has one input port per&#xA;algorithm, and each port accepts only that algorithm’s hash type — so which column a hash lands in&#xA;follows from the connection you drew, never from what an upstream node happens to be called.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>OCR</title>
-      <link>http://localhost:1313/docs/nodes/ocr/</link>
+      <link>https://metaloom.io/docs/nodes/ocr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/ocr/</guid>
+      <guid>https://metaloom.io/docs/nodes/ocr/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OCR node extracts text from images and document scans using &lt;strong&gt;Tesseract&lt;/strong&gt; (via Tess4J). The&#xA;recognized text is stored so it can be indexed and searched.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Quality</title>
-      <link>http://localhost:1313/docs/nodes/quality/</link>
+      <link>https://metaloom.io/docs/nodes/quality/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/quality/</guid>
+      <guid>https://metaloom.io/docs/nodes/quality/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The quality node measures &lt;strong&gt;perceptual quality metrics&lt;/strong&gt; of an image or video — resolution,&#xA;blurriness (via a Laplacian measure) and bitrate — so low-quality assets can be flagged or filtered.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>S3 Sink</title>
-      <link>http://localhost:1313/docs/nodes/s3-sink/</link>
+      <link>https://metaloom.io/docs/nodes/s3-sink/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/s3-sink/</guid>
+      <guid>https://metaloom.io/docs/nodes/s3-sink/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 sink is an &lt;strong&gt;output node&lt;/strong&gt;. It takes the files other nodes produce — contact sheets, depth&#xA;maps, generated images, speech audio — uploads them to an S3 bucket, and registers each one in&#xA;Loom as an asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>S3 Source</title>
-      <link>http://localhost:1313/docs/nodes/s3-source/</link>
+      <link>https://metaloom.io/docs/nodes/s3-source/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/s3-source/</guid>
+      <guid>https://metaloom.io/docs/nodes/s3-source/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The S3 source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a media&#xA;item, it &lt;strong&gt;enumerates&lt;/strong&gt; objects from S3-compatible object storage (AWS S3, MinIO, Ceph) and feeds each&#xA;one into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene Detection</title>
-      <link>http://localhost:1313/docs/nodes/scene-detection/</link>
+      <link>https://metaloom.io/docs/nodes/scene-detection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/scene-detection/</guid>
+      <guid>https://metaloom.io/docs/nodes/scene-detection/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The scene detection node finds &lt;strong&gt;scene boundaries&lt;/strong&gt; (cuts) in a video using optical-flow analysis, and&#xA;emits the resulting segments. Each run replaces the whole segment set for the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene Layout</title>
-      <link>http://localhost:1313/docs/nodes/scene-layout/</link>
+      <link>https://metaloom.io/docs/nodes/scene-layout/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/scene-layout/</guid>
+      <guid>https://metaloom.io/docs/nodes/scene-layout/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Detection tells you &lt;strong&gt;what&lt;/strong&gt; is in a picture and where its box sits. Scene layout tells you &lt;strong&gt;how&#xA;those things relate to each other&lt;/strong&gt; — which is in front, which is behind, which one is hiding part&#xA;of another, and which are standing side by side.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Script</title>
-      <link>http://localhost:1313/docs/nodes/script/</link>
+      <link>https://metaloom.io/docs/nodes/script/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/script/</guid>
+      <guid>https://metaloom.io/docs/nodes/script/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The script node runs &lt;strong&gt;a small piece of code you write&lt;/strong&gt; as a step in your pipeline. It reads the&#xA;media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare —&#xA;a text, a number, a list of texts, a block of JSON, a set of timeframes, or images.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Sentiment Analysis</title>
-      <link>http://localhost:1313/docs/nodes/sentiment/</link>
+      <link>https://metaloom.io/docs/nodes/sentiment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/sentiment/</guid>
+      <guid>https://metaloom.io/docs/nodes/sentiment/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The sentiment node &lt;strong&gt;scores the tone of text&lt;/strong&gt; your pipeline has already produced. It does not look&#xA;at the media itself — it has a single &lt;code&gt;text&lt;/code&gt; input port that accepts any text type, so you can&#xA;connect &lt;a href=&#34;../tika/&#34;&gt;Tika&lt;/a&gt; document content, &lt;a href=&#34;../ocr/&#34;&gt;OCR&lt;/a&gt; text, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;,&#xA;or a &lt;a href=&#34;../vlm/&#34;&gt;VLM&lt;/a&gt; / &lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; answer to it. The node labels whatever arrives&#xA;&lt;strong&gt;positive&lt;/strong&gt;, &lt;strong&gt;neutral&lt;/strong&gt; or &lt;strong&gt;negative&lt;/strong&gt;, with a confidence score and a signed polarity value you&#xA;can sort and filter on.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Speech-to-Text (Whisper)</title>
-      <link>http://localhost:1313/docs/nodes/whisper/</link>
+      <link>https://metaloom.io/docs/nodes/whisper/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/whisper/</guid>
+      <guid>https://metaloom.io/docs/nodes/whisper/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Whisper node transcribes the audio track of a media file into text using a &lt;strong&gt;Whisper&lt;/strong&gt;&#xA;speech-to-text model. The transcript is stored as a first-class component so it can be searched and&#xA;summarized.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Text-to-Speech (TTS)</title>
-      <link>http://localhost:1313/docs/nodes/tts/</link>
+      <link>https://metaloom.io/docs/nodes/tts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/tts/</guid>
+      <guid>https://metaloom.io/docs/nodes/tts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The TTS node &lt;strong&gt;generates narration audio from text&lt;/strong&gt;. Unlike the analysis nodes, which describe a&#xA;property of the media itself, TTS has a single &lt;code&gt;text&lt;/code&gt; input port that accepts any text type — connect&#xA;an &lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; summary, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;, or a translated&#xA;&lt;a href=&#34;../whisper/&#34;&gt;transcript&lt;/a&gt; to it — and synthesizes speech, attaching the audio to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Thumbnail</title>
-      <link>http://localhost:1313/docs/nodes/thumbnail/</link>
+      <link>https://metaloom.io/docs/nodes/thumbnail/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/thumbnail/</guid>
+      <guid>https://metaloom.io/docs/nodes/thumbnail/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The thumbnail node generates a &lt;strong&gt;contact-sheet preview&lt;/strong&gt; (a tiled grid of frames) for a video, giving&#xA;the UI a fast visual summary of the content.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Tika</title>
-      <link>http://localhost:1313/docs/nodes/tika/</link>
+      <link>https://metaloom.io/docs/nodes/tika/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/tika/</guid>
+      <guid>https://metaloom.io/docs/nodes/tika/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Tika node extracts &lt;strong&gt;format metadata and embedded text&lt;/strong&gt; from virtually any file type using Apache&#xA;Tika — images (EXIF), audio/video containers, PDFs and Office documents.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>VLM</title>
-      <link>http://localhost:1313/docs/nodes/vlm/</link>
+      <link>https://metaloom.io/docs/nodes/vlm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/nodes/vlm/</guid>
+      <guid>https://metaloom.io/docs/nodes/vlm/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The VLM node reads an image with a &lt;strong&gt;vision-language model&lt;/strong&gt; served over an OpenAI-compatible&#xA;endpoint. It ships an &lt;strong&gt;olmOCR&lt;/strong&gt; preset that transcribes a document page — scans, receipts,&#xA;screenshots, forms — into clean markdown, with tables converted to HTML and equations to LaTeX.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>
