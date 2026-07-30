@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Face Description | MetaLoom</title>
+	<title>Video Generation | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. Its detections port carries a sequence — one element per detected …">
+	<meta name="description" content="The video-generation node generates a short video clip with a diffusion model. Like the image-generation node — and unlike the analysis nodes, which describe a property of the media itself — videogen …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/nodes/facedescription/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/videogen/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Face Description | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/facedescription/">
-    <meta property="og:description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. Its detections port carries a sequence — one element per detected …">
+    <meta property="og:title" content="Video Generation | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/videogen/">
+    <meta property="og:description" content="The video-generation node generates a short video clip with a diffusion model. Like the image-generation node — and unlike the analysis nodes, which describe a property of the media itself — videogen …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Face Description">
+    <meta property="og:image:alt" content="Video Generation">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Face Description | MetaLoom">
-    <meta name="twitter:description" content="The face description node produces a natural-language description of the faces detected in an asset, using a vision-language model. Its detections port carries a sequence — one element per detected …">
+    <meta name="twitter:title" content="Video Generation | MetaLoom">
+    <meta name="twitter:description" content="The video-generation node generates a short video clip with a diffusion model. Like the image-generation node — and unlike the analysis nodes, which describe a property of the media itself — videogen …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Face Description">
+    <meta name="twitter:image:alt" content="Video Generation">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -247,18 +247,22 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Nodes</p>
-          <h1>Face Description</h1>
+          <h1>Video Generation</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The face description node produces a <strong>natural-language description</strong> of the faces detected in an
-asset, using a vision-language model. Its <code>detections</code> port carries a <strong>sequence</strong> — one element per
-detected face — and the node describes each element in turn, so a picture with three faces comes back
-with three descriptions in the same order. A sequence with no elements means there is nothing to
-describe and no model call is made.</p>
+<p>The video-generation node <strong>generates a short video clip with a diffusion model</strong>. Like the
+image-generation node — and unlike the analysis nodes, which describe a property of the media itself
+— <code>videogen</code> produces fresh media: a small MP4 clip, either from a text prompt (<code>GENERATE</code>) or by
+animating the asset’s own still image as the opening frame (<code>ANIMATE</code>), and attaches it to the asset.
+The clip carries a <strong>synchronised audio track</strong>.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;facedescription&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;Vision model service&#34;,&#34;persist&#34;:&#34;asset_json_comp + asset_node_result ledger&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected face, cropped from its bounding box&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;descriptions&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one short description per incoming face, in the same order&#34;}]}"></div>
+<div class="paragraph">
+<p>The diffusion model runs behind a small HTTP sidecar, so the node stays a pure client and needs no
+model runtime of its own. The shipped sidecar serves <strong>LTX-2</strong>, which fits a single 24 GB GPU.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;videogen&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;video sidecar&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the MP4 stays in the local videogen_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;generate (text-to-video)&#34;,&#34;note&#34;:&#34;mode GENERATE · prompt from node config&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;the prompt set on the node — nothing upstream is needed&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;video&#34;,&#34;ct&#34;:&#34;artifact/video&#34;,&#34;d&#34;:&#34;the generated MP4, in the worker local videogen_bin cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]},{&#34;name&#34;:&#34;animate (image-to-video)&#34;,&#34;note&#34;:&#34;mode ANIMATE · source image + prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the source picture, used as the opening frame&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;prompt&#34;,&#34;d&#34;:&#34;the prompt set on the node, steering the motion&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;video&#34;,&#34;ct&#34;:&#34;artifact/video&#34;,&#34;d&#34;:&#34;the generated MP4, in the worker local videogen_bin cache&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -267,27 +271,27 @@ describe and no model call is made.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>facedescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videogen</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Image (video is stubbed / not yet implemented)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image assets</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detections</code> (<strong>many</strong>) — connect the <code>detections</code> port of <a href="../facedetect/">Face Detection</a>; the crops travel with the elements, so the picture itself is not wired in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A generation <code>prompt</code> from the node configuration; in <code>ANIMATE</code> mode also <code>media</code>, the asset’s own image</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>descriptions</code> (<strong>many</strong> — one per incoming face, aligned with the input sequence)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>video</code> (the generated MP4, ready for <a href="../s3-sink/">S3 Sink</a>), <code>flag</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A vision-language / LLM model service reachable from the worker. CPU on the worker; the model runs in the service.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A running <strong>video sidecar</strong> (<code>/generate</code>, <code>/animate</code>). A GPU with at least 24 GB is required.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> + <code>asset_node_result</code> ledger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_node_result</code> ledger only — the generated MP4 stays in the worker’s local <code>videogen_bin</code> cache (as with generated images)</p></td>
 </tr>
 </tbody>
 </table>
@@ -295,8 +299,86 @@ describe and no model call is made.</p>
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Uses the model-service connection shared with the LLM/captioning family. There is nothing to
-configure about where the faces come from — connect the <code>detections</code> port and the node follows it.</p>
+<p><code>VideoGenNodeOptions</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GENERATE</code> (text-to-video) or <code>ANIMATE</code> (image-to-video) (default <code>GENERATE</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prompt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The generation prompt (required)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>negativePrompt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What to steer away from (optional; the sidecar applies its own default when empty)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>host</code> / <code>port</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address of the video sidecar (default <code>localhost:9220</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>width</code> / <code>height</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output size (default <code>768</code> × <code>512</code>; snapped to a multiple of 32 by the sidecar)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>numFrames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of frames (default <code>49</code>; snapped to <code>k*8+1</code> by the sidecar)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frame rate of the produced clip (default <code>24</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>steps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of inference steps (default <code>40</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>guidance</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prompt guidance scale (default <code>4.0</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>seed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional RNG seed for reproducible output</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_the_sidecar">Running the sidecar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The sidecar is a small FastAPI service:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd sidecars/ltx2-sidecar
+./setup.sh                       # venv; installs torch (cu128) then requirements.txt
+./run.sh                         # serves on :9220 (first call loads the model)
+# smoke test
+curl -s -X POST localhost:9220/generate \
+  -H &#39;content-type: application/json&#39; \
+  -d &#39;{&#34;prompt&#34;:&#34;a dark, elegant cinemagraph of glowing teal threads&#34;,&#34;num_frames&#34;:33}&#39; -o out.mp4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first request downloads and quantizes the model, which takes a while; everything after is warm.
+LTX-2 is a large system — it fits a single 24 GB card only because the sidecar quantizes it to
+4-bit. Set <code>steps</code> and <code>numFrames</code> modestly for interactive latency and raise them once you have the
+GPU time budget.</p>
 </div>
 </div>
 </div>
@@ -306,15 +388,20 @@ configure about where the faces come from — connect the <code>detections</code
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Searchable people descriptions</strong> — &#34;man with glasses, outdoors&#34; style text for retrieval.</p>
+<p><strong>Motion hero clips</strong> — turn a catalogue prompt into a short looping clip for a listing.</p>
 </li>
 <li>
-<p><strong>Accessibility / alt text</strong> for images containing people.</p>
+<p><strong>Animating a still</strong> — bring an existing asset’s image to life as the opening frame of a clip.</p>
 </li>
 <li>
-<p><strong>Review context</strong> — a quick textual summary of who/what is in a flagged image.</p>
+<p><strong>Previews &amp; variations</strong> — produce derived motion visuals for review workflows.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The generated MP4 is written to the worker’s local <code>videogen_bin</code> cache and a node-result ledger row
+records that the node ran for the asset. Wire the <code>video</code> port into an <a href="../s3-sink/">S3 Sink</a> to
+keep the clip and register it as its own asset.</p>
 </div>
 </div>
 </div>

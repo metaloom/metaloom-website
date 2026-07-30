@@ -242,9 +242,14 @@
         </div>
       </div>
       <div class="col-lg-9">
-        <div class="docs-page-header">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Loom</p>
           <h1>Configuration</h1>
-        </div>
+          
+        </header>
         <div class="post-single-content docs-main-content">
           <div id="preamble">
 <div class="sectionbody">
@@ -475,6 +480,72 @@ Environment variables take precedence over values in <code>loom.yml</code>.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_near_duplicate_video_lookup">Near-duplicate video lookup</h3>
+<div class="paragraph">
+<p>Powers &#34;which other videos look like this one?&#34;, and with it the near-duplicate review workflow of the
+<a href="../../nodes/dedup/">deduplication</a> nodes. It is switched off by default because it is only useful
+once videos have been fingerprinted.</p>
+</div>
+<div class="paragraph">
+<p>The lookup keeps its own index on disk. That index is built entirely from fingerprints already stored
+with your assets, so it can be discarded and rebuilt at any time without data loss.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable near-duplicate lookup. While off, requests to the similar-videos routes are refused with a clear reason rather than answering &#34;nothing found&#34;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_INDEX_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>similarity-index</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directory holding the lookup index. Give each server its own directory — two servers cannot share one</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_ALGORITHM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom-multisector-v1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which fingerprint version takes part in the lookup</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_SCORE_THRESHOLD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How close a match must be to count as a near-duplicate. Higher is stricter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_TOPK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many similar videos a query returns by default</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If the index directory cannot be written, the server still starts normally — only the
+near-duplicate routes report themselves as unavailable.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_authentication">Authentication</h3>
@@ -727,6 +798,15 @@ over the REST API and has its own configuration file.</p>
 </div>
 </div>
 
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
         </div>
       </div>
     </div>

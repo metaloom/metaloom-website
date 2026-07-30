@@ -151,13 +151,19 @@
 </section>
 
 
+
 <section class="section docs-section">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <div class="docs-page-header text-center">
+        <header class="page-head page-head-center">
+          
+          
+          
+          <p class="page-eyebrow">Documentation</p>
           <h1>Nodes</h1>
-        </div>
+          
+        </header>
       </div>
       <div class="col-lg-10">
         <div class="post-single-content docs-content docs-main-content">
@@ -292,6 +298,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Generate images from a prompt (or remix the asset) with a diffusion model</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="videogen/">Video Generation</a> (<code>videogen</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate a short video clip from a prompt (or animate the asset’s image) with a diffusion model</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedetect/">Face Detection</a> (<code>facedetect</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Detect faces + embeddings — its <code>detections</code> port carries <strong>one element per face</strong></p></td>
@@ -351,6 +362,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="dominant-color/">Dominant Colour</a> (<code>dominant-color</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image (optionally with detections connected)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Work out which colours a picture is made of, as HEX and in words (English and German)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="watermark/">Watermark</a> (<code>watermark</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stamp your own logo or mark onto the asset at a relative position — the original is never modified</p></td>
 </tr>
 </tbody>
 </table>
@@ -458,6 +474,10 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>imagegen</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A video-generation sidecar (LTX-2; a 24 GB GPU is required)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videogen</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A sentiment sidecar (german-sentiment-bert + twitter-roberta; CPU is enough)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sentiment</code></p></td>
 </tr>
@@ -466,12 +486,16 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthmap</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>ffmpeg</code> / <code>ffprobe</code> binaries on <code>PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>watermark</code> (video only — the image path needs nothing)</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S3-compatible object storage (AWS S3, MinIO, Ceph)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3-source</code>, <code>s3-sink</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, filters, dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), filters, dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -542,6 +566,19 @@ LLM provider such as Ollama.</p>
 <p><a href="imagegen/"><code>imagegen</code></a> generates a new image with a diffusion model behind a small HTTP sidecar —
 either from a text prompt or by remixing the asset’s own image — and writes the PNG to the worker’s
 local cache.</p>
+</dd>
+<dt class="hdlist1">Video generation</dt>
+<dd>
+<p><a href="videogen/"><code>videogen</code></a> generates a short video clip with a diffusion model behind a small HTTP
+sidecar — either from a text prompt or by animating the asset’s own image as the opening frame — and
+writes the MP4, with a synchronised audio track, to the worker’s local cache.</p>
+</dd>
+<dt class="hdlist1">Watermarking</dt>
+<dd>
+<p><a href="watermark/"><code>watermark</code></a> stamps a logo or mark you supply onto an asset at a relative position, so
+one setting works across a library of mixed resolutions. Stills are composited in-process; video goes
+through the <code>ffmpeg</code> overlay filter, which re-encodes the picture but copies the audio through
+untouched. The original file is never modified — the marked copy is a new artifact.</p>
 </dd>
 <dt class="hdlist1">Text-to-speech</dt>
 <dd>

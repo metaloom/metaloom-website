@@ -216,7 +216,7 @@
       <link>https://metaloom.io/docs/nodes/dedup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/dedup/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist:&#xA;one by exact content hash, one by perceptual video fingerprint.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to&#xA;decide that two files are &amp;#34;the same&amp;#34;:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Depth Map</title>
@@ -513,11 +513,25 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Tika node extracts &lt;strong&gt;format metadata and embedded text&lt;/strong&gt; from virtually any file type using Apache&#xA;Tika — images (EXIF), audio/video containers, PDFs and Office documents.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Video Generation</title>
+      <link>https://metaloom.io/docs/nodes/videogen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/videogen/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The video-generation node &lt;strong&gt;generates a short video clip with a diffusion model&lt;/strong&gt;. Like the&#xA;image-generation node — and unlike the analysis nodes, which describe a property of the media itself&#xA;— &lt;code&gt;videogen&lt;/code&gt; produces fresh media: a small MP4 clip, either from a text prompt (&lt;code&gt;GENERATE&lt;/code&gt;) or by&#xA;animating the asset’s own still image as the opening frame (&lt;code&gt;ANIMATE&lt;/code&gt;), and attaches it to the asset.&#xA;The clip carries a &lt;strong&gt;synchronised audio track&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>VLM</title>
       <link>https://metaloom.io/docs/nodes/vlm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/vlm/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The VLM node reads an image with a &lt;strong&gt;vision-language model&lt;/strong&gt; served over an OpenAI-compatible&#xA;endpoint. It ships an &lt;strong&gt;olmOCR&lt;/strong&gt; preset that transcribes a document page — scans, receipts,&#xA;screenshots, forms — into clean markdown, with tables converted to HTML and equations to LaTeX.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Watermark</title>
+      <link>https://metaloom.io/docs/nodes/watermark/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/watermark/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The watermark node &lt;strong&gt;stamps your own image onto an asset&lt;/strong&gt; — a logo, a copyright mark, a &amp;#34;preview&amp;#34;&#xA;badge, a rating overlay. Unlike the analysis nodes, which describe a property of the media, and&#xA;unlike &lt;a href=&#34;../imagegen/&#34;&gt;Image Generation&lt;/a&gt;, which invents new pixels, &lt;code&gt;watermark&lt;/code&gt; marks the media it&#xA;was given: it composites the overlay you configure onto the asset’s own frames and hands the result&#xA;downstream.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

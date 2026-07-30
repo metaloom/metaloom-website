@@ -190,6 +190,10 @@
   </url><url>
     <loc>https://metaloom.io/docs/nodes/tika/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/videogen/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/nodes/vlm/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/nodes/watermark/</loc>
   </url>
 </urlset>

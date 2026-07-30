@@ -152,7 +152,15 @@
 
 
 
-<section class="section docs-section">
+<section class="section docs-section" data-reveal-scope>
+  
+<script>
+  document.documentElement.classList.add('reveal-js');
+  setTimeout(function () {
+    if (!window.__revealReady) document.documentElement.classList.remove('reveal-js');
+  }, 2500);
+</script>
+
   <div class="container">
     
     <header class="page-head page-head-center">
@@ -173,6 +181,11 @@
     </div>
   </div>
 </section>
+
+
+
+<script src="/js/reveal.min.18964114a6d192251fbf48609c768ce23ee9ec216abaad0b28e5b41e5cd45f2c6912cdf62d5e82063eeccd507af1454b.js" integrity="sha384-GJZBFKbRkiUfv0hgnHaM4j7p7CFquq0LKOW0HlzUXyxpEs32LV6CBj7szVB68UVL" defer></script>
+
 
   </div><!-- Footer -->
 

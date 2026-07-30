@@ -152,7 +152,16 @@
 </section>
 
 
-<section class="section docs-section">
+
+<section class="section docs-section" data-reveal-scope>
+  
+<script>
+  document.documentElement.classList.add('reveal-js');
+  setTimeout(function () {
+    if (!window.__revealReady) document.documentElement.classList.remove('reveal-js');
+  }, 2500);
+</script>
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-9">
@@ -165,7 +174,8 @@
 
         <div class="ann-timeline">
           
-          <article class="ann-entry">
+          
+          <article class="ann-entry reveal" data-reveal-delay="0">
             <div class="ann-entry-meta">
               <span class="ann-badge ann-badge-upcoming">Not released yet</span>
               <time datetime="2026-07-27">27 July 2026</time>
@@ -175,6 +185,7 @@
             <p class="ann-entry-summary">The scope of the first stable MetaLoom release — pipeline engine, processing nodes, AI agent, APIs, UI, CLI and Kubernetes deployment.</p>
             <a class="ann-entry-more" href="/announcements/metaloom-1-0-0/">Read the announcement <span aria-hidden="true">&rarr;</span></a>
           </article>
+          
           
         </div>
 
@@ -186,6 +197,11 @@
     </div>
   </div>
 </section>
+
+
+
+<script src="/js/reveal.min.18964114a6d192251fbf48609c768ce23ee9ec216abaad0b28e5b41e5cd45f2c6912cdf62d5e82063eeccd507af1454b.js" integrity="sha384-GJZBFKbRkiUfv0hgnHaM4j7p7CFquq0LKOW0HlzUXyxpEs32LV6CBj7szVB68UVL" defer></script>
+
 
   </div><!-- Footer -->
 

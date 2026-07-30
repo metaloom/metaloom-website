@@ -7,7 +7,7 @@
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist: one by exact content hash, one by perceptual video fingerprint.">
+	<meta name="description" content="The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to decide that two files are &amp;#34;the same&amp;#34;:">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/dedup/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Deduplication | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/dedup/">
-    <meta property="og:description" content="The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist: one by exact content hash, one by perceptual video fingerprint.">
+    <meta property="og:description" content="The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to decide that two files are &amp;#34;the same&amp;#34;:">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Deduplication">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Deduplication | MetaLoom">
-    <meta name="twitter:description" content="The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist: one by exact content hash, one by perceptual video fingerprint.">
+    <meta name="twitter:description" content="The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to decide that two files are &amp;#34;the same&amp;#34;:">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Deduplication">
 
@@ -242,15 +242,32 @@
         </div>
       </div>
       <div class="col-lg-9">
-        <div class="docs-page-header">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Nodes</p>
           <h1>Deduplication</h1>
-        </div>
+          
+        </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The deduplication nodes detect duplicate media and move the extra copies aside. Two variants exist:
-one by exact content hash, one by perceptual video fingerprint.</p>
+<p>The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to
+decide that two files are &#34;the same&#34;:</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dedup&#34;,&#34;applies&#34;:&#34;Any file \u00b7 Video&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the move is the side effect)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;sha512-dedup&#34;,&#34;note&#34;:&#34;exact duplicates by content hash&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash — typically the hash port of a sha512 node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;duplicate moved&#34;,&#34;d&#34;:&#34;the extra copy is moved into dupFolder&#34;}]},{&#34;name&#34;:&#34;fingerprint dedup (stub)&#34;,&#34;note&#34;:&#34;detects, does not yet move files&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;fingerprint&#34;,&#34;l&#34;:&#34;fingerprint&#34;,&#34;d&#34;:&#34;the perceptual code, from the fingerprint port of a fingerprint node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;near-duplicate flagged&#34;,&#34;d&#34;:&#34;reported only — moving the file is not implemented yet&#34;}]}]}"></div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>By content hash</strong> — the files are byte-for-byte identical.</p>
+</li>
+<li>
+<p><strong>By perceptual fingerprint</strong> — the files <strong>look</strong> like the same footage, even when they are different
+encodes, resolutions or crops. Because that is a judgement call, near-duplicates are never deleted
+automatically: they are collected for a person to confirm first.</p>
+</li>
+</ul>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dedup&#34;,&#34;applies&#34;:&#34;Any file · Video&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;duplicate groups for review + processing ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;sha512-dedup&#34;,&#34;note&#34;:&#34;exact duplicates by content hash&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash — typically the hash port of a sha512 node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;duplicate moved&#34;,&#34;d&#34;:&#34;the extra copy is moved into dupFolder&#34;}]},{&#34;name&#34;:&#34;fingerprint-dedup&#34;,&#34;note&#34;:&#34;finds near-duplicates and submits them for review&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;fingerprint&#34;,&#34;l&#34;:&#34;fingerprint&#34;,&#34;d&#34;:&#34;the perceptual code, from the fingerprint port of a fingerprint node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;review group created&#34;,&#34;d&#34;:&#34;a duplicate group awaiting a human decision — no file is touched&#34;}]},{&#34;name&#34;:&#34;fingerprint-dedup-apply&#34;,&#34;note&#34;:&#34;carries out confirmed decisions&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash, identifying the file to check against confirmed decisions&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;confirmed duplicate moved&#34;,&#34;d&#34;:&#34;only for groups a reviewer confirmed&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -259,7 +276,7 @@ one by exact content hash, one by perceptual video fingerprint.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kinds</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512-dedup</code> (hash dedup), fingerprint dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512-dedup</code> (exact), <code>fingerprint-dedup</code> (find near-duplicates), <code>fingerprint-dedup-apply</code> (act on confirmed ones)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
@@ -271,7 +288,7 @@ one by exact content hash, one by perceptual video fingerprint.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None — the node has side effects (moves duplicate files)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None — these nodes work by side effect (creating review entries, or moving files)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
@@ -279,28 +296,74 @@ one by exact content hash, one by perceptual video fingerprint.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_node_result</code> ledger (the move itself is the side effect)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duplicate groups awaiting review, plus a processing ledger entry per file</p></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
+<div class="sect1">
+<h2 id="_finding_near_duplicate_videos">Finding near-duplicate videos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Near-duplicate detection is a three-step workflow, and the split is deliberate: nothing is moved
+until a person has agreed to it.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find.</strong> <code>fingerprint-dedup</code> compares each video’s perceptual fingerprint against every other
+fingerprinted video and groups the ones that match closely enough. Each group records one file to
+<strong>keep</strong> and one or more <strong>duplicates</strong>. <strong>No file is changed at this stage.</strong></p>
+</li>
+<li>
+<p><strong>Review.</strong> The groups wait for a decision. Confirming a group approves the proposed clean-up;
+rejecting it means those files are never touched again.</p>
+</li>
+<li>
+<p><strong>Apply.</strong> <code>fingerprint-dedup-apply</code> acts only on confirmed groups, and re-checks the file it is
+about to keep before moving anything.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tbody><tr>
 <td class="icon">
-<div class="title">Note</div>
+<div class="title">Tip</div>
 </td>
 <td class="content">
-<code>sha512-dedup</code> is the working variant. Fingerprint-based dedup is currently a stub and does not
-yet move files.
+Fingerprint dedup needs the <a href="../fingerprint/">Fingerprint</a> node to have run first, and
+near-duplicate lookup must be switched on in the server configuration. Without it, the workflow has
+nothing to compare.
 </td>
 </tr>
 </tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_which_copy_is_kept">Which copy is kept</h3>
+<div class="paragraph">
+<p>The node picks the copy that is <strong>largest among the complete files</strong>, and it refuses to propose a
+group at all when that choice looks unsafe — for example when one of the candidate duplicates is
+<strong>larger</strong> than the file that would be kept, or when no candidate is known to be complete. The intent
+is that a clean-up can only ever discard the lesser copy.</p>
+</div>
+<div class="paragraph">
+<p>Before it moves anything, the apply step checks all over again against the files as they are on disk
+right now: the file being kept must still exist, still be complete, still be at least as large as the
+duplicate, and must not itself already be sitting in the duplicates folder. If any of that no longer
+holds, the move is skipped rather than guessed at.</p>
+</div>
+<div class="paragraph">
+<p>Both steps are safe to re-run. Re-running the search updates the same pending group instead of piling
+up new ones, and re-running the apply step skips files that have already been moved.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>DedupNodeOptions</code>:</p>
+<p>Exact-hash dedup and the apply step (<code>DedupNodeOptions</code>):</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -320,6 +383,43 @@ yet move files.
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Near-duplicate search (<code>fingerprint-dedup</code>):</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which fingerprint version to compare (defaults to the one the Fingerprint node produces)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>topK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many similar videos to consider per file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scoreThreshold</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How close a match has to be before it counts as a near-duplicate. Higher is stricter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>abortOnLargerDup</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refuse to propose a group when a candidate duplicate is larger than the file that would be kept. On by default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allowPartial</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow a group even when no candidate is known to be a complete file. Off by default.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -331,14 +431,27 @@ yet move files.
 <p><strong>Ingest cleanup</strong> — collapse byte-identical files as they are scanned from a folder or NAS.</p>
 </li>
 <li>
-<p><strong>Near-duplicate video pruning</strong> (once fingerprint dedup is implemented) — remove re-encodes of the
-same footage.</p>
+<p><strong>Near-duplicate video pruning</strong> — find re-encodes and re-uploads of the same footage, review them,
+and clear out the redundant copies once approved.</p>
+</li>
+<li>
+<p><strong>Reclaiming storage safely</strong> — the review step means a large clean-up can be checked before any
+file moves.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
         </div>
       </div>
     </div>

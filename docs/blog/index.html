@@ -153,7 +153,15 @@
 
 
 
-<section class="section docs-section">
+<section class="section docs-section" data-reveal-scope>
+  
+<script>
+  document.documentElement.classList.add('reveal-js');
+  setTimeout(function () {
+    if (!window.__revealReady) document.documentElement.classList.remove('reveal-js');
+  }, 2500);
+</script>
+
   <div class="container">
     
     <header class="page-head page-head-center">
@@ -166,7 +174,7 @@
     <div class="row blog-grid">
       
       
-<article class="col-lg-4 col-md-6 col-12 mb-4">
+<article class="col-lg-4 col-md-6 col-12 mb-4 reveal">
   <a class="blog-card" href="/blog/video-fingerprinting/">
     <span class="blog-card-media">
       <img src="/blog/video-fingerprinting/photo-1585079374502-415f8516dcc3.webp" alt="" aria-hidden="true" loading="lazy">
@@ -182,7 +190,7 @@
 
       
       
-<article class="col-lg-4 col-md-6 col-12 mb-4">
+<article class="col-lg-4 col-md-6 col-12 mb-4 reveal">
   <a class="blog-card" href="/blog/day4-vertx-jooq-poc/">
     <span class="blog-card-media">
       <img src="/blog/day4-vertx-jooq-poc/jan-antonin-kolar-lRoX0shwjUQ-unsplash.webp" alt="" aria-hidden="true" loading="lazy">
@@ -198,7 +206,7 @@
 
       
       
-<article class="col-lg-4 col-md-6 col-12 mb-4">
+<article class="col-lg-4 col-md-6 col-12 mb-4 reveal">
   <a class="blog-card" href="/blog/day3-vertx-dagger-poc/">
     <span class="blog-card-media">
       <img src="/blog/day3-vertx-dagger-poc/christian-wiediger-WkfDrhxDMC8-unsplash.webp" alt="" aria-hidden="true" loading="lazy">
@@ -214,7 +222,7 @@
 
       
       
-<article class="col-lg-4 col-md-6 col-12 mb-4">
+<article class="col-lg-4 col-md-6 col-12 mb-4 reveal">
   <a class="blog-card" href="/blog/day2-project-setup/">
     <span class="blog-card-media">
       <img src="/blog/day2-project-setup/terry-vlisidis-WsEbnsnKbUE-unsplash.webp" alt="" aria-hidden="true" loading="lazy">
@@ -230,7 +238,7 @@
 
       
       
-<article class="col-lg-4 col-md-6 col-12 mb-4">
+<article class="col-lg-4 col-md-6 col-12 mb-4 reveal">
   <a class="blog-card" href="/blog/day1-project-design/">
     <span class="blog-card-media">
       <img src="/blog/day1-project-design/eleventh-wave-JsjtrixOiWc-unsplash.webp" alt="" aria-hidden="true" loading="lazy">
@@ -246,7 +254,7 @@
 
       
       
-<article class="col-lg-4 col-md-6 col-12 mb-4">
+<article class="col-lg-4 col-md-6 col-12 mb-4 reveal">
   <a class="blog-card" href="/blog/day0-let-there-be-loom/">
     <span class="blog-card-media">
       <img src="/blog/day0-let-there-be-loom/banner_square.webp" alt="" aria-hidden="true" loading="lazy">
@@ -270,6 +278,11 @@
     </div>
   </div>
 </section>
+
+
+
+<script src="/js/reveal.min.18964114a6d192251fbf48609c768ce23ee9ec216abaad0b28e5b41e5cd45f2c6912cdf62d5e82063eeccd507af1454b.js" integrity="sha384-GJZBFKbRkiUfv0hgnHaM4j7p7CFquq0LKOW0HlzUXyxpEs32LV6CBj7szVB68UVL" defer></script>
+
 
   </div><!-- Footer -->
 
