@@ -366,9 +366,10 @@ be viewed and restored. See <a href="../loom/rest-api/">REST API</a> for the end
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;version&#34;: 1,
   &#34;nodes&#34;: [
     { &#34;id&#34;: &#34;pn1&#34;, &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;File Source&#34; },
-    { &#34;id&#34;: &#34;pn2&#34;, &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;MIME Filter&#34; },
+    { &#34;id&#34;: &#34;pn2&#34;, &#34;type&#34;: &#34;filter&#34;,   &#34;name&#34;: &#34;Language Filter&#34; },
     { &#34;id&#34;: &#34;pn3&#34;, &#34;type&#34;: &#34;sha256&#34;,            &#34;name&#34;: &#34;SHA-256 Hash&#34; }
   ],
   &#34;edges&#34;: [
@@ -383,6 +384,12 @@ be viewed and restored. See <a href="../loom/rest-api/">REST API</a> for the end
 <div class="ulist">
 <ul>
 <li>
+<p><code>version</code> names the <strong>definition format</strong> the graph is written in. Loom sets it for you when you
+save, so you never have to write it by hand. A definition without one is read as version 1, and a
+definition from a newer Loom than the one you are running is refused with a message naming both
+versions rather than being partially understood.</p>
+</li>
+<li>
 <p>Each node carries a graph <code>id</code> and a <code>type</code> — the <strong>node kind</strong> that Loom uses to route the task to
 a worker that can run it.</p>
 </li>
@@ -395,8 +402,9 @@ flows, and is rejected.</p>
 <p>A pipeline has exactly one <strong>source</strong> node (e.g. <code>filesystem-source</code>) that enumerates media.</p>
 </li>
 <li>
-<p><strong>Filter</strong> nodes (e.g. <code>filter-mimetype</code>) route items down <code>PASS</code> / <code>REJECT</code> branches so, for
-example, a video-only branch never receives images. The key is <code>branch</code>, and it defaults to <code>ANY</code>.</p>
+<p><strong>Filter</strong> nodes (<code>filter</code>) grow one output port per configured bucket and route each item down
+exactly one of them — so a German branch never receives English. The port <strong>is</strong> the branch:
+anything wired to a port that carried nothing is skipped for that item.</p>
 </li>
 <li>
 <p>Node kinds map to the built-in <a href="../nodes/">Nodes</a> (or your own custom nodes).</p>

@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Features | MetaLoom</title>
+	<title>Binary Storage | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+	<meta name="description" content="Every asset in Loom has two halves: the record — filename, hashes, tags, everything a pipeline worked out about it — and the bytes themselves. This page is about the bytes: where they go, how you put …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/features/">
+<link rel="canonical" href="https://metaloom.io/docs/loom/binary-storage/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Features | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/features/">
-    <meta property="og:description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+    <meta property="og:title" content="Binary Storage | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/binary-storage/">
+    <meta property="og:description" content="Every asset in Loom has two halves: the record — filename, hashes, tags, everything a pipeline worked out about it — and the bytes themselves. This page is about the bytes: where they go, how you put …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Features">
+    <meta property="og:image:alt" content="Binary Storage">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Features | MetaLoom">
-    <meta name="twitter:description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+    <meta name="twitter:title" content="Binary Storage | MetaLoom">
+    <meta name="twitter:description" content="Every asset in Loom has two halves: the record — filename, hashes, tags, everything a pipeline worked out about it — and the bytes themselves. This page is about the bytes: where they go, how you put …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Features">
+    <meta name="twitter:image:alt" content="Binary Storage">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -247,289 +247,256 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Loom</p>
-          <h1>Features</h1>
+          <h1>Binary Storage</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.
-Each section below links to the reference page that covers the feature in depth.</p>
+<p>Every asset in Loom has two halves: the <strong>record</strong> — filename, hashes, tags, everything a pipeline
+worked out about it — and the <strong>bytes</strong> themselves. This page is about the bytes: where they go, how
+you put them there, and how you get them back.</p>
 </div>
 <div class="sect1">
-<h2 id="_assets">Assets</h2>
+<h2 id="_uploading">Uploading</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An <strong>asset</strong> is the central entity in Loom.
-It represents a digital media file (image, video, audio, document) together with its extracted metadata.</p>
+<p>The quickest way to get media into Loom is a single request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X POST https://loom.example.com/api/v1/assets/upload \
+  -H &#34;Authorization: Bearer $TOKEN&#34; \
+  -F &#34;file=@holiday.mp4&#34; \
+  -F &#34;libraryUuid=$LIBRARY_UUID&#34;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Key capabilities:</p>
+<p>That stores the bytes, creates the asset, and starts any pipeline configured to run on that media
+type. The response is the new asset, including its UUID.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Do not set a <code>Content-Type</code> header yourself. Your HTTP client sets it, together with the
+multipart boundary; overriding it makes the upload unreadable.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_uploading_the_same_file_twice">Uploading the same file twice</h3>
+<div class="paragraph">
+<p>Loom identifies an asset by the SHA-512 of its content, so uploading a file it already has does not
+create a duplicate — you get the existing asset back, with status <code>200</code> instead of <code>201</code>. Importing
+the same file into a second library adds a second <strong>location</strong> for that one asset rather than a
+second asset.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_replacing_the_bytes_of_an_existing_asset">Replacing the bytes of an existing asset</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X POST https://loom.example.com/api/v1/assets/$ASSET_UUID/binary/data \
+  -H &#34;Authorization: Bearer $TOKEN&#34; \
+  -F &#34;file=@holiday-regraded.mp4&#34;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the asset lives in more than one library, add <code>-F &#34;libraryUuid=…​&#34;</code> to say which copy you mean.
+Loom will not guess, because guessing would overwrite the wrong library’s file.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_downloading">Downloading</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -O -J https://loom.example.com/api/v1/assets/$ASSET_UUID/binary/data \
+  -H &#34;Authorization: Bearer $TOKEN&#34;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Downloads support byte ranges, so a browser can seek inside a video without refetching it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -r 0-1048575 https://loom.example.com/api/v1/assets/$ASSET_UUID/binary/data \
+  -H &#34;Authorization: Bearer $TOKEN&#34;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_choosing_where_the_bytes_are_stored">Choosing where the bytes are stored</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <strong>storage pool</strong> is either a directory on disk or an S3 bucket. A <strong>library</strong> points at a pool, and
+everything uploaded into that library goes there. Libraries with no pool use the server’s local
+storage directory, which is the default and needs no configuration at all.</p>
+</div>
+<div class="paragraph">
+<p>Create a pool:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># A filesystem pool
+curl -X POST https://loom.example.com/api/v1/pools \
+  -H &#34;Authorization: Bearer $TOKEN&#34; -H &#34;Content-Type: application/json&#34; \
+  -d &#39;{&#34;name&#34;: &#34;fast-ssd&#34;, &#34;fsPath&#34;: &#34;/mnt/fast-ssd/media&#34;}&#39;
+
+# An S3 pool
+curl -X POST https://loom.example.com/api/v1/pools \
+  -H &#34;Authorization: Bearer $TOKEN&#34; -H &#34;Content-Type: application/json&#34; \
+  -d &#39;{&#34;name&#34;: &#34;archive&#34;, &#34;s3Bucket&#34;: &#34;media-archive&#34;, &#34;s3Region&#34;: &#34;eu-central-1&#34;}&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A pool is one or the other, never both.</p>
+</div>
+<div class="paragraph">
+<p>Then point a library at it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X POST https://loom.example.com/api/v1/libraries/$LIBRARY_UUID \
+  -H &#34;Authorization: Bearer $TOKEN&#34; -H &#34;Content-Type: application/json&#34; \
+  -d &#39;{&#34;poolUuid&#34;: &#34;&#39;$POOL_UUID&#39;&#34;}&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Every library reports which backend it uses as <code>storageType</code>, either <code>filesystem</code> or <code>s3</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Changing a library’s pool affects <strong>future</strong> uploads only. Files already stored stay where
+they are and keep working — each one remembers the pool it was written to.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_s3_credentials">S3 credentials</h3>
+<div class="paragraph">
+<p>Bucket, region and endpoint are part of the pool. The access key and secret are not: they are set on
+the server, so they never end up in the database or in an API response.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">LOOM_S3_ACCESS_KEY=...
+LOOM_S3_SECRET_KEY=...
+LOOM_S3_ENDPOINT=https://minio.example.com   # only for S3-compatible storage
+LOOM_S3_REGION=eu-central-1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Leave the keys unset on AWS to use the machine’s own credentials — an IAM role, IRSA on Kubernetes,
+or a local AWS profile. For MinIO, Ceph and similar gateways, set <code>LOOM_S3_ENDPOINT</code>; path-style
+addressing switches itself on automatically.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_storage_settings">Storage settings</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_STORAGE_UPLOAD_DIR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data/storage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where binaries go for libraries with no pool.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_STORAGE_MAX_UPLOAD_SIZE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unlimited</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Largest accepted upload, in bytes. Larger uploads are rejected before anything is written.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_STORAGE_MIN_FREE_SPACE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 GiB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loom refuses an upload that would take the disk below this. Set <code>0</code> to disable.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deleting">Deleting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Deleting a binary removes the file only when nothing else needs it. Because storage is
+content-addressed, identical files share one copy on disk — so removing one asset’s binary never
+takes the preview away from another asset that happens to hold the same content.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_attachments">Attachments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Alongside its main binary, an asset can carry <strong>attachments</strong>: contact sheets, poster frames,
+waveforms, proxies, extracted audio. They upload and download the same way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -X POST https://loom.example.com/api/v1/attachments \
+  -H &#34;Authorization: Bearer $TOKEN&#34; \
+  -F &#34;file=@poster.jpg&#34; -F &#34;assetUuid=$ASSET_UUID&#34; -F &#34;type=POSTER_FRAME&#34;
+
+curl -O -J https://loom.example.com/api/v1/attachments/$ATTACHMENT_UUID/data \
+  -H &#34;Authorization: Bearer $TOKEN&#34;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An attachment is stored in the same pool as the asset it belongs to.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_processing_uploaded_media">Processing uploaded media</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cortex workers do not receive media over the network — Loom tells them <strong>where</strong> the file is and they
+read it themselves. What that requires depends on the pool:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Create, read, update, delete (CRUD) via REST API</p>
+<p><strong>S3 pools</strong> — nothing extra. The worker fetches the object directly, so Loom and Cortex can run
+anywhere. The worker needs its own S3 settings (<code>CORTEX_S3_*</code>).</p>
 </li>
 <li>
-<p>Lookup by UUID or SHA-512 hash</p>
-</li>
-<li>
-<p>Binary upload/download (original file)</p>
-</li>
-<li>
-<p>Bulk create and bulk update</p>
-</li>
-<li>
-<p>Tagging</p>
-</li>
-<li>
-<p>Reactions (like, dislike, custom reactions)</p>
-</li>
-<li>
-<p>Comments and annotations</p>
-</li>
-<li>
-<p>Linked components (asset parts / variants)</p>
-</li>
-<li>
-<p>Linked locations (multiple storage locations per file)</p>
-</li>
-<li>
-<p>Embedding storage (vector embeddings for similarity search)</p>
+<p><strong>Filesystem pools</strong> — the worker must be able to see the same directory at the same path, via a
+shared volume or by running on the same host. If it cannot, processing fails to open the file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_assets">REST API — Assets</a> · <a href="../java-client/#_working_with_assets">Java Client — Assets</a> · <a href="../../ui/#assets">Loom UI — Assets</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_asset_pools">Asset Pools</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Asset pools</strong> are logical groupings of assets, typically corresponding to a physical storage location (folder, bucket, NAS share).
-They are used to scope Cortex processing runs and asset import operations.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/filesystem-source/">Filesystem Source Node</a> · <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — <code>pool list</code></a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_libraries">Libraries</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Libraries</strong> provide a higher-level organizational layer above asset pools.
-A library can span multiple pools and is the primary unit for user-visible browsing.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_libraries">REST API — Libraries</a> · <a href="../../ui/#_library">Loom UI — Library</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_collections">Collections</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Collections</strong> are curated, user-defined sets of assets (similar to playlists or albums).
-An asset can appear in multiple collections.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_collections">REST API — Collections</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_users">Users</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>User management is built into Loom.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create, update, delete users</p>
-</li>
-<li>
-<p>Assign users to groups</p>
-</li>
-<li>
-<p>Set per-user passwords</p>
-</li>
-<li>
-<p>Per-user token management</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_users">REST API — Users</a> · <a href="../authentication/">Authentication</a> · <a href="../../ui/#administration">Loom UI — Administration</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_groups">Groups</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Groups aggregate users and are the unit on which <strong>roles</strong> are assigned.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_groups">REST API — Groups</a> · <a href="../java-client/#_working_with_users_groups_and_roles">Java Client — Users, Groups and Roles</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_roles">Roles</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom uses role-based access control (RBAC).</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create named roles (e.g. <code>viewer</code>, <code>editor</code>, <code>admin</code>)</p>
-</li>
-<li>
-<p>Assign roles to groups</p>
-</li>
-<li>
-<p>Roles carry permissions for each resource type</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_roles">REST API — Roles</a> · <a href="../../ui/#administration">Loom UI — Permissions (ACL matrix)</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_permissions">Permissions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Permissions control what actions a role can perform on each resource (create, read, update, delete).
-They can be set at the global level or scoped to specific libraries or collections.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../ui/#administration">Loom UI — Administration</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — access listings</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tags">Tags</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Tags</strong> are free-text labels that can be attached to assets.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create and manage a global tag vocabulary</p>
-</li>
-<li>
-<p>Add or remove tags from individual assets</p>
-</li>
-<li>
-<p>Filter assets by one or more tags via the API</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_tags">REST API — Tags</a> · <a href="../java-client/#_working_with_tags">Java Client — Tags</a> · <a href="../../ui/#_tags">Loom UI — Tags</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipelines">Pipelines</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Pipelines</strong> define the media processing workflows.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Define a pipeline with a name, description, priority, and enabled flag</p>
-</li>
-<li>
-<p>Pipelines are authored in the UI and stored on Loom with immutable versioning</p>
-</li>
-<li>
-<p>Runs are executed by Loom’s engine, which delegates node tasks to registered Cortex workers (see <a href="../../pipeline/">Pipeline Mechanism</a>)</p>
-</li>
-<li>
-<p>Pipeline execution results are tracked and surfaced as real-time WebSocket events</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../nodes/">Nodes</a> · <a href="../rest-api/#_pipelines">REST API — Pipelines</a> · <a href="../../ui/#pipeline-editing">Loom UI — Pipeline Editing</a> · <a href="../../cli/#_running_a_pipeline">Command Line — Running a Pipeline</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tasks">Tasks</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Tasks</strong> represent asynchronous background operations (e.g. bulk ingestion).
-They can be monitored via the REST API.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../operation/#_how_loom_dispatches_work">Operation — How Loom Dispatches Work</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_api_keys_tokens">API Keys (Tokens)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Long-lived API keys can be created for service accounts or CI/CD integrations.
-They are functionally equivalent to JWT tokens.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../authentication/#_api_keys_tokens">Authentication — API Keys</a> · <a href="../../ui/#administration">Loom UI — API Keys</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_blacklists">Blacklists</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Assets or hashes can be blacklisted to prevent them from being re-ingested or surfaced in search results.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/hash/">Hashing Node</a> · <a href="../../nodes/filter/">Filter Node</a> · <a href="../../ui/#administration">Loom UI — Blacklist</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_spaces">Spaces</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Spaces</strong> are top-level organisational units that group libraries, collections and users.
-They allow multi-tenant deployments within a single Loom instance.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../cli/#_browsing_content_and_access">Command Line — Content Hierarchy</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_search_and_similarity">Search and Similarity</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom integrates with search backends (Elasticsearch, Lucene, Qdrant) to provide:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Full-text search over extracted metadata</p>
-</li>
-<li>
-<p>Vector similarity search using stored embeddings (e.g. face embeddings, video fingerprints)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/fingerprint/">Fingerprint Node</a> · <a href="../../nodes/facedescription/">Face Description Node</a> · <a href="../../nodes/dedup/">Deduplication Node</a> · <a href="../graphql-api/">GraphQL API</a></p>
+<p>If you are running Loom and Cortex on separate machines, an S3-backed library is the simpler
+arrangement.</p>
 </div>
 </div>
 </div>

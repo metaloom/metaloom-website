@@ -266,7 +266,7 @@ transcripts, and the chat questions those transcripts then make answerable.</p>
 <div class="ml-figure">
 <svg viewBox="0 0 900 340" role="img" aria-labelledby="ml-tr-title ml-tr-desc" class="ml-arch-svg">
   <title id="ml-tr-title">From files on disk to an answer in the chat</title>
-  <desc id="ml-tr-desc">A filesystem-source node walks the library and its media output port feeds two branches. One goes to a filter-mimetype node that passes video and audio on to a whisper node wired to the matching media input port; the other goes to a sha512 node that establishes asset identity alongside it. The transcript is stored in Loom as an asset transcript component, which the chat agent reads through the search_transcript tool to answer a user question.</desc>
+  <desc id="ml-tr-desc">A filesystem-source node walks the library and its media output port feeds two branches. One goes to a whisper node wired to its video and audio media input ports, which accept the item only when its real type matches; the other goes to a sha512 node that establishes asset identity alongside it. The transcript is stored in Loom as an asset transcript component, which the chat agent reads through the search_transcript tool to answer a user question.</desc>
   <defs>
     <marker id="ml-tr-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57cbcc"></path></marker>
     <marker id="ml-tr-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7681"></path></marker>
@@ -281,10 +281,6 @@ transcripts, and the chat questions those transcripts then make answerable.</p>
     <text x="117" y="120" text-anchor="middle" class="ml-part-title">filesystem-source</text>
     <text x="117" y="136" text-anchor="middle" class="ml-part-sub">media</text>
 
-    <rect x="250" y="86" width="170" height="42" rx="6" class="ml-box-part"></rect>
-    <text x="335" y="104" text-anchor="middle" class="ml-part-title">filter-mimetype</text>
-    <text x="335" y="120" text-anchor="middle" class="ml-part-sub">passed</text>
-
     <rect x="250" y="146" width="170" height="42" rx="6" class="ml-box-part"></rect>
     <text x="335" y="164" text-anchor="middle" class="ml-part-title">sha512</text>
     <text x="335" y="180" text-anchor="middle" class="ml-part-sub">hash — asset identity</text>
@@ -293,10 +289,9 @@ transcripts, and the chat questions those transcripts then make answerable.</p>
     <text x="560" y="104" text-anchor="middle" class="ml-part-title">whisper</text>
     <text x="560" y="120" text-anchor="middle" class="ml-part-sub">audio | video → transcript</text>
 
-    <polyline points="202,123 226,123 226,107 250,107" class="ml-edge" marker-end="url(#ml-tr-arrow)"></polyline>
     <polyline points="202,123 226,123 226,167 250,167" class="ml-edge" marker-end="url(#ml-tr-arrow)"></polyline>
-    <polyline points="420,107 470,107" class="ml-edge" marker-end="url(#ml-tr-arrow)"></polyline>
-    <text x="445" y="99" text-anchor="middle" class="ml-edge-label">PASS</text>
+    <polyline points="202,123 336,123 336,107 470,107" class="ml-edge" marker-end="url(#ml-tr-arrow)"></polyline>
+    <text x="336" y="99" text-anchor="middle" class="ml-edge-label">media/*</text>
   </g>
 
   <!-- media source -->
@@ -413,7 +408,7 @@ nodes:
   -e LOOM_HOST=loom -e LOOM_PORT=8092 -e LOOM_TOKEN=&#34;$TOKEN&#34; \
   -e CORTEX_NODE_ID=cortex-gpu-1 \
   -e CORTEX_META_PATH=/meta \
-  -e CORTEX_NODE_WHITELIST=filesystem-source,sha512,filter-mimetype,whisper \
+  -e CORTEX_NODE_WHITELIST=filesystem-source,sha512,whisper \
   -v cortex-gpu-meta:/meta \
   -v /srv/models:/models:ro \
   -v ./cortex.yml:/cortex/.config/metaloom/cortex.yml:ro \
@@ -441,10 +436,6 @@ default concurrency of <strong>1</strong>. Long recordings need the timeout rais
   &#34;nodes&#34;: [
     { &#34;id&#34;: &#34;source&#34;,   &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Media library&#34;,
       &#34;options&#34;: { &#34;path&#34;: &#34;/media/library&#34; } },
-    { &#34;id&#34;: &#34;video&#34;,    &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Video only&#34;,
-      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
-    { &#34;id&#34;: &#34;audio&#34;,    &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Audio only&#34;,
-      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;audio/*&#34; } },
     { &#34;id&#34;: &#34;hash&#34;,     &#34;type&#34;: &#34;sha512&#34;,            &#34;name&#34;: &#34;SHA-512 identity&#34; },
     { &#34;id&#34;: &#34;speech-v&#34;, &#34;type&#34;: &#34;whisper&#34;,           &#34;name&#34;: &#34;Transcribe video&#34;,
       &#34;timeoutMs&#34;: 3600000 },
@@ -453,15 +444,11 @@ default concurrency of <strong>1</strong>. Long recordings need the timeout rais
   ],
   &#34;edges&#34;: [
     { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
-      &#34;target&#34;: &#34;video&#34;,    &#34;targetPort&#34;: &#34;media&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
-      &#34;target&#34;: &#34;audio&#34;,    &#34;targetPort&#34;: &#34;media&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
       &#34;target&#34;: &#34;hash&#34;,     &#34;targetPort&#34;: &#34;media&#34; },
-    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;video&#34;,  &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;speech-v&#34;, &#34;targetPort&#34;: &#34;video&#34;, &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;audio&#34;,  &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;speech-a&#34;, &#34;targetPort&#34;: &#34;audio&#34;, &#34;branch&#34;: &#34;PASS&#34; }
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;speech-v&#34;, &#34;targetPort&#34;: &#34;video&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;speech-a&#34;, &#34;targetPort&#34;: &#34;audio&#34; }
   ]
 }</code></pre>
 </div>
@@ -482,18 +469,21 @@ drawn into its input port, never by the graph id of whoever produced the value.<
 against its persisted index so a re-run only picks up new, modified or moved files. Its single output
 port <code>media</code> is what everything downstream connects to.</p>
 </dd>
-<dt class="hdlist1"><code>filter-mimetype</code></dt>
+<dt class="hdlist1">`whisper’s two media inputs</dt>
 <dd>
-<p>Emits a verdict on its <code>passed</code> port, and the <code>branch</code> on an outgoing edge picks
-which side of it to follow (<code>PASS</code>, <code>REJECT</code>, or <code>ANY</code> for both). That is what stops images being
-handed to a speech model. A branch is only valid on an edge leaving a filter node.</p>
+<p>Nothing routes by file type here, because nothing has to. Whisper
+declares <code>audio</code> and <code>video</code> as <strong>alternatives</strong> — exactly one may be wired — and each carries a
+concrete content type. A source cannot know an item’s real type when the graph is drawn, so it emits
+the family wildcard <code>media/*</code>; the connection is accepted when you draw it and settled per item at
+run time with the file in hand. An image reaching a speech model is prevented by the type, not by a
+node you had to add.</p>
 </dd>
 <dt class="hdlist1"><code>sha512</code></dt>
 <dd>
 <p>The identity step described above. Its <code>hash</code> port carries <code>hash/sha512</code>, so it can only be
-connected to something that declares a matching hash input — <a href="../../nodes/loom/"><code>loom</code></a> or a
-<a href="../../nodes/dedup/">dedup</a> node. It hangs off the source rather than sitting in the middle of the
-media path.</p>
+connected to something that declares a matching hash input, such as a <a href="../../nodes/dedup/">dedup</a>
+node. It persists the hash itself, so nothing has to be connected to it at all. It hangs off the
+source rather than sitting in the middle of the media path.</p>
 </dd>
 <dt class="hdlist1"><code>whisper</code></dt>
 <dd>
@@ -761,8 +751,8 @@ rejected the same way.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Images are being handed to Whisper</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The filter edge is missing its <code>&#34;branch&#34;: &#34;PASS&#34;</code>, so the filter’s verdict is not routing anything.
-Note that the key is <code>branch</code> — an edge carrying anything else is simply an unconditional edge.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The edge lands on the wrong input port. Wire the source into <code>whisper’s `audio</code> or <code>video</code> port —
+never both, they are alternatives — and the concrete content type keeps everything else out.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Every run re-transcribes everything</p></td>
@@ -784,7 +774,7 @@ Note that the key is <code>branch</code> — an edge carrying anything else is s
 <p>Take the transcript further — <a href="../translation/">Translating Content</a>.</p>
 </li>
 <li>
-<p>Node reference — <a href="../../nodes/whisper/">Whisper</a>, <a href="../../nodes/filters/">Filters</a>.</p>
+<p>Node reference — <a href="../../nodes/whisper/">Whisper</a>, <a href="../../nodes/filter/">Filter</a>.</p>
 </li>
 </ul>
 </div>

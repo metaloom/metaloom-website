@@ -40,7 +40,7 @@
       <link>https://metaloom.io/docs/playbooks/translation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/playbooks/translation/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any&#xA;pipeline, because each has a different answer today:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any&#xA;pipeline:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>A Custom Node in Python</title>

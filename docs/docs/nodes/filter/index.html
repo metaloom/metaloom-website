@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Features | MetaLoom</title>
+	<title>Filter | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+	<meta name="description" content="The Filter node is a router. Instead of producing metadata, it decides which group each item belongs to and sends it down the matching branch, so the work you hang off each branch only runs on the …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/features/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/filter/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Features | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/features/">
-    <meta property="og:description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+    <meta property="og:title" content="Filter | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/filter/">
+    <meta property="og:description" content="The Filter node is a router. Instead of producing metadata, it decides which group each item belongs to and sends it down the matching branch, so the work you hang off each branch only runs on the …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Features">
+    <meta property="og:image:alt" content="Filter">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Features | MetaLoom">
-    <meta name="twitter:description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+    <meta name="twitter:title" content="Filter | MetaLoom">
+    <meta name="twitter:description" content="The Filter node is a router. Instead of producing metadata, it decides which group each item belongs to and sends it down the matching branch, so the work you hang off each branch only runs on the …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Features">
+    <meta name="twitter:image:alt" content="Filter">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -206,7 +206,7 @@
               
               
               <li>
-                <a href="/docs/loom/" class="is-current">Loom</a>
+                <a href="/docs/loom/">Loom</a>
               </li>
               
               
@@ -218,7 +218,7 @@
               
               
               <li>
-                <a href="/docs/nodes/">Nodes</a>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
               </li>
               
               
@@ -246,290 +246,211 @@
         
         
         <header class="page-head">
-          <p class="page-eyebrow">Loom</p>
-          <h1>Features</h1>
+          <p class="page-eyebrow">Nodes</p>
+          <h1>Filter</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.
-Each section below links to the reference page that covers the feature in depth.</p>
+<p>The Filter node is a <strong>router</strong>. Instead of producing metadata, it decides which group each item
+belongs to and sends it down the matching branch, so the work you hang off each branch only runs on
+the items that belong there.</p>
 </div>
+<div class="paragraph">
+<p>You configure a list of <strong>buckets</strong>, and the node grows <strong>one output port per bucket</strong> — plus an
+<code>other</code> port that is always present. Wire the ports you care about; that is the whole configuration.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;filter&#34;,&#34;applies&#34;:&#34;Routing node&#34;,&#34;badge&#34;:&#34;Needs a language model&#34;,&#34;persist&#34;:&#34;the routing decision, as a JSON component on the asset&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;language routing&#34;,&#34;note&#34;:&#34;buckets: de, en&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item being routed&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;d&#34;:&#34;the text to classify — a transcript, extracted document text or a caption (optional)&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;de&#34;,&#34;d&#34;:&#34;items classified as German — carries only those items&#34;},{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;en&#34;,&#34;d&#34;:&#34;items classified as English — carries only those items&#34;},{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;other&#34;,&#34;d&#34;:&#34;everything else; always present&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;passed&#34;,&#34;d&#34;:&#34;true when a bucket other than other matched&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;bucket&#34;,&#34;d&#34;:&#34;the id of the bucket this item landed in — carries a value for every item&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">— (routing; sits between other nodes)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> — the item being routed. <code>text</code> — the text to classify; optional, and without it every item lands in <code>other</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One per configured bucket, plus <code>other</code>, <code>passed</code> and <code>bucket</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable language model (Ollama by default)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The routing decision, as a JSON component on the asset</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect1">
-<h2 id="_assets">Assets</h2>
+<h2 id="_how_routing_works">How routing works</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An <strong>asset</strong> is the central entity in Loom.
-It represents a digital media file (image, video, audio, document) together with its extracted metadata.</p>
+<p>The <strong>port is the branch</strong>. Each item is written to exactly one bucket port, and anything wired to a
+port that carried nothing is skipped for that item. Nothing else has to be configured: there is no
+branch setting on the connection, and no limit of two ways.</p>
 </div>
 <div class="paragraph">
-<p>Key capabilities:</p>
+<p>Skipping carries down the branch. If a node is skipped because its branch did not fire, everything
+downstream of it is skipped for that item too — you do not have to repeat the condition at each step.</p>
 </div>
+<div class="paragraph">
+<p>Two ports behave differently on purpose:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>passed</code></dt>
+<dd>
+<p><code>true</code> when the item matched a bucket other than <code>other</code>. Useful when you want the plain
+yes/no rather than the group.</p>
+</dd>
+<dt class="hdlist1"><code>bucket</code></dt>
+<dd>
+<p>The id of the bucket the item landed in. This port carries a value for <strong>every</strong> item, so
+a node wired to it runs whichever way the item went — that is how you record or count the decision
+without also being routed by it.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>In the editor a branch port is drawn with a <strong>dashed</strong> outline, so you can see at a glance which
+connections carry every item and which carry only some.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_buckets">Configuring buckets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each bucket has:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Becomes the output port. Lowercase letters, digits and underscore; typing &#34;Brazilian Portuguese&#34; turns into <code>brazilian_portuguese</code> for you</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name shown on the node. Defaults to the id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aliases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Other names that mean the same bucket, comma separated — e.g. <code>german, deutsch</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Use the <strong>Add bucket</strong> button to grow a branch, and the delete icon to remove one. The node’s ports
+follow immediately, and removing a bucket also removes any connections that were hanging off it.</p>
+</div>
+<div class="paragraph">
+<p><code>other</code> cannot be used as a bucket id — it is the catch-all and is always there. Neither can
+<code>passed</code>, <code>bucket</code>, <code>media</code> or <code>text</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_filtering_by">Filtering by</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Filter by</strong> setting chooses what the buckets are matched against.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Filter by</th>
+<th class="tableblock halign-left valign-top">Each item goes to the bucket whose…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…language matches the text wired into the node</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Language is decided by a language model, which means it needs a reachable Ollama endpoint but no
+extra model download and no separate service. Wire the <code>text</code> port from whatever produced the text:
+a transcript from <a href="../whisper/">Whisper</a>, extracted document text from <a href="../tika/">Tika</a>, or
+recognised text from <a href="../ocr/">OCR</a>.</p>
+</div>
+<div class="paragraph">
+<p>If the model is unreachable the item <strong>fails</strong> rather than being quietly routed to <code>other</code> — an item
+that could not be classified is not the same as one that did not match. An answer the model gives
+that names no configured bucket does land in <code>other</code>, which is what that branch is for.</p>
+</div>
+<div class="paragraph">
+<p>Set a <strong>Minimum confidence</strong> to send uncertain classifications to <code>other</code> instead of trusting them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Create, read, update, delete (CRUD) via REST API</p>
+<p><strong>Language routing</strong> — send German transcripts to one summarisation prompt and English ones to
+another, and everything else to a review branch.</p>
 </li>
 <li>
-<p>Lookup by UUID or SHA-512 hash</p>
+<p><strong>Per-language publishing</strong> — tag, translate or caption each language differently without building
+a separate pipeline for each.</p>
 </li>
 <li>
-<p>Binary upload/download (original file)</p>
+<p><strong>Catching the unexpected</strong> — wire <code>other</code> to a review step and see what your library actually
+contains.</p>
 </li>
 <li>
-<p>Bulk create and bulk update</p>
-</li>
-<li>
-<p>Tagging</p>
-</li>
-<li>
-<p>Reactions (like, dislike, custom reactions)</p>
-</li>
-<li>
-<p>Comments and annotations</p>
-</li>
-<li>
-<p>Linked components (asset parts / variants)</p>
-</li>
-<li>
-<p>Linked locations (multiple storage locations per file)</p>
-</li>
-<li>
-<p>Embedding storage (vector embeddings for similarity search)</p>
+<p><strong>Recording the decision</strong> — wire <code>bucket</code> into <a href="../script/">Script</a> to count or store which
+group each item fell into, without changing what else runs.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_assets">REST API — Assets</a> · <a href="../java-client/#_working_with_assets">Java Client — Assets</a> · <a href="../../ui/#assets">Loom UI — Assets</a></p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_asset_pools">Asset Pools</h2>
+<h2 id="_notes">Notes</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Asset pools</strong> are logical groupings of assets, typically corresponding to a physical storage location (folder, bucket, NAS share).
-They are used to scope Cortex processing runs and asset import operations.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/filesystem-source/">Filesystem Source Node</a> · <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — <code>pool list</code></a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_libraries">Libraries</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Libraries</strong> provide a higher-level organizational layer above asset pools.
-A library can span multiple pools and is the primary unit for user-visible browsing.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_libraries">REST API — Libraries</a> · <a href="../../ui/#_library">Loom UI — Library</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_collections">Collections</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Collections</strong> are curated, user-defined sets of assets (similar to playlists or albums).
-An asset can appear in multiple collections.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_collections">REST API — Collections</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_users">Users</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>User management is built into Loom.</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Create, update, delete users</p>
+<p>The node remembers its answer per item for the lifetime of the worker, so re-running a pipeline
+does not pay for the same classification twice. Changing the buckets or the model counts as a
+different question and is classified afresh.</p>
 </li>
 <li>
-<p>Assign users to groups</p>
-</li>
-<li>
-<p>Set per-user passwords</p>
-</li>
-<li>
-<p>Per-user token management</p>
+<p>Two Filter nodes can sit in one pipeline — route by language first, then by something else — and
+they keep their decisions separate.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_users">REST API — Users</a> · <a href="../authentication/">Authentication</a> · <a href="../../ui/#administration">Loom UI — Administration</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_groups">Groups</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Groups aggregate users and are the unit on which <strong>roles</strong> are assigned.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_groups">REST API — Groups</a> · <a href="../java-client/#_working_with_users_groups_and_roles">Java Client — Users, Groups and Roles</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_roles">Roles</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom uses role-based access control (RBAC).</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create named roles (e.g. <code>viewer</code>, <code>editor</code>, <code>admin</code>)</p>
-</li>
-<li>
-<p>Assign roles to groups</p>
-</li>
-<li>
-<p>Roles carry permissions for each resource type</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_roles">REST API — Roles</a> · <a href="../../ui/#administration">Loom UI — Permissions (ACL matrix)</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_permissions">Permissions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Permissions control what actions a role can perform on each resource (create, read, update, delete).
-They can be set at the global level or scoped to specific libraries or collections.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../ui/#administration">Loom UI — Administration</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — access listings</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tags">Tags</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Tags</strong> are free-text labels that can be attached to assets.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create and manage a global tag vocabulary</p>
-</li>
-<li>
-<p>Add or remove tags from individual assets</p>
-</li>
-<li>
-<p>Filter assets by one or more tags via the API</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_tags">REST API — Tags</a> · <a href="../java-client/#_working_with_tags">Java Client — Tags</a> · <a href="../../ui/#_tags">Loom UI — Tags</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipelines">Pipelines</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Pipelines</strong> define the media processing workflows.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Define a pipeline with a name, description, priority, and enabled flag</p>
-</li>
-<li>
-<p>Pipelines are authored in the UI and stored on Loom with immutable versioning</p>
-</li>
-<li>
-<p>Runs are executed by Loom’s engine, which delegates node tasks to registered Cortex workers (see <a href="../../pipeline/">Pipeline Mechanism</a>)</p>
-</li>
-<li>
-<p>Pipeline execution results are tracked and surfaced as real-time WebSocket events</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../nodes/">Nodes</a> · <a href="../rest-api/#_pipelines">REST API — Pipelines</a> · <a href="../../ui/#pipeline-editing">Loom UI — Pipeline Editing</a> · <a href="../../cli/#_running_a_pipeline">Command Line — Running a Pipeline</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tasks">Tasks</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Tasks</strong> represent asynchronous background operations (e.g. bulk ingestion).
-They can be monitored via the REST API.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../operation/#_how_loom_dispatches_work">Operation — How Loom Dispatches Work</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_api_keys_tokens">API Keys (Tokens)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Long-lived API keys can be created for service accounts or CI/CD integrations.
-They are functionally equivalent to JWT tokens.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../authentication/#_api_keys_tokens">Authentication — API Keys</a> · <a href="../../ui/#administration">Loom UI — API Keys</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_blacklists">Blacklists</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Assets or hashes can be blacklisted to prevent them from being re-ingested or surfaced in search results.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/hash/">Hashing Node</a> · <a href="../../nodes/filter/">Filter Node</a> · <a href="../../ui/#administration">Loom UI — Blacklist</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_spaces">Spaces</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Spaces</strong> are top-level organisational units that group libraries, collections and users.
-They allow multi-tenant deployments within a single Loom instance.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../cli/#_browsing_content_and_access">Command Line — Content Hierarchy</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_search_and_similarity">Search and Similarity</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom integrates with search backends (Elasticsearch, Lucene, Qdrant) to provide:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Full-text search over extracted metadata</p>
-</li>
-<li>
-<p>Vector similarity search using stored embeddings (e.g. face embeddings, video fingerprints)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/fingerprint/">Fingerprint Node</a> · <a href="../../nodes/facedescription/">Face Description Node</a> · <a href="../../nodes/dedup/">Deduplication Node</a> · <a href="../graphql-api/">GraphQL API</a></p>
 </div>
 </div>
 </div>

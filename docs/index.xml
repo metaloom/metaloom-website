@@ -55,7 +55,7 @@
       <link>https://metaloom.io/docs/playbooks/translation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/playbooks/translation/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any&#xA;pipeline, because each has a different answer today:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any&#xA;pipeline:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>A Custom Node in Python</title>
@@ -147,6 +147,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/authentication/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom uses JWT (JSON Web Token) bearer tokens for API authentication.&#xA;OAuth2 integration is also available.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Binary Storage</title>
+      <link>https://metaloom.io/docs/loom/binary-storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/binary-storage/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every asset in Loom has two halves: the &lt;strong&gt;record&lt;/strong&gt; — filename, hashes, tags, everything a pipeline&#xA;worked out about it — and the &lt;strong&gt;bytes&lt;/strong&gt; themselves. This page is about the bytes: where they go, how&#xA;you put them there, and how you get them back.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Captioning</title>
@@ -275,11 +282,11 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The filesystem source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a&#xA;media item, it &lt;strong&gt;enumerates&lt;/strong&gt; media from disk (a directory tree walked recursively, or a set of path&#xA;globs) and feeds each file into the graph.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Filters</title>
-      <link>https://metaloom.io/docs/nodes/filters/</link>
+      <title>Filter</title>
+      <link>https://metaloom.io/docs/nodes/filter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/filters/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Filter nodes are &lt;strong&gt;routing&lt;/strong&gt; nodes. Instead of producing metadata, a filter evaluates each item and&#xA;splits the pipeline into a &lt;strong&gt;PASS&lt;/strong&gt; and a &lt;strong&gt;REJECT&lt;/strong&gt; branch, so downstream nodes only run on the items&#xA;that match. They are a pipeline-only construct (they have no standalone Cortex node).&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <guid>https://metaloom.io/docs/nodes/filter/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Filter node is a &lt;strong&gt;router&lt;/strong&gt;. Instead of producing metadata, it decides which group each item&#xA;belongs to and sends it down the matching branch, so the work you hang off each branch only runs on&#xA;the items that belong there.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Fingerprint</title>
@@ -287,6 +294,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/fingerprint/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The fingerprint node computes a &lt;strong&gt;perceptual, multi-sector video fingerprint&lt;/strong&gt;. Unlike a content hash,&#xA;the fingerprint is robust to transcoding, resolution changes and minor edits, so it can identify the&#xA;&lt;strong&gt;same footage&lt;/strong&gt; even when the file bytes differ.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Google Drive Source</title>
+      <link>https://metaloom.io/docs/nodes/gdrive-source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/gdrive-source/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Google Drive source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing&#xA;a media item, it &lt;strong&gt;enumerates&lt;/strong&gt; files from Google Drive and feeds each one into the graph. It reads&#xA;both My Drive and shared drives.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>GraphQL API</title>
@@ -345,13 +359,6 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Loom Sync</title>
-      <link>https://metaloom.io/docs/nodes/loom/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/nodes/loom/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom sync node is a &lt;strong&gt;sink&lt;/strong&gt;: it accumulates hash results and writes them back to the Loom&#xA;backend in batches, keeping the number of REST calls low on large runs. It has one input port per&#xA;algorithm, and each port accepts only that algorithm’s hash type — so which column a hash lands in&#xA;follows from the connection you drew, never from what an upstream node happens to be called.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
       <title>Loom UI</title>
       <link>https://metaloom.io/docs/ui/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -406,6 +413,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/ocr/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OCR node extracts text from images and document scans using &lt;strong&gt;Tesseract&lt;/strong&gt; (via Tess4J). The&#xA;recognized text is stored so it can be indexed and searched.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>OneDrive Source</title>
+      <link>https://metaloom.io/docs/nodes/onedrive-source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/onedrive-source/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OneDrive source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a&#xA;media item, it &lt;strong&gt;enumerates&lt;/strong&gt; files from OneDrive and feeds each one into the graph. A SharePoint&#xA;document library is the same thing as far as this node is concerned, so team sites work too.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Operation</title>
@@ -511,6 +525,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/tika/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Tika node extracts &lt;strong&gt;format metadata and embedded text&lt;/strong&gt; from virtually any file type using Apache&#xA;Tika — images (EXIF), audio/video containers, PDFs and Office documents.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Translate</title>
+      <link>https://metaloom.io/docs/nodes/translate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/translate/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The translate node &lt;strong&gt;turns text your pipeline has already produced into another language&lt;/strong&gt;. Like&#xA;&lt;a href=&#34;../sentiment/&#34;&gt;sentiment&lt;/a&gt; it never looks at the media itself: it has a single &lt;code&gt;text&lt;/code&gt; input port&#xA;that accepts any text type, so a &lt;a href=&#34;../whisper/&#34;&gt;Whisper&lt;/a&gt; transcript, &lt;a href=&#34;../tika/&#34;&gt;Tika&lt;/a&gt; document&#xA;content, an &lt;a href=&#34;../ocr/&#34;&gt;OCR&lt;/a&gt; result or a &lt;a href=&#34;../vlm/&#34;&gt;VLM&lt;/a&gt; answer can all be connected to it. What&#xA;comes out is plain prose on a &lt;code&gt;translation&lt;/code&gt; port, ready to be wired into &lt;a href=&#34;../tts/&#34;&gt;TTS&lt;/a&gt; for&#xA;narration or stored alongside the original.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Video Generation</title>

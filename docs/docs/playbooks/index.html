@@ -298,7 +298,7 @@ Dagger node collection is not enough — the kind has to be registered with the 
 </div>
 <div class="paragraph">
 <p>The other built-in nodes — <code>whisper</code>, <code>llm</code>, <code>ocr</code>, <code>tika</code>, <code>facedetect</code>, <code>facedescription</code>,
-<code>captioning</code>, <code>scene-detection</code>, <code>quality</code>, <code>consistency</code>, the dedup kinds, <code>loom</code> and the <code>filter-*</code>
+<code>captioning</code>, <code>scene-detection</code>, <code>quality</code>, <code>consistency</code>, the dedup kinds and the <code>filter-*</code>
 kinds — exist, are covered by tests, and are wired into the worker’s node collection, but are <strong>not yet
 registered with the pipeline node factory</strong>, so Loom will not route work to them. The registered set is
 growing; <code>vlm</code> and <code>tts</code> were the most recent additions.</p>
@@ -351,7 +351,7 @@ the registered set fills in.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Node kinds</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Written as they appear in a definition’s <code>type</code> field: <code>whisper</code>, <code>filter-mimetype</code>, …</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Written as they appear in a definition’s <code>type</code> field: <code>whisper</code>, <code>filter</code>, …</p></td>
 </tr>
 </tbody>
 </table>

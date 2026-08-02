@@ -318,6 +318,9 @@ versions they ran with</p>
 <p><strong>Assets</strong> — grid/list browser with search, status and type filters, plus a rich per-asset detail view</p>
 </li>
 <li>
+<p><strong>Uploads</strong> — multi-file drag-and-drop ingest with per-file progress that keeps running in the background</p>
+</li>
+<li>
 <p><strong>Collections</strong> — organise assets into colour-coded collections</p>
 </li>
 <li>
@@ -470,6 +473,30 @@ tabs for comments, annotations and reactions.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_uploads">Uploads</h3>
+<div class="paragraph">
+<p>The <strong>Uploads</strong> screen is the place to bring media into Loom. Drag a whole selection of files onto the
+drop area, or click it to pick them — there is no one-file-at-a-time limit.</p>
+</div>
+<div class="paragraph">
+<p>Every upload has to land in a <strong>library</strong>, which you choose before adding files. The library also decides
+where the bytes are physically stored, and the screen shows that destination so there is never any doubt
+about where a file went. Administrators additionally get a <strong>storage pool</strong> selector to send a particular
+batch somewhere else — an archive bucket, say — without changing the library itself.</p>
+</div>
+<div class="paragraph">
+<p>Each file gets its own progress bar and can be cancelled on its own; anything that fails can be retried
+without re-picking the file. Uploading the same content twice is not an error: Loom recognises content it
+already holds and links it to the existing asset instead of creating a duplicate, and the screen says so.</p>
+</div>
+<div class="paragraph">
+<p>Uploads keep running while you work elsewhere in the application. Leave the screen and a progress bar
+appears next to <strong>Uploads</strong> in the navigation, and a notification tells you when the batch finishes or if
+something went wrong. Reloading the browser page is the one thing that cancels an upload in progress, so
+the application warns you before that happens.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_library">Library</h3>
 <div class="paragraph">
 <p>Assets can be organised into libraries. The library view provides a per-library selector and an asset
@@ -602,6 +629,29 @@ without cross-referencing the API. Roles are assigned to users through groups.</
 <div class="content">
 <img src="acl-roles.png" alt="Role and permission (ACL) management"/>
 </div>
+</div>
+<div class="paragraph">
+<p>Three things are worth knowing when you assemble a role:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A tick is the whole story.</strong> The matrix always saves the role’s complete permission set, so
+unticking a box revokes that permission — it is not merely omitted from the update.</p>
+</li>
+<li>
+<p><strong>Changes apply immediately.</strong> Members of the role gain or lose the access on their very next
+request; nobody has to sign out and back in.</p>
+</li>
+<li>
+<p><strong>Permissions are account-wide, not per-object.</strong> Granting <strong>Read asset</strong> lets the role read every
+asset in the instance. To keep a set of media apart, separate it by instance rather than by role.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A role only reaches people once it is attached to a group they belong to. A role with permissions
+but no group grants nothing.</p>
 </div>
 <div class="paragraph">
 <p><strong>API Keys</strong> generates and revokes long-lived API tokens for programmatic access — see

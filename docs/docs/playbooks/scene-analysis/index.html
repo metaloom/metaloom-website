@@ -364,8 +364,6 @@ with dialogue: interviews, lectures, podcasts with video, meeting recordings.</p
   &#34;nodes&#34;: [
     { &#34;id&#34;: &#34;source&#34;,      &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
       &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
-    { &#34;id&#34;: &#34;mime&#34;,        &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Video only&#34;,
-      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
     { &#34;id&#34;: &#34;hash&#34;,        &#34;type&#34;: &#34;sha512&#34;,            &#34;name&#34;: &#34;SHA-512 identity&#34; },
     { &#34;id&#34;: &#34;consistency&#34;, &#34;type&#34;: &#34;consistency&#34;,       &#34;name&#34;: &#34;Decodable?&#34; },
     { &#34;id&#34;: &#34;scenes&#34;,      &#34;type&#34;: &#34;scene-detection&#34;,   &#34;name&#34;: &#34;Scene boundaries&#34;,
@@ -375,26 +373,26 @@ with dialogue: interviews, lectures, podcasts with video, meeting recordings.</p
   ],
   &#34;edges&#34;: [
     { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
-      &#34;target&#34;: &#34;mime&#34;,        &#34;targetPort&#34;: &#34;media&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;hash&#34;,        &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;consistency&#34;, &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;scenes&#34;,      &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;speech&#34;,      &#34;targetPort&#34;: &#34;video&#34;,  &#34;branch&#34;: &#34;PASS&#34; }
+      &#34;target&#34;: &#34;hash&#34;,        &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;consistency&#34;, &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;scenes&#34;,      &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;speech&#34;,      &#34;targetPort&#34;: &#34;video&#34; }
   ]
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Every edge names the port at each end; both are mandatory. <code>whisper</code> is wired on its <code>video</code> port
-because this graph is filtered to video — <code>audio</code> and <code>video</code> are alternatives and exactly one of them
-may be connected.</p>
+because that is the type this graph is about — <code>audio</code> and <code>video</code> are alternatives and exactly one of
+them may be connected. The source emits the family wildcard <code>media/*</code>, so the connection is accepted
+when you draw it and settled per item at run time: a stray audio file is simply not handed to a node
+declaring <code>media/video</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>scenes</code> and <code>speech</code> depend on the same filter branch and nothing on each other, so Loom dispatches
+<p><code>scenes</code> and <code>speech</code> depend on the same source and nothing on each other, so Loom dispatches
 them independently — potentially to different workers, in parallel. That is the whole reason to model
 this as a graph rather than a script: the GPU box transcribes while the CPU box runs optical flow.</p>
 </div>
@@ -402,8 +400,7 @@ this as a graph rather than a script: the GPU box transcribes while the CPU box 
 <p><code>consistency</code> is worth the extra node for what it records: a truncated download produces a
 plausible-looking file, and <code>is_complete</code> on the asset is how you find the ones that wasted a
 half-hour of transcription. It is not a gate you wire in front of the expensive nodes, though — its
-verdict is a scalar, and routing is what <a href="../../nodes/filters/">filter nodes</a> and their <code>branch</code>
-edges do.</p>
+verdict is a scalar, and routing is what the <a href="../../nodes/filter/">Filter</a> node’s branch ports do.</p>
 </div>
 <div class="sect2">
 <h3 id="_reading_the_result">Reading the result</h3>
@@ -465,8 +462,6 @@ tells you nothing and you need the frames.</p>
   &#34;nodes&#34;: [
     { &#34;id&#34;: &#34;source&#34;, &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
       &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
-    { &#34;id&#34;: &#34;mime&#34;,   &#34;type&#34;: &#34;filter-mimetype&#34;, &#34;name&#34;: &#34;Video only&#34;,
-      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
     { &#34;id&#34;: &#34;hash&#34;,   &#34;type&#34;: &#34;sha512&#34;,          &#34;name&#34;: &#34;SHA-512 identity&#34; },
     { &#34;id&#34;: &#34;scenes&#34;, &#34;type&#34;: &#34;scene-detection&#34;, &#34;name&#34;: &#34;Scene boundaries&#34; },
     { &#34;id&#34;: &#34;sheet&#34;,  &#34;type&#34;: &#34;thumbnail&#34;,       &#34;name&#34;: &#34;Contact sheet&#34; },
@@ -474,15 +469,13 @@ tells you nothing and you need the frames.</p>
   ],
   &#34;edges&#34;: [
     { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
-      &#34;target&#34;: &#34;mime&#34;,   &#34;targetPort&#34;: &#34;media&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;hash&#34;,   &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;scenes&#34;, &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;sheet&#34;,  &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;mime&#34;,   &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;grade&#34;,  &#34;targetPort&#34;: &#34;media&#34;, &#34;branch&#34;: &#34;PASS&#34; }
+      &#34;target&#34;: &#34;hash&#34;,   &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;scenes&#34;, &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;sheet&#34;,  &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;grade&#34;,  &#34;targetPort&#34;: &#34;media&#34; }
   ]
 }</code></pre>
 </div>
@@ -565,7 +558,7 @@ file wired into it arrives in one upload task per asset.</p>
 <div class="ml-figure">
 <svg viewBox="0 0 900 330" role="img" aria-labelledby="ml-sc-title ml-sc-desc" class="ml-arch-svg">
   <title id="ml-sc-title">Both routes in one graph</title>
-  <desc id="ml-sc-desc">A filesystem source emits media into a MIME filter that passes video only. The filter&#39;s PASS branch feeds five independent nodes — sha512 and consistency, and then scene detection, whisper, thumbnail and quality — each wired into its own media input port, which Loom dispatches in parallel, each producing its own stored component.</desc>
+  <desc id="ml-sc-desc">A filesystem source emits media on one output port that feeds six independent nodes — sha512 and consistency, and then scene detection, whisper, thumbnail and quality — each wired into its own media input port, which Loom dispatches in parallel, each producing its own stored component.</desc>
   <defs>
     <marker id="ml-sc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57cbcc"></path></marker>
   </defs>
@@ -574,12 +567,6 @@ file wired into it arrives in one upload task per asset.</p>
   <rect x="16" y="140" width="120" height="44" rx="6" class="ml-box-part"></rect>
   <text x="76" y="160" text-anchor="middle" class="ml-part-title">source</text>
   <text x="76" y="176" text-anchor="middle" class="ml-part-sub">media</text>
-
-  <rect x="176" y="140" width="130" height="44" rx="6" class="ml-box-part"></rect>
-  <text x="241" y="160" text-anchor="middle" class="ml-part-title">mime</text>
-  <text x="241" y="176" text-anchor="middle" class="ml-part-sub">video/* → passed</text>
-
-  <polyline points="136,162 176,162" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
 
   <!-- fan-out -->
   <rect x="666" y="16" width="180" height="44" rx="6" class="ml-box-part"></rect>
@@ -602,20 +589,18 @@ file wired into it arrives in one upload task per asset.</p>
   <text x="486" y="250" text-anchor="middle" class="ml-part-title">sha512 · consistency</text>
   <text x="486" y="266" text-anchor="middle" class="ml-part-sub">identity · decodable?</text>
 
-  <polyline points="306,162 628,162 628,38 666,38" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="306,162 628,162 628,118 666,118" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="306,162 628,162 628,198 666,198" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="306,162 628,162 628,278 666,278" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-  <polyline points="340,162 340,252 386,252" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
-
-  <text x="340" y="154" text-anchor="middle" class="ml-edge-label">PASS</text>
+  <polyline points="136,162 628,162 628,38 666,38" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="136,162 628,162 628,118 666,118" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="136,162 628,162 628,198 666,198" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="136,162 628,162 628,278 666,278" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
+  <polyline points="200,162 200,252 386,252" class="ml-edge" marker-end="url(#ml-sc-arrow)"></polyline>
 
   <text x="756" y="76" text-anchor="middle" class="ml-edge-label">→ asset_segment_comp</text>
   <text x="756" y="156" text-anchor="middle" class="ml-edge-label">→ asset_transcript_comp</text>
   <text x="756" y="236" text-anchor="middle" class="ml-edge-label">→ binary + local cache</text>
   <text x="756" y="316" text-anchor="middle" class="ml-edge-label">→ quality component</text>
 
-  <text x="180" y="290" text-anchor="middle" class="ml-edge-label">every edge leaves the filter&#39;s passed port</text>
+  <text x="180" y="290" text-anchor="middle" class="ml-edge-label">every edge leaves the source&#39;s media port</text>
   <text x="180" y="308" text-anchor="middle" class="ml-edge-label">and enters that node&#39;s own media input</text>
 </svg>
 </div>
@@ -689,7 +674,7 @@ from it. See <a href="#fanout">Fan-out, and why scene detection does not do it</
 <td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline will not save: <code>incompatible content types</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An edge connects two ports whose types do not agree. <code>consistency’s `is_complete</code> is a boolean and
 <code>sha512’s `hash</code> is a hash — neither can feed a node that wants media. Wire those nodes off the
-filter’s <code>passed</code> port, beside the others.</p></td>
+source’s <code>media</code> port, beside the others.</p></td>
 </tr>
 </tbody>
 </table>

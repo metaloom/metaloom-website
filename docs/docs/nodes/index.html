@@ -283,6 +283,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Score the tone of extracted text (German and English)</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="translate/">Translate</a> (<code>translate</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any (text connected to its <code>text</code> port)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Translate extracted text into a target language with a language model</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="llm/">LLM Enrichment</a> (<code>llm</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enrich metadata with a language model — one output port per prompt</p></td>
@@ -400,19 +405,24 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enumerate media from S3-compatible object storage, picking up only what changed</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="filters/">Filters</a> (<code>filter-*</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="gdrive-source/">Google Drive Source</a> (<code>gdrive-source</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">— (source)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enumerate media from Google Drive, picking up only what changed — including renames and moves</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="onedrive-source/">OneDrive Source</a> (<code>onedrive-source</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">— (source)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enumerate media from OneDrive or a SharePoint library, picking up only what changed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="filter/">Filter</a> (<code>filter</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">— (routing)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Route items down the PASS or REJECT branch of a <code>passed</code> port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Route each item down one branch per configured bucket — the output port <strong>is</strong> the branch</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="script/">Script</a> (<code>script</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Run your own code as a pipeline step and emit declared ports — list outputs fan out</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="loom/">Loom Sync</a> (<code>loom</code>)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Batch hash results back to Loom, one input port per algorithm</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="s3-sink/">S3 Sink</a> (<code>s3-sink</code>)</p></td>
@@ -494,8 +504,16 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3-source</code>, <code>s3-sink</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Google Drive, OneDrive or SharePoint credentials</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gdrive-source</code>, <code>onedrive-source</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable language model (Ollama by default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>llm</code>, <code>translate</code>, <code>filter</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>loom</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), filters, dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -592,6 +610,15 @@ English behind a small HTTP sidecar.</p>
 text, OCR output, a caption or an LLM answer to its <code>text</code> port — as positive, neutral or negative
 with a signed polarity value, using dedicated German and English models behind a small HTTP sidecar.</p>
 </dd>
+<dt class="hdlist1">Translation</dt>
+<dd>
+<p><a href="translate/"><code>translate</code></a> turns text the pipeline already produced into another language — connect a
+transcript, document text or an OCR result to its <code>text</code> port and the translation comes out on
+<code>translation</code>, ready for <a href="tts/"><code>tts</code></a> to speak. One node translates into one language, so several
+languages means several nodes; each translation is stored under its own language and stays separately
+retrievable. Documents longer than the model’s context window are split at paragraph and sentence
+boundaries, never mid-sentence, and rejoined.</p>
+</dd>
 <dt class="hdlist1">Depth and spatial layout</dt>
 <dd>
 <p><a href="depthmap/"><code>depthmap</code></a> works out how far each part of a photo is from the camera, from the photo
@@ -610,6 +637,24 @@ it can run over an entire archive cheaply.</p>
 <dd>
 <p><a href="consistency/"><code>consistency</code></a> validates that stored metadata — hashes, dimensions, codec
 information — still matches the file on disk, flagging inconsistencies for review or remediation.</p>
+</dd>
+<dt class="hdlist1">Cloud drive ingest</dt>
+<dd>
+<p><a href="gdrive-source/"><code>gdrive-source</code></a> and <a href="onedrive-source/"><code>onedrive-source</code></a> read media straight
+out of Google Drive, OneDrive and SharePoint, without anyone having to copy it to a disk or a bucket
+first. Both are differential: a re-run asks the drive what changed and processes only that, so
+watching a large drive costs a single request when nothing has happened. And because a file in a
+drive keeps its identity when someone renames it or files it away, both report a move as a <strong>move</strong>
+rather than as a deletion followed by a fresh upload — so the metadata you have already built up
+stays attached to it.</p>
+</dd>
+<dt class="hdlist1">Branching a pipeline</dt>
+<dd>
+<p><a href="filter/"><code>filter</code></a> sorts items into buckets you configure and grows one output port per bucket,
+plus an <code>other</code> port for everything else. The port <strong>is</strong> the branch: anything wired to a port that
+carried nothing is skipped for that item, and the skip carries on down that branch — so one node
+routes a pipeline any number of ways without a condition repeated at every step. Today it sorts by
+language, decided by a language model.</p>
 </dd>
 </dl>
 </div>

@@ -401,6 +401,84 @@ reconciled on registration and persisted as a durable <code>cortex_instance</cod
 </div>
 </div>
 <div class="sect1">
+<h2 id="_how_loom_picks_a_worker">How Loom Picks a Worker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Among the workers that accept a node kind, Loom dispatches to the one with the highest <strong>priority</strong>.
+Priority is your placement decision and is never overridden — a busy high-priority worker is still
+preferred over an idle low-priority one.</p>
+</div>
+<div class="paragraph">
+<p>Where several workers share the same priority, the <strong>least loaded</strong> one is chosen. Load is taken from
+the status update every worker sends every 20 seconds, and is the higher of its CPU and disk
+utilisation, because a worker saturated on either cannot take on more. A worker that has not reported
+a load in the last minute counts as neither idle nor busy, so a quiet worker is not favoured over one
+that has proven it has capacity.</p>
+</div>
+<div class="paragraph">
+<p>Only workers that are online receive work. A paused, starting or shutting-down worker is skipped.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shutting_a_worker_down">Shutting a Worker Down</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stopping a worker with <code>SIGTERM</code> (<code>docker stop</code>, a Kubernetes eviction, a systemd restart) does not
+throw away the work it was holding. The worker first tells Loom it is terminating, which stops any
+further tasks being sent to it, then gives the tasks already running a grace period to finish. Anything
+still running when that period expires is handed back, and Loom places it on another worker
+immediately.</p>
+</div>
+<div class="paragraph">
+<p>Without this hand-back, work held by a stopped worker is only recovered when its lease expires — ten
+minutes by default — so every scale-down or rolling deploy would stall the affected runs for that long.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CORTEX_DRAIN_TIMEOUT_MS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long a shutdown lets running tasks finish before handing them back.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The default matches Kubernetes&#39; 30 second termination grace period. Waiting longer than your
+orchestrator will wait achieves nothing — the process is killed mid-drain and the work falls back to
+lease expiry — so if you run minutes-long nodes such as <code>whisper</code> or <code>ocr</code>, raise this <strong>and</strong>
+<code>terminationGracePeriodSeconds</code> together. Otherwise those tasks are simply re-run elsewhere, which
+costs time but loses nothing.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+A worker that is in the middle of <strong>scanning a source</strong> when it is stopped is the one case that
+is not recovered automatically: there is no way to hand a half-finished scan back. The run waits, and
+has to be started again.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_optional_yaml_file_per_node_options">Optional YAML File &amp; Per-Node Options</h2>
 <div class="sectionbody">
 <div class="paragraph">

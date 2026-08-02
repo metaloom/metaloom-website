@@ -404,8 +404,28 @@ live but has <code>cortex_loom_registered == 0</code> will never receive work.</
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">End-to-end task execution time.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex_tasks_returned_total</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reason</code> = <code>refused</code> | <code>unfinished</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Work handed back to Loom during shutdown, so it can be re-placed at once. <code>refused</code> arrived after the worker announced it was terminating; <code>unfinished</code> was still running when the drain grace period expired.</p></td>
+</tr>
 </tbody>
 </table>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+A steady stream of <code>unfinished</code> returns means <code>CORTEX_DRAIN_TIMEOUT_MS</code> is shorter than your
+slowest node, so restarts routinely re-run work elsewhere. See
+<a href="../configuration/">Configuration</a>.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -593,7 +613,13 @@ network time to the model service.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex_cpu_load</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">gauge</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Process CPU load.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Percentage of the machine’s CPU capacity in use (0–100), as also reported to Loom.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex_io_load</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Percentage of time the busiest disk spent serving requests (0–100). Linux only; <code>0</code> where it cannot be measured.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cortex_disk_used_bytes</code> / <code>cortex_disk_total_bytes</code></p></td>

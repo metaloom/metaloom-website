@@ -7,7 +7,7 @@
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any pipeline, because each has a different answer today:">
+	<meta name="description" content="Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any pipeline:">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/playbooks/translation/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Translating Content | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/playbooks/translation/">
-    <meta property="og:description" content="Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any pipeline, because each has a different answer today:">
+    <meta property="og:description" content="Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any pipeline:">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Translating Content">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Translating Content | MetaLoom">
-    <meta name="twitter:description" content="Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any pipeline, because each has a different answer today:">
+    <meta name="twitter:description" content="Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any pipeline:">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Translating Content">
 
@@ -253,7 +253,7 @@
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
 <p>Translation in MetaLoom is three separate jobs, and it is worth naming them before writing any
-pipeline, because each has a different answer today:</p>
+pipeline:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -269,8 +269,8 @@ pipeline, because each has a different answer today:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>Extraction and speech synthesis are stock nodes. Translation is the step that needs a decision, for a
-specific reason spelled out below.</p>
+<p>All three are stock nodes. This page builds the pipeline end to end, then covers the two off-graph
+routes that are still the right answer for a one-off backfill or a human-reviewed translation.</p>
 </div>
 <div class="sect1">
 <h2 id="_the_shape_of_it">The Shape of It</h2>
@@ -278,7 +278,7 @@ specific reason spelled out below.</p>
 <div class="ml-figure">
 <svg viewBox="0 0 900 300" role="img" aria-labelledby="ml-tl-title ml-tl-desc" class="ml-arch-svg">
   <title id="ml-tl-title">Extract, translate, speak</title>
-  <desc id="ml-tl-desc">Four extractor nodes turn media into text: whisper for speech, tika for documents, ocr for images and vlm for scanned pages, each carrying its result on a named output port. Those ports feed a translate step, whose translated text can then be wired into the text input port of the tts node to synthesize narration audio.</desc>
+  <desc id="ml-tl-desc">Four extractor nodes turn media into text: whisper for speech, tika for documents, ocr for images and vlm for scanned pages, each carrying its result on a named output port. Those ports feed the translate node, whose translated text can then be wired into the text input port of the tts node to synthesize narration audio.</desc>
   <defs>
     <marker id="ml-tl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57cbcc"></path></marker>
   </defs>
@@ -311,12 +311,12 @@ specific reason spelled out below.</p>
 
   <!-- translate -->
   <g>
-    <rect x="440" y="96" width="200" height="120" rx="12" class="ml-box-dyn"></rect>
+    <rect x="440" y="96" width="200" height="120" rx="12" class="ml-box-container"></rect>
     <text x="456" y="120" class="ml-box-title">2 · Translate</text>
-    <text x="540" y="146" text-anchor="middle" class="ml-part-sub">REST batch (no code)</text>
-    <text x="540" y="166" text-anchor="middle" class="ml-part-sub">chat agent + skill</text>
-    <text x="540" y="186" text-anchor="middle" class="ml-part-sub">custom node</text>
-    <text x="540" y="206" text-anchor="middle" class="ml-box-tag">not a stock node — pick one</text>
+    <rect x="456" y="132" width="168" height="44" rx="6" class="ml-box-part"></rect>
+    <text x="540" y="152" text-anchor="middle" class="ml-part-title">translate</text>
+    <text x="540" y="168" text-anchor="middle" class="ml-part-sub">one node per language</text>
+    <text x="540" y="200" text-anchor="middle" class="ml-part-sub">translation — plain prose</text>
   </g>
 
   <!-- tts -->
@@ -345,8 +345,8 @@ specific reason spelled out below.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Of the kinds on this page, only <code>tts</code> and <code>vlm</code> are registered with the stock worker’s pipeline node
-factory. <code>whisper</code>, <code>tika</code>, <code>ocr</code> and <code>llm</code> are not yet dispatchable — see
+<p><code>translate</code> needs a reachable language model — any Ollama or OpenAI-compatible endpoint — on the
+worker that runs it. A kind no online worker advertises makes the run fail with a <code>503</code>; see
 <a href="../#node-availability">Which node kinds a worker can actually run</a>.</p>
 </div>
 </td>
@@ -426,33 +426,79 @@ Build that first and confirm the transcripts are stored before adding anything d
 <h2 id="translate">Step 2 — Translate</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Here is the constraint that decides the whole design:</p>
+<p><a href="../../nodes/translate/"><code>translate</code></a> takes text on its <code>text</code> input port and puts the translation
+on its <code>translation</code> output port. Because the port is typed <code>text/*</code>, any of the four extractors above
+can feed it — you draw the edge, and nothing in the node’s configuration says where the text came
+from.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{ &#34;id&#34;: &#34;translate&#34;, &#34;type&#34;: &#34;translate&#34;, &#34;name&#34;: &#34;Translate to English&#34;,
+  &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;en&#34;, &#34;model&#34;: &#34;gemma2:27b&#34; } }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
 <table>
 <tbody><tr>
 <td class="icon">
-<div class="title">Warning</div>
+<div class="title">Note</div>
 </td>
 <td class="content">
 <div class="paragraph">
-<p><strong>The <code>llm</code> node does not see upstream text.</strong> Its only input port is <code>media</code>; it builds its prompt
-from the asset’s <strong>filename</strong> (the prompt variable <code>name</code>), so there is no port to wire a transcript
-into and ask for a translation. It is built for classification and tagging from metadata, and its
-output is a JSON document stored as an <code>asset_json_comp</code> per prompt.</p>
-</div>
-<div class="paragraph">
-<p>Anything that translates extracted text therefore has to come from one of the three options below.</p>
+<p>The <a href="../../nodes/llm/"><code>llm</code></a> node cannot do this job. Its only input port is <code>media</code> and it builds
+its prompt from the asset’s <strong>filename</strong>, so there is no port to wire a transcript into. It is built for
+classification and tagging from metadata. The two nodes share their model plumbing, not their shape.</p>
 </div>
 </td>
 </tr>
 </tbody></table>
 </div>
 <div class="sect2">
-<h3 id="_option_a_translate_outside_the_graph_works_today_no_code">Option A — Translate outside the graph (works today, no code)</h3>
+<h3 id="_one_node_per_language">One node per language</h3>
 <div class="paragraph">
-<p>Run the extraction pipeline, then read the stored text over REST, translate it with whatever model you
-already run, and write the translation back as a JSON component on the same asset:</p>
+<p>A translate node translates into exactly one language. For several, add several nodes and connect the
+same upstream text to each:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{ &#34;id&#34;: &#34;to-en&#34;, &#34;type&#34;: &#34;translate&#34;, &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;en&#34; } },
+{ &#34;id&#34;: &#34;to-fr&#34;, &#34;type&#34;: &#34;translate&#34;, &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;fr&#34; } }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each translation is stored under its own target language, so one asset carries <code>en</code>, <code>de</code> and <code>fr</code>
+side by side and each stays separately retrievable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -s -H &#34;Authorization: Bearer $TOKEN&#34; \
+  &#34;$LOOM/api/v1/assets/$ASSET/json-comps&#34; \
+  | jq &#39;.data[] | select(.schemaType == &#34;translation&#34; and .variant == &#34;fr&#34;) | .data.text&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>They also run independently, so a slow or unavailable model for one language does not hold up the
+others.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_long_transcripts">Long transcripts</h3>
+<div class="paragraph">
+<p>A feature-length transcript does not fit in a model’s context window. The node splits it at paragraph
+boundaries first, then sentence boundaries — never mid-sentence — and rejoins the answers in order.
+<code>maxChunkChars</code> sets the budget per request, and each chunk is one call to the model, so a longer
+recording costs proportionally more. <code>chunkCount</code> in the stored result records how many it took.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_not_to_use_the_node">When not to use the node</h3>
+<div class="paragraph">
+<p>Two situations are still better served off the graph.</p>
+</div>
+<div class="paragraph">
+<p><strong>A one-off backfill of an existing library.</strong> Adding a node to a pipeline only affects what the
+pipeline processes next. To translate what you already have, read the stored text over REST, translate
+it, and write the result back as a component on the same asset:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -469,7 +515,7 @@ TRANSLATION=$(curl -s http://ollama:11434/api/generate -d &#34;{
   \&#34;prompt\&#34;: $(jq -Rs &#39;&#34;Translate the following text into English. Return only the translation.\n\n&#34; + .&#39; source.txt)
 }&#34; | jq -r .response)
 
-# 3. Store it back on the asset, alongside the original
+# 3. Store it back on the asset, in the same shape the node writes
 curl -s -X POST $LOOM/api/v1/assets/$ASSET/json-comps \
   -H &#34;Authorization: Bearer $TOKEN&#34; -H &#39;Content-Type: application/json&#39; \
   -d &#34;$(jq -n --arg t &#34;$TRANSLATION&#34; &#39;{
@@ -477,24 +523,17 @@ curl -s -X POST $LOOM/api/v1/assets/$ASSET/json-comps \
         schemaType: &#34;translation&#34;,
         variant: &#34;en&#34;,
         producerVersion: &#34;gpt-oss:20b&#34;,
-        data: { language: &#34;en&#34;, text: $t }
+        data: { targetLanguage: &#34;en&#34;, text: $t }
       }&#39;)&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Using <code>variant</code> for the target language means one asset can carry <code>en</code>, <code>de</code> and <code>fr</code> translations side
-by side, each retrievable from <code>GET /api/v1/assets/{uuid}/json-comps</code>.</p>
+<p>Writing the same <code>schemaType</code> and <code>variant</code> the node writes means backfilled and pipeline-produced
+translations read back through one query.</p>
 </div>
 <div class="paragraph">
-<p>This is a batch job you run after the pipeline, not a node — which is exactly what it should be while
-translation is a one-off backfill.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_option_b_ask_the_chat_agent_works_today_interactive">Option B — Ask the chat agent (works today, interactive)</h3>
-<div class="paragraph">
-<p>For occasional, human-in-the-loop translation, the <a href="../../loom/chat/">chat agent</a> already reaches
-transcripts through <code>search_transcript</code>. A skill makes the behaviour consistent:</p>
+<p><strong>An occasional translation a human should see first.</strong> The <a href="../../loom/chat/">chat agent</a> already
+reaches transcripts through <code>search_transcript</code>. A skill makes the behaviour consistent:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -518,57 +557,8 @@ filename or invent dialogue.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Remember that the agent’s domain tools are <strong>read-only</strong>: it will produce the translation in the
-conversation, not persist it onto the asset. Pair it with Option A when the translation must be stored.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_option_c_a_translate_node_the_durable_answer">Option C — A translate node (the durable answer)</h3>
-<div class="paragraph">
-<p>Once translation is a routine part of ingest, it belongs in the graph. A translate node is small:
-declare a <code>text</code> input port and a <code>translation</code> output port, read the input, call the provider, emit
-the result. Loom resolves each input port from the <strong>wired edges</strong> and ships the resulting values to
-the worker together with the node task, so a node can consume a transcript produced by a different
-node on a different machine.</p>
-</div>
-<div class="paragraph">
-<p>The quickest way to build one is a Python worker — a single file that advertises the kind and runs it.
-The whole procedure, from an empty file to a pipeline that dispatches to it, is
-<a href="../python-node/">A Custom Node in Python</a>. The node body is the only part that differs from the
-example there:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-python" data-lang="python">def run_node(node_kind, media_path, options, inputs):
-    # `inputs` is keyed by THIS node&#39;s own input port ids. Whichever upstream
-    # port was wired into &#34;text&#34; — a whisper transcript, tika document text,
-    # OCR output — arrives here under the same name.
-    source = one_value(inputs, &#34;text&#34;)
-    if not source:
-        return NodeResult.skipped(&#34;nothing wired into &#39;text&#39;&#34;)
-
-    translated = translate(source, options.get(&#34;targetLanguage&#34;, &#34;en&#34;))
-
-    # Keyed by this node&#39;s OUTPUT port id — what an edge can be drawn from.
-    return NodeResult.completed({&#34;translation&#34;: translated})</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>one_value</code> is the small reader from the <a href="../python-node/#node">Python node playbook</a> that unwraps
-the payload envelope every port value travels in; the same page shows the <code>OUTPUT_PORTS</code> table that
-tells the protocol layer to wrap <code>translation</code> back up as <code>text/plain</code>.</p>
-</div>
-<div class="paragraph">
-<p>Because the node’s own ports name its inputs, nothing in the node’s configuration says where the text
-comes from — you draw an edge from <code>speech.transcript</code> (or <code>pages.content</code>, or <code>scan.result_body</code>)
-into <code>translate.text</code> and the engine resolves the rest. Declare the input as <code>text/*</code> and any of the
-extractors above can feed it.</p>
-</div>
-<div class="paragraph">
-<p>Two registrations are needed before Loom will route work to the kind: a <strong>node descriptor</strong> on the Loom
-side — including its <code>inputPorts</code> and <code>outputPorts</code>, so <code>translate</code> passes pipeline validation and can
-be connected in the UI palette — and the kind in your worker’s advertised list. Both are covered in the
-<a href="../python-node/">Python node playbook</a>.</p>
+<p>The agent’s domain tools are <strong>read-only</strong>: it produces the translation in the conversation, not on
+the asset. Pair it with the REST write above when the translation must be stored.</p>
 </div>
 </div>
 </div>
@@ -593,7 +583,7 @@ nodes:
 </div>
 </div>
 <div class="paragraph">
-<p>The words come from the graph. With a <code>translate</code> node in place, the full dubbing pipeline is:</p>
+<p>The words come from the graph. The full dubbing pipeline is:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -601,24 +591,21 @@ nodes:
   &#34;nodes&#34;: [
     { &#34;id&#34;: &#34;source&#34;,    &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
       &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
-    { &#34;id&#34;: &#34;mime&#34;,      &#34;type&#34;: &#34;filter-mimetype&#34;,   &#34;name&#34;: &#34;Video only&#34;,
-      &#34;options&#34;: { &#34;allowedTypes&#34;: &#34;video/*&#34; } },
     { &#34;id&#34;: &#34;hash&#34;,      &#34;type&#34;: &#34;sha512&#34;,            &#34;name&#34;: &#34;SHA-512 identity&#34; },
     { &#34;id&#34;: &#34;speech&#34;,    &#34;type&#34;: &#34;whisper&#34;,           &#34;name&#34;: &#34;Transcribe&#34;,
       &#34;timeoutMs&#34;: 3600000 },
-    { &#34;id&#34;: &#34;translate&#34;, &#34;type&#34;: &#34;translate&#34;,         &#34;name&#34;: &#34;Translate to English&#34; },
+    { &#34;id&#34;: &#34;translate&#34;, &#34;type&#34;: &#34;translate&#34;,         &#34;name&#34;: &#34;Translate to English&#34;,
+      &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;en&#34; } },
     { &#34;id&#34;: &#34;narrate&#34;,   &#34;type&#34;: &#34;tts&#34;,               &#34;name&#34;: &#34;Speak the translation&#34; }
   ],
   &#34;edges&#34;: [
     { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;,    &#34;sourcePort&#34;: &#34;media&#34;,
-      &#34;target&#34;: &#34;mime&#34;,      &#34;targetPort&#34;: &#34;media&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;mime&#34;,      &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;hash&#34;,      &#34;targetPort&#34;: &#34;media&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;mime&#34;,      &#34;sourcePort&#34;: &#34;passed&#34;,
-      &#34;target&#34;: &#34;speech&#34;,    &#34;targetPort&#34;: &#34;video&#34;,  &#34;branch&#34;: &#34;PASS&#34; },
-    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;speech&#34;,    &#34;sourcePort&#34;: &#34;transcript&#34;,
+      &#34;target&#34;: &#34;hash&#34;,      &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;source&#34;,    &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;speech&#34;,    &#34;targetPort&#34;: &#34;video&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;speech&#34;,    &#34;sourcePort&#34;: &#34;transcript&#34;,
       &#34;target&#34;: &#34;translate&#34;, &#34;targetPort&#34;: &#34;text&#34; },
-    { &#34;id&#34;: &#34;e5&#34;, &#34;source&#34;: &#34;translate&#34;, &#34;sourcePort&#34;: &#34;translation&#34;,
+    { &#34;id&#34;: &#34;e4&#34;, &#34;source&#34;: &#34;translate&#34;, &#34;sourcePort&#34;: &#34;translation&#34;,
       &#34;target&#34;: &#34;narrate&#34;,   &#34;targetPort&#34;: &#34;text&#34; }
   ]
 }</code></pre>
@@ -675,24 +662,29 @@ with a production path where Orpheus runs on vLLM or llama.cpp.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-off backfill of an existing library</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option A (REST batch)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No code, no rebuild; run it once and store the result.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Occasional, reviewed translation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option B (chat + skill)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A human sees the output before it counts.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Translation on every ingest</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option C (custom node)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>translate</code> node</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Belongs in the graph; composes with <code>tts</code> for dubbing.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Several target languages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One <code>translate</code> node per language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each translation is stored under its own language and stays separately retrievable.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dubbing / accessibility audio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option C + <code>tts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>translate</code> + <code>tts</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code> speaks whatever is wired into its <code>text</code> port.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One-off backfill of an existing library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REST batch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline only affects what it processes next; a backfill reaches what is already stored.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Occasional, reviewed translation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chat agent + skill</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A human sees the output before it counts.</p></td>
 </tr>
 </tbody>
 </table>
@@ -715,7 +707,22 @@ with a production path where Orpheus runs on vLLM or llama.cpp.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <code>llm</code> node &#34;translates&#34; nonsense</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It only ever saw the filename. It cannot read a transcript — see the warning above.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It only ever saw the filename. It cannot read a transcript — use <code>translate</code>, which has a <code>text</code>
+input port.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two <code>translate</code> nodes, but only one translation stored</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Both are set to the same <code>targetLanguage</code>. The language is the storage key, so the second overwrites
+the first. Give them different targets.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The translation is truncated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The input hit <code>maxChars</code>. Raise it, or translate per scene rather than per file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The narration is in the right words but the wrong accent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>tts</code> node’s own <code>language</code> still points at the source language. It says how to speak, never
+what to speak — set it to match the translate node’s target.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Saving the pipeline fails with <code>requires input &#39;text&#39; …​ but nothing is connected</code></p></td>
@@ -734,7 +741,8 @@ assignability never crosses families — so a <code>hash/sha512</code> port cann
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The narration reads out JSON syntax</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A JSON-returning <code>llm</code> prompt port is wired into <code>text</code>. Both ports are <code>text/plain</code>, so validation
-cannot catch it — wire a prose port instead.</p></td>
+cannot catch it — wire a prose port instead. The same applies to <code>translate</code>: it will dutifully
+translate field names.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The translation is stored but not visible</p></td>
@@ -766,7 +774,10 @@ not.</p></td>
 <p>Translate per scene rather than per file — <a href="../scene-analysis/">Scene-Level Video Analysis</a>.</p>
 </li>
 <li>
-<p>Build the node — <a href="../../cortex/examples/">Cortex Examples</a>.</p>
+<p>The node’s full option set — <a href="../../nodes/translate/">Translate</a>.</p>
+</li>
+<li>
+<p>Build a node of your own — <a href="../python-node/">A Custom Node in Python</a>.</p>
 </li>
 </ul>
 </div>
