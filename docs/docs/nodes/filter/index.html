@@ -285,7 +285,7 @@ the items that belong there.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable language model (Ollama by default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable OpenAI-compatible language model endpoint</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
@@ -396,7 +396,7 @@ follow immediately, and removing a bucket also removes any connections that were
 </tbody>
 </table>
 <div class="paragraph">
-<p>Language is decided by a language model, which means it needs a reachable Ollama endpoint but no
+<p>Language is decided by a language model, which means it needs a reachable OpenAI-compatible endpoint but no
 extra model download and no separate service. Wire the <code>text</code> port from whatever produced the text:
 a transcript from <a href="../whisper/">Whisper</a>, extracted document text from <a href="../tika/">Tika</a>, or
 recognised text from <a href="../ocr/">OCR</a>.</p>

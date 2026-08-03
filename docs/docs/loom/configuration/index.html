@@ -338,9 +338,8 @@ storage:
 
 ai:                       # Chat &amp; AI agent — see the &#34;AI Agent&#34; section below
   enabled: true
-  providerType: &#34;OLLAMA&#34;
-  url: &#34;http://127.0.0.1:11434&#34;
-  modelId: &#34;gpt-oss:20b&#34;
+  url: &#34;http://127.0.0.1:8080/v1&#34;
+  modelId: &#34;openai/gpt-oss-20b&#34;
 
 sandbox:                  # Agentic coding sandbox — off by default
   enabled: false
@@ -662,18 +661,13 @@ endpoints:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Master switch for the chat agent</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_PROVIDER_TYPE</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OLLAMA</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LLM provider (<code>OLLAMA</code> | <code>VLLM</code>)</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_URL</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://127.0.0.1:11434</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provider base URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://127.0.0.1:8080/v1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the OpenAI-compatible server</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_MODEL_ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpt-oss:20b</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>openai/gpt-oss-20b</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Model id</p></td>
 </tr>
 <tr>

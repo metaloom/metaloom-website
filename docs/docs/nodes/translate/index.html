@@ -260,7 +260,7 @@ comes out is plain prose on a <code>translation</code> port, ready to be wired i
 narration or stored alongside the original.</p>
 </div>
 <div class="paragraph">
-<p>Translation runs on a language model you already operate — any Ollama or OpenAI-compatible endpoint —
+<p>Translation runs on a language model you already operate — any OpenAI-compatible endpoint —
 so the node stays a pure client with no model runtime of its own.</p>
 </div>
 <div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;translate&#34;,&#34;applies&#34;:&#34;Any asset with upstream text&#34;,&#34;badge&#34;:&#34;Language model&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType translation, one row per target language)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;a transcript&#34;,&#34;note&#34;:&#34;the whisper transcript port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here speech transcribed by Whisper&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;translation&#34;,&#34;d&#34;:&#34;the translated prose, ready for TTS or storage&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;language&#34;,&#34;d&#34;:&#34;the language it was translated into&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the translation plus the languages, the model and how many chunks it took&#34;}]},{&#34;name&#34;:&#34;document text&#34;,&#34;note&#34;:&#34;the tika content port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here a document body extracted by Tika&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;translation&#34;,&#34;d&#34;:&#34;the translated prose, ready for TTS or storage&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;language&#34;,&#34;d&#34;:&#34;the language it was translated into&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the translation plus the languages, the model and how many chunks it took&#34;}]}]}"></div>
@@ -292,7 +292,7 @@ so the node stays a pure client with no model runtime of its own.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An <strong>Ollama or OpenAI-compatible endpoint</strong> serving the configured model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An <strong>OpenAI-compatible endpoint</strong> serving the configured model</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
@@ -309,7 +309,7 @@ so the node stays a pure client with no model runtime of its own.</p>
   &#34;text&#34;: &#34;The customer service was a disaster.&#34;,
   &#34;targetLanguage&#34;: &#34;en&#34;,
   &#34;sourceLanguage&#34;: &#34;auto&#34;,
-  &#34;model&#34;: &#34;gemma2:27b&#34;,
+  &#34;model&#34;: &#34;google/gemma-2-27b-it&#34;,
   &#34;chunkCount&#34;: 3,
   &#34;sourceChars&#34;: 18422,
   &#34;translatedChars&#34;: 17980
@@ -388,15 +388,11 @@ more.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>model</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The model asked to translate (default <code>gemma2:27b</code>). Recorded with every result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The model asked to translate (default <code>google/gemma-2-27b-it</code>). Recorded with every result</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ollamaUrl</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the backend (default <code><a href="http://127.0.0.1:11434" class="bare">http://127.0.0.1:11434</a></code>)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>providerType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OLLAMA</code> or <code>VLLM</code> for an OpenAI-compatible endpoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>openaiUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the OpenAI-compatible backend (default <code><a href="http://127.0.0.1:8080/v1" class="bare">http://127.0.0.1:8080/v1</a></code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>contextWindow</code></p></td>

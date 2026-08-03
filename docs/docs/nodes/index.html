@@ -253,6 +253,11 @@ covers both the type icons and the cardinality:</p>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="metadata/">Asset Metadata</a> (<code>metadata</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Document, Audio, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read the metadata already inside a file — title, creator, keywords, date, rights and GPS position</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="tika/">Tika</a> (<code>tika</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Extract format metadata + text with Apache Tika</p></td>
@@ -508,12 +513,12 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>gdrive-source</code>, <code>onedrive-source</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable language model (Ollama by default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable OpenAI-compatible language model endpoint</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>llm</code>, <code>translate</code>, <code>filter</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>filesystem-source</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>metadata</code>, <code>filesystem-source</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -555,10 +560,20 @@ simply by connecting to it.</p>
 <p><a href="thumbnail/"><code>thumbnail</code></a> renders contact-sheet previews from video frames and source images and
 uploads them to Loom as asset binaries.</p>
 </dd>
-<dt class="hdlist1">Metadata extraction</dt>
+<dt class="hdlist1">Metadata ingest</dt>
 <dd>
-<p><a href="tika/"><code>tika</code></a> uses Apache Tika to pull structured and unstructured metadata out of any supported
-format — EXIF from images, codec information from video, full text from documents.</p>
+<p><a href="metadata/"><code>metadata</code></a> reads what a file already says about itself — the photographer’s title,
+caption and keywords, the camera and exposure, the licence and credit line, and where the shutter
+was pressed — out of EXIF, IPTC, XMP, companion <code>.xmp</code> files, PDF and Office properties and audio
+tags, and normalises all of it onto one Dublin Core shape. It records which original field supplied
+each value, so nothing has to be trusted blindly, and it needs no model and no GPU. Its <code>text</code>
+output carries the authored prose alone, ready for <a href="translate/"><code>translate</code></a>,
+<a href="sentiment/"><code>sentiment</code></a> or <a href="llm/"><code>llm</code></a>.</p>
+</dd>
+<dt class="hdlist1">Document text extraction</dt>
+<dd>
+<p><a href="tika/"><code>tika</code></a> uses Apache Tika to pull the full text out of any supported document format. It is
+the companion to <a href="metadata/"><code>metadata</code></a>: one gives you the words, the other the properties.</p>
 </dd>
 <dt class="hdlist1">Scene detection</dt>
 <dd>
@@ -577,7 +592,7 @@ the layout — tables, columns, formulas — that plain glyph recognition flatte
 <p><a href="captioning/"><code>captioning</code></a> generates natural-language descriptions of both images and videos with
 a vision-language model — images from a still frame (SmolVLM), videos from their temporal content
 (Qwen2.5-VL), optionally as a per-scene timeline — and <a href="llm/"><code>llm</code></a> enriches metadata through an
-LLM provider such as Ollama.</p>
+LLM provider such as llama.cpp or vLLM.</p>
 </dd>
 <dt class="hdlist1">Image generation</dt>
 <dd>

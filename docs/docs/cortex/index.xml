@@ -56,5 +56,12 @@
       <guid>https://metaloom.io/docs/cortex/monitoring/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt;, &lt;strong&gt;readiness&lt;/strong&gt; and&#xA;&lt;strong&gt;Prometheus metrics&lt;/strong&gt; endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.&#xA;Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated&#xA;monitoring port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
+    <item>
+      <title>Writing a Custom Node</title>
+      <link>https://metaloom.io/docs/cortex/custom-nodes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/cortex/custom-nodes/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A custom node is an ordinary Java class on a Cortex worker’s classpath. It runs as soon as the worker&#xA;knows about it, and — because the worker &lt;strong&gt;announces&lt;/strong&gt; what it looks like — it appears in the pipeline&#xA;editor by itself. Loom is not changed and is not rebuilt.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
   </channel>
 </rss>

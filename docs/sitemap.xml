@@ -62,6 +62,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/loom/artifacts/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/metadata/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/loom/authentication/</loc>
   </url><url>
     <loc>https://metaloom.io/author/</loc>
@@ -201,5 +203,7 @@
     <loc>https://metaloom.io/docs/nodes/vlm/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/watermark/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/cortex/custom-nodes/</loc>
   </url>
 </urlset>

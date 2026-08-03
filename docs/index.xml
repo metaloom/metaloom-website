@@ -142,6 +142,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom publishes JVM artifacts, a command line client and container deployment assets separately.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_artifacts&#34;&gt;Maven Artifacts&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;See &lt;a href=&#34;../maven-artifacts/&#34;&gt;Maven Artifacts&lt;/a&gt; for the BOM and the primary client and shared model modules.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Asset Metadata</title>
+      <link>https://metaloom.io/docs/nodes/metadata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/metadata/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every media file arrives already knowing things about itself. Who took the photograph, when, and&#xA;where. What the picture is called, what it shows, which keywords the photographer attached. Which&#xA;licence it may be published under, and who has to be credited.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Authentication</title>
       <link>https://metaloom.io/docs/loom/authentication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -553,6 +560,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/watermark/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The watermark node &lt;strong&gt;stamps your own image onto an asset&lt;/strong&gt; — a logo, a copyright mark, a &amp;#34;preview&amp;#34;&#xA;badge, a rating overlay. Unlike the analysis nodes, which describe a property of the media, and&#xA;unlike &lt;a href=&#34;../imagegen/&#34;&gt;Image Generation&lt;/a&gt;, which invents new pixels, &lt;code&gt;watermark&lt;/code&gt; marks the media it&#xA;was given: it composites the overlay you configure onto the asset’s own frames and hands the result&#xA;downstream.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Writing a Custom Node</title>
+      <link>https://metaloom.io/docs/cortex/custom-nodes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/cortex/custom-nodes/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A custom node is an ordinary Java class on a Cortex worker’s classpath. It runs as soon as the worker&#xA;knows about it, and — because the worker &lt;strong&gt;announces&lt;/strong&gt; what it looks like — it appears in the pipeline&#xA;editor by itself. Loom is not changed and is not rebuilt.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

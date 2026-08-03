@@ -345,7 +345,7 @@ routes that are still the right answer for a one-off backfill or a human-reviewe
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>translate</code> needs a reachable language model — any Ollama or OpenAI-compatible endpoint — on the
+<p><code>translate</code> needs a reachable language model — any OpenAI-compatible endpoint — on the
 worker that runs it. A kind no online worker advertises makes the run fail with a <code>503</code>; see
 <a href="../#node-availability">Which node kinds a worker can actually run</a>.</p>
 </div>
@@ -434,7 +434,7 @@ from.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{ &#34;id&#34;: &#34;translate&#34;, &#34;type&#34;: &#34;translate&#34;, &#34;name&#34;: &#34;Translate to English&#34;,
-  &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;en&#34;, &#34;model&#34;: &#34;gemma2:27b&#34; } }</code></pre>
+  &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;en&#34;, &#34;model&#34;: &#34;google/gemma-2-27b-it&#34; } }</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -508,12 +508,13 @@ it, and write the result back as a component on the same asset:</p>
 curl -s -H &#34;Authorization: Bearer $TOKEN&#34; \
   $LOOM/api/v1/assets/$ASSET/transcripts | jq -r &#39;.[0].text&#39; &gt; source.txt
 
-# 2. Translate it with your provider (Ollama shown; any OpenAI-compatible endpoint works)
-TRANSLATION=$(curl -s http://ollama:11434/api/generate -d &#34;{
-  \&#34;model\&#34;: \&#34;gpt-oss:20b\&#34;,
-  \&#34;stream\&#34;: false,
-  \&#34;prompt\&#34;: $(jq -Rs &#39;&#34;Translate the following text into English. Return only the translation.\n\n&#34; + .&#39; source.txt)
-}&#34; | jq -r .response)
+# 2. Translate it with your provider (any OpenAI-compatible endpoint works)
+TRANSLATION=$(curl -s http://llm:8080/v1/chat/completions \
+  -H &#39;Content-Type: application/json&#39; -d &#34;{
+  \&#34;model\&#34;: \&#34;google/gemma-2-27b-it\&#34;,
+  \&#34;messages\&#34;: [{ \&#34;role\&#34;: \&#34;user\&#34;, \&#34;content\&#34;:
+     $(jq -Rs &#39;&#34;Translate the following text into English. Return only the translation.\n\n&#34; + .&#39; source.txt) }]
+}&#34; | jq -r &#39;.choices[0].message.content&#39;)
 
 # 3. Store it back on the asset, in the same shape the node writes
 curl -s -X POST $LOOM/api/v1/assets/$ASSET/json-comps \
@@ -522,7 +523,7 @@ curl -s -X POST $LOOM/api/v1/assets/$ASSET/json-comps \
         nodeKind: &#34;translate&#34;,
         schemaType: &#34;translation&#34;,
         variant: &#34;en&#34;,
-        producerVersion: &#34;gpt-oss:20b&#34;,
+        producerVersion: &#34;google/gemma-2-27b-it&#34;,
         data: { targetLanguage: &#34;en&#34;, text: $t }
       }&#39;)&#34;</code></pre>
 </div>

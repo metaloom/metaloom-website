@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Asset Metadata | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="Every media file arrives already knowing things about itself. Who took the photograph, when, and where. What the picture is called, what it shows, which keywords the photographer attached. Which …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/metadata/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Asset Metadata | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/metadata/">
+    <meta property="og:description" content="Every media file arrives already knowing things about itself. Who took the photograph, when, and where. What the picture is called, what it shows, which keywords the photographer attached. Which …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Asset Metadata">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Asset Metadata | MetaLoom">
+    <meta name="twitter:description" content="Every media file arrives already knowing things about itself. Who took the photograph, when, and where. What the picture is called, what it shows, which keywords the photographer attached. Which …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Asset Metadata">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+          
+          <nav class="docs-topics" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Topics</div>
+            <ul>
+              
+              
+              <li>
+                <a href="/docs/getting-started/">Getting Started</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/deployment/">Container Images</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/playbooks/">Playbooks</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/legal/">Legal &amp; Licensing</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cli/">Command Line</a>
+              </li>
+              
+              
+              
+              
+              
+              <li>
+                <a href="/docs/cortex/">Cortex</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/loom/">Loom</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/ui/">Loom UI</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/operation/">Operation</a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/docs/pipeline/">Pipeline Mechanism</a>
+              </li>
+              
+              
+              
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <div class="col-lg-9">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Nodes</p>
+          <h1>Asset Metadata</h1>
+          
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>Every media file arrives already knowing things about itself. Who took the photograph, when, and
+where. What the picture is called, what it shows, which keywords the photographer attached. Which
+licence it may be published under, and who has to be credited.</p>
+</div>
+<div class="paragraph">
+<p>Most media systems throw all of that away at the door and then ask people to type it back in. This
+node reads it instead.</p>
+</div>
+<div class="paragraph">
+<p>It works on photographs, documents, audio and video, and it does not need a model, a GPU or anything
+installed alongside it.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;metadata&#34;,&#34;applies&#34;:&#34;Images, documents, audio, video&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType metadata) + geo component&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;reading a file&#34;,&#34;note&#34;:&#34;just point it at the media&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the file to read&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;metadata&#34;,&#34;ct&#34;:&#34;struct/json&#34;,&#34;d&#34;:&#34;everything the file said, normalised: title, creator, keywords, date, rights, camera settings, position&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/plain&#34;,&#34;d&#34;:&#34;the authored prose alone - title, description, keywords, creator - ready for any text node&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;geo&#34;,&#34;ct&#34;:&#34;struct/json&#34;,&#34;d&#34;:&#34;latitude and longitude, only when the file carried a position&#34;,&#34;opt&#34;:true}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metadata</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images, documents, audio, video</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> (the file to read)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metadata</code> (the full normalised structure), <code>text</code> (the authored prose), <code>geo</code> (position, when there is one)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None — no model, no sidecar, no GPU</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The asset’s metadata record, plus a position on the asset when the file carried one</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_what_it_reads">What it reads</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Media files describe themselves in half a dozen different standards, which overlap, contradict each
+other, and are named after the decades they came from. This node knows all of them so nobody else
+has to:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Where it comes from</th>
+<th class="tableblock halign-left valign-top">What it gives you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Camera data (EXIF)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make, model, lens, exposure, aperture, ISO, focal length, flash, orientation, and the date the shutter opened</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position (GPS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Latitude, longitude, altitude, heading, and the reported accuracy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Newsroom fields (IPTC)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Headline, caption, byline, credit, source, copyright notice, city and country, keywords</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modern embedded metadata (XMP)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Title, description, creator, keywords, rights, licence, and everything editors write back into a file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Companion <code>.xmp</code> files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same information when an editor kept it beside the file rather than inside it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Title, author, subject, keywords, page count and creating application, from PDF, Word, Excel, PowerPoint, OpenDocument and EPUB</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Artist, album, genre, track number, year and tempo, from the tags in the file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Title, creation date and the descriptive tags the container carries</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_you_get_back">What you get back</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One record per asset, in one shape, no matter which standards the file happened to speak:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;v&#34;: 1,
+  &#34;dc&#34;: {
+    &#34;title&#34;: &#34;Sunrise over Fuji&#34;,
+    &#34;creator&#34;: [&#34;Jane Doe&#34;],
+    &#34;subject&#34;: [&#34;sunrise&#34;, &#34;mountain&#34;, &#34;japan&#34;],
+    &#34;description&#34;: &#34;Taken from the fifth station.&#34;,
+    &#34;date&#34;: &#34;2019-04-03T05:12:44+09:00&#34;,
+    &#34;type&#34;: &#34;StillImage&#34;,
+    &#34;format&#34;: &#34;image/jpeg&#34;,
+    &#34;language&#34;: &#34;en&#34;,
+    &#34;coverage&#34;: &#34;Fujinomiya, Shizuoka, JP&#34;,
+    &#34;rights&#34;: &#34;© 2019 Jane Doe&#34;
+  },
+  &#34;rights&#34;: {
+    &#34;statement&#34;: &#34;© 2019 Jane Doe&#34;,
+    &#34;holder&#34;: &#34;Jane Doe&#34;,
+    &#34;licenseUrl&#34;: &#34;https://creativecommons.org/licenses/by/4.0/&#34;,
+    &#34;licenseId&#34;: &#34;CC-BY-4.0&#34;,
+    &#34;credit&#34;: &#34;Jane Doe / MetaLoom&#34;,
+    &#34;marked&#34;: true
+  },
+  &#34;capture&#34;: {
+    &#34;make&#34;: &#34;SONY&#34;, &#34;model&#34;: &#34;ILCE-7M3&#34;, &#34;lens&#34;: &#34;FE 24-70mm F2.8 GM&#34;,
+    &#34;dateTimeOriginal&#34;: &#34;2019-04-03T05:12:44+09:00&#34;,
+    &#34;exposureTime&#34;: 0.004, &#34;fNumber&#34;: 8.0, &#34;iso&#34;: 100,
+    &#34;focalLength&#34;: 35.0, &#34;flash&#34;: false, &#34;orientation&#34;: 1
+  },
+  &#34;geo&#34;: {
+    &#34;lat&#34;: 35.360833, &#34;lon&#34;: 138.727500, &#34;altitudeM&#34;: 2305.0,
+    &#34;place&#34;: { &#34;city&#34;: &#34;Fujinomiya&#34;, &#34;state&#34;: &#34;Shizuoka&#34;, &#34;country&#34;: &#34;JP&#34; }
+  },
+  &#34;provenance&#34;: {
+    &#34;dc.title&#34;: &#34;xmp:dc:title&#34;,
+    &#34;dc.date&#34;: &#34;exif:DateTimeOriginal&#34;
+  },
+  &#34;sources&#34;: [&#34;exif&#34;, &#34;xmp&#34;, &#34;iptc&#34;]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The vocabulary is Dublin Core — the same fifteen elements libraries, archives and publishers have
+been exchanging metadata in for thirty years — so what comes out of this node is what other systems
+expect to receive.</p>
+</div>
+<div class="sect2">
+<h3 id="_values_are_cleaned_up_not_passed_through">Values are cleaned up, not passed through</h3>
+<div class="paragraph">
+<p>Exposure comes back as <code>0.004</code> seconds, not <code>&#34;1/250&#34;</code>. Aperture is a number, not <code>&#34;f/8.0&#34;</code>.
+Coordinates are decimal degrees, not <code>35 deg 21&#39; 39.00&#34; N</code>. Whether the flash fired is <code>true</code> or
+<code>false</code>. Anything you would otherwise have to parse again downstream has already been parsed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nothing_is_invented">Nothing is invented</h3>
+<div class="paragraph">
+<p>A field the file did not carry is simply absent. It is never an empty string, never a zero, and
+never a guess — so &#34;this photo has no position&#34; and &#34;this photo was taken at the equator&#34; can be
+told apart.</p>
+</div>
+<div class="paragraph">
+<p>The same applies to the harder cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A licence is only reported when the file names a known licence URL.</strong> A wrong <code>CC-BY</code> on an
+all-rights-reserved photo is worse than no answer, because it is the answer a &#34;what may we
+publish?&#34; search trusts.</p>
+</li>
+<li>
+<p><strong>The language is never detected</strong>, only reported when the file states it.</p>
+</li>
+<li>
+<p><strong>A place name never becomes a coordinate.</strong> If a file says &#34;Fujinomiya&#34; but carries no GPS, you
+get the name and no position.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_it_tells_you_where_each_value_came_from">It tells you where each value came from</h3>
+<div class="paragraph">
+<p>The <code>provenance</code> block records which raw field won each value. Cameras, phones and photo editors
+routinely write the same caption into three different places with two different values, so knowing
+which one was used is the difference between trusting the catalogue and second-guessing it.</p>
+</div>
+<div class="paragraph">
+<p>Which one wins is decided consistently: authored text prefers what the editor wrote, dates prefer
+what the camera recorded. The camera writes the date once; every editor that touches the file
+rewrites its own copy — while the camera’s text fields cannot represent anything outside plain
+ASCII and mangle every non-Latin script.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_feeding_other_nodes">Feeding other nodes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>text</code> output carries the authored prose alone — title, description, keywords, creator — so the
+text nodes can work on it without knowing anything about photography:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../translate/">Translate</a> — turn a German caption catalogue into an English one.</p>
+</li>
+<li>
+<p><a href="../sentiment/">Sentiment Analysis</a> — score the tone of supplied descriptions.</p>
+</li>
+<li>
+<p><a href="../llm/">LLM Enrichment</a> — expand terse keywords into usable descriptions, or normalise
+inconsistent ones.</p>
+</li>
+<li>
+<p><a href="../filter/">Filter</a> — route assets by what their metadata says.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>geo</code> output carries just the coordinate, ready for whatever should act on a position.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>includeRaw</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also keep every original field, unmapped. Off by default — camera manufacturer data is unpredictable and has been known to contain serial numbers and owner names</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rawMaxKeys</code> / <code>rawMaxValueBytes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bounds on that raw copy. Defaults 500 entries and 4 KB per value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>readXmpSidecar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read a companion <code>.xmp</code> file when one sits next to the media. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>writeGeoComponent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store the position on the asset. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpsPolicy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KEEP</code> the exact position (default), <code>ROUND</code> it, or <code>DROP</code> it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpsRoundDecimals</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much precision to keep when rounding. Default 2, roughly 1.1 km</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpsTrackMaxSamples</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on the number of position readings kept per asset. Default 1000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>emitText</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Produce the plain-text output. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseDetection</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recognise well-known licence URLs and record a short identifier for them. On by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dateFallback</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NONE</code> (default), or <code>FILESYSTEM</code> to fall back to the file’s modification time when it states no date of its own</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>excludeKeys</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fields to drop before anything reads them</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Each of these is set on the node in the pipeline, not on the worker, so one pipeline can round
+coordinates while another keeps them exact — even when both run on the same machine.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Stop retyping what you already have.</strong> Titles, captions, keywords and credits arrive with the
+files; this is what makes them searchable.</p>
+</li>
+<li>
+<p><strong>Answer &#34;what may we publish?&#34;</strong> — find everything under a permissive licence, and everything
+whose rights are unstated.</p>
+</li>
+<li>
+<p><strong>Put the archive on a map.</strong> Photographs and drone footage carry where they were taken.</p>
+</li>
+<li>
+<p><strong>Give credit correctly.</strong> Photographer, byline and credit line come from the file rather than
+from memory.</p>
+</li>
+<li>
+<p><strong>Sort by when it was taken, not when it was copied.</strong> The camera’s date survives every backup,
+restore and re-upload that resets the file’s timestamp.</p>
+</li>
+<li>
+<p><strong>Find the equipment.</strong> Everything shot on a particular body or lens, for a recall, a licence
+audit or a quality investigation.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_privacy">Privacy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This node reads personal information on purpose, and that deserves saying plainly. A GPS tag on a
+holiday photo is frequently a home address. A creator field is a named person. Camera manufacturer
+data has, in some generations, carried serial numbers and owner names.</p>
+</div>
+<div class="paragraph">
+<p>Three things follow:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>gpsPolicy</code> is a real setting, not a footnote.</strong> A shared or public collection can round
+positions to about a kilometre, or drop them entirely, while the internal archive keeps them
+exact.</p>
+</li>
+<li>
+<p><strong>Rounding on the way in cannot be undone.</strong> It changes the stored value for everyone, including
+the people who were entitled to the precise one. If the concern is who sees a position rather than
+whether it is recorded, the answer is to control access to it, not to destroy it on arrival.</p>
+</li>
+<li>
+<p><strong>Deleting an asset deletes its metadata</strong>, including its position, in the same operation.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_good_to_know">Good to know</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A file with no metadata is a success, not a failure.</strong> Stock photography routinely arrives
+stripped; the node records that the file says nothing about itself and moves on. A file that
+cannot be <strong>read</strong> is reported as a failure, so it shows up in the run summary instead of
+disappearing.</p>
+</li>
+<li>
+<p><strong>It reports what the file claims, not what the file is.</strong> Width, duration and bitrate as stated
+by the container are frequently wrong — rotated video, truncated durations, variable-bitrate audio
+quoting a nominal figure. Measured values come from <a href="../quality/">Quality</a>, and the two are
+kept separately on purpose.</p>
+</li>
+<li>
+<p><strong>It does not extract document text.</strong> That is <a href="../tika/">Tika</a> and its <code>content</code> port. Run
+both if you want the words as well as the properties.</p>
+</li>
+<li>
+<p><strong>Dates without a timezone stay without one.</strong> Cameras record local time and usually say nothing
+about where &#34;local&#34; was. Assuming UTC would move an evening photograph into the next day and
+quietly corrupt every date range you search on.</p>
+</li>
+<li>
+<p><strong>A missing companion <code>.xmp</code> file is completely normal</strong> and never treated as a problem.</p>
+</li>
+<li>
+<p><strong>Some formats are not covered yet</strong>: Matroska/WebM tags, AVCHD companion files, and a few camera
+raw dialects.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

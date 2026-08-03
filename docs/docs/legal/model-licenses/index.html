@@ -358,8 +358,8 @@ deploy.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gemma2:27b</code> (<a href="../../nodes/llm/">LLM node</a> default)<br/>
-<code>gemma3:27b-it-q8_0</code> (<a href="../../nodes/facedescription/">Face Description</a> default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>google/gemma-2-27b-it</code> (<a href="../../nodes/llm/">LLM node</a> default)<br/>
+<code>google/gemma-3-27b-it</code> (<a href="../../nodes/facedescription/">Face Description</a> default)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not an OSI license. Commercial use is permitted, but you accept a Prohibited Use Policy and must
   pass the same terms (and the use restrictions) on to anyone you distribute the model or a derivative to.</p></td>
@@ -489,13 +489,13 @@ native libraries listed under <a href="#runtimes">Runtimes &amp; Libraries</a> a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/llm/">LLM Enrichment</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gemma2:27b</code> via an Ollama / OpenAI-compatible provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>google/gemma-2-27b-it</code> via an OpenAI-compatible provider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use — see <a href="#conditional">conditions</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/facedescription/">Face Description</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gemma3:27b-it-q8_0</code> via Ollama</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>google/gemma-3-27b-it</code> via an OpenAI-compatible vision provider</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use — see <a href="#conditional">conditions</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
 </tr>
@@ -518,8 +518,8 @@ native libraries listed under <a href="#runtimes">Runtimes &amp; Libraries</a> a
 <h3 id="_the_loom_chat_agent">The Loom chat agent</h3>
 <div class="paragraph">
 <p>The <a href="../../loom/chat/">Chat &amp; AI Agent</a> is not a pipeline node, but it does run a model. Loom
-talks to an Ollama or OpenAI-compatible provider selected by
-<a href="../../loom/configuration/"><code>LOOM_AI_MODEL_ID</code></a>, which defaults to <strong><code>gpt-oss:20b</code></strong>
+talks to an OpenAI-compatible provider selected by
+<a href="../../loom/configuration/"><code>LOOM_AI_MODEL_ID</code></a>, which defaults to <strong><code>openai/gpt-oss-20b</code></strong>
 (Apache-2.0). Point it at a hosted provider instead and the applicable terms become that provider’s
 API terms of service, not a weight license — which also means your prompts and asset content leave
 your infrastructure.</p>
@@ -654,7 +654,7 @@ MIT-licensed instruct model, unless the Gemma Terms of Use are acceptable to you
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LLM / Face Description</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">provider URL + <code>providerType</code>, model id in the prompt definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">provider URL, model id in the prompt definition</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Text-to-Speech</p></td>

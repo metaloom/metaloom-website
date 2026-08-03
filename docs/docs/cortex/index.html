@@ -177,7 +177,8 @@ thumbnails, fingerprints, face embeddings, transcripts, captions and OCR text.</
 <div class="sectionbody">
 <div class="paragraph">
 <p>Cortex runs as a <strong>long-running worker daemon</strong>, not a one-shot CLI batch tool. On startup it opens a
-persistent WebSocket to a Loom server, <strong>registers</strong> itself and the node kinds it can run, and then
+persistent WebSocket to a Loom server, <strong>registers</strong> itself and the node kinds it can run,
+<strong>announces what those nodes look like</strong> so they can be authored in the pipeline editor, and then
 waits for work. Loom <strong>pushes</strong> tasks down that connection; Cortex never polls.</p>
 </div>
 <div class="paragraph">
@@ -213,6 +214,10 @@ accordingly.</p>
 </li>
 <li>
 <p><strong>Artifacts</strong> — Maven coordinates and the container image. See <a href="artifacts">Artifacts</a>.</p>
+</li>
+<li>
+<p><strong>Writing a Custom Node</strong> — Add a node of your own and have it appear in the pipeline editor by
+itself, without changing or rebuilding Loom. See <a href="custom-nodes">Writing a Custom Node</a>.</p>
 </li>
 <li>
 <p><strong>Examples</strong> — Custom node, custom daemon (Java) and custom worker (Python). See <a href="examples">Examples</a>.</p>

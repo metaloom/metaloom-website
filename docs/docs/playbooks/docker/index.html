@@ -680,14 +680,14 @@ listed under <a href="../../nodes/#requirements">Nodes → Requirements at a gla
 <div class="sectionbody">
 <div class="paragraph">
 <p>The built-in <a href="../../loom/chat/">chat agent</a> is enabled by default but answers nothing without a
-reachable model provider. Ollama on the same network is the simplest option:</p>
+reachable model provider. Any server speaking the OpenAI API works; llama.cpp on the same network
+is the simplest option:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  ollama:
-    image: ollama/ollama:latest
-    volumes:
-      - ollama:/root/.ollama</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  llm:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    command: [&#34;-hf&#34;, &#34;Qwen/Qwen3-8B-GGUF&#34;, &#34;--host&#34;, &#34;0.0.0.0&#34;, &#34;--port&#34;, &#34;8080&#34;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -696,14 +696,13 @@ reachable model provider. Ollama on the same network is the simplest option:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">    environment:
-      LOOM_AI_PROVIDER_TYPE: OLLAMA
-      LOOM_AI_URL: http://ollama:11434
-      LOOM_AI_MODEL_ID: gpt-oss:20b</code></pre>
+      LOOM_AI_URL: http://llm:8080/v1
+      LOOM_AI_MODEL_ID: Qwen/Qwen3-8B</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The <a href="../../nodes/llm/"><code>llm</code> node</a> is configured separately — it is the <strong>worker</strong> that calls the
-provider, using <code>nodes.llm.ollamaUrl</code> in the worker’s <code>cortex.yml</code>. Two different settings, two
+provider, using <code>nodes.llm.openaiUrl</code> in the worker’s <code>cortex.yml</code>. Two different settings, two
 different processes.</p>
 </div>
 </div>
