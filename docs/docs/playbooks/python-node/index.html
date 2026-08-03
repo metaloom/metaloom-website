@@ -350,6 +350,22 @@ downstream nodes — it is <strong>not</strong> how the data gets saved.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+The worker below writes its results with hand-rolled REST calls, so that the whole thing stays
+one readable file with a single dependency. If you would rather not maintain that part, the
+<a href="../../loom/python-client/">Python Client</a> covers the same calls — resolving an asset by hash,
+storing a JSON component, and appending the node-result row — and has no third-party dependencies of
+its own. The WebSocket control plane is still yours to write either way.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 </div>
 <div class="sect1">

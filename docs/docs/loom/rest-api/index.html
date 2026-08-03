@@ -331,14 +331,29 @@ curl http://localhost:8092/api/v1/openapi.json   # JSON</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Generating a typed client from the spec is a one-liner with any OpenAPI generator:</p>
+<p>For a language Loom does not ship a client for, an OpenAPI generator will scaffold one from the
+specification:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">openapi-generator-cli generate \
   -i https://metaloom.io/docs/examples/openapi.yaml \
-  -g python -o ./loom-client</code></pre>
+  -g typescript-fetch -o ./loom-client</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The specification documents request and response bodies by example rather than by schema, so a
+generated client gives you the routes but leaves the bodies untyped. The maintained clients below do
+not have that limitation.
+</td>
+</tr>
+</tbody></table>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -347,8 +362,9 @@ curl http://localhost:8092/api/v1/openapi.json   # JSON</code></pre>
 <div class="title">Tip</div>
 </td>
 <td class="content">
-Loom also ships a maintained, typed Java client — see <a href="../java-client/">Java Client</a>. Prefer
-it over a generated one when you work in Java.
+Loom ships maintained, typed clients for Java and Python — see
+<a href="../java-client/">Java Client</a> and <a href="../python-client/">Python Client</a>. Prefer either over a
+generated one.
 </td>
 </tr>
 </tbody></table>

@@ -338,6 +338,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The image-generation node &lt;strong&gt;generates a new image with a diffusion model&lt;/strong&gt;. Unlike the analysis&#xA;nodes, which describe a property of the media itself, &lt;code&gt;imagegen&lt;/code&gt; produces a fresh image — either&#xA;from a text prompt (&lt;code&gt;GENERATE&lt;/code&gt;) or by remixing the asset’s own image guided by a prompt (&lt;code&gt;REMIX&lt;/code&gt;) —&#xA;and attaches it to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Image Manipulation</title>
+      <link>https://metaloom.io/docs/nodes/image-manipulation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/image-manipulation/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The image manipulation node &lt;strong&gt;straightens, crops and reframes a picture in one pass&lt;/strong&gt;. It applies the&#xA;photo’s own orientation so it is the right way up, cuts it to a fixed region or one built around the&#xA;faces in it, forces a target aspect ratio — padding the margins with a blurred enlargement of the&#xA;picture rather than black bars — and bounds the result’s size. All of it happens in a single step,&#xA;and &lt;strong&gt;the original file is never modified&lt;/strong&gt;: the reworked picture is a new artifact.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Impressum</title>
       <link>https://metaloom.io/docs/legal/impressum/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -349,7 +356,7 @@
       <link>https://metaloom.io/docs/loom/java-client/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/java-client/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;loom-rest-client&lt;/code&gt; module provides a typed HTTP client for JVM applications.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_dependency&#34;&gt;Maven Dependency&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&amp;lt;dependency&amp;gt;&#xA;    &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt;&#xA;    &amp;lt;artifactId&amp;gt;loom-rest-client&amp;lt;/artifactId&amp;gt;&#xA;    &amp;lt;version&amp;gt;1.0.0-SNAPSHOT&amp;lt;/version&amp;gt;&#xA;&amp;lt;/dependency&amp;gt;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;code&gt;loom-client-rest&lt;/code&gt; module provides a typed HTTP client for JVM applications.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_maven_dependency&#34;&gt;Maven Dependency&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&amp;lt;dependency&amp;gt;&#xA;    &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt;&#xA;    &amp;lt;artifactId&amp;gt;loom-client-rest&amp;lt;/artifactId&amp;gt;&#xA;    &amp;lt;version&amp;gt;1.0.0-SNAPSHOT&amp;lt;/version&amp;gt;&#xA;&amp;lt;/dependency&amp;gt;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Johannes Schüth</title>
@@ -441,6 +448,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/pipeline/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A &lt;strong&gt;pipeline&lt;/strong&gt; is a directed acyclic graph (DAG) of processing nodes applied to media assets.&#xA;Pipelines are &lt;strong&gt;authored in the Loom UI&lt;/strong&gt;, &lt;strong&gt;stored on Loom&lt;/strong&gt; (versioned in the database), and&#xA;&lt;strong&gt;executed by Loom’s pipeline engine&lt;/strong&gt;, which delegates the individual node tasks to registered&#xA;&lt;a href=&#34;../cortex/&#34;&gt;Cortex&lt;/a&gt; workers.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Python Client Usage</title>
+      <link>https://metaloom.io/docs/loom/python-client/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/python-client/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Python client is a synchronous binding for the Loom REST API. It is built entirely&#xA;on the Python standard library and has no third-party dependencies, so it drops into a&#xA;processing script or a container without pulling anything else in.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Quality</title>

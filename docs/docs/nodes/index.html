@@ -378,6 +378,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Stamp your own logo or mark onto the asset at a relative position — the original is never modified</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="image-manipulation/">Image Manipulation</a> (<code>image-manipulation</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image (optionally with detections connected)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Straighten by EXIF orientation, crop, reframe to a target ratio (including the blurred vertical-video fix) and resize — the original is never modified</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -518,7 +523,7 @@ covers both the type icons and the cardinality:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>metadata</code>, <code>filesystem-source</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>metadata</code>, <code>filesystem-source</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), <code>image-manipulation</code>, dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -612,6 +617,14 @@ writes the MP4, with a synchronised audio track, to the worker’s local cache.<
 one setting works across a library of mixed resolutions. Stills are composited in-process; video goes
 through the <code>ffmpeg</code> overlay filter, which re-encodes the picture but copies the audio through
 untouched. The original file is never modified — the marked copy is a new artifact.</p>
+</dd>
+<dt class="hdlist1">Image manipulation</dt>
+<dd>
+<p><a href="image-manipulation/"><code>image-manipulation</code></a> straightens, crops and reframes a picture in one pass —
+applying its EXIF orientation so it is upright, cutting it to a fixed region or one built around the
+faces connected to its <code>detections</code> port, forcing a target aspect ratio (padding vertical pictures
+with a blurred enlargement of themselves rather than black bars), and bounding the result’s size. No
+model or external tool is needed, and the original file is never modified.</p>
 </dd>
 <dt class="hdlist1">Text-to-speech</dt>
 <dd>

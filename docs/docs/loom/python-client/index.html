@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Features | MetaLoom</title>
+	<title>Python Client Usage | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+	<meta name="description" content="The Python client is a synchronous binding for the Loom REST API. It is built entirely on the Python standard library and has no third-party dependencies, so it drops into a processing script or a …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/features/">
+<link rel="canonical" href="https://metaloom.io/docs/loom/python-client/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Features | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/features/">
-    <meta property="og:description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+    <meta property="og:title" content="Python Client Usage | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/python-client/">
+    <meta property="og:description" content="The Python client is a synchronous binding for the Loom REST API. It is built entirely on the Python standard library and has no third-party dependencies, so it drops into a processing script or a …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Features">
+    <meta property="og:image:alt" content="Python Client Usage">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Features | MetaLoom">
-    <meta name="twitter:description" content="Loom provides a comprehensive set of features for managing digital media assets and their associated metadata. Each section below links to the reference page that covers the feature in depth.">
+    <meta name="twitter:title" content="Python Client Usage | MetaLoom">
+    <meta name="twitter:description" content="The Python client is a synchronous binding for the Loom REST API. It is built entirely on the Python standard library and has no third-party dependencies, so it drops into a processing script or a …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Features">
+    <meta name="twitter:image:alt" content="Python Client Usage">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -247,289 +247,306 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Loom</p>
-          <h1>Features</h1>
+          <h1>Python Client Usage</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>Loom provides a comprehensive set of features for managing digital media assets and their associated metadata.
-Each section below links to the reference page that covers the feature in depth.</p>
+<p>The Python client is a synchronous binding for the Loom REST API. It is built entirely
+on the Python standard library and has no third-party dependencies, so it drops into a
+processing script or a container without pulling anything else in.</p>
+</div>
+<div class="paragraph">
+<p>It requires Python 3.10 or newer.</p>
 </div>
 <div class="sect1">
-<h2 id="_assets">Assets</h2>
+<h2 id="_installing">Installing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An <strong>asset</strong> is the central entity in Loom.
-It represents a digital media file (image, video, audio, document) together with its extracted metadata.</p>
+<p>The client lives in the <code>clients/python/</code> directory of the source repository and is installed from
+there:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">pip install ./clients/python</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Key capabilities:</p>
+<p>It is not yet published to the Python Package Index.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connecting">Connecting</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">from loom_client import LoomClient
+
+with LoomClient(host=&#34;localhost&#34;, port=8092) as client:
+    client.authenticate(&#34;admin&#34;, &#34;secret&#34;)
+    print(client.rest_info().body().version)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the client as a context manager closes the connection when the block ends. If you
+would rather manage it yourself, call <code>close()</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can also read the connection settings from the environment — <code>LOOM_HOST</code>,
+<code>LOOM_PORT</code>, <code>LOOM_SCHEME</code>, <code>LOOM_TIMEOUT</code>, <code>LOOM_TOKEN</code>, and <code>LOOM_USER</code> /
+<code>LOOM_PASSWORD</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">client = LoomClient.from_env()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authenticating">Authenticating</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>authenticate()</code> logs in and keeps the token for every later call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">client.authenticate(&#34;admin&#34;, &#34;secret&#34;)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you already hold a long-lived API token, pass it in directly instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">client = LoomClient(host=&#34;localhost&#34;, port=8092, token=api_token)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sending_requests">Sending requests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every method returns a request that has not been sent yet. That is deliberate: it
+leaves room to attach paging and filtering before the call goes out.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">users = client.list_users().limit(50).sort(&#34;username&#34;).body()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are two ways to finish a request. <code>body()</code> gives you the parsed result, which is
+what you usually want. <code>execute()</code> gives you the status code and response headers as
+well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">user = client.load_user(user_uuid).body()
+
+response = client.load_user(user_uuid).execute()
+print(response.status, response.body.username)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_working_with_assets">Working with assets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An asset can be addressed either by its identifier or by the SHA-512 of its content.
+Every asset method accepts both, which means a script that has just hashed a file can
+look the asset up without knowing its identifier first:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">asset = client.load_asset(&#34;3f1b2c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d&#34;).body()
+same = client.load_asset(&#34;cf83e1357eefb8bd...&#34;).body()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Creating, updating and deleting:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">from loom_client.models import AssetCreateRequest, AssetUpdateRequest, FileInfo, HashInfo
+
+created = client.create_asset(
+    AssetCreateRequest(
+        hashes=HashInfo(sha512=digest),
+        file=FileInfo(
+            filename=&#34;photo.jpg&#34;,
+            mime_type=&#34;image/jpeg&#34;,
+            size=size_in_bytes,
+            origin=&#34;import-script&#34;,
+        ),
+    )
+).body()
+
+client.update_asset(created.uuid, AssetUpdateRequest(filename=&#34;beach.jpg&#34;)).execute()
+client.delete_asset(created.uuid).execute()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An asset needs an origin — the request is rejected without one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uploading_and_downloading">Uploading and downloading</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">asset = client.upload_asset(&#34;/path/to/photo.jpg&#34;, library_uuid=library_uuid).body()
+
+with client.download_asset_binary(asset.uuid).body() as binary:
+    binary.save(&#34;/tmp/photo.jpg&#34;)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Downloads are streamed, so use the result as a context manager or close it when you are
+done. Uploads are held in memory while they are sent; the limit is 64 MiB by default.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_paging_through_results">Paging through results</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Listings are paged. <code>iter()</code> walks every page for you:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">for asset in client.list_assets().iter(page_size=100):
+    print(asset.uuid)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you would rather page yourself, each result carries the total count and a cursor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">page = client.list_assets().limit(100).body()
+print(page.metainfo.total_count)
+
+next_page = client.list_assets().limit(100).from_(page.metainfo.last_uuid).body()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_filtering_and_searching">Filtering and searching</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Filters are built with small helpers and can be combined; results must match all of
+them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">from loom_client import eq, gte
+
+client.list_users().filter(eq(&#34;username&#34;, &#34;joedoe&#34;)).body()
+client.list_assets().filter(gte(&#34;size&#34;, &#34;1MB&#34;)).body()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Full-text search is separate, and takes its own options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">results = client.search(&#34;aurora&#34;, types=&#34;asset,transcript&#34;, limit=50).body()
+
+for hit in results:
+    print(f&#34;{hit.score:.2f}  {hit.title}&#34;)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tags_tasks_and_comments">Tags, tasks and comments</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">from loom_client.models import TagCreateRequest
+
+client.tag_asset(asset_uuid, TagCreateRequest(name=&#34;holiday&#34;, collection=&#34;Travel&#34;)).body()
+client.untag_asset(asset_uuid, tag_uuid).execute()
+
+for task in client.list_asset_tasks(asset_uuid).body():
+    print(task.title)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A tag always belongs to a collection.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_handling_errors">Handling errors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Anything other than a successful response raises an error chosen by what went wrong, so
+you can catch exactly the case you care about:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">from loom_client import LoomConnectionError, LoomForbiddenError, LoomNotFoundError
+
+try:
+    asset = client.load_asset(asset_uuid).body()
+except LoomNotFoundError:
+    print(&#34;no such asset&#34;)
+except LoomForbiddenError as e:
+    print(f&#34;not allowed: {e.message}&#34;)
+except LoomConnectionError:
+    print(&#34;the server could not be reached&#34;)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>LoomError</code> is the base of all of them, so catching it catches everything the client can
+raise. Every error carries the server’s own explanation in <code>message</code> and the status code
+in <code>status</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_full_replacement">Full replacement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most updates change only the fields you set. Full replacement is different: it requires
+every replaceable property to be present, and the request is rejected if any are
+missing. Load the element first, change what you need, and send the whole thing back:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">user = client.load_user(user_uuid).body()
+user.email = &#34;new@example.com&#34;
+client.replace_user(user_uuid, user).execute()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_things_to_be_aware_of">Things to be aware of</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Create, read, update, delete (CRUD) via REST API</p>
+<p>Content addressing works for an asset itself, but not for anything nested under it.
+Tags, tasks, detections and reactions all need the asset’s identifier; passing a hash
+raises an error rather than sending a request that would fail.</p>
 </li>
 <li>
-<p>Lookup by UUID or SHA-512 hash</p>
+<p>Most timestamps are ISO-8601 strings, but a few from search are numbers. Passing
+either through <code>parse_instant()</code> gives you a <code>datetime</code>.</p>
 </li>
 <li>
-<p>Binary upload/download (original file)</p>
-</li>
-<li>
-<p>Bulk create and bulk update</p>
-</li>
-<li>
-<p>Tagging</p>
-</li>
-<li>
-<p>Reactions (like, dislike, custom reactions)</p>
-</li>
-<li>
-<p>Comments and annotations</p>
-</li>
-<li>
-<p>Linked components (asset parts / variants)</p>
-</li>
-<li>
-<p>Linked locations (multiple storage locations per file)</p>
-</li>
-<li>
-<p>Embedding storage (vector embeddings for similarity search)</p>
+<p>Fields the client does not recognise are preserved rather than dropped, so reading an
+element, changing one field and saving it back is safe against a newer server.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_assets">REST API — Assets</a> · <a href="../java-client/#_working_with_assets">Java Client — Assets</a> · <a href="../python-client/#_working_with_assets">Python Client — Assets</a> · <a href="../../ui/#assets">Loom UI — Assets</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_asset_pools">Asset Pools</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Asset pools</strong> are logical groupings of assets, typically corresponding to a physical storage location (folder, bucket, NAS share).
-They are used to scope Cortex processing runs and asset import operations.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/filesystem-source/">Filesystem Source Node</a> · <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — <code>pool list</code></a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_libraries">Libraries</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Libraries</strong> provide a higher-level organizational layer above asset pools.
-A library can span multiple pools and is the primary unit for user-visible browsing.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_libraries">REST API — Libraries</a> · <a href="../../ui/#_library">Loom UI — Library</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_collections">Collections</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Collections</strong> are curated, user-defined sets of assets (similar to playlists or albums).
-An asset can appear in multiple collections.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_collections">REST API — Collections</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_users">Users</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>User management is built into Loom.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create, update, delete users</p>
-</li>
-<li>
-<p>Assign users to groups</p>
-</li>
-<li>
-<p>Set per-user passwords</p>
-</li>
-<li>
-<p>Per-user token management</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_users">REST API — Users</a> · <a href="../authentication/">Authentication</a> · <a href="../../ui/#administration">Loom UI — Administration</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_groups">Groups</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Groups aggregate users and are the unit on which <strong>roles</strong> are assigned.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_groups">REST API — Groups</a> · <a href="../java-client/#_working_with_users_groups_and_roles">Java Client — Users, Groups and Roles</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_roles">Roles</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom uses role-based access control (RBAC).</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create named roles (e.g. <code>viewer</code>, <code>editor</code>, <code>admin</code>)</p>
-</li>
-<li>
-<p>Assign roles to groups</p>
-</li>
-<li>
-<p>Roles carry permissions for each resource type</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_roles">REST API — Roles</a> · <a href="../../ui/#administration">Loom UI — Permissions (ACL matrix)</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_permissions">Permissions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Permissions control what actions a role can perform on each resource (create, read, update, delete).
-They can be set at the global level or scoped to specific libraries or collections.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../ui/#administration">Loom UI — Administration</a> · <a href="../../cli/#_browsing_content_and_access">Command Line — access listings</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tags">Tags</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Tags</strong> are free-text labels that can be attached to assets.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Create and manage a global tag vocabulary</p>
-</li>
-<li>
-<p>Add or remove tags from individual assets</p>
-</li>
-<li>
-<p>Filter assets by one or more tags via the API</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../rest-api/#_tags">REST API — Tags</a> · <a href="../java-client/#_working_with_tags">Java Client — Tags</a> · <a href="../python-client/#_tags_tasks_and_comments">Python Client — Tags</a> · <a href="../../ui/#_tags">Loom UI — Tags</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipelines">Pipelines</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Pipelines</strong> define the media processing workflows.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Define a pipeline with a name, description, priority, and enabled flag</p>
-</li>
-<li>
-<p>Pipelines are authored in the UI and stored on Loom with immutable versioning</p>
-</li>
-<li>
-<p>Runs are executed by Loom’s engine, which delegates node tasks to registered Cortex workers (see <a href="../../pipeline/">Pipeline Mechanism</a>)</p>
-</li>
-<li>
-<p>Pipeline execution results are tracked and surfaced as real-time WebSocket events</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../pipeline/">Pipeline Mechanism</a> · <a href="../../nodes/">Nodes</a> · <a href="../rest-api/#_pipelines">REST API — Pipelines</a> · <a href="../../ui/#pipeline-editing">Loom UI — Pipeline Editing</a> · <a href="../../cli/#_running_a_pipeline">Command Line — Running a Pipeline</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tasks">Tasks</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Tasks</strong> represent asynchronous background operations (e.g. bulk ingestion).
-They can be monitored via the REST API.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../operation/#_how_loom_dispatches_work">Operation — How Loom Dispatches Work</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_api_keys_tokens">API Keys (Tokens)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Long-lived API keys can be created for service accounts or CI/CD integrations.
-They are functionally equivalent to JWT tokens.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../authentication/#_api_keys_tokens">Authentication — API Keys</a> · <a href="../../ui/#administration">Loom UI — API Keys</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_blacklists">Blacklists</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Assets or hashes can be blacklisted to prevent them from being re-ingested or surfaced in search results.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/hash/">Hashing Node</a> · <a href="../../nodes/filter/">Filter Node</a> · <a href="../../ui/#administration">Loom UI — Blacklist</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_spaces">Spaces</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Spaces</strong> are top-level organisational units that group libraries, collections and users.
-They allow multi-tenant deployments within a single Loom instance.</p>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../cli/#_browsing_content_and_access">Command Line — Content Hierarchy</a> · <a href="../rest-api/#_further_endpoints">REST API — Further Endpoints</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_search_and_similarity">Search and Similarity</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Loom integrates with search backends (Elasticsearch, Lucene, Qdrant) to provide:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Full-text search over extracted metadata</p>
-</li>
-<li>
-<p>Vector similarity search using stored embeddings (e.g. face embeddings, video fingerprints)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>Read more:</em> <a href="../../nodes/fingerprint/">Fingerprint Node</a> · <a href="../../nodes/facedescription/">Face Description Node</a> · <a href="../../nodes/dedup/">Deduplication Node</a> · <a href="../graphql-api/">GraphQL API</a></p>
 </div>
 </div>
 </div>

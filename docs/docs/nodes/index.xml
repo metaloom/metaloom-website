@@ -106,6 +106,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The image-generation node &lt;strong&gt;generates a new image with a diffusion model&lt;/strong&gt;. Unlike the analysis&#xA;nodes, which describe a property of the media itself, &lt;code&gt;imagegen&lt;/code&gt; produces a fresh image — either&#xA;from a text prompt (&lt;code&gt;GENERATE&lt;/code&gt;) or by remixing the asset’s own image guided by a prompt (&lt;code&gt;REMIX&lt;/code&gt;) —&#xA;and attaches it to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Image Manipulation</title>
+      <link>https://metaloom.io/docs/nodes/image-manipulation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/image-manipulation/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The image manipulation node &lt;strong&gt;straightens, crops and reframes a picture in one pass&lt;/strong&gt;. It applies the&#xA;photo’s own orientation so it is the right way up, cuts it to a fixed region or one built around the&#xA;faces in it, forces a target aspect ratio — padding the margins with a blurred enlargement of the&#xA;picture rather than black bars — and bounds the result’s size. All of it happens in a single step,&#xA;and &lt;strong&gt;the original file is never modified&lt;/strong&gt;: the reworked picture is a new artifact.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>LLM Enrichment</title>
       <link>https://metaloom.io/docs/nodes/llm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

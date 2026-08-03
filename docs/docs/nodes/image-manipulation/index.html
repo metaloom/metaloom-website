@@ -2,35 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Java Client Usage | MetaLoom</title>
+	<title>Image Manipulation | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The loom-client-rest module provides a typed HTTP client for JVM applications.
-Maven Dependency &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt; …">
+	<meta name="description" content="The image manipulation node straightens, crops and reframes a picture in one pass. It applies the photo’s own orientation so it is the right way up, cuts it to a fixed region or one built around the …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/java-client/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/image-manipulation/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Java Client Usage | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/java-client/">
-    <meta property="og:description" content="The loom-client-rest module provides a typed HTTP client for JVM applications.
-Maven Dependency &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt; …">
+    <meta property="og:title" content="Image Manipulation | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/image-manipulation/">
+    <meta property="og:description" content="The image manipulation node straightens, crops and reframes a picture in one pass. It applies the photo’s own orientation so it is the right way up, cuts it to a fixed region or one built around the …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Java Client Usage">
+    <meta property="og:image:alt" content="Image Manipulation">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Java Client Usage | MetaLoom">
-    <meta name="twitter:description" content="The loom-client-rest module provides a typed HTTP client for JVM applications.
-Maven Dependency &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.metaloom.loom.client&amp;lt;/groupId&amp;gt; …">
+    <meta name="twitter:title" content="Image Manipulation | MetaLoom">
+    <meta name="twitter:description" content="The image manipulation node straightens, crops and reframes a picture in one pass. It applies the photo’s own orientation so it is the right way up, cuts it to a fixed region or one built around the …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Java Client Usage">
+    <meta name="twitter:image:alt" content="Image Manipulation">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -209,7 +206,7 @@ Maven Dependency &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.metaloom.l
               
               
               <li>
-                <a href="/docs/loom/" class="is-current">Loom</a>
+                <a href="/docs/loom/">Loom</a>
               </li>
               
               
@@ -221,7 +218,7 @@ Maven Dependency &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.metaloom.l
               
               
               <li>
-                <a href="/docs/nodes/">Nodes</a>
+                <a href="/docs/nodes/" class="is-current">Nodes</a>
               </li>
               
               
@@ -249,243 +246,188 @@ Maven Dependency &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;io.metaloom.l
         
         
         <header class="page-head">
-          <p class="page-eyebrow">Loom</p>
-          <h1>Java Client Usage</h1>
+          <p class="page-eyebrow">Nodes</p>
+          <h1>Image Manipulation</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The <code>loom-client-rest</code> module provides a typed HTTP client for JVM applications.</p>
+<p>The image manipulation node <strong>straightens, crops and reframes a picture in one pass</strong>. It applies the
+photo’s own orientation so it is the right way up, cuts it to a fixed region or one built around the
+faces in it, forces a target aspect ratio — padding the margins with a blurred enlargement of the
+picture rather than black bars — and bounds the result’s size. All of it happens in a single step,
+and <strong>the original file is never modified</strong>: the reworked picture is a new artifact.</p>
+</div>
+<div class="paragraph">
+<p>Unlike <a href="../imagegen/">Image Generation</a>, which invents new pixels, this node only rearranges the
+pixels it was given. It is the node that finally <strong>acts on</strong> the EXIF orientation every camera and phone
+writes — until now MetaLoom recorded that value but never used it, so portrait photos were handled
+sideways.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;image-manipulation&#34;,&#34;applies&#34;:&#34;Image&#34;,&#34;badge&#34;:&#34;no external tools&#34;,&#34;persist&#34;:&#34;asset_node_result ledger (the reworked file stays in the local imagemanip_bin cache)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;manipulate&#34;,&#34;note&#34;:&#34;ImageIO + Graphics2D · no external tools&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;the picture to rework — its pixels are read, never overwritten&#34;},{&#34;t&#34;:&#34;detection&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;d&#34;:&#34;optional face or object boxes, usually from face detection, for a subject-aware crop&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;image&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;the reworked picture, in the worker local imagemanip_bin cache&#34;},{&#34;t&#34;:&#34;struct&#34;,&#34;l&#34;:&#34;geometry&#34;,&#34;ct&#34;:&#34;struct/json&#34;,&#34;d&#34;:&#34;a record of what was done — the source and result sizes and each step&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE, SKIPPED or FAILED&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image-manipulation</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image assets. Video, audio and documents are skipped</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> — the picture to rework; <code>detections</code> — optional face/object boxes for a subject-aware crop, usually from <a href="../facedetect/">Face Detection</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> (the reworked picture), <code>geometry</code> (a JSON record of what was done), <code>flag</code> (String)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Nothing.</strong> No model, no sidecar, no external binary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_node_result</code> ledger only — the reworked file stays in the worker’s local <code>imagemanip_bin</code> cache (as with <a href="../watermark/">watermarks</a> and <a href="../thumbnail/">thumbnails</a>)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The reworked file lives on the worker that produced it. Wire the <code>image</code> output into
+<a href="../s3-sink/">S3 Sink</a> to upload it and register it as its own asset — otherwise it is only
+reachable on that one machine.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
 </div>
 <div class="sect1">
-<h2 id="_maven_dependency">Maven Dependency</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.metaloom.loom.client&lt;/groupId&gt;
-    &lt;artifactId&gt;loom-client-rest&lt;/artifactId&gt;
-    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_creating_a_client">Creating a Client</h2>
+<h2 id="_the_operations">The operations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Use the builder to configure and construct the client:</p>
+<p>You choose which operations run, and in which order, with the <code>operations</code> setting — a comma-separated
+list. They are applied in one pass over the picture.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">LoomHttpClient client = LoomHttpClient.builder()
-    .setHostname(&#34;localhost&#34;)
-    .setPort(8092)
-    .build();</code></pre>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUTOROTATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Turns and flips the picture according to its EXIF orientation, so it is upright. Must come first when used</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CROP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cuts a fixed rectangle, given as fractions of the frame so one setting works at any resolution</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SUBJECT_CROP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frames the faces (or other detections) connected to the <code>detections</code> port, keeping them all in shot</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ASPECT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Forces a target ratio such as <code>16:9</code> or <code>1:1</code> — either by cutting the long side or by padding the short one</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RESIZE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shrinks the picture so its longest edge fits a limit, keeping its proportions</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>Connect, read and write timeouts default to ten seconds each and can be changed with
-<code>setConnectTimeout</code>, <code>setReadTimeout</code> and <code>setWriteTimeout</code>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_authentication">Authentication</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">AuthLoginResponse login = client.login(&#34;admin&#34;, &#34;secret&#34;).sync().body();
-client.setToken(login.getToken());</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The token is automatically included as a <code>Bearer</code> header in all subsequent requests.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_sending_requests">Sending Requests</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Every method returns a request that has not been sent yet, which is what allows paging
-and filtering to be attached afterwards. Calling <code>sync()</code> sends it and returns a
-response wrapper; <code>body()</code> unwraps the model:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">UserResponse user = client.loadUser(userUuid).sync().body();
-
-LoomClientResponse&lt;UserResponse&gt; response = client.loadUser(userUuid).sync();
-System.out.println(response.statusCode());</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_working_with_assets">Working with Assets</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>An asset can be addressed by its UUID or by the SHA-512 of its content:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">AssetResponse byUuid = client.loadAsset(assetUuid).sync().body();
-AssetResponse byHash = client.loadAsset(SHA512.fromString(digest)).sync().body();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Creating, updating and deleting:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">AssetCreateRequest createReq = new AssetCreateRequest();
-createReq.setHashes(new HashInfo().setSHA512(SHA512.fromString(digest)));
-createReq.setFile(new FileInfo()
-    .setFilename(&#34;photo.jpg&#34;)
-    .setMimeType(&#34;image/jpeg&#34;)
-    .setSize(sizeInBytes)
-    .setOrigin(&#34;import-job&#34;));
-
-AssetResponse asset = client.createAsset(createReq).sync().body();
-
-AssetUpdateRequest updateReq = new AssetUpdateRequest().setFilename(&#34;beach.jpg&#34;);
-client.updateAsset(asset.getUuid(), updateReq).sync();
-
-client.deleteAsset(asset.getUuid()).sync();
-
-AssetListResponse list = client.listAssets().addLimit(50).sync().body();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An asset requires an origin — the request is rejected without one.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_working_with_tags">Working with Tags</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A tag always belongs to a collection.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">TagCreateRequest tagReq = new TagCreateRequest()
-    .setName(&#34;holiday&#34;)
-    .setCollection(&#34;Travel&#34;);
-
-TagResponse tag = client.tagAsset(assetUuid, tagReq).sync().body();
-
-client.untagAsset(assetUuid, tag.getUuid()).sync();</code></pre>
-</div>
+<p>The default, <code>AUTOROTATE,ASPECT,RESIZE</code>, straightens the picture, squares it to your target ratio and
+bounds its size in one go.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_working_with_users_groups_and_roles">Working with Users, Groups and Roles</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">UserCreateRequest userReq = new UserCreateRequest().setUsername(&#34;alice&#34;);
-UserResponse user = client.createUser(userReq).sync().body();
-
-GroupCreateRequest groupReq = new GroupCreateRequest().setName(&#34;editors&#34;);
-GroupResponse group = client.createGroup(groupReq).sync().body();
-
-RoleCreateRequest roleReq = new RoleCreateRequest().setName(&#34;asset-editor&#34;);
-RoleResponse role = client.createRole(roleReq).sync().body();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Permissions reach a user through a group that holds a role.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_paging_and_filtering">Paging and Filtering</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">UserListResponse page = client.listUsers()
-    .addLimit(50)
-    .sortBy(LoomSortKey.USERNAME)
-    .sync()
-    .body();
-
-// Continue from the last element of the previous page
-UserListResponse next = client.listUsers()
-    .addLimit(50)
-    .addFrom(page.getMetainfo().getLastUuid())
-    .sync()
-    .body();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pipelines">Pipelines</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">PipelineCreateRequest pipelineReq = new PipelineCreateRequest()
-    .setName(&#34;ingest-pipeline&#34;)
-    .setEnabled(true);
-PipelineResponse pipeline = client.createPipeline(pipelineReq).sync().body();
-
-PipelineListResponse pipelines = client.listPipelines().sync().body();</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_asynchronous_usage">Asynchronous Usage</h2>
+<h2 id="_fixing_vertical_video">Fixing vertical video</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Requests can also be sent asynchronously, returning an RxJava <code>Single</code>:</p>
+<p>A portrait photo placed in a landscape frame usually gets two black bars down the sides. This node can
+fill those margins with a <strong>blurred, enlarged copy of the picture itself</strong> instead, which reads far
+better on a wide screen — the effect you see behind vertical clips on most video platforms.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">// Synchronous
-AssetResponse asset = client.loadAsset(assetUuid).sync().body();
-
-// Asynchronous
-client.loadAsset(assetUuid).async()
-    .subscribe(response -&gt; System.out.println(&#34;Loaded: &#34; + response.body().getUuid()));</code></pre>
+<div class="paragraph">
+<p>Set the aspect operation to pad rather than crop, and choose the blurred fill:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>operations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUTOROTATE,ASPECT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>targetAspect</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16:9</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>aspectMode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PAD</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>padFill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BLUR</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>With <code>padFill</code> set to a colour instead, the same setup gives you clean, classic bars in the colour of
+your choice.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_error_handling">Error Handling</h2>
+<h2 id="_subject_aware_cropping">Subject-aware cropping</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A response other than 2xx throws a <code>LoomClientException</code> carrying the status code and
-the server’s message:</p>
+<p>Connect the <code>detections</code> output of <a href="../facedetect/">Face Detection</a> to this node’s <code>detections</code>
+port and use the <code>SUBJECT_CROP</code> operation. The node frames all of the detected faces together — a
+group photo stays a group photo — pads a little breathing room around them, and expands the crop to
+your target ratio without cutting anyone out.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">try {
-    client.loadAsset(assetUuid).sync().body();
-} catch (LoomClientException e) {
-    System.out.println(e.getStatusCode() + &#34;: &#34; + e.getStatusMsg());
-}</code></pre>
+<div class="paragraph">
+<p>If a picture has no faces in it, the node falls back to a centred crop by default, so a landscape in
+the same library is still handled sensibly. You can instead have it skip such pictures, or treat them
+as an error, with the <code>subjectFallback</code> setting.</p>
 </div>
+<div class="paragraph">
+<p>Because face boxes are turned and moved along with the picture, autorotating and subject-cropping in
+the same step lands the crop on the right faces even for a sideways phone photo.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_closing_the_client">Closing the Client</h2>
+<h2 id="_output">Output</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The client implements <code>AutoCloseable</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">try (LoomHttpClient client = LoomHttpClient.builder().setHostname(&#34;localhost&#34;).build()) {
-    // use client
-}</code></pre>
-</div>
+<p>Pictures are written as <strong>JPEG</strong> by default, which is right for photographs; choose <strong>PNG</strong> when you
+need lossless output or transparency. Transparent areas are flattened onto a background colour of your
+choice when writing JPEG, which cannot carry transparency.</p>
 </div>
 </div>
 </div>
