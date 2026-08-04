@@ -692,7 +692,7 @@ it has completed, failed or skipped in total.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
-<img src="debug-held-full.png" alt="The pipeline editor in debug mode with a run halted at the thumbnail node"/>
+<img src="debug-held-full.png" alt="The pipeline editor in debug mode with a run halted at the face detection node"/>
 </div>
 </div>
 <div class="paragraph">
@@ -718,10 +718,10 @@ that node emitted for <strong>that file</strong> — one line per output, labell
 </div>
 </div>
 <div class="paragraph">
-<p>Above, one image has been carried through the graph. The source reports the file it found, the hash
-node its digest, the thumbnail node the picture it wrote and a <code>PROCESSED</code> flag, and face detection
-three faces with the best score of the three. That is four nodes&#39; worth of &#34;what did you actually
-do&#34;, on the graph, for one specific file.</p>
+<p>Above, one video clip has been carried through the graph. The source reports the file it found, the
+hash node its digest, the thumbnail node the contact sheet it wrote and a <code>DONE</code> flag, and face
+detection ten faces with the first of them summarised. That is four nodes&#39; worth of &#34;what did you
+actually do&#34;, on the graph, for one specific file.</p>
 </div>
 <div class="paragraph">
 <p>Results are always tied to one file. &#34;What did the transcription node produce&#34; has no answer
@@ -756,7 +756,7 @@ editor never confuses them.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
-<img src="debug-detail-image.png" alt="A produced thumbnail opened full size from the node that made it"/>
+<img src="debug-detail-image.png" alt="A produced contact sheet opened full size from the node that made it"/>
 </div>
 </div>
 <div class="paragraph">
@@ -765,7 +765,8 @@ the run they belong to. A preview is a debugging aid, not a copy of your media: 
 lossy, and it is not a way to store or serve what a pipeline produces.</p>
 </div>
 <div class="paragraph">
-<p>Audio and video outputs are still shown as file references — only images are previewed today.</p>
+<p>Audio and video outputs are still shown as file references — only images are previewed today, which
+is why the clip itself appears as a path while everything made from it appears as a picture.</p>
 </div>
 </div>
 <div class="sect2">
@@ -806,8 +807,32 @@ precisely what a downstream node will receive, with nothing interpreted for you.
 </div>
 <div class="paragraph">
 <p>The table above is not a generic rendering of the detection list: face detection wrote it, which is
-why it has a yaw column and a box column rather than a row of unlabelled numbers. Any node can
-describe its own output this way, and when one does, its description is what opens first.</p>
+why it has a confidence column and a box column rather than a row of unlabelled numbers. Any node
+can describe its own output this way, and when one does, its description is what opens first.</p>
+</div>
+<div class="sect3">
+<h4 id="_detections_as_pictures">Detections as pictures</h4>
+<div class="paragraph">
+<p>For a node that finds things <strong>in</strong> an image, a table still leaves the two most obvious questions
+unanswered — where in the picture, and what does it look like. The <strong>Image</strong> view answers both: the
+frame the boxes were measured against, with each box drawn on it, and one thumbnail per detection
+underneath.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug-detail-faces.png" alt="Face detections drawn over the frame" width="with a thumbnail per detected face"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Those thumbnails are cut from the source at full resolution rather than from the reduced frame
+above, which matters more than it sounds: in 4K footage a face occupies a few percent of the
+picture, so a crop taken from a 512-pixel preview would be barely thirty pixels across.</p>
+</div>
+<div class="paragraph">
+<p>Note the ten detections over two people. Face detection reports one entry per face <strong>per sampled
+frame</strong>, so <code>face_count</code> counts detections rather than distinct people — and the thumbnails make
+that visible at a glance in a way the number alone does not.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -862,6 +887,55 @@ debugged run to be slower than the same run without a halt.
 </td>
 </tr>
 </tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="re-executing">Changing a setting and trying again</h3>
+<div class="paragraph">
+<p>Stopping at a node answers <em>what did it produce</em>. The question that follows is almost always <em>and
+what would it produce if I changed this</em> — and answering it by editing the pipeline and starting a
+new run means waiting for everything before that node to happen all over again.</p>
+</div>
+<div class="paragraph">
+<p>So while a node is waiting, its settings can be changed and the node run again over the same file.
+Select the halted node and its settings panel says it is waiting, with <strong>Re-execute</strong> underneath.
+Change a value, press it, and the node runs a second time over exactly the inputs it had the first
+time.</p>
+</div>
+<div class="paragraph">
+<p>The face detector is the clearest example. It ignores faces turned further away from the camera than
+<strong>Max Face Angle</strong>, which defaults to 30°. On footage of two people talking to each other, that finds
+nothing at all — and &#34;no faces here&#34; and &#34;faces I was told to ignore&#34; look identical from the
+outside. Raise the angle to 90°, press Re-execute, and the same frame comes back with both faces
+found.</p>
+</div>
+<div class="paragraph">
+<p>Each attempt is kept. Once a node has been run more than once an <strong>Attempt</strong> selector appears, and
+switching between attempts switches what the canvas and the results panel show — which is the whole
+point, since a value is only good or bad compared with the one before it.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Settings changed here apply to <strong>this run only</strong>. They are not saved into the pipeline, so
+you can try five values without anyone else’s runs changing and without leaving a half-finished
+experiment behind. When a value turns out to be the right one, <strong>Save to pipeline</strong> writes it into the
+pipeline as a new version — that is the only button in this panel that changes anything permanent.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>A setting is checked before the node runs, against the range that node declares: asking a thumbnail
+node for 99 columns is refused immediately rather than becoming a failure to find in a log.</p>
+</div>
+<div class="paragraph">
+<p>Only a node that is currently <strong>waiting</strong> can be re-executed. Once you press Step or Continue its
+result has gone downstream, and re-running it would mean unpicking everything that already used it.</p>
 </div>
 </div>
 </div>
