@@ -159,86 +159,121 @@
           <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
           
-          
-          <nav class="docs-topics" aria-label="Documentation topics">
-            <div class="docs-sidebar-title">Topics</div>
-            <ul>
-              
-              
-              <li>
-                <a href="/docs/getting-started/">Getting Started</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/deployment/">Container Images</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/playbooks/">Playbooks</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/legal/">Legal &amp; Licensing</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cli/">Command Line</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cortex/">Cortex</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/loom/">Loom</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/ui/" class="is-current">Loom UI</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/nodes/">Nodes</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/operation/">Operation</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/pipeline/">Pipeline Mechanism</a>
-              </li>
-              
-              
-              
-              
-            </ul>
-          </nav>
-          
+
+
+<nav class="docs-topics" aria-label="Documentation topics">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/">Nodes</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/">Loom</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/">Cortex</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/" class="is-current" aria-current="page">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
         </div>
       </div>
       <div class="col-lg-9">
@@ -557,6 +592,21 @@ history, and the JSON tab exposes the raw definition.</p>
 <div class="imageblock img-fluid">
 <div class="content">
 <img src="pipeline-editor.png" alt="Pipeline editor canvas"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_debugging_a_run">Debugging a Run</h3>
+<div class="paragraph">
+<p>A <strong>Debug</strong> toggle in the toolbar turns the same canvas into a debugger. Each node then shows live
+counters, and picking a file from the run history paints onto every node the values it emitted for
+<strong>that</strong> file — a hash, a transcript, a thumbnail you can actually look at. Clicking any of them opens
+it full size.</p>
+</div>
+<div class="paragraph">
+<p>A dot in each node’s left margin halts the run there: the node runs, everything after it waits, and
+<strong>Step</strong> then lets one file through at a time. Debug off leaves the editor exactly as it is for
+authoring. See <a href="../pipeline/#debug-mode">Pipeline Mechanism — Debug Mode</a> for the full walkthrough
+with screenshots.</p>
 </div>
 </div>
 <div class="sect2">

@@ -159,86 +159,157 @@
           <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
           
-          
-          <nav class="docs-topics" aria-label="Documentation topics">
-            <div class="docs-sidebar-title">Topics</div>
-            <ul>
-              
-              
-              <li>
-                <a href="/docs/getting-started/">Getting Started</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/deployment/">Container Images</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/playbooks/">Playbooks</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/legal/">Legal &amp; Licensing</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cli/">Command Line</a>
-              </li>
-              
-              
-              
-              
-              
-              <li>
-                <a href="/docs/cortex/" class="is-current">Cortex</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/loom/">Loom</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/ui/">Loom UI</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/nodes/">Nodes</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/operation/">Operation</a>
-              </li>
-              
-              
-              
-              <li>
-                <a href="/docs/pipeline/">Pipeline Mechanism</a>
-              </li>
-              
-              
-              
-              
-            </ul>
-          </nav>
-          
+
+
+<nav class="docs-topics" aria-label="Documentation topics">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/">Nodes</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/">Loom</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/" class="is-current">Cortex</a>
+			
+			<ul class="docs-subtopics">
+				
+				<li>
+					<a href="/docs/cortex/artifacts/">Artifacts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/configuration/">Configuration</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/containers/">Containers</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/examples/">Examples</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/maven-artifacts/">Maven Artifacts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/metrics/">Metrics</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/monitoring/">Monitoring API</a>
+				</li>
+				
+				<li>
+					<a href="/docs/cortex/custom-nodes/" class="is-current" aria-current="page">Writing a Custom Node</a>
+				</li>
+				
+			</ul>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
         </div>
       </div>
       <div class="col-lg-9">
@@ -381,6 +452,41 @@ graph takes every edge attached to it along with it.</p>
 <div class="paragraph">
 <p>The editor’s node picker has a <strong>show offline nodes</strong> toggle. It affects the picker only: a node already
 on the canvas is always drawn with its full ports, whether or not anything can currently run it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_describing_your_output_for_the_debug_view">Describing your output for the debug view</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When someone runs a pipeline with <strong>Debug</strong> on, the editor shows what each node emitted. Your node
+gets a sensible rendering for free, based on the types its ports declare — you do not have to do
+anything.</p>
+</div>
+<div class="paragraph">
+<p>Two things improve on that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If your node writes an image file and says so on the port, a preview of it appears automatically.
+No code is needed.</p>
+</li>
+<li>
+<p>If your node knows something about its output that the port type cannot express — that a set of
+numbers is a bounding box, that a list is one entry per detected face — describe it in Markdown:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ctx.preview(OUT_DETECTIONS, &#34;| # | confidence |\n|---|---|\n| 0 | 0.93 |&#34;);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A description you write always wins over the automatic rendering. It is discarded unless the run
+asked for previews, so it is safe to build unconditionally — and it must never be able to fail your
+node, so keep it simple and catch anything that could throw.</p>
 </div>
 </div>
 </div>

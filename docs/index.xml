@@ -30,6 +30,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This playbook runs MetaLoom in a cluster: the Loom server, a pool of Cortex workers, and — the part&#xA;that needs real attention — the &lt;strong&gt;service account and RBAC that let the chat agent spawn per-session&#xA;sandbox Pods&lt;/strong&gt;. It ends with how to package the whole thing as a Helm chart.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Pipeline Mechanism</title>
+      <link>https://metaloom.io/docs/pipeline/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/pipeline/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A &lt;strong&gt;pipeline&lt;/strong&gt; is a directed acyclic graph (DAG) of processing nodes applied to media assets.&#xA;Pipelines are &lt;strong&gt;authored in the Loom UI&lt;/strong&gt;, &lt;strong&gt;stored on Loom&lt;/strong&gt; (versioned in the database), and&#xA;&lt;strong&gt;executed by Loom’s pipeline engine&lt;/strong&gt;, which delegates the individual node tasks to registered&#xA;&lt;a href=&#34;../cortex/&#34;&gt;Cortex&lt;/a&gt; workers.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Helm Charts</title>
       <link>https://metaloom.io/docs/deployment/helm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -42,6 +49,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/playbooks/transcription/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The chat agent can only answer from what has been extracted. Ask it &amp;#34;which clip mentions the launch&#xA;date?&amp;#34; and it calls &lt;code&gt;search_transcript&lt;/code&gt; — which returns nothing at all until something has actually&#xA;transcribed your media.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Operation</title>
+      <link>https://metaloom.io/docs/operation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/operation/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;How Loom and Cortex operate together at runtime.&#xA;Loom is the brain; Cortex is the muscle. Loom stores assets, owns pipeline definitions and &lt;strong&gt;drives&lt;/strong&gt;&#xA;processing runs; Cortex is a fleet of worker daemons that register with Loom and execute the individual&#xA;tasks Loom hands them.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Scene-Level Video Analysis</title>
@@ -63,6 +77,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/playbooks/python-node/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The built-in nodes cover hashing, transcription, OCR, faces and scenes — but not your domain. This&#xA;playbook adds a &lt;strong&gt;node of your own, written in Python&lt;/strong&gt;, and gets Loom dispatching real pipeline work&#xA;to it.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Loom UI</title>
+      <link>https://metaloom.io/docs/ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/ui/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Loom UI&lt;/strong&gt; is the browser-based management interface for a Loom server. It is a single-page&#xA;application (React, Vite and Material UI) that is &lt;strong&gt;bundled into the Loom server itself&lt;/strong&gt; — no separate&#xA;deployment is required. Everything you can do through the &lt;a href=&#34;../loom/rest-api/&#34;&gt;REST API&lt;/a&gt; — browsing&#xA;assets, chatting with the AI agent, authoring pipelines, managing users, roles and API keys — is&#xA;available from the UI.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Command Line</title>
+      <link>https://metaloom.io/docs/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/cli/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;code&gt;metaloom&lt;/code&gt; is a command line client for a Loom server. It talks to the same REST API the web&#xA;interface uses, so anything you can do in the UI you can script.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>MetaLoom 1.0.0</title>
@@ -175,13 +203,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/chat/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom ships with a built-in &lt;strong&gt;AI assistant&lt;/strong&gt; — an OpenAI-style chat, backed by a &lt;strong&gt;server-side agentic&#xA;loop&lt;/strong&gt; that runs inside the Loom backend. Users converse with their asset domain in natural language&#xA;(&amp;#34;find beach videos&amp;#34;, &amp;#34;what tasks are open for me?&amp;#34;, &amp;#34;summarize this clip’s transcript&amp;#34;) and the&#xA;agent answers by calling Loom’s own tools with the caller’s permissions.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Command Line</title>
-      <link>https://metaloom.io/docs/cli/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/cli/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;code&gt;metaloom&lt;/code&gt; is a command line client for a Loom server. It talks to the same REST API the web&#xA;interface uses, so anything you can do in the UI you can script.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Configuration</title>
@@ -373,13 +394,6 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
-      <title>Loom UI</title>
-      <link>https://metaloom.io/docs/ui/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/ui/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Loom UI&lt;/strong&gt; is the browser-based management interface for a Loom server. It is a single-page&#xA;application (React, Vite and Material UI) that is &lt;strong&gt;bundled into the Loom server itself&lt;/strong&gt; — no separate&#xA;deployment is required. Everything you can do through the &lt;a href=&#34;../loom/rest-api/&#34;&gt;REST API&lt;/a&gt; — browsing&#xA;assets, chatting with the AI agent, authoring pipelines, managing users, roles and API keys — is&#xA;available from the UI.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
       <title>Maven Artifacts</title>
       <link>https://metaloom.io/docs/cortex/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -434,20 +448,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/onedrive-source/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OneDrive source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a&#xA;media item, it &lt;strong&gt;enumerates&lt;/strong&gt; files from OneDrive and feeds each one into the graph. A SharePoint&#xA;document library is the same thing as far as this node is concerned, so team sites work too.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Operation</title>
-      <link>https://metaloom.io/docs/operation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/operation/</guid>
-      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;How Loom and Cortex operate together at runtime.&#xA;Loom is the brain; Cortex is the muscle. Loom stores assets, owns pipeline definitions and &lt;strong&gt;drives&lt;/strong&gt;&#xA;processing runs; Cortex is a fleet of worker daemons that register with Loom and execute the individual&#xA;tasks Loom hands them.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Pipeline Mechanism</title>
-      <link>https://metaloom.io/docs/pipeline/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://metaloom.io/docs/pipeline/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A &lt;strong&gt;pipeline&lt;/strong&gt; is a directed acyclic graph (DAG) of processing nodes applied to media assets.&#xA;Pipelines are &lt;strong&gt;authored in the Loom UI&lt;/strong&gt;, &lt;strong&gt;stored on Loom&lt;/strong&gt; (versioned in the database), and&#xA;&lt;strong&gt;executed by Loom’s pipeline engine&lt;/strong&gt;, which delegates the individual node tasks to registered&#xA;&lt;a href=&#34;../cortex/&#34;&gt;Cortex&lt;/a&gt; workers.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Python Client Usage</title>
