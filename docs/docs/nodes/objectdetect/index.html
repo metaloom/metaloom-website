@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Object Detection | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="The object detection node finds objects — people, vehicles, animals, furniture — in images and video frames, and reports each one as a labelled box with a confidence score. Video is processed by …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/objectdetect/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Object Detection | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/objectdetect/">
+    <meta property="og:description" content="The object detection node finds objects — people, vehicles, animals, furniture — in images and video frames, and reports each one as a labelled box with a confidence score. Video is processed by …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Object Detection">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Object Detection | MetaLoom">
+    <meta name="twitter:description" content="The object detection node finds objects — people, vehicles, animals, furniture — in images and video frames, and reports each one as a labelled box with a confidence score. Video is processed by …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Object Detection">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+<nav class="docs-topics" aria-label="Documentation topics">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/" class="is-current">Nodes</a>
+			
+			<ul class="docs-subtopics">
+				
+				<li>
+					<a href="/docs/nodes/metadata/">Asset Metadata</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/captioning/">Captioning</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/consistency/">Consistency</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/dedup/">Deduplication</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/depthmap/">Depth Map</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/dominant-color/">Dominant Colour</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/facedescription/">Face Description</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/facedetect/">Face Detection</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/filesystem-source/">Filesystem Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/filter/">Filter</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/fingerprint/">Fingerprint</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/gdrive-source/">Google Drive Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/hash/">Hashing</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/imagegen/">Image Generation</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/image-manipulation/">Image Manipulation</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/llm/">LLM Enrichment</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/objectdetect/" class="is-current" aria-current="page">Object Detection</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/ocr/">OCR</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/onedrive-source/">OneDrive Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/quality/">Quality</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/s3-sink/">S3 Sink</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/s3-source/">S3 Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/scene-detection/">Scene Detection</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/scene-layout/">Scene Layout</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/script/">Script</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/sentiment/">Sentiment Analysis</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/whisper/">Speech-to-Text (Whisper)</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/tag/">Tag</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/tts/">Text-to-Speech (TTS)</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/thumbnail/">Thumbnail</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/tika/">Tika</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/translate/">Translate</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/videogen/">Video Generation</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/vlm/">VLM</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/watermark/">Watermark</a>
+				</li>
+				
+			</ul>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/">Loom</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/">Cortex</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Nodes</p>
+          <h1>Object Detection</h1>
+          
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The object detection node finds objects — people, vehicles, animals, furniture — in images and video
+frames, and reports each one as a labelled box with a confidence score. Video is processed by
+sampling frames at a configurable rate and running detection on each sample.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;objectdetect&#34;,&#34;applies&#34;:&#34;Image · Video&#34;,&#34;badge&#34;:&#34;YOLO native&#34;,&#34;persist&#34;:&#34;detection rows (bulk upsert) + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;detection&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;a still picture — wire either image or video, never both&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;frames sampled at videoChopRate — wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;ct&#34;:&#34;detection/object&#34;,&#34;d&#34;:&#34;one element per detected object: class label, bounding box and confidence&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;labels&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;the distinct classes found, one element each — wire straight into the tag node&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;object_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many objects the detector found&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;SUCCESS, NONE or CAPPED for the detector run&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>objectdetect</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> or <code>video</code> — exactly one of the two is wired</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detections</code> (<strong>many</strong> — one element per detected object, the boxes that feed <a href="../scene-layout/">Scene Layout</a>, <a href="../dominant-color/">Dominant Colour</a> and <a href="../image-manipulation/">Image Manipulation</a>), <code>labels</code> (<strong>many</strong> — the distinct class names, ready to wire into <a href="../tag/">Tag</a>), <code>object_count</code> (Integer), <code>flag</code> (String)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YOLO native runtime</strong> plus an ONNX detection model and its class-name file. A CUDA-capable GPU is strongly recommended for video; on CPU the runtime still works, at a fraction of the speed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detection</code> table (bulk upsert) + <code>asset_node_result</code> ledger</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modelPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the ONNX detection model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>labelsPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the class-name file that belongs to that model, one name per line</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useGpu</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run inference on the GPU when one is available</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minConfidence</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Discard detections the model is less sure about than this. The engine never reports anything below 0.4, so that is the lowest usable setting</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoChopRate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run detection on every Nth video frame. The single biggest cost lever the node has</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoScaleSize</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Longest edge a frame is scaled to before inference. Boxes are reported against the original resolution regardless</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxDetections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on the detections kept for one file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>classFilter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep only these class names. Left empty, every class the model knows is kept</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_the_model_can_find">What the model can find</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The node reports whatever classes its model was trained on, and nothing else — the class list comes
+from the labels file, not from the node. A model trained on 20 everyday classes will never report a
+<code>traffic light</code> no matter how clearly one is in frame. Choosing the model is choosing the vocabulary.</p>
+</div>
+<div class="paragraph">
+<p>Detections are reported per frame, so a thirty-second clip of a busy street produces far more rows
+than a photograph of the same street. <code>maxDetections</code> is what keeps that bounded: when it stops a
+scan early the <code>flag</code> port reports <code>CAPPED</code> rather than <code>SUCCESS</code>, so a downstream consumer can tell
+&#34;this is everything in the file&#34; from &#34;this is the first few hundred&#34;.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cost">Cost</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Object detection on video is the most expensive thing in a typical pipeline, because it is inference
+per sampled frame rather than once per file. Three settings decide the bill:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>videoChopRate</code></strong> — halving it doubles the work for the whole file. The default samples roughly
+one frame per second of footage, which is enough to know what is in a clip and not enough to
+follow anything across it.</p>
+</li>
+<li>
+<p><strong><code>videoScaleSize</code></strong> — frames are scaled down before inference. Smaller is faster and misses small
+or distant objects.</p>
+</li>
+<li>
+<p><strong><code>useGpu</code></strong> — the difference between a clip processing in seconds and in minutes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases">Use Cases</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Search by content</strong> — connect the <code>labels</code> port to <a href="../tag/">Tag</a> and every asset is tagged
+with what is in it, with no rules to write.</p>
+</li>
+<li>
+<p><strong>Spatial understanding</strong> — feed <code>detections</code> into <a href="../scene-layout/">Scene Layout</a> together
+with a depth map to derive relations like &#34;person in front of car&#34;.</p>
+</li>
+<li>
+<p><strong>Smart cropping</strong> — feed <code>detections</code> into <a href="../image-manipulation/">Image Manipulation</a> so a
+thumbnail frames the subject instead of the centre of the picture.</p>
+</li>
+<li>
+<p><strong>Review and moderation</strong> — flag assets containing particular classes using <code>classFilter</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

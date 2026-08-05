@@ -256,6 +256,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -469,6 +473,12 @@ describe and no model call is made.</p>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The Face Description settings panel: Max Face Angle (deg)"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <div class="paragraph">
 <p>Uses the model-service connection shared with the LLM/captioning family. There is nothing to
 configure about where the faces come from — connect the <code>detections</code> port and the node follows it.</p>
@@ -625,6 +635,8 @@ configure about where the faces come from — connect the <code>detections</code
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

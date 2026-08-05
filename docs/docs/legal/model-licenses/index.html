@@ -394,6 +394,35 @@ licensed image model can be dropped in behind the same endpoint without touching
 <p>These are usable commercially, but not under a plain permissive license. Read the terms before you
 deploy.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>YOLO object detection — AGPL-3.0, and the copyleft reaches your deployment.</strong> The
+<a href="../../nodes/objectdetect/">Object Detection</a> node runs YOLO through a native shim built against
+<strong>YOLOs-CPP</strong>, which is licensed <strong>AGPL-3.0</strong>, and the reference <code>.onnx</code> detection models are
+exported from <strong>Ultralytics</strong> YOLO, which is also AGPL-3.0.</p>
+</div>
+<div class="paragraph">
+<p>This is not a non-commercial restriction — AGPL permits commercial use. It is a <strong>network</strong> copyleft:
+running an AGPL work as part of a service offered over a network obliges you to offer the
+corresponding source of the whole combined work to its users. For a hosted MetaLoom that includes
+far more than the detector.</p>
+</div>
+<div class="paragraph">
+<p><strong>If you need object detection in a closed commercial deployment:</strong> buy an Ultralytics enterprise
+license, or point the node at a permissively licensed detection model <strong>and</strong> replace the AGPL
+inference shim — the model swap alone is not enough, because the runtime carries the same license.
+The node takes both from options (<code>modelPath</code>, <code>labelsPath</code>), so the model side needs no code change.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 28.5714%;"/>
@@ -509,6 +538,12 @@ native libraries listed under <a href="#runtimes">Runtimes &amp; Libraries</a> a
 <td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/objectdetect/">Object Detection</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YOLOs-CPP inference shim + an ONNX detection model and its class-name file (<code>modelPath</code>, <code>labelsPath</code>); reference setup uses Ultralytics-exported YOLOv11n</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AGPL-3.0</strong> (both the shim and the reference weights)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Only under AGPL terms — see <a href="#conditional">above</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/vlm/">VLM</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>allenai/olmOCR-2-7B-1025-FP8</code> served over an OpenAI-compatible endpoint (<code>model</code>, <code>endpointUrl</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0 per the model card; fine-tuned from Qwen2.5-VL-7B-Instruct (Apache-2.0)</p></td>
@@ -618,6 +653,11 @@ your infrastructure.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">InspireFace native runtime (via <code>inspireface4j</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0 (code only — <strong>not</strong> the model packs)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">See <a href="#restricted">restrictions</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YOLOs-CPP inference shim (<code>libyolib.so</code>, via <code>yolo4j</code>) + ONNX Runtime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AGPL-3.0</strong> for YOLOs-CPP; MIT for ONNX Runtime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object detection. The shim is compiled against the AGPL headers, so it carries that license — see <a href="#conditional">conditions</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Apache Tika, Tess4J / Tesseract</p></td>
@@ -876,6 +916,8 @@ MIT-licensed instruct model, unless the Gemma Terms of Use are acceptable to you
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

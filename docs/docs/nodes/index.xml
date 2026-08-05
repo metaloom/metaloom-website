@@ -120,6 +120,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Object Detection</title>
+      <link>https://metaloom.io/docs/nodes/objectdetect/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/objectdetect/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The object detection node finds objects — people, vehicles, animals, furniture — in images and video&#xA;frames, and reports each one as a labelled box with a confidence score. Video is processed by&#xA;sampling frames at a configurable rate and running detection on each sample.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>OCR</title>
       <link>https://metaloom.io/docs/nodes/ocr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

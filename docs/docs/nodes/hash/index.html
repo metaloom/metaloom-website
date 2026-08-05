@@ -256,6 +256,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -471,6 +475,12 @@ modified files.</p>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The SHA-512 Hash settings panel" width="which offers only the common node fields"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <div class="paragraph">
 <p>Per-node options (<code>HashNodeOptions</code>) enable each algorithm individually:</p>
 </div>
@@ -512,6 +522,23 @@ modified files.</p>
 </table>
 <div class="paragraph">
 <p>In online mode a hash node checks Loom first and short-circuits when the hash is already stored.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over <code>pexels-photo-2379005.jpeg</code>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The sha512 node after a run" width="with the values it emitted on each port"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The strip on the card lists what each output port carried — <code>hash</code>.</p>
 </div>
 </div>
 </div>
@@ -668,6 +695,8 @@ modified files.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

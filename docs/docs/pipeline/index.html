@@ -820,7 +820,7 @@ underneath.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
-<img src="debug-detail-faces.png" alt="Face detections drawn over the frame" width="with a thumbnail per detected face"/>
+<img src="debug-detail-faces.png" alt="Face detections drawn over the frame they were measured on" width="with a thumbnail per detected face"/>
 </div>
 </div>
 <div class="paragraph">
@@ -829,9 +829,51 @@ above, which matters more than it sounds: in 4K footage a face occupies a few pe
 picture, so a crop taken from a 512-pixel preview would be barely thirty pixels across.</p>
 </div>
 <div class="paragraph">
-<p>Note the ten detections over two people. Face detection reports one entry per face <strong>per sampled
-frame</strong>, so <code>face_count</code> counts detections rather than distinct people — and the thumbnails make
-that visible at a glance in a way the number alone does not.</p>
+<p>The caption under the picture is worth reading on a video. Detection runs on <strong>sampled frames</strong>, so
+the ten thumbnails below the picture are ten detections spread across several moments, while the
+boxes drawn on the picture are only the ones measured against <strong>this</strong> frame. <code>face_count</code> therefore
+counts detections, not distinct people — two people can easily account for all ten.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="detections-over-time">Watching detection happen</h4>
+<div class="paragraph">
+<p>Ten detections and two people is the kind of arithmetic that only makes sense once you have seen the
+clip. Below is the same node’s output over the same footage, painted in as the video plays.</p>
+</div>
+<div class="ml-detplayer" data-track-url="facedetect-detections.json" data-video-url="facedetect-demo.mp4" data-recent="10">
+  <video controls="" muted="" loop="" playsinline="" preload="metadata" poster="facedetect-demo-poster.jpg" src="facedetect-demo.mp4"></video>
+</div>
+<div class="paragraph">
+<p>Two things are worth watching for.</p>
+</div>
+<div class="paragraph">
+<p><strong>Boxes appear and then dissolve.</strong> Nothing is tracking anyone. The node samples every fifth frame, so
+between two samples there is simply no new answer, and a box that fades out is saying &#34;this is the
+most recent thing reported here&#34; rather than following a face across the picture.</p>
+</div>
+<div class="paragraph">
+<p><strong>Long stretches have nothing at all.</strong> The node keeps only the sharpest faces it finds, so a clip
+where two people are mostly turned away from the camera yields a handful of detections at the
+moments they were most legible — not a box on every frame. That is the same behaviour the numbers
+above describe, seen from the other side.</p>
+</div>
+<div class="paragraph">
+<p>The strip underneath is the ten most recent detections, newest first, each one the crop the node
+actually cut. Selecting one jumps the clip to the frame it came from.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The clip is a six-second excerpt of the source, and both the excerpt and every box come from a
+real run of the face detection node — the frame numbers shown are the source’s own.
+</td>
+</tr>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -1082,6 +1124,8 @@ implementing a worker in Python.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

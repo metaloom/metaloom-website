@@ -259,6 +259,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -598,6 +602,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Detect faces + embeddings — its <code>detections</code> port carries <strong>one element per face</strong></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="objectdetect/">Object Detection</a> (<code>objectdetect</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detect objects with YOLO — its <code>detections</code> port carries <strong>one element per object</strong>, and <code>labels</code> feeds the tag node directly</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="facedescription/">Face Description</a> (<code>facedescription</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Describe detected faces with a vision model, one description per face</p></td>
@@ -755,6 +764,10 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>facedetect</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YOLO native runtime + an ONNX model (GPU strongly recommended for video)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>objectdetect</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whisper runtime (whisper.cpp; GPU optional)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>whisper</code></p></td>
 </tr>
@@ -844,6 +857,14 @@ bounding boxes, facial embeddings and the optimal focal point for cropped thumbn
 <code>detections</code> port carries one element per face, so <a href="facedescription/"><code>facedescription</code></a>,
 <a href="scene-layout/"><code>scene-layout</code></a> and <a href="dominant-color/"><code>dominant-color</code></a> all work per face
 simply by connecting to it.</p>
+</dd>
+<dt class="hdlist1">Object detection</dt>
+<dd>
+<p><a href="objectdetect/"><code>objectdetect</code></a> finds objects — people, vehicles, animals, furniture — in images
+and video frames with a YOLO model, reporting each as a labelled box with a confidence score. The
+classes it can report come from the model’s own vocabulary, so choosing the model is choosing what
+the library can be searched for. Its <code>labels</code> port lists the distinct classes found and connects
+straight to <a href="tag/"><code>tag</code></a>, which turns every asset into something searchable by what is in it.</p>
 </dd>
 <dt class="hdlist1">Thumbnail generation</dt>
 <dd>
@@ -1143,6 +1164,8 @@ and the build and run commands.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

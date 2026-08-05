@@ -256,6 +256,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -584,6 +588,12 @@ PNG) and can be processed like any other file.</p>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The Google Drive Source settings panel: Shared drive ID" width="Folder ID" height="Include sub-folders and 7 more settings"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <div class="paragraph">
 <p>Set on the node in the pipeline editor:</p>
 </div>
@@ -739,6 +749,38 @@ a worker cannot renew one on its own.
 </td>
 </tr>
 </tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over <code>pexels-jack-sparrow-5977265.mp4</code>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The gdrive-source node after a run" width="with the values it emitted on each port"/>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This run was captured against an in-repo stand-in for the Google Drive API — there is no way to
+point a build machine at a real account. Everything below it is the shipping code: the token is
+really signed and exchanged, the change feed is really diffed against the index, and the file is
+really downloaded.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The strip on the card lists what each output port carried — <code>media</code>.</p>
 </div>
 </div>
 </div>
@@ -916,6 +958,8 @@ or files it away in another folder.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

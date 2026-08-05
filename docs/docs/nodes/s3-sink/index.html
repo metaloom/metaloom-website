@@ -256,6 +256,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -562,6 +566,12 @@ Using <code>{sha512}</code> requires a hashing node earlier in the pipeline.
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The S3 Sink settings panel: Bucket" width="Key template" height="Include source media and 6 more settings"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <div class="paragraph">
 <p>Set on the node in the pipeline editor:</p>
 </div>
@@ -637,6 +647,23 @@ it is ever placed wrongly.</p>
 from the same worker’s disk — Scene Layout reads the depth map that way. Turning on
 <code>deleteAfterUpload</code> in a pipeline like that removes the file before the next node gets to it, and
 the failure looks like a depth-map problem rather than a sink one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over <code>pexels-photo-2379005.jpeg</code>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The s3-sink node after a run" width="with the values it emitted on each port"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The strip on the card lists what each output port carried — <code>flag</code>, <code>count</code>, <code>result</code>.</p>
 </div>
 </div>
 </div>
@@ -790,6 +817,8 @@ the failure looks like a depth-map problem rather than a sink one.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

@@ -256,6 +256,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -549,6 +553,12 @@ overlay’s own pixel dimensions instead, which will look different on every res
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The Watermark settings panel: Watermark Image (base64)" width="Horizontal Position" height="Vertical Position and 8 more settings"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <div class="paragraph">
 <p><code>WatermarkNodeOptions</code>:</p>
 </div>
@@ -625,6 +635,31 @@ what a watermark is for.</p>
 </div>
 <div class="paragraph">
 <p>Because video re-encoding saturates a machine on its own, the node defaults to a concurrency of <code>1</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over <code>pexels-photo-2379005.jpeg</code>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The watermark node after a run" width="with the values it emitted on each port"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The strip on the card lists what each output port carried — <code>flag</code>, <code>image</code>.</p>
+</div>
+<div class="paragraph">
+<p>Selecting one of them opens it full size.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug-detail.png" alt="One output of the watermark node opened full size"/>
+</div>
 </div>
 </div>
 </div>
@@ -788,6 +823,8 @@ marked copy as a new asset with its own storage location.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->

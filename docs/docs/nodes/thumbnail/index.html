@@ -256,6 +256,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/ocr/">OCR</a>
 				</li>
 				
@@ -466,6 +470,12 @@ the UI a fast visual summary of the content.</p>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The Thumbnail Generator settings panel: Grid Columns" width="Grid Rows" height="Tile Size (px)"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <div class="paragraph">
 <p><code>ThumbnailNodeOptions</code> control the contact-sheet layout:</p>
 </div>
@@ -495,6 +505,31 @@ the UI a fast visual summary of the content.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over <code>pexels-jack-sparrow-5977265.mp4</code>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The thumbnail node after a run" width="with the values it emitted on each port"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The strip on the card lists what each output port carried — <code>flag</code>, <code>thumbnail</code>.</p>
+</div>
+<div class="paragraph">
+<p>Selecting one of them opens it full size.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug-detail.png" alt="One output of the thumbnail node opened full size"/>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -644,6 +679,8 @@ the UI a fast visual summary of the content.</p>
 <script src="/plugins/graphiql/graphiql.js"></script>
 
 <script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
 
 
 <!-- Main Script -->
