@@ -527,6 +527,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Whisper node transcribes the audio track of a media file into text using a &lt;strong&gt;Whisper&lt;/strong&gt;&#xA;speech-to-text model. The transcript is stored as a first-class component so it can be searched and&#xA;summarized.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Tag</title>
+      <link>https://metaloom.io/docs/nodes/tag/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/tag/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Tag node writes &lt;strong&gt;tags&lt;/strong&gt; onto your assets from rules you configure. It is the step that turns&#xA;something a pipeline worked out — this photo is blurry, this clip is in German, this picture is&#xA;mostly amber — into something you can &lt;strong&gt;search for&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Text-to-Speech (TTS)</title>
       <link>https://metaloom.io/docs/nodes/tts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

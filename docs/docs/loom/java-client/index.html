@@ -460,6 +460,21 @@ AssetListResponse list = client.listAssets().addLimit(50).sync().body();</code><
 <div class="paragraph">
 <p>An asset requires an origin — the request is rejected without one.</p>
 </div>
+<div class="paragraph">
+<p>Deleting an asset takes everything that is <strong>about it</strong> with it: its analysis results, its locations,
+its tag assignments, the collections and libraries it was filed in, the tasks that referenced it,
+the notes people wrote on it, and the comments and reactions left on it — replies included.</p>
+</div>
+<div class="paragraph">
+<p>What it never touches is the things it was merely linked to. The tag, the collection, the library,
+the task and the person all stay, along with every other asset they cover: a task about five assets
+keeps the other four and everything written on the task itself. A tag that no asset carries any more
+is an empty tag, not a deleted one.</p>
+</div>
+<div class="paragraph">
+<p>The one direction that is still refused is deleting a <strong>library</strong> that has assets in it — a library
+is not removed out from under its contents.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

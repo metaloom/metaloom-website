@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Face Detection | MetaLoom</title>
+	<title>Tag | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The face detection node finds faces in images and video frames and, optionally, computes face embeddings (vectors) that can be used for recognition and clustering. Video is processed by scanning …">
+	<meta name="description" content="The Tag node writes tags onto your assets from rules you configure. It is the step that turns something a pipeline worked out — this photo is blurry, this clip is in German, this picture is mostly …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/nodes/facedetect/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/tag/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Face Detection | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/facedetect/">
-    <meta property="og:description" content="The face detection node finds faces in images and video frames and, optionally, computes face embeddings (vectors) that can be used for recognition and clustering. Video is processed by scanning …">
+    <meta property="og:title" content="Tag | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/tag/">
+    <meta property="og:description" content="The Tag node writes tags onto your assets from rules you configure. It is the step that turns something a pipeline worked out — this photo is blurry, this clip is in German, this picture is mostly …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Face Detection">
+    <meta property="og:image:alt" content="Tag">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Face Detection | MetaLoom">
-    <meta name="twitter:description" content="The face detection node finds faces in images and video frames and, optionally, computes face embeddings (vectors) that can be used for recognition and clustering. Video is processed by scanning …">
+    <meta name="twitter:title" content="Tag | MetaLoom">
+    <meta name="twitter:description" content="The Tag node writes tags onto your assets from rules you configure. It is the step that turns something a pipeline worked out — this photo is blurry, this clip is in German, this picture is mostly …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Face Detection">
+    <meta name="twitter:image:alt" content="Tag">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -220,7 +220,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/facedetect/" class="is-current" aria-current="page">Face Detection</a>
+					<a href="/docs/nodes/facedetect/">Face Detection</a>
 				</li>
 				
 				<li>
@@ -296,7 +296,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/tag/">Tag</a>
+					<a href="/docs/nodes/tag/" class="is-current" aria-current="page">Tag</a>
 				</li>
 				
 				<li>
@@ -422,16 +422,22 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Nodes</p>
-          <h1>Face Detection</h1>
+          <h1>Tag</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The face detection node finds faces in images and video frames and, optionally, computes <strong>face
-embeddings</strong> (vectors) that can be used for recognition and clustering. Video is processed by scanning
-frames at a configurable rate.</p>
+<p>The Tag node writes <strong>tags</strong> onto your assets from rules you configure. It is the step that turns
+something a pipeline worked out — this photo is blurry, this clip is in German, this picture is
+mostly amber — into something you can <strong>search for</strong>.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;facedetect&#34;,&#34;applies&#34;:&#34;Image \u00b7 Video&#34;,&#34;badge&#34;:&#34;InspireFace native&#34;,&#34;persist&#34;:&#34;detection rows (bulk upsert) + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;detection&#34;,&#34;note&#34;:&#34;capabilities: detection&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;a still picture \u2014 wire either image or video, never both&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;frames sampled at videoChopRate \u2014 wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many faces the detector found&#34;},{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected face: bounding box, landmarks and focal point&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED for the detector run&#34;}]},{&#34;name&#34;:&#34;detection + recognition&#34;,&#34;note&#34;:&#34;capabilities: detection, recognition&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;a still picture \u2014 wire either image or video, never both&#34;},{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;frames sampled at videoChopRate \u2014 wire either image or video, never both&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;face_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many faces the detector found&#34;},{&#34;t&#34;:&#34;face&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;c&#34;:&#34;many&#34;,&#34;d&#34;:&#34;one element per detected face: bounding box, landmarks and focal point&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED for the detector run&#34;}]}]}"></div>
+<div class="paragraph">
+<p>That is the point of it. Most analysis nodes attach their answer to the asset as a structured result,
+which is fine to read on the asset page and impossible to find by. A tag is different: the moment it
+is written it becomes part of the asset’s search document, so <code>blurry</code> in the search box brings back
+every blurry picture in the library.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;tag&#34;,&#34;applies&#34;:&#34;Any&#34;,&#34;badge&#34;:&#34;No model, no sidecar&#34;,&#34;persist&#34;:&#34;tags on the asset, plus a record of what this node applied&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;quality triage&#34;,&#34;note&#34;:&#34;rules over a quality result&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item being tagged&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;d&#34;:&#34;prose to match against — a transcript, caption or document text (optional)&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;number&#34;,&#34;d&#34;:&#34;a single metric to threshold on (optional)&#34;},{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;a true/false verdict from an upstream node (optional)&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;struct&#34;,&#34;d&#34;:&#34;a structured upstream result, addressed by path in a rule (optional)&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;labels&#34;,&#34;d&#34;:&#34;strings to turn into tags — takes many (optional)&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;applied&#34;,&#34;d&#34;:&#34;what was applied, withdrawn and rejected for this item&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;count&#34;,&#34;d&#34;:&#34;how many tags were attached&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -440,74 +446,182 @@ frames at a configurable rate.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>facedetect</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tag</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> or <code>video</code> — exactly one of the two is wired</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> — the item being tagged. <code>text</code>, <code>number</code>, <code>flag</code>, <code>struct</code>, <code>labels</code> — the values your rules read; all optional</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detections</code> (<strong>many</strong> — one element per detected face, the boxes that feed <a href="../scene-layout/">Scene Layout</a>, <a href="../dominant-color/">Dominant Colour</a> and <a href="../facedescription/">Face Description</a>), <code>face_count</code> (Integer), <code>flag</code> (String). Embedding vectors are <strong>not</strong> a connectable port: with the recognition capability they are written straight to the detection and embedding tables, so face search reads them from Loom rather than through the graph</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>applied</code> — what this node did to the item. <code>count</code> — how many tags were attached</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>InspireFace native runtime</strong> and its model pack. CPU works; a GPU-enabled pack accelerates video/large batches. Model files require local storage and memory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None. No model, no sidecar, no native library</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detection</code> table (bulk upsert) + <code>asset_node_result</code> ledger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags on the asset, plus a record of what this node applied</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect1">
-<h2 id="_configuration">Configuration</h2>
+<h2 id="_how_a_rule_works">How a rule works</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>FacedetectNodeOptions</code>:</p>
+<p>A rule reads: <strong>when this holds, attach this tag</strong>. Each rule is a row with a name and one or more
+conditions, and every rule is checked independently — an item can pick up several tags in one pass.</p>
+</div>
+<div class="paragraph">
+<p>A condition names one of the node’s <strong>input ports</strong>, a comparison, and a value:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;"/>
-<col style="width: 66.6667%;"/>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Field</th>
 <th class="tableblock halign-left valign-top">Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inspirefacePackPath</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the InspireFace model pack</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which port to read: <code>text</code>, <code>number</code>, <code>flag</code>, <code>struct</code> or <code>labels</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>capabilities</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which InspireFace capabilities to enable (detection, recognition, …)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For <code>struct</code> only: which value inside the result to look at, written with dots — <code>blurriness</code>, <code>image.width</code>, <code>colors.0.name</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoChopRate</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How often to sample frames from a video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EQ</code>, <code>NEQ</code>, <code>GT</code>, <code>GTE</code>, <code>LT</code>, <code>LTE</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>, <code>MATCHES</code> (a regular expression), <code>IN</code> (a list), <code>EXISTS</code>, <code>NOT_BLANK</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoScaleSize</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Frame scale used before detection</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minFaceHeightFactor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Minimum face size (as a fraction of frame height) to keep</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>faceClusterMinimum</code> / <code>faceClusterEPS</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clustering parameters for grouping embeddings into persons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What to compare against. Not needed for <code>EXISTS</code> and <code>NOT_BLANK</code></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>A rule with several conditions fires when <strong>all</strong> of them hold. Set <strong>Match</strong> to <code>ANY</code> for a rule that
+fires when at least one does.</p>
+</div>
+<div class="paragraph">
+<p>Where the values come from is the connection you draw, not something you type into the rule. Wire
+<a href="../quality/">Quality</a> into <code>struct</code> and your rules can threshold on blurriness; wire
+<a href="../whisper/">Whisper</a> into <code>text</code> and they can match on what was said.</p>
+</div>
+<div class="paragraph">
+<p><strong>A port nobody connected simply makes its conditions false.</strong> The node does not refuse to run and
+does not fail the item — it records the rule as skipped, so you can see on the asset that a rule
+never fired because a connection is missing rather than because nothing matched.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tagging_a_list">Tagging a list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some nodes produce a <strong>list</strong> of words rather than one value: the colour names from
+<a href="../dominant-color/">Dominant Colour</a>, for instance. Connect that to the <code>labels</code> port and set
+<strong>Tag by</strong> to <code>Labels</code>, and every entry in the list becomes a tag.</p>
+</div>
+<div class="paragraph">
+<p>The same list can also drive a rule. Set <strong>For each</strong> to <code>labels</code> and use <code>${value}</code> in the tag name to
+build one tag per entry — <code>lang:${value}</code> turns a list of detected languages into <code>lang:de</code>,
+<code>lang:en</code> and so on.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keeping_the_tag_list_clean">Keeping the tag list clean</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tags are shared across your whole library: two assets tagged <code>blurry</code> carry the <strong>same</strong> tag, and
+renaming it renames it everywhere. That is what makes tags useful for searching, and it is also why
+a node writing them automatically needs guard rails. There are four, and they are worth setting:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>Collection</strong></dt>
+<dd>
+<p>Which collection the tags go into. Keep machine-written tags in their own collection
+— it is what lets you tell them apart from the ones people typed.</p>
+</dd>
+<dt class="hdlist1"><strong>Allowed tags</strong></dt>
+<dd>
+<p>A list of the only names this node may write. Anything else is dropped and
+recorded as rejected. Use it whenever the names come from a list rather than from you: one unexpected
+word otherwise becomes a permanent entry in a list everyone shares.</p>
+</dd>
+<dt class="hdlist1"><strong>Max tags</strong></dt>
+<dd>
+<p>A ceiling on how many tags one item can pick up. A rule that builds names from a list
+has no natural limit.</p>
+</dd>
+<dt class="hdlist1"><strong>Normalize</strong></dt>
+<dd>
+<p>How a name is tidied before it is written. The default trims spaces and lowercases,
+so <code>Amber</code> and `amber ` cannot become two separate tags.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_trying_rules_out_first">Trying rules out first</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <strong>Dry run</strong> and the node works out exactly what it would tag and records it on the asset,
+without attaching anything. That is the safe way to try a rule set against a real library: run it,
+look at what it decided, then turn it off.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_removing_tags_again">Removing tags again</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default the node only ever adds. Turn on <strong>Remove withdrawn</strong> and it will also take back tags it
+applied on an earlier run that its rules no longer support — so fixing a threshold cleans up after
+itself instead of leaving the old verdict behind.</p>
+</div>
+<div class="paragraph">
+<p>It will only ever remove a tag it can prove it wrote: one that is in its own record from a previous
+run <strong>and</strong> in the collection it writes into. A tag you added by hand, or one a different Tag node
+applied, is never touched — and the server enforces the same rule from its side, because every tag on
+an asset records who put it there.</p>
+</div>
+<div class="paragraph">
+<p>Adding and removing happen together in a single write, so an asset is never left carrying the new
+verdict alongside the old one. The flip side is that a worker which is allowed to tag but not to
+untag cannot do half the job: with <strong>Remove withdrawn</strong> on it will report the item as failed rather
+than quietly adding without removing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_telling_machine_tags_from_your_own">Telling machine tags from your own</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every tag on an asset carries the name of whatever attached it — a node, or <code>manual</code> when a person
+did — along with the confidence and the time. Tags you typed and tags a pipeline worked out sit side
+by side and stay distinguishable, so a view can show them differently, or hide the machine ones, or
+let you confirm them one at a time.</p>
+</div>
+<div class="paragraph">
+<p>The same asset can also carry one tag several times, each in its own place: two faces in a photo, one
+person at three points in a video. Each of those placements can be removed on its own without
+disturbing the others.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -516,17 +630,48 @@ frames at a configurable rate.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Face search &amp; recognition</strong> — match a query face against embeddings across the library.</p>
+<p><strong>Quality triage</strong> — connect <a href="../quality/">Quality</a> and tag <code>blurry</code>, <code>low-resolution</code> or
+<code>print-ready</code>, then find them from the search box.</p>
 </li>
 <li>
-<p><strong>Person clustering</strong> — group appearances of the same person via the embedding clusters.</p>
+<p><strong>Colour facets</strong> — connect <a href="../dominant-color/">Dominant Colour</a> to <code>labels</code> and get a colour
+vocabulary across the library, with an allowed list so only the colours you want appear.</p>
 </li>
 <li>
-<p><strong>Content moderation / review</strong> — flag assets that contain people.</p>
+<p><strong>Editorial review</strong> — connect a transcript to <code>text</code> and a tone score to <code>number</code>, and tag
+<code>needs-review</code> when a recording is both negative and mentions a complaint.</p>
 </li>
 <li>
-<p>Feed <a href="../facedescription/">Face Description</a> by connecting the <code>detections</code> port — it runs once
-per element of the sequence.</p>
+<p><strong>Findable metadata</strong> — connect <a href="../metadata/">Asset Metadata</a> and tag what the files already
+say about themselves: <code>geotagged</code> when a photo carries coordinates, <code>licensed</code> when it carries a
+licence.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes">Notes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The node remembers its answer per item for the lifetime of the worker, so re-running a pipeline
+does not redo the same work. Changing the rules counts as a different question and is worked out
+afresh.</p>
+</li>
+<li>
+<p>Two Tag nodes can sit in one pipeline — one for quality, one for colour — and each keeps its own
+record of what it applied, so neither can undo the other’s work.</p>
+</li>
+<li>
+<p>Attaching a tag needs the worker’s Loom token to be allowed to tag assets, and <strong>Remove withdrawn</strong>
+additionally needs it to be allowed to untag them. Without the permission the item fails rather than
+quietly tagging nothing.</p>
+</li>
+<li>
+<p>All the tags for one item are written in one go, however many rules fired — tagging a large library
+costs one write per asset, not one per tag.</p>
 </li>
 </ul>
 </div>

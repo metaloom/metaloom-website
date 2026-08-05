@@ -296,6 +296,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/tag/">Tag</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/tts/">Text-to-Speech (TTS)</a>
 				</li>
 				
@@ -450,7 +454,7 @@ each would otherwise be a development project.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code>, plus <code>data</code> for whatever you connect from upstream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code>, plus <code>data</code> for structured input and <code>text</code> for text from upstream</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
@@ -493,8 +497,8 @@ each would otherwise be a development project.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The current item: <code>path</code>, <code>absolutePath</code>, <code>size</code>, <code>sha512</code>, <code>isVideo</code>, <code>isImage</code>, <code>isAudio</code>, <code>isDocument</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>upstream</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">What arrived on the connected inputs, keyed by node and port: <code>upstream[&#39;whisper&#39;][&#39;transcript&#39;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What arrived on the connected inputs. The <code>data</code> port’s JSON is unpacked into it field by field, and whatever you connect to the <code>text</code> port appears as <code>data.text</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>params</code></p></td>
@@ -515,12 +519,13 @@ each would otherwise be a development project.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>A complete example — turning a transcript into chapter marks:</p>
+<p>A complete example — turning a transcript into chapter marks. Connect the whisper node’s
+<code>transcript</code> output to this node’s <code>text</code> input, and it arrives as <code>data.text</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">const re = new RegExp(params.pattern, &#39;i&#39;);
-const transcript = JSON.parse(upstream[&#39;whisper&#39;][&#39;transcript&#39;]);
+const transcript = JSON.parse(data.text);
 
 const frames = transcript.segments
   .filter(s =&gt; re.test(s.text))

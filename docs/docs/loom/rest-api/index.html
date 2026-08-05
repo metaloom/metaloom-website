@@ -616,9 +616,19 @@ authoritative list.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add tag to asset</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/tags</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a whole set of tags at once, and remove the ones listed in <code>withdraw</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/tags/:tagUuid</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Remove tag from asset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove tag from asset, with every placement of it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/api/v1/assets/:uuid/tag-placements/:placementUuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove one placement of a tag — one face, one timecode — keeping the others</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
@@ -1178,8 +1188,27 @@ engine and delegated to registered Cortex workers — see <a href="../../pipelin
 <div class="paragraph">
 <p>Additional endpoints exist for: <code>attachments</code>, <code>tasks</code>, <code>comments</code>, <code>reactions</code>,
 <code>embeddings</code>, <code>spaces</code>, <code>annotations</code>, <code>persons</code>, <code>clusters</code>, <code>blacklists</code>, <code>pools</code> (asset pools),
-<code>tokens</code> (API keys), <code>me</code>, <code>health</code>, and the pipeline node metadata under <code>pipeline/node-descriptors</code>
-and <code>pipeline/content-types</code>. Most follow the same CRUD pattern under <code>/api/v1/&lt;resource&gt;</code>.</p>
+<code>tokens</code> (API keys), <code>notifications</code>, <code>me</code>, <code>health</code>, and the pipeline node metadata under
+<code>pipeline/node-descriptors</code> and <code>pipeline/content-types</code>. Most follow the same CRUD pattern under
+<code>/api/v1/&lt;resource&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Two of them deviate deliberately:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tasks/&lt;uuid&gt;/assignees</code> — <code>GET</code> lists who a task is assigned to, <code>POST</code> adds users and/or groups,
+and the two <code>DELETE</code> sub-paths <code>assignees/users/&lt;uuid&gt;</code> and <code>assignees/groups/&lt;uuid&gt;</code> remove one.</p>
+</li>
+<li>
+<p><code>notifications</code> — the caller’s own inbox, and read-only apart from dismissal: there is no create
+route, because notifications are raised by the server when something happens. <code>POST
+/notifications/&lt;uuid&gt;</code> marks one read, <code>POST /notifications/read-all</code> marks them all, <code>DELETE
+/notifications/&lt;uuid&gt;</code> dismisses one and <code>DELETE /notifications</code> clears the inbox. Every route sees
+only your own entries; another user’s notification answers <code>404</code>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

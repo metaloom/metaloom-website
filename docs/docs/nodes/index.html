@@ -299,6 +299,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/tag/">Tag</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/tts/">Text-to-Speech (TTS)</a>
 				</li>
 				
@@ -706,6 +710,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Route each item down one branch per configured bucket — the output port <strong>is</strong> the branch</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="tag/">Tag</a> (<code>tag</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attach tags from rules over what upstream nodes worked out — a tagged asset is a findable asset</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="script/">Script</a> (<code>script</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Run your own code as a pipeline step and emit declared ports — list outputs fan out</p></td>
@@ -799,7 +808,7 @@ covers both the type icons and the cardinality:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>metadata</code>, <code>filesystem-source</code>, <code>script</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), <code>image-manipulation</code>, dedup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>/<code>sha256</code>/<code>sha512</code>/<code>chunk-hash</code>, <code>consistency</code>, <code>tika</code>, <code>metadata</code>, <code>filesystem-source</code>, <code>script</code>, <code>tag</code>, <code>scene-layout</code>, <code>dominant-color</code>, <code>watermark</code> (images), <code>image-manipulation</code>, dedup</p></td>
 </tr>
 </tbody>
 </table>
@@ -951,6 +960,15 @@ watching a large drive costs a single request when nothing has happened. And bec
 drive keeps its identity when someone renames it or files it away, both report a move as a <strong>move</strong>
 rather than as a deletion followed by a fresh upload — so the metadata you have already built up
 stays attached to it.</p>
+</dd>
+<dt class="hdlist1">Automatic tagging</dt>
+<dd>
+<p><a href="tag/"><code>tag</code></a> attaches tags from rules you configure over what the pipeline already worked out —
+a quality metric, a transcript, a list of colour names. It matters because of where a tag lands:
+most analysis results sit on the asset where you can read them but not search them, while a tag
+becomes part of the asset’s search document as soon as it is written. A vocabulary can be pinned to
+an allowed list so automatic tagging cannot litter the shared tag list, and the node only ever
+removes a tag it can prove it wrote itself.</p>
 </dd>
 <dt class="hdlist1">Branching a pipeline</dt>
 <dd>
