@@ -513,22 +513,84 @@ tabs for comments, annotations and reactions.</p>
 <p>The <strong>Uploads</strong> screen is the place to bring media into Loom. Drag a whole selection of files onto the
 drop area, or click it to pick them — there is no one-file-at-a-time limit.</p>
 </div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="uploads.png" alt="Three files uploading at once on the Uploads screen — a per-file progress bar for each and a combined bar above them"/>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_choosing_where_the_files_land">Choosing where the files land</h4>
 <div class="paragraph">
 <p>Every upload has to land in a <strong>library</strong>, which you choose before adding files. The library also decides
-where the bytes are physically stored, and the screen shows that destination so there is never any doubt
-about where a file went. Administrators additionally get a <strong>storage pool</strong> selector to send a particular
-batch somewhere else — an archive bucket, say — without changing the library itself.</p>
+where the bytes are physically stored, and the chip beside the selectors names that destination — <strong>Stores
+to: Primary storage</strong> above — so there is never any doubt about where a file went. Administrators
+additionally get a <strong>storage pool</strong> selector to send a particular batch somewhere else — an archive bucket,
+say — without changing the library itself; the chip then names the pool you picked instead.</p>
 </div>
 <div class="paragraph">
-<p>Each file gets its own progress bar and can be cancelled on its own; anything that fails can be retried
-without re-picking the file. Uploading the same content twice is not an error: Loom recognises content it
-already holds and links it to the existing asset instead of creating a duplicate, and the screen says so.</p>
+<p>The <strong>Origin</strong> field is a free-text label recorded with each asset, describing where the material came
+from. It defaults to <code>upload</code>; change it to something like <code>client-handoff</code> or <code>shoot-2026-08</code> and the
+whole batch is tagged with it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_watching_a_batch_run">Watching a batch run</h4>
+<div class="paragraph">
+<p>Loom transfers <strong>three files at a time</strong> and starts the next one as soon as a slot frees up, so a large
+selection queues up rather than competing for the same connection. Files still waiting are listed as
+<strong>Waiting</strong> until their turn comes.</p>
 </div>
 <div class="paragraph">
-<p>Uploads keep running while you work elsewhere in the application. Leave the screen and a progress bar
-appears next to <strong>Uploads</strong> in the navigation, and a notification tells you when the batch finishes or if
-something went wrong. Reloading the browser page is the one thing that cancels an upload in progress, so
-the application warns you before that happens.</p>
+<p>Each file gets its own progress bar and the bytes sent so far, and the bar across the top of the list is
+the progress of the batch as a whole — weighted by file size, so a single large file is not drowned out
+by a handful of small ones. A file can be cancelled on its own with the <strong>✕</strong> beside it, or the whole batch
+with <strong>Cancel all</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Anything that fails says why in place of its status line and offers a retry, so a failed upload never
+means picking the file again; <strong>Retry failed</strong> puts every failure back in the queue at once. Uploading the
+same content twice is not an error either: Loom recognises content it already holds and links it to the
+existing asset instead of creating a duplicate, and the row says so rather than reporting a problem.
+<strong>Clear finished</strong> tidies away everything that has settled and leaves whatever is still running alone.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A bar reaches 100% when the last byte has been <strong>sent</strong>. The server still has to hash and store the file
+after that, so a large upload pauses briefly at full before it turns green. That pause is the server
+finishing its work, not a stalled transfer.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_uploads_keep_running_while_you_work">Uploads keep running while you work</h4>
+<div class="paragraph">
+<p>Uploads are not tied to the screen that started them. Leave it and the <strong>Uploads</strong> entry in the navigation
+carries a count of what is still in flight plus a thin progress bar, which is the ambient signal that
+work is happening somewhere behind the page you are on:</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="uploads-sidebar.png" alt="The Uploads navigation entry showing a badge of three active uploads and a progress bar while another screen is open" width="260"/>
+</div>
+</div>
+<div class="paragraph">
+<p>A short message tells you when the batch finishes, how many files were already known, and whether
+anything failed. The upload dialog in the asset browser feeds the same queue, so a batch started there
+behaves identically and shows up in the same place.</p>
+</div>
+<div class="paragraph">
+<p>Reloading the browser page is the one thing that cancels an upload in progress — the files only exist in
+the page until they have been sent — so the application warns you before that happens.</p>
+</div>
 </div>
 </div>
 <div class="sect2">

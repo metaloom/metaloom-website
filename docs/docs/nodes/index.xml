@@ -190,6 +190,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The script node runs &lt;strong&gt;a small piece of code you write&lt;/strong&gt; as a step in your pipeline. It reads the&#xA;media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare —&#xA;a text, a number, a list of texts, a block of JSON, a set of timeframes, or images.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Segment Anything</title>
+      <link>https://metaloom.io/docs/nodes/sam2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/sam2/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Detection tells you &lt;strong&gt;where&lt;/strong&gt; something is: a rectangle around a person, a car, a dog. This node&#xA;tells you &lt;strong&gt;which pixels&lt;/strong&gt; are that thing. It runs Segment Anything 2 and returns a mask per object —&#xA;the exact outline, not a box around it.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Sentiment Analysis</title>
       <link>https://metaloom.io/docs/nodes/sentiment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

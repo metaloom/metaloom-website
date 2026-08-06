@@ -299,6 +299,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/sam2/">Segment Anything</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/sentiment/">Sentiment Analysis</a>
 				</li>
 				
@@ -621,6 +625,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Describe detected faces with a vision model, one description per face</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="sam2/">Segment Anything</a> (<code>sam2</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image, Video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Turn boxes into exact outlines with SAM 2 — segment everything, cut out what a detector found, or track a mask through a clip</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="depthmap/">Depth Map</a> (<code>depthmap</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Estimate how far each part of a photo is from the camera</p></td>
@@ -797,6 +806,10 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tts</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A SAM 2 sidecar (GPU strongly recommended)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sam2</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An image-generation sidecar (SDXL-Turbo / diffusion model; GPU recommended)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>imagegen</code></p></td>
 </tr>
@@ -878,6 +891,15 @@ and video frames with a YOLO model, reporting each as a labelled box with a conf
 classes it can report come from the model’s own vocabulary, so choosing the model is choosing what
 the library can be searched for. Its <code>labels</code> port lists the distinct classes found and connects
 straight to <a href="tag/"><code>tag</code></a>, which turns every asset into something searchable by what is in it.</p>
+</dd>
+<dt class="hdlist1">Segmentation</dt>
+<dd>
+<p><a href="sam2/"><code>sam2</code></a> answers the question detection cannot: not where a thing is, but which pixels are
+it. Given the boxes <a href="objectdetect/"><code>objectdetect</code></a> already found, it returns each one as an exact
+outline; given nothing at all, it finds every distinct region in the picture by itself; given a video,
+it follows an outline from frame to frame as the subject moves. That boundary is what separates a
+product from its backdrop, crops to a person rather than to a rectangle around one, and turns &#34;how
+much of this shot is sky&#34; from an impression into a number.</p>
 </dd>
 <dt class="hdlist1">Thumbnail generation</dt>
 <dd>

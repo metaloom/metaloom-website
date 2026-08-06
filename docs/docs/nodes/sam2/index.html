@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Depth Map | MetaLoom</title>
+	<title>Segment Anything | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The depth map node works out how far each part of a photo is from the camera, from the photo alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a greyscale map …">
+	<meta name="description" content="Detection tells you where something is: a rectangle around a person, a car, a dog. This node tells you which pixels are that thing. It runs Segment Anything 2 and returns a mask per object — the exact …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/nodes/depthmap/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/sam2/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Depth Map | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/depthmap/">
-    <meta property="og:description" content="The depth map node works out how far each part of a photo is from the camera, from the photo alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a greyscale map …">
+    <meta property="og:title" content="Segment Anything | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/sam2/">
+    <meta property="og:description" content="Detection tells you where something is: a rectangle around a person, a car, a dog. This node tells you which pixels are that thing. It runs Segment Anything 2 and returns a mask per object — the exact …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Depth Map">
+    <meta property="og:image:alt" content="Segment Anything">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Depth Map | MetaLoom">
-    <meta name="twitter:description" content="The depth map node works out how far each part of a photo is from the camera, from the photo alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a greyscale map …">
+    <meta name="twitter:title" content="Segment Anything | MetaLoom">
+    <meta name="twitter:description" content="Detection tells you where something is: a rectangle around a person, a car, a dog. This node tells you which pixels are that thing. It runs Segment Anything 2 and returns a mask per object — the exact …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Depth Map">
+    <meta name="twitter:image:alt" content="Segment Anything">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -212,7 +212,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/depthmap/" class="is-current" aria-current="page">Depth Map</a>
+					<a href="/docs/nodes/depthmap/">Depth Map</a>
 				</li>
 				
 				<li>
@@ -296,7 +296,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/sam2/">Segment Anything</a>
+					<a href="/docs/nodes/sam2/" class="is-current" aria-current="page">Segment Anything</a>
 				</li>
 				
 				<li>
@@ -434,26 +434,26 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Nodes</p>
-          <h1>Depth Map</h1>
+          <h1>Segment Anything</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The depth map node works out <strong>how far each part of a photo is from the camera</strong>, from the photo
-alone. No stereo pair, no depth sensor, no camera metadata — a single image goes in, and a
-greyscale map comes out in which bright means close and dark means far.</p>
+<p>Detection tells you <strong>where</strong> something is: a rectangle around a person, a car, a dog. This node
+tells you <strong>which pixels</strong> are that thing. It runs Segment Anything 2 and returns a mask per object —
+the exact outline, not a box around it.</p>
 </div>
 <div class="paragraph">
-<p>That map is what turns a flat list of detected things into a scene you can reason about. On its own
-it powers depth-aware cropping, background separation and subject isolation; combined with
-<a href="../scene-layout/">Scene Layout</a> it is what lets MetaLoom say a person is standing <strong>in front of</strong>
-a car rather than merely overlapping it in the frame.</p>
+<p>It does that three ways. It can segment <strong>everything</strong> in a picture with no help at all, it can take
+the boxes <a href="../objectdetect/">Object Detection</a> or <a href="../facedetect/">Face Detection</a> already
+found and turn each one into a precise cut-out, and it can follow a mask through a video clip, frame
+after frame, as the thing moves.</p>
 </div>
 <div class="paragraph">
 <p>The model runs behind a small HTTP sidecar, so the node stays a pure client and your worker needs no
 machine-learning runtime of its own.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;depthmap&#34;,&#34;applies&#34;:&#34;Images&#34;,&#34;badge&#34;:&#34;Depth sidecar&#34;,&#34;persist&#34;:&#34;Local depthmap_bin cache + node-result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;relative (default)&#34;,&#34;note&#34;:&#34;orders objects front-to-back&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;any still image&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;depth&#34;,&#34;l&#34;:&#34;meta&#34;,&#34;d&#34;:&#34;model, map and image dimensions, and the depth percentiles&#34;},{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;map&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;16-bit greyscale PNG written to the worker — bright is close&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]},{&#34;name&#34;:&#34;metric&#34;,&#34;note&#34;:&#34;mode = METRIC, adds a range in metres&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;any still image&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;depth&#34;,&#34;l&#34;:&#34;meta&#34;,&#34;d&#34;:&#34;as above, plus the nearest and farthest distance in metres&#34;},{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;map&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;16-bit greyscale PNG written to the worker&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;DONE or FAILED&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;sam2&#34;,&#34;applies&#34;:&#34;Images, Video&#34;,&#34;badge&#34;:&#34;SAM 2 sidecar&#34;,&#34;persist&#34;:&#34;Local sam2_bin cache + node-result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;automatic (default)&#34;,&#34;note&#34;:&#34;segment everything, no prompt&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;any still image&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;masks&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;one binary PNG per object found, written to the worker&#34;},{&#34;t&#34;:&#34;masks&#34;,&#34;l&#34;:&#34;segments&#34;,&#34;ct&#34;:&#34;struct/masks&#34;,&#34;d&#34;:&#34;area, score and box for every mask, plus both image sizes&#34;},{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;overlay&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;the picture with every mask tinted over it&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;mask_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many masks were produced&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;SUCCESS, NONE, CAPPED or FAILED&#34;}]},{&#34;name&#34;:&#34;prompted&#34;,&#34;note&#34;:&#34;mode = PROMPTED, cut out what a detector found&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;image&#34;,&#34;d&#34;:&#34;any still image&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;ct&#34;:&#34;detection/*&#34;,&#34;d&#34;:&#34;boxes from any detector; every box becomes one mask&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;masks&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;one mask per box, carrying that box’s label&#34;},{&#34;t&#34;:&#34;masks&#34;,&#34;l&#34;:&#34;segments&#34;,&#34;ct&#34;:&#34;struct/masks&#34;,&#34;d&#34;:&#34;area, score, box and label for every mask&#34;},{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;overlay&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;the picture with every mask tinted over it&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;mask_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many masks were produced&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;SUCCESS, NONE, CAPPED or FAILED&#34;}]},{&#34;name&#34;:&#34;track&#34;,&#34;note&#34;:&#34;mode = TRACK, follow a mask through a clip&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;video&#34;,&#34;l&#34;:&#34;video&#34;,&#34;d&#34;:&#34;a video; frames are sampled at the chop rate&#34;},{&#34;t&#34;:&#34;bbox&#34;,&#34;l&#34;:&#34;detections&#34;,&#34;ct&#34;:&#34;detection/*&#34;,&#34;d&#34;:&#34;the boxes to follow; leave unwired to track the whole first frame&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;artifact&#34;,&#34;l&#34;:&#34;masks&#34;,&#34;ct&#34;:&#34;artifact/image&#34;,&#34;d&#34;:&#34;one mask per object per sampled frame&#34;},{&#34;t&#34;:&#34;masks&#34;,&#34;l&#34;:&#34;segments&#34;,&#34;ct&#34;:&#34;struct/masks&#34;,&#34;d&#34;:&#34;every mask stamped with its source frame number and object id&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;mask_count&#34;,&#34;ct&#34;:&#34;scalar/integer&#34;,&#34;d&#34;:&#34;how many masks were produced&#34;},{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;SUCCESS, NONE, CAPPED or FAILED&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -462,71 +462,105 @@ machine-learning runtime of its own.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthmap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sam2</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Images. Video is not supported yet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images and video</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> — the image asset itself, no upstream node required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code> <strong>or</strong> <code>video</code> — the asset itself; plus <code>detections</code>, optional, from any detector</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>meta</code> (the description below, and what <a href="../scene-layout/">Scene Layout</a> connects to), <code>map</code> (the PNG on the worker), <code>flag</code> (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>masks</code> (one element per mask), <code>segments</code> (the description below), <code>overlay</code> (the picture), <code>mask_count</code>, <code>flag</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A running <strong>depth sidecar</strong> (<code>/v1/depth</code>). CPU works for the default model; a GPU is much faster and is recommended for metric mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A running <strong>SAM 2 sidecar</strong>. A GPU is strongly recommended — segment-everything is over a thousand model passes for one picture</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The generated map stays on the worker under <code>depthmap_bin</code>; a processing record is stored against the asset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The masks stay on the worker under <code>sam2_bin</code>; a processing record is stored against the asset</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect1">
+<h2 id="_the_three_modes">The three modes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pick one with the <code>mode</code> setting. They are genuinely different jobs, not quality levels.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Automatic</dt>
+<dd>
+<p>Segment everything. The model samples a grid of points across the picture and returns
+every distinct region it can find, largest first. Nothing needs to be wired in. Good for cut-outs,
+background removal and &#34;what is even in this picture&#34; — but the masks have no names, because nothing
+told the model what it was looking at.</p>
+</dd>
+<dt class="hdlist1">Prompted</dt>
+<dd>
+<p>One mask per box. Wire a detector into <code>detections</code> and every box it found comes back as a
+precise outline, carrying that detector’s label. This is usually what you want: object detection is
+cheap and knows <strong>what</strong> things are, and this node is what makes the boundary exact.</p>
+</dd>
+<dt class="hdlist1">Track</dt>
+<dd>
+<p>Follow objects through a clip. Prompts are placed on one sampled frame and the model carries
+them forward across the rest, so a person walking across the shot stays one mask with one identity —
+not a fresh unrelated detection every frame.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_what_it_produces">What it produces</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <strong>16-bit greyscale PNG</strong> and a small JSON description of it:</p>
+<p>A <strong>binary PNG per mask</strong> — white inside the object, black outside — plus one JSON description of the
+whole set:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  &#34;model&#34;: &#34;depth-anything/Depth-Anything-V2-Small-hf&#34;,
-  &#34;convention&#34;: &#34;NEARNESS&#34;,
-  &#34;source&#34;: &#34;RELATIVE&#34;,
+  &#34;model&#34;: &#34;facebook/sam2.1-hiera-small&#34;,
+  &#34;mode&#34;: &#34;PROMPTED&#34;,
   &#34;width&#34;: 1024, &#34;height&#34;: 683,
   &#34;imageWidth&#34;: 4000, &#34;imageHeight&#34;: 2667,
-  &#34;stats&#34;: { &#34;p05&#34;: 0.11, &#34;p50&#34;: 0.38, &#34;p95&#34;: 0.82 },
-  &#34;path&#34;: &#34;/var/lib/cortex/depthmap_bin/ab12/&lt;hash&gt;.png&#34;
+  &#34;dir&#34;: &#34;/var/lib/cortex/sam2_bin/ab12/&lt;hash&gt;-7f3c1a9e0b52/&#34;,
+  &#34;masks&#34;: [
+    { &#34;index&#34;: 0, &#34;label&#34;: &#34;person&#34;, &#34;area&#34;: 184203, &#34;score&#34;: 0.96,
+      &#34;bbox&#34;: { &#34;x&#34;: 210, &#34;y&#34;: 88, &#34;w&#34;: 340, &#34;h&#34;: 520 },
+      &#34;path&#34;: &#34;.../mask-0000.png&#34; }
+  ],
+  &#34;truncated&#34;: { &#34;masks&#34;: 0, &#34;frames&#34;: 0 }
 }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_reading_the_map">Reading the map</h3>
+<h3 id="_reading_a_mask">Reading a mask</h3>
 <div class="paragraph">
-<p>The one rule worth remembering: <strong>brighter is closer</strong>. The map stores <strong>nearness</strong>, not distance —
-white is right in front of the lens, black is the far background. Every model is normalised to that
-same convention before it reaches you, so a map is readable the same way regardless of which model
-produced it.</p>
-</div>
-<div class="paragraph">
-<p>Two further details matter if you process the map yourself:</p>
+<p>Two details matter if you process the masks yourself:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>width</code> and <code>height</code> describe <strong>the map</strong>, which is a scaled-down version of your image. <code>imageWidth</code>
-and <code>imageHeight</code> give the original, so you can map coordinates between the two.</p>
+<p><code>width</code> and <code>height</code> describe <strong>the masks</strong>, which are a scaled-down version of your image.
+<code>imageWidth</code> and <code>imageHeight</code> give the original, so you can map coordinates between the two.</p>
 </li>
 <li>
-<p>Relative mode gives you reliable <strong>ordering</strong> — what is in front of what — but not distances. If you
-need actual metres, switch to metric mode and read <code>metric.min_m</code> / <code>metric.max_m</code>.</p>
+<p>A mask pixel is either 0 or 255. Anything above the midpoint is inside the object — a mask that has
+been re-encoded somewhere along the way can pick up soft values along the edge.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The <code>overlay</code> port is the same result as a picture: your frame with every mask tinted a different
+colour. It is the quickest way to check a run did what you expected.</p>
 </div>
 </div>
 </div>
@@ -534,15 +568,6 @@ need actual metres, switch to metric mode and read <code>metric.min_m</code> / <
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
-<div class="imageblock ml-panel-shot">
-<div class="content">
-<img src="config.png" alt="The Depth Map settings panel: Sidecar Host" width="Sidecar Port" height="Depth Mode and 3 more settings"/>
-</div>
-<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
-</div>
-<div class="paragraph">
-<p><code>DepthmapNodeOptions</code>:</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;"/>
@@ -556,24 +581,60 @@ need actual metres, switch to metric mode and read <code>metric.min_m</code> / <
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>depthHost</code> / <code>depthPort</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Where the depth sidecar is listening. Defaults to <code>localhost:9120</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sam2Host</code> / <code>sam2Port</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where the SAM 2 sidecar is listening. Defaults to <code>localhost:9130</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RELATIVE</code> (default) orders things front-to-back; <code>METRIC</code> also reports a range in metres</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUTOMATIC</code> (default), <code>PROMPTED</code> or <code>TRACK</code> — see above</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>model</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use a specific model instead of the sidecar’s default for the selected mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use a specific checkpoint instead of the sidecar’s default</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxDim</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Longest side sent for analysis, default 1024. Lower is faster and coarser; this also sets the size of the produced map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Longest side sent for analysis, default 1024. This also sets the size of every produced mask</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pointsPerSide</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatic only: how densely the picture is sampled, default 32. Halving it is roughly four times faster and finds fewer small things</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>predIouThresh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatic only: discard masks the model rates below this, default 0.8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minMaskArea</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Discard masks smaller than this many pixels, default 256. Raise it to drop speckle</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxMasks</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop after this many masks, default 64. Hitting it reports <code>CAPPED</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>multimask</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prompted only: return the model’s three candidate outlines per box instead of the best one. Counts against <code>maxMasks</code> three times over</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>videoChopRate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sample every Nth video frame, default 25 — roughly one per second of typical footage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxFrames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Never send more than this many frames, default 64. Hitting it reports <code>CAPPED</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trackFrame</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which sampled frame the prompts are placed on, default the first</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>emitOverlay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also write the tinted picture, default on</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>timeoutMs</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How long to wait for the sidecar, default 120000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long to wait for the sidecar, default 300000</p></td>
 </tr>
 </tbody>
 </table>
@@ -584,23 +645,13 @@ need actual metres, switch to metric mode and read <code>metric.min_m</code> / <
 <div class="sectionbody">
 <div class="paragraph">
 <p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
-card itself. Below is a real run of this node over <code>pexels-photo-2379005.jpeg</code>, a portrait taken
-against a wall — a subject with an obvious near thing and an obvious far thing behind it.</p>
-</div>
-<div class="imageblock img-fluid">
-<div class="content">
-<img src="debug.png" alt="The depthmap node after a run" width="showing the depth map it produced and the metadata describing it"/>
-</div>
+card itself.</p>
 </div>
 <div class="paragraph">
-<p>The <code>map</code> port carries an artifact, so the card shows it rather than its path: the head is bright
-because bright means <strong>near</strong>. <code>meta</code> carries the model, the map’s dimensions and the quantiles a
-consumer needs to read those greys; <code>flag</code> records how the node finished.</p>
-</div>
-<div class="imageblock ml-panel-shot">
-<div class="content">
-<img src="debug-detail.png" alt="The depth map opened from the card - a 16-bit grayscale estimate of the portrait"/>
-</div>
+<p>The <code>overlay</code> port carries an artifact, so the card shows the picture rather than its path. <code>segments</code>
+lists what was found with an area and a score each; <code>mask_count</code> and <code>flag</code> record how the node
+finished. The <code>masks</code> port is a sequence, and the card previews its first entry — the overlay is the
+one to look at for the whole result.</p>
 </div>
 </div>
 </div>
@@ -608,9 +659,9 @@ consumer needs to read those greys; <code>flag</code> records how the node finis
 <h2 id="_requirements_and_models">Requirements and models</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The default model is <strong>Depth Anything V2 Small</strong>, published under Apache 2.0 and usable
-commercially. It is small enough to run on a CPU, though a GPU will process a large library far
-faster. Metric mode uses <strong>ZoeDepth</strong> (MIT), which is heavier and really does want a GPU.</p>
+<p>The default checkpoint is <strong>SAM 2.1 Hiera Small</strong>, published under Apache 2.0 and usable
+commercially — as is every member of that family. Larger variants trade speed for a little more
+accuracy on fine boundaries; see <a href="../../legal/model-licenses/">Model licences</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -620,9 +671,9 @@ faster. Metric mode uses <strong>ZoeDepth</strong> (MIT), which is heavier and r
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The larger Depth Anything V2 models are published under a <strong>non-commercial</strong> licence and are
-deliberately not the default. If you want higher quality with commercial terms intact, use a DPT /
-MiDaS model instead. See <a href="../../legal/model-licenses/">Model licences</a>.</p>
+<p>Segment-everything at the default density is over a thousand model passes for a single picture, and
+tracking holds a growing memory of the clip while it runs. Give this node a GPU, and give it one it
+does not have to share with another model server.</p>
 </div>
 </td>
 </tr>
@@ -636,20 +687,23 @@ MiDaS model instead. See <a href="../../legal/model-licenses/">Model licences</a
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Subject isolation</strong> — find the foreground automatically for cut-outs, blurred backgrounds or
-depth-aware crops that keep the subject.</p>
+<p><strong>Cut-outs and background removal</strong> — an exact outline is what separates a product photo from its
+backdrop, without anyone tracing it by hand.</p>
 </li>
 <li>
-<p><strong>Better automatic cropping</strong> — a crop that respects depth keeps the person and drops the wall,
-instead of cutting by rule of thirds and hoping.</p>
+<p><strong>Precise crops</strong> — a box crops to a rectangle around a person; a mask crops to the person.</p>
 </li>
 <li>
-<p><strong>Scene understanding</strong> — feed <a href="../scene-layout/">Scene Layout</a> so captions and search can talk
-about what is in front of what.</p>
+<p><strong>Measuring what is in frame</strong> — mask area is real coverage, so &#34;how much of this shot is sky&#34; is a
+number rather than an impression.</p>
 </li>
 <li>
-<p><strong>Quality triage</strong> — flat depth across an entire frame is a good signal for a photograph of a
-screen, a document scan, or a flat-lay, which you may want routed differently.</p>
+<p><strong>Video object tracking</strong> — one identity followed across a clip, for shot selection, redaction or
+effects work.</p>
+</li>
+<li>
+<p><strong>Better training data</strong> — a detector’s boxes plus this node’s outlines is a segmentation dataset
+produced from an existing library.</p>
 </li>
 </ul>
 </div>
@@ -659,10 +713,10 @@ screen, a document scan, or a flat-lay, which you may want routed differently.</
 <h2 id="_deployment_note">Deployment note</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The generated map is stored on the worker that produced it. If you connect <code>meta</code> to
-<a href="../scene-layout/">Scene Layout</a>, put both nodes in the <strong>same affinity group</strong> in your pipeline
-so they run on the same machine — otherwise the second node cannot find the map the description
-points at.</p>
+<p>The masks are stored on the worker that produced them, and there is a directory of them per asset
+rather than a single file. If you connect <code>masks</code> to <a href="../s3-sink/">S3 Sink</a> — which is how you get
+them off the worker — put both nodes in the <strong>same affinity group</strong> in your pipeline so they run on
+the same machine.</p>
 </div>
 </div>
 </div>
