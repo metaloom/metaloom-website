@@ -440,7 +440,83 @@ chips inside the conversation — and, for some results, a <strong>diagram</stro
 </div>
 </div>
 <div class="sect1">
-<h2 id="pipeline-diagrams">Pipeline Diagrams in Chat</h2>
+<h2 id="pipeline-diagrams">Building a Pipeline by Asking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The assistant can do more than describe a pipeline — it can build one. Ask for what you want
+processed (<strong>&#34;set up a pipeline that transcribes every new video and tags the language&#34;</strong>) and it
+works the way a person would: it looks up which processing nodes this Loom actually offers, checks
+what each one accepts and produces, drafts the pipeline, <strong>validates the draft without saving it</strong>,
+fixes whatever the validator objects to, and only then stores it.</p>
+</div>
+<div class="paragraph">
+<p>The result is an ordinary pipeline. It appears in the pipeline list, opens in the editor, and can be
+reviewed and changed by hand before you run it. Nothing is started automatically — starting a run
+stays your decision.</p>
+</div>
+<div class="paragraph">
+<p>Changes work the same way. Asking for a node to be added or a setting changed stores a <strong>new
+version</strong> of the pipeline; earlier versions are kept and can be restored, so a change you did not
+want is never destructive.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Ask the assistant to <strong>show</strong> you the pipeline before you run it. It draws the node graph as a
+diagram in the conversation (see below), which is the quickest way to check that it understood you.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_permissions">Permissions</h3>
+<div class="paragraph">
+<p>Letting the assistant write pipelines is granted separately from letting a person edit them in the
+pipeline editor, so you can allow one without the other. Three permissions cover it, all in the
+<strong>Pipeline (assistant)</strong> group of the role editor:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Permission</th>
+<th class="tableblock halign-left valign-top">What it allows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create pipelines (assistant)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The assistant may store a new pipeline. Granted <strong>in addition to</strong> the ordinary create permission —
+  both are needed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edit pipelines (assistant)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The assistant may store a new version of an existing pipeline. Again in addition to the ordinary
+  edit permission.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Validate pipelines (assistant)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The assistant may check a draft. Nothing is stored, so this one is safe to grant on its own — the
+  assistant can design and check a pipeline for you to save yourself.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Without these, the assistant is not told the pipeline-writing tools exist and will not offer to
+build one.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pipeline_diagrams_in_chat">Pipeline Diagrams in Chat</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Ask the agent about a processing pipeline — <strong>&#34;show me the current pipeline for media
@@ -547,8 +623,13 @@ working context, not just a chat log.</p>
 <h2 id="skills">Skills</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <strong>skill</strong> is a user-owned, <code>SKILL.md</code>-style markdown instruction package (name, description and a
-full markdown body) that steers the agent for a particular task.</p>
+<p>A <strong>skill</strong> is a <code>SKILL.md</code>-style markdown instruction package (name, description and a full
+markdown body) that steers the agent for a particular task.</p>
+</div>
+<div class="paragraph">
+<p>A few skills <strong>ship with Loom</strong> and are always available — you do not create them, activate them or
+see them in your skill list. Today that is the pipeline authoring skill described below. Everything
+else is yours:</p>
 </div>
 <div class="ulist">
 <ul>

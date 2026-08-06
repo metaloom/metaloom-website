@@ -646,6 +646,97 @@ near-duplicate routes report themselves as unavailable.
 </div>
 </div>
 <div class="sect2">
+<h3 id="_face_and_image_similarity">Face and image similarity</h3>
+<div class="paragraph">
+<p>Powers &#34;where else does this face appear?&#34; and the person grouping built on top of it. It is a separate
+index from the near-duplicate lookup above: that one holds one fingerprint per video and answers &#34;is this
+the same recording?&#34;, while this one holds one vector per detected face and answers &#34;is this the same
+person?&#34;.</p>
+</div>
+<div class="paragraph">
+<p>Switched off by default, because it is only useful once face detection has run with embeddings enabled.</p>
+</div>
+<div class="paragraph">
+<p>Your face vectors are stored with your assets in the database. The index is built entirely from them, so it
+can be discarded and rebuilt at any time without losing anything — which is also what makes it safe to
+change the recognition model, or the index technology, later on.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_PROVIDER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which index to use: <code>none</code> or <code>lucene</code>. An unrecognised name stops the server with a clear message rather than starting with no index</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vector-index</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directory holding the index. Give each server its own directory, and keep it separate from the near-duplicate index</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_TOPK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many matches a query returns by default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_SCORE_THRESHOLD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.35</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How close a match must be to count. Higher is stricter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_SYNC_INTERVAL_MS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How often newly stored vectors are picked up. Set <code>0</code> to switch the background pass off</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_SYNC_BATCH_SIZE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>500</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many vectors are picked up per pass</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If the index directory cannot be written, the server still starts normally — face vectors are still
+stored, and only the similarity routes report themselves as unavailable. Switching the index on later and
+running a rebuild picks up everything recorded in the meantime.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Changing the recognition model</div>
+<div class="paragraph">
+<p>Face vectors from different models cannot be compared, so each one is recorded with the model that produced
+it and queries never mix them.</p>
+</div>
+<div class="paragraph">
+<p>To move to a new model, change the model name on the face detection node and re-run it. The new vectors are
+stored <strong>alongside</strong> the old ones rather than replacing them, so both remain searchable and you can compare
+the two before discarding either.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_authentication">Authentication</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

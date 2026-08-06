@@ -447,7 +447,7 @@ the items that belong there.</p>
 <p>You configure a list of <strong>buckets</strong>, and the node grows <strong>one output port per bucket</strong> — plus an
 <code>other</code> port that is always present. Wire the ports you care about; that is the whole configuration.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;filter&#34;,&#34;applies&#34;:&#34;Routing node&#34;,&#34;badge&#34;:&#34;Needs a language model&#34;,&#34;persist&#34;:&#34;the routing decision, as a JSON component on the asset&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;language routing&#34;,&#34;note&#34;:&#34;buckets: de, en&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item being routed&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;d&#34;:&#34;the text to classify — a transcript, extracted document text or a caption (optional)&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;de&#34;,&#34;d&#34;:&#34;items classified as German — carries only those items&#34;},{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;en&#34;,&#34;d&#34;:&#34;items classified as English — carries only those items&#34;},{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;other&#34;,&#34;d&#34;:&#34;everything else; always present&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;passed&#34;,&#34;d&#34;:&#34;true when a bucket other than other matched&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;bucket&#34;,&#34;d&#34;:&#34;the id of the bucket this item landed in — carries a value for every item&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;filter&#34;,&#34;applies&#34;:&#34;Routing node&#34;,&#34;badge&#34;:&#34;Language routing needs a model&#34;,&#34;persist&#34;:&#34;the routing decision, as a JSON component on the asset&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;language routing&#34;,&#34;note&#34;:&#34;buckets: de, en&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item being routed&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;d&#34;:&#34;the text to classify — a transcript, extracted document text or a caption (optional)&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;de&#34;,&#34;d&#34;:&#34;items classified as German — carries only those items&#34;},{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;en&#34;,&#34;d&#34;:&#34;items classified as English — carries only those items&#34;},{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;other&#34;,&#34;d&#34;:&#34;everything else; always present&#34;},{&#34;t&#34;:&#34;branch&#34;,&#34;l&#34;:&#34;passed&#34;,&#34;d&#34;:&#34;true when a bucket other than other matched&#34;},{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;bucket&#34;,&#34;d&#34;:&#34;the id of the bucket this item landed in — carries a value for every item&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -472,7 +472,7 @@ the items that belong there.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable OpenAI-compatible language model endpoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only <code>Language</code> needs a reachable OpenAI-compatible endpoint. <code>MIME type</code>, <code>Size</code> and <code>Date</code> read the file itself and need nothing</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
@@ -543,8 +543,8 @@ connections carry every item and which carry only some.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name shown on the node. Defaults to the id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Aliases</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Other names that mean the same bucket, comma separated — e.g. <code>german, deutsch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Match</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hints this bucket matches on, comma separated. What they mean depends on <strong>Filter by</strong> — other names for a language (<code>german, deutsch</code>), MIME patterns (<code>image/*</code>), size thresholds (<code>&lt;10MB</code>) or dates (<code>2024-01-01..2024-12-31</code>)</p></td>
 </tr>
 </tbody>
 </table>
@@ -562,26 +562,52 @@ follow immediately, and removing a bucket also removes any connections that were
 <h2 id="_filtering_by">Filtering by</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <strong>Filter by</strong> setting chooses what the buckets are matched against.</p>
+<p>The <strong>Filter by</strong> setting chooses what the buckets are matched against. Buckets are tried top to
+bottom and the first one that matches wins, so a narrow bucket above a broad one behaves as written.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;"/>
-<col style="width: 75%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 40%;"/>
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Filter by</th>
 <th class="tableblock halign-left valign-top">Each item goes to the bucket whose…</th>
+<th class="tableblock halign-left valign-top">Match hints look like</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Language</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">…language matches the text wired into the node</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>german, deutsch</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIME type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…pattern matches the item’s file type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image/*</code>, <code>video/mp4</code>, or a bare <code>image</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…threshold the item’s size falls into</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;10MB</code>, <code>1MB..100MB</code>, <code>&gt;1GB</code>, or a bare <code>10MB</code> meaning &#34;up to&#34;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…window the item’s modification date falls into</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=2024-01-01</code>, <code>2024-01-01..2024-12-31</code>, <code>2024-03-17</code>, <code>age&lt;30d</code></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Only <strong>Language</strong> costs anything. The other three read the item’s own metadata, so a pipeline that
+only splits images from video, or last month’s files from last year’s, runs with no model backend at
+all — and adds no time per item.</p>
+</div>
+<div class="sect2">
+<h3 id="_language">Language</h3>
 <div class="paragraph">
 <p>Language is decided by a language model, which means it needs a reachable OpenAI-compatible endpoint but no
 extra model download and no separate service. Wire the <code>text</code> port from whatever produced the text:
@@ -594,7 +620,79 @@ that could not be classified is not the same as one that did not match. An answe
 that names no configured bucket does land in <code>other</code>, which is what that branch is for.</p>
 </div>
 <div class="paragraph">
-<p>Set a <strong>Minimum confidence</strong> to send uncertain classifications to <code>other</code> instead of trusting them.</p>
+<p>Set a <strong>Minimum confidence</strong> to send uncertain classifications to <code>other</code> instead of trusting them.
+It applies to Language only; the other three are not guesses.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mime_type">MIME type</h3>
+<div class="paragraph">
+<p>The type comes from the file’s name — <code>holiday.png</code> is <code>image/png</code>. A pattern is an exact type
+(<code>image/png</code>), a family (<code>image/<strong></strong></code><strong>), or a bare word read as a family (<code>image</code> means <code>image/</code></strong>). A
+bucket with no hints at all falls back to its own id, so three buckets called <code>image</code>, <code>video</code> and
+<code>audio</code> route correctly with nothing typed in.</p>
+</div>
+<div class="paragraph">
+<p>An extension nothing recognises is <code>application/octet-stream</code>, which a bucket can ask for like any
+other type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_size">Size</h3>
+<div class="paragraph">
+<p>Sizes are the numbers a file manager shows: <code>KB</code>, <code>MB</code>, <code>GB</code> and <code>TB</code> are 1024-based, and <code>KiB</code>,
+<code>MiB</code>, <code>GiB</code>, <code>TiB</code> are accepted as the same thing. A bare number with no unit is bytes.</p>
+</div>
+<div class="paragraph">
+<p><code>&lt;</code>, <code>⇐</code>, <code>&gt;</code> and <code>&gt;=</code> compare; <code>1MB..100MB</code> is a range whose lower end is included and whose
+upper end is not, so neighbouring ranges tile without overlapping; and a bare <code>10MB</code> means &#34;up to
+10MB&#34;. That last one is what makes the common ladder read as written:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bucket</th>
+<th class="tableblock halign-left valign-top">Match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>small</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1MB</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>medium</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100MB</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>large</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;100MB</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_date">Date</h3>
+<div class="paragraph">
+<p>The date is the file’s last-modified time. Absolute conditions use ISO dates and always cover the
+whole day: <code>⇐2024-12-31</code> includes every moment of 31 December, and <code>2024-01-01..2024-12-31</code> is the
+whole year. A bare <code>2024-03-17</code> is that one day.</p>
+</div>
+<div class="paragraph">
+<p>Relative conditions are ages, and the <code>age</code> prefix is required: <code>age&lt;30d</code> is &#34;changed in the last 30
+days&#34; and <code>age&gt;1y</code> is &#34;untouched for over a year&#34;. Writing <code>&lt;30d</code> on its own is refused, because it
+reads as <strong>before</strong> while meaning <strong>newer than</strong> — and getting that backwards would route a whole run the
+wrong way. Ages take <code>h</code>, <code>d</code>, <code>w</code>, <code>m</code> (months) and <code>y</code>.</p>
+</div>
+<div class="paragraph">
+<p>A hint that cannot be read as a threshold or a date — <code>&lt;10 megabytes</code>, <code>last month</code> — stops the
+pipeline with a message naming the bucket, rather than starting a run in which every item quietly
+lands in <code>other</code>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -636,8 +734,17 @@ card itself. Below is a real run of this node over <code>pexels-jack-sparrow-597
 another, and everything else to a review branch.</p>
 </li>
 <li>
-<p><strong>Per-language publishing</strong> — tag, translate or caption each language differently without building
-a separate pipeline for each.</p>
+<p><strong>Type routing</strong> — send images to <a href="../captioning/">Captioning</a> and video to
+<a href="../scene-detection/">Scene Detection</a> from one source, with no model round trip to decide
+which is which.</p>
+</li>
+<li>
+<p><strong>Cost control by size</strong> — run the expensive analysis only on files above a threshold, and a
+cheap thumbnail path on everything else.</p>
+</li>
+<li>
+<p><strong>Backfill by date</strong> — process last month’s arrivals on one branch and the historical archive on
+another, so a re-run does not redo years of work.</p>
 </li>
 <li>
 <p><strong>Catching the unexpected</strong> — wire <code>other</code> to a review step and see what your library actually

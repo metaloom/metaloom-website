@@ -347,6 +347,9 @@ versions they ran with</p>
 <div class="ulist">
 <ul>
 <li>
+<p><strong>Search</strong> — one search box above the navigation that looks across every kind of content at once</p>
+</li>
+<li>
 <p><strong>Library</strong> — browse assets grouped into libraries</p>
 </li>
 <li>
@@ -487,7 +490,112 @@ The memory view lets an administrator browse and edit those notes; the agent see
 </div>
 </div>
 <div class="sect1">
-<h2 id="assets">Assets</h2>
+<h2 id="assets">Search</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The search box sits at the top of the left navigation and is available from every screen. Unlike the
+filter boxes inside individual screens — which narrow the list you are already looking at — this one
+queries the whole installation: asset filenames and metadata, transcript text, tag and collection
+names, annotations, people and libraries, all in a single pass.</p>
+</div>
+<div class="paragraph">
+<p>Start typing and suggestions appear after the second character. Press <strong>Enter</strong> to open the full results
+page, where each hit shows what kind of thing it is and a short excerpt with your search terms
+highlighted. Transcript hits carry the timecode where the phrase was spoken. Selecting a result takes
+you to the asset or the screen that holds it.</p>
+</div>
+<div class="sect2">
+<h3 id="_refining_a_search">Refining a Search</h3>
+<div class="paragraph">
+<p>The results page offers three ways to narrow what you get back:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Kind</strong> — chips for assets, transcripts, tags, annotations, people, collections, libraries and
+clusters. Pick one or several; picking none searches everything you are allowed to see.</p>
+</li>
+<li>
+<p><strong>Suggested filters</strong> — file type, kind and language chips generated from the results themselves,
+each showing how many matches it accounts for.</p>
+</li>
+<li>
+<p><strong>Sort</strong> — by relevance (the default), newest, oldest, name or size.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Active filters are listed together above the results so you can always see what is being excluded and
+remove it in one click.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_syntax">Search Syntax</h3>
+<div class="paragraph">
+<p>The search box understands three operators, which can be combined freely:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Syntax</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&#34;quarterly update&#34;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text in double quotes matches only where those words appear together, in that order.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dividends or championship</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>or</code> between two terms matches documents containing either one. Without it, terms are combined —
+  a document has to contain all of them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>quarterly -podcast</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A leading hyphen excludes matches. This example finds documents about the quarterly update but
+  leaves out anything mentioning the podcast.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Punctuation that is not one of these operators is simply treated as text, so a stray quote or bracket
+never turns into an error.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Search results respect your permissions. If your account cannot read a particular kind of content,
+those results are left out and a note above the results says so — rather than silently returning less
+than you asked for.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_search_is_turned_off">When Search Is Turned Off</h3>
+<div class="paragraph">
+<p>Search is optional, and an administrator can disable it or point Loom at a search backend that is not
+running. When that happens the search box does not appear at all, and the search page explains which
+backend is configured and why it cannot answer. Every other part of Loom keeps working normally — a
+search outage never takes the rest of the application with it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assets">Assets</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The asset browser shows every asset with search, status and type filters and switchable grid/list and
