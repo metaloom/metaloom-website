@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -530,6 +534,31 @@ licensed and may therefore be used commercially. Both speak the same contract â€
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run in <code>REMIX</code> mode over <code>pexels-photo-2379005.jpeg</code>, prompted for
+<em>&#34;the same portrait as an oil painting, warm light, visible brush strokes&#34;</em>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The imagegen node after a run" width="showing the image it generated"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>image</code> port carries an artifact, so the card shows the picture rather than its path. <code>REMIX</code> is
+the mode worth photographing: <code>GENERATE</code>, the shipped default, ignores the incoming media entirely
+and answers from the prompt alone.</p>
+</div>
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="debug-detail.png" alt="The remixed portrait opened from the card"/>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

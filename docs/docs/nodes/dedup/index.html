@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/" class="is-current" aria-current="page">Deduplication</a>
 				</li>
 				
@@ -605,6 +609,45 @@ up new ones, and re-running the apply step skips files that have already been mo
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced. This one
+is the exception in the catalogue: it declares <strong>no output ports at all</strong>. What it does is move a
+file and record the fact, so there is nothing to draw on the node card — and the card correctly draws
+nothing.</p>
+</div>
+<div class="paragraph">
+<p>The place its work shows up is the node’s own Results tab, which the run detail opens:</p>
+</div>
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="debug.png" alt="The dedup node’s Results tab after a real run: COMPLETED in 23ms" width="with no outputs recorded"/>
+</div>
+</div>
+<div class="paragraph">
+<p>That is a real run against a real Loom: an asset already existed for one copy of the file, a second
+copy of the same bytes was fed in, and the node matched them by hash and moved the second one into
+the duplicates folder. <code>No outputs were recorded</code> is the honest answer — the result lives on the
+filesystem and in the asset’s history, not on a port.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+If you want a downstream node to react to a duplicate, do not wire it to this one. Put
+<a href="../hash/">Hash</a> upstream of both and branch on what you need, or read the asset’s history back
+through the API.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 </div>
 <div class="sect1">

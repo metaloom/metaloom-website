@@ -207,6 +207,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -577,6 +581,11 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Translate extracted text into a target language with a language model</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="guard/">Content Guard</a> (<code>guard</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any (text connected to its <code>text</code> port); Image on a multimodal model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Screen content against a harm taxonomy with a guardrail model, and gate a branch on the verdict</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="llm/">LLM Enrichment</a> (<code>llm</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enrich metadata with a language model — one output port per prompt</p></td>
@@ -817,7 +826,11 @@ covers both the type icons and the cardinality:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A reachable OpenAI-compatible language model endpoint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>llm</code>, <code>translate</code>, <code>filter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>llm</code>, <code>translate</code>, <code>filter</code>, <code>guard</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reachable OpenAI-compatible endpoint serving a guardrail model (Llama Guard, ShieldGemma or Granite Guardian)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>guard</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CPU only</p></td>
@@ -952,6 +965,18 @@ transcript, document text or an OCR result to its <code>text</code> port and the
 languages means several nodes; each translation is stored under its own language and stays separately
 retrievable. Documents longer than the model’s context window are split at paragraph and sentence
 boundaries, never mid-sentence, and rejoined.</p>
+</dd>
+<dt class="hdlist1">Content screening</dt>
+<dd>
+<p><a href="guard/"><code>guard</code></a> checks content against a harm taxonomy — connect a transcript, document text, an
+OCR result or a caption to its <code>text</code> port, or point it at image assets — and answers <code>safe</code> or
+<code>unsafe</code> with a confidence score and the categories that fired. Its <code>safe</code> output is a branch, so a
+publishing or upload step connected behind it runs only for the items that came back clean, while
+flagged assets are still fully processed and their verdicts stored for review. Three families of open
+guardrail model are supported behind the one node — Meta’s Llama Guard, Google’s ShieldGemma and IBM’s
+Granite Guardian — and all of them are normalised onto one shared vocabulary of harm categories and
+one comparable score, so changing the model does not mean rewiring the pipeline. Llama Guard 4 and
+ShieldGemma 2 read pictures directly; the rest screen text.</p>
 </dd>
 <dt class="hdlist1">Depth and spatial layout</dt>
 <dd>

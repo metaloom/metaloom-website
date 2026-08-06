@@ -439,10 +439,21 @@ The node takes both from options (<code>modelPath</code>, <code>labelsPath</code
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>google/gemma-2-27b-it</code> (<a href="../../nodes/llm/">LLM node</a> default)<br/>
-<code>google/gemma-3-27b-it</code> (<a href="../../nodes/facedescription/">Face Description</a> default)</p></td>
+<code>google/gemma-3-27b-it</code> (<a href="../../nodes/facedescription/">Face Description</a> default)<br/>
+<code>google/shieldgemma-*</code> and <code>google/shieldgemma-2-4b-it</code> (<a href="../../nodes/guard/">Content Guard</a>, <code>SHIELDGEMMA</code> families)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not an OSI license. Commercial use is permitted, but you accept a Prohibited Use Policy and must
   pass the same terms (and the use restrictions) on to anyone you distribute the model or a derivative to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>meta-llama/Llama-Guard-3-8B</code> (<a href="../../nodes/guard/">Content Guard</a> default)<br/>
+<code>meta-llama/Llama-Guard-4-12B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama 3.3 / Llama 4 Community License — repositories are <strong>gated</strong> on Hugging Face</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Commercial use is permitted below a large-scale-user threshold (700 M monthly active users), above
+  which you must request a separate license from Meta. An Acceptable Use Policy applies, derivatives
+  must carry the &#34;Llama&#34; name, and you must accept the gate to download the weights.<br/>
+  <strong>Permissively licensed alternative:</strong> <code>ibm-granite/granite-guardian-3.*</code> is Apache-2.0 and the node
+  supports it with <code>family: GRANITE_GUARDIAN</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>SebastianBodza/Kartoffel_Orpheus-3B_german_natural-v0.1</code> (German <a href="../../nodes/tts/">TTS</a> voice)</p></td>
@@ -586,6 +597,24 @@ native libraries listed under <a href="#runtimes">Runtimes &amp; Libraries</a> a
 <td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/guard/">Content Guard</a> — default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>meta-llama/Llama-Guard-3-8B</code> (<code>model</code>) via an OpenAI-compatible provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama 3.3 Community License, gated — see <a href="#conditional">conditions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/guard/">Content Guard</a> — ShieldGemma</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>google/shieldgemma-2b</code>/<code>-9b</code>/<code>-27b</code>, <code>google/shieldgemma-2-4b-it</code> (<code>family: SHIELDGEMMA</code>, <code>SHIELDGEMMA_2</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gemma Terms of Use — see <a href="#conditional">conditions</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⚠️ Conditional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/guard/">Content Guard</a> — Granite Guardian</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ibm-granite/granite-guardian-3.*</code> (<code>family: GRANITE_GUARDIAN</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache-2.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✅ Yes</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../../nodes/facedetect/">Face Detection</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">InspireFace runtime + model pack, default <code>packs/Pikachu</code> (<code>inspirefacePackPath</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Code Apache-2.0; <strong>model packs follow InsightFace — academic use only</strong></p></td>
@@ -701,6 +730,12 @@ commercially licensed face model.</p>
 <li>
 <p><strong>Replace the Gemma defaults</strong> in the <a href="../../nodes/llm/">LLM</a> node with an Apache-2.0 or
 MIT-licensed instruct model, unless the Gemma Terms of Use are acceptable to you.</p>
+</li>
+<li>
+<p><strong>Set the <a href="../../nodes/guard/">Content Guard</a> node to <code>family: GRANITE_GUARDIAN</code></strong> with an
+<code>ibm-granite/granite-guardian-3.*</code> model. It is the only Apache-2.0 option of the three families,
+so it needs neither the Llama community license nor the Gemma terms. It is text-only; screening
+pictures means accepting one of the other two.</p>
 </li>
 <li>
 <p><strong>Verify the FFmpeg build</strong> in your container base if you redistribute images.</p>

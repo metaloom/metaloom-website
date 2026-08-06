@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -573,6 +577,26 @@ strategy — the per-scene breakdown, so the timeline is available for search an
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run over <code>pexels-jack-sparrow-5977265.mp4</code> through the <strong>video</strong> branch:
+the node sampled eight frames from the clip and asked one question about all of them at once.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The captioning node after a run" width="with the sentence it produced for the clip"/>
+</div>
+</div>
+<div class="paragraph">
+<p>One port, one sentence — which is the point of this node. The two input branches are different
+backends, not two ways into the same one: <code>image</code> goes to a SmolVLM server with a caption endpoint of
+its own, and <code>video</code> goes to an OpenAI-compatible endpoint as a batch of frames.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

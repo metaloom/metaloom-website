@@ -247,6 +247,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server is distributed as the &lt;code&gt;metaloom/loom-server&lt;/code&gt; image (JVM and &lt;code&gt;-native&lt;/code&gt; variants). For a&#xA;zero-config first run, use the all-in-one &lt;code&gt;metaloom/loom-demo&lt;/code&gt; image instead — see&#xA;&lt;a href=&#34;../../getting-started/&#34;&gt;Getting Started&lt;/a&gt;. The full image list is on &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Content Guard</title>
+      <link>https://metaloom.io/docs/nodes/guard/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/guard/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The guard node &lt;strong&gt;screens your content against a harm taxonomy and gives you a yes/no answer with a&#xA;confidence score behind it&lt;/strong&gt;. Connect text to it — a &lt;a href=&#34;../whisper/&#34;&gt;Whisper&lt;/a&gt; transcript,&#xA;&lt;a href=&#34;../tika/&#34;&gt;Tika&lt;/a&gt; document content, an &lt;a href=&#34;../ocr/&#34;&gt;OCR&lt;/a&gt; result, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt; —&#xA;or point it at image assets, and every item comes back labelled &lt;code&gt;safe&lt;/code&gt; or &lt;code&gt;unsafe&lt;/code&gt;, with the harm&#xA;categories that fired and how sure the model was.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Deduplication</title>
       <link>https://metaloom.io/docs/nodes/dedup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

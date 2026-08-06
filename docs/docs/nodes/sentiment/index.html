@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -558,6 +562,27 @@ draw a connection instead. A PDF pipeline wires <a href="../tika/">Tika</a>&#39;
 pipeline wires <a href="../ocr/">OCR</a>&#39;s <code>text</code>, and a photo pipeline wires
 <a href="../captioning/">captioning</a>&#39;s <code>caption</code>. Wanting all three in one pipeline means one sentiment
 node per source, each with its own row.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run over a German complaint — <em>&#34;Wir haben die Lieferung heute erhalten,
+aber zwei Kartons waren beschädigt&#34;</em> — at the shipped <code>language: auto</code>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The sentiment node after a run" width="with the label" height="score and full result it emitted"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The strip lists what each output port carried — <code>label</code>, <code>score</code>, <code>result</code>. The interesting part is
+in <code>result</code>: the sidecar detected <code>de</code> and routed to the German checkpoint on its own, which is what
+<code>auto</code> buys you. The same text scored by an English model would be a different number about a
+sentence it did not understand.</p>
 </div>
 </div>
 </div>

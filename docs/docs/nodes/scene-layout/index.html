@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -635,6 +639,28 @@ actually support. You can make it bolder or more cautious with <code>depthZThres
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run over a single frame of a café conversation, with a real depth map
+from <a href="../depthmap/">Depthmap</a> on one port and real boxes from <a href="../facedetect/">Facedetect</a> on
+the other — both measured against that same frame.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The scene-layout node after a run" width="reporting two objects and four relations"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Two faces in, four relations out. The <code>result</code> port carries them in full: the man is nearer the
+camera than the woman, so the solver reports <code>IN_FRONT_OF</code> and <code>BEHIND</code> from the depth difference and
+<code>LEFT_OF</code> / <code>RIGHT_OF</code> from the boxes. <code>object_count</code> and <code>relation_count</code> are the same answer as
+numbers, for a downstream node that only needs to know whether there was anything to relate.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

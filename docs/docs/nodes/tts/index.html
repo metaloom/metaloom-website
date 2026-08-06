@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -514,6 +518,26 @@ small HTTP sidecar, so the node stays a pure client and needs no model runtime o
 <div class="paragraph">
 <p>Nothing configures where the words come from — connect a port to <code>text</code> and the node speaks whatever
 arrives on it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run at the shipped <code>language: de</code> / <code>voice: Jakob</code>, speaking the German
+transcript that <a href="../translate/">Translate</a> and <a href="../sentiment/">Sentiment</a> also work on.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The TTS node after a run" width="showing the WAV it wrote and the flag recording how it finished"/>
+</div>
+</div>
+<div class="paragraph">
+<p><code>audio</code> carries the path of the WAV in the worker’s local cache and <code>flag</code> records how the node
+finished. The audio itself is not uploaded anywhere yet — the bytes live beside the worker, exactly
+as <a href="../thumbnail/">Thumbnail</a> leaves its contact sheet.</p>
 </div>
 </div>
 </div>

@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -471,6 +475,12 @@ sampling frames at a configurable rate and running detection on each sample.</p>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The Object Detection settings panel: Model Path" width="Labels Path" height="Use GPU"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;"/>
@@ -517,6 +527,37 @@ sampling frames at a configurable rate and running detection on each sample.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of <code>YOLOv11n_voc.onnx</code> over <code>pexels-jack-sparrow-5977265.mp4</code> at the
+shipped <code>videoChopRate: 25</code> — every 25th frame of a 326-frame clip.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The objectdetect node after a run" width="reporting 33 detections across the sampled frames"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Four ports. <code>detections</code> carries one element per box, <code>labels</code> the distinct class names it saw
+(<code>person</code>, <code>bottle</code>), <code>object_count</code> the total, and <code>flag</code> how the node finished. Opening
+<code>detections</code> shows every box with the frame it was measured on:</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug-detail.png" alt="The detections opened from the card - a table of label" width="confidence" height="box and frame"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>frame</code> column is what makes those boxes usable. Detection ran on 13 of the clip’s 326 frames, so
+the boxes belong to thirteen different moments and only the ones sharing a frame number describe the
+same picture — the same sampling the
+<a href="../../pipeline/#detections-over-time">detection player</a> on the pipeline page animates.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -560,6 +564,25 @@ in the same pipeline.</p>
 <div class="paragraph">
 <p>Configured with no prompts the node falls back to the olmOCR preset, so pointing <code>endpointUrl</code> at a
 running olmOCR server is enough to get document transcription.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run over a scanned page, with one prompt configured — <code>transcription</code> —
+asking the model to transcribe what it can see.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The VLM node after a run" width="with the page transcription it emitted"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The port is named after the prompt: configure two prompts and you get two ports. This run went to a
+locally served Qwen2.5-VL; the page it read is German, and nothing in the prompt said so.</p>
 </div>
 </div>
 </div>

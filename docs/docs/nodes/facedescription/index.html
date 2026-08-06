@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -482,6 +486,27 @@ describe and no model call is made.</p>
 <div class="paragraph">
 <p>Uses the model-service connection shared with the LLM/captioning family. There is nothing to
 configure about where the faces come from — connect the <code>detections</code> port and the node follows it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run over a frame with two people in it, fed the boxes
+<a href="../facedetect/">Facedetect</a> found in that same frame.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The facedescription node after a run" width="with one description per incoming face"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Two boxes in, two descriptions out, aligned by element index — that alignment is why a face that
+cannot be described still emits an empty document rather than being skipped. Each description is the
+JSON the prompt asks for: eye state, mouth state, an age estimate, whether the face is frontal or in
+profile.</p>
 </div>
 </div>
 </div>

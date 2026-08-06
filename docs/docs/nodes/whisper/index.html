@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -517,22 +521,18 @@ summarized.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
-card itself — for this node, the transcript and the segments it was cut into.</p>
+card itself — for this node, the transcript and the segments it was cut into. Below is a real run of
+<code>ggml-large-v3-turbo</code> over a recording of a speech.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tbody><tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-There is no screenshot of that here yet. MetaLoom ships no model weights, and
-no Whisper model is present on the machine that builds these pictures, so this is the one
-node page whose debug view is taken from a real run of nothing. Every other picture on these pages
-comes from an actual run, and we would rather leave a gap than draw one.
-</td>
-</tr>
-</tbody></table>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The whisper node after a run" width="with the start of the transcript it produced"/>
+</div>
+</div>
+<div class="paragraph">
+<p>One port, one document. <code>transcript</code> carries the segments as JSON — each with its text and its time
+span — so a downstream <a href="../script/">Script</a> node can cut chapters out of it and
+<a href="../translate/">Translate</a> can take the prose.</p>
 </div>
 </div>
 </div>

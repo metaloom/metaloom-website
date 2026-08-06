@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -540,6 +544,45 @@ model runtime of its own. The shipped sidecar serves <strong>LTX-2</strong>, whi
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run in <code>ANIMATE</code> mode over <code>pexels-photo-2379005.jpeg</code>, prompted for
+<em>&#34;the man turns his head slowly towards the camera and smiles&#34;</em> — 49 frames at 768×512, the shipped
+defaults, at 20 steps.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The videogen node after a run" width="showing the MP4 it wrote and the flag recording how it finished"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Two ports: <code>video</code> carries the path of the MP4 in the worker’s local cache and <code>flag</code> records how the
+node finished. Unlike <a href="../imagegen/">Imagegen</a>, the card shows the path rather than the result —
+the debugging view previews images, and a video artifact has no still to show.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The clip has <strong>sound</strong>. LTX-2 returns synchronised audio from the same forward pass and the
+sidecar muxes both into the MP4, so what lands on the <code>video</code> port is a 49-frame H.264 stream with an
+AAC track beside it — not a silent animation.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p><code>ANIMATE</code> is the mode worth photographing: <code>GENERATE</code>, the shipped default, never reads the incoming
+media and answers from the prompt alone.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

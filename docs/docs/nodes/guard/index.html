@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Content Guard | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="The guard node screens your content against a harm taxonomy and gives you a yes/no answer with a confidence score behind it. Connect text to it — a Whisper transcript, Tika document content, an OCR …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/guard/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Content Guard | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/guard/">
+    <meta property="og:description" content="The guard node screens your content against a harm taxonomy and gives you a yes/no answer with a confidence score behind it. Connect text to it — a Whisper transcript, Tika document content, an OCR …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Content Guard">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Content Guard | MetaLoom">
+    <meta name="twitter:description" content="The guard node screens your content against a harm taxonomy and gives you a yes/no answer with a confidence score behind it. Connect text to it — a Whisper transcript, Tika document content, an OCR …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Content Guard">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+<nav class="docs-topics" aria-label="Documentation topics">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/" class="is-current">Nodes</a>
+			
+			<ul class="docs-subtopics">
+				
+				<li>
+					<a href="/docs/nodes/metadata/">Asset Metadata</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/captioning/">Captioning</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/consistency/">Consistency</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/guard/" class="is-current" aria-current="page">Content Guard</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/dedup/">Deduplication</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/depthmap/">Depth Map</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/dominant-color/">Dominant Colour</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/facedescription/">Face Description</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/facedetect/">Face Detection</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/filesystem-source/">Filesystem Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/filter/">Filter</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/fingerprint/">Fingerprint</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/gdrive-source/">Google Drive Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/hash/">Hashing</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/imagegen/">Image Generation</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/image-manipulation/">Image Manipulation</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/llm/">LLM Enrichment</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/objectdetect/">Object Detection</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/ocr/">OCR</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/onedrive-source/">OneDrive Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/quality/">Quality</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/s3-sink/">S3 Sink</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/s3-source/">S3 Source</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/scene-detection/">Scene Detection</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/scene-layout/">Scene Layout</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/script/">Script</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/sentiment/">Sentiment Analysis</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/whisper/">Speech-to-Text (Whisper)</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/tag/">Tag</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/tts/">Text-to-Speech (TTS)</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/thumbnail/">Thumbnail</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/tika/">Tika</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/translate/">Translate</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/videogen/">Video Generation</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/vlm/">VLM</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/watermark/">Watermark</a>
+				</li>
+				
+			</ul>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/">Loom</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/">Cortex</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Nodes</p>
+          <h1>Content Guard</h1>
+          
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>The guard node <strong>screens your content against a harm taxonomy and gives you a yes/no answer with a
+confidence score behind it</strong>. Connect text to it — a <a href="../whisper/">Whisper</a> transcript,
+<a href="../tika/">Tika</a> document content, an <a href="../ocr/">OCR</a> result, a <a href="../captioning/">caption</a> —
+or point it at image assets, and every item comes back labelled <code>safe</code> or <code>unsafe</code>, with the harm
+categories that fired and how sure the model was.</p>
+</div>
+<div class="paragraph">
+<p>The <code>safe</code> output is a <strong>branch</strong>. Connect a node behind it and that node runs only for the items
+that came back clean, so a publishing step, an S3 upload or a tagging pass can be gated on the
+verdict without a <a href="../filter/">filter</a> node in between.</p>
+</div>
+<div class="paragraph">
+<p>Three families of open guardrail model are supported behind this one node — Meta’s Llama Guard,
+Google’s ShieldGemma and IBM’s Granite Guardian. They disagree about almost everything: how many
+questions they answer per item, what they call each kind of harm, even how many categories exist.
+The node normalises all of it, so <strong>swapping the model does not mean rewiring the pipeline</strong>.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;guard&#34;,&#34;applies&#34;:&#34;Any asset with upstream text; image assets on a multimodal model&#34;,&#34;badge&#34;:&#34;Guardrail model&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType guard, one verdict per asset)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;screening a transcript&#34;,&#34;note&#34;:&#34;the whisper transcript port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here speech transcribed by Whisper&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;safe&#34;,&#34;d&#34;:&#34;the branch: nodes connected here run only for items that came back clean&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;label&#34;,&#34;d&#34;:&#34;safe or unsafe&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;score&#34;,&#34;d&#34;:&#34;how confident the model is that this is unsafe, from 0 to 1&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;categories&#34;,&#34;many&#34;:true,&#34;d&#34;:&#34;the harm categories that fired, one element each&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the full verdict: score, threshold, per-category scores and the model’s raw answer&#34;}]},{&#34;name&#34;:&#34;screening pictures&#34;,&#34;note&#34;:&#34;an image asset, on a multimodal model&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;ct&#34;:&#34;media/image&#34;,&#34;d&#34;:&#34;the picture itself&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;boolean&#34;,&#34;l&#34;:&#34;safe&#34;,&#34;d&#34;:&#34;the branch: nodes connected here run only for items that came back clean&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;label&#34;,&#34;d&#34;:&#34;safe or unsafe&#34;},{&#34;t&#34;:&#34;number&#34;,&#34;l&#34;:&#34;score&#34;,&#34;d&#34;:&#34;how confident the model is that this is unsafe, from 0 to 1&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;categories&#34;,&#34;many&#34;:true,&#34;d&#34;:&#34;the harm categories that fired, one element each&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the full verdict: score, threshold, per-category scores and the model’s raw answer&#34;}]}]}"></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>guard</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any asset with text connected; image assets when the configured model can read pictures</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code> — accepts any text type, so a transcript, a document body, an OCR result or a caption can all be wired into it. <code>media</code> — the picture itself, for an image asset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>safe</code> (Branch), <code>label</code> (String), <code>score</code> (Number), <code>categories</code> (String, one per flagged category), <code>result</code> (the structure below)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An <strong>OpenAI-compatible endpoint</strong> serving one of the supported guardrail models</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> — one verdict per asset</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect1">
+<h2 id="_what_it_produces">What it produces</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;safe&#34;: false,
+  &#34;score&#34;: 0.6466,
+  &#34;threshold&#34;: 0.5,
+  &#34;family&#34;: &#34;LLAMA_GUARD_3&#34;,
+  &#34;model&#34;: &#34;meta-llama/Llama-Guard-3-8B&#34;,
+  &#34;subject&#34;: &#34;text&#34;,
+  &#34;categories&#34;: [
+    {
+      &#34;canonical&#34;: &#34;VIOLENT_CRIME&#34;,
+      &#34;native&#34;: &#34;S1&#34;,
+      &#34;label&#34;: &#34;Violent Crimes&#34;,
+      &#34;score&#34;: 0.6466
+    }
+  ],
+  &#34;raw&#34;: &#34;unsafe\nS1&#34;,
+  &#34;probes&#34;: 1,
+  &#34;scoreExact&#34;: true,
+  &#34;textChars&#34;: 183
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That is a real verdict, from the run the screenshots on this page were taken of: a delivery
+complaint that ends in a threat, screened by Llama Guard 3. <code>score</code> is the probability that the item
+is unsafe, and it means the same thing whichever model produced it. <code>safe</code> is simply
+<code>score &lt; threshold</code> — note how close 0.65 is to the default 0.5, which is why the threshold is worth
+tuning against your own content rather than left at the default.</p>
+</div>
+<div class="paragraph">
+<p>Each flagged category is reported twice on purpose. <code>canonical</code> is MetaLoom’s own name for that kind
+of harm and is the same word whichever model you run; <code>native</code> is the model’s own code, kept so you
+can trace a verdict back to the model card without guesswork.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_one_node_three_families_of_model">One node, three families of model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pick the family in the node’s settings. It selects the prompt format, the list of harm categories,
+and — the part you will feel — how much work one verdict costs.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3335%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Family</th>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Categories</th>
+<th class="tableblock halign-left valign-top">Cost per item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Llama Guard 3</strong> (Meta)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LLAMA_GUARD_3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14 hazards, from violent crime to election interference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One</strong> model call, whatever you select</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Llama Guard 4</strong> (Meta)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LLAMA_GUARD_4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same 14 minus code-interpreter abuse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One</strong> model call. Reads pictures as well as text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ShieldGemma</strong> (Google)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SHIELDGEMMA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 policies: dangerous content, harassment, hate speech, sexually explicit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One call <strong>per category</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ShieldGemma 2</strong> (Google)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SHIELDGEMMA_2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 image policies: sexually explicit, violence &amp; gore, dangerous content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One call <strong>per category</strong>. Pictures only</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Granite Guardian</strong> (IBM)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GRANITE_GUARDIAN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9 risks, including jailbreak attempts and unethical behaviour that the other two have no word for</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One call <strong>per category</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The difference in cost is real and worth planning around. Llama Guard asks the model a single
+question covering its whole taxonomy, so screening a million assets costs a million calls.
+ShieldGemma and Granite Guardian ask one yes/no question per category, so leaving all nine Granite
+risks switched on costs nine million. What you buy for that is a genuinely independent score per
+category, rather than one number covering everything the model flagged.</p>
+</div>
+<div class="paragraph">
+<p><strong>Narrowing the <code>categories</code> setting is therefore a throughput decision</strong>, not just a policy one. If
+you only care about sexual content and violence, selecting those two makes the node four times
+faster on ShieldGemma. It makes no difference at all on Llama Guard.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_categories_all_three_models_agree_on">The categories all three models agree on</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whichever family you run, a flagged item is reported in one shared vocabulary. That is what lets you
+connect <code>categories</code> to a <a href="../tag/">tag</a> node, or route on a specific kind of harm, and keep the
+pipeline working after you change models.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category</th>
+<th class="tableblock halign-left valign-top">Reached from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VIOLENT_CRIME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S1</code>, ShieldGemma 2 <code>violence_gore</code>, Granite <code>violence</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NON_VIOLENT_CRIME</code>, <code>SEX_CRIME</code>, <code>CHILD_EXPLOITATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S2</code>, <code>S3</code>, <code>S4</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DEFAMATION</code>, <code>SPECIALIZED_ADVICE</code>, <code>PRIVACY</code>, <code>INTELLECTUAL_PROPERTY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S5</code>–<code>S8</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INDISCRIMINATE_WEAPONS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S9</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S10</code>, ShieldGemma <code>hate_speech</code>, Granite <code>social_bias</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SELF_HARM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S11</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SEXUAL_CONTENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S12</code>, ShieldGemma <code>sexually_explicit</code>, Granite <code>sexual_content</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ELECTIONS</code>, <code>CODE_INTERPRETER_ABUSE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Llama Guard <code>S13</code>, <code>S14</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HARASSMENT</code>, <code>DANGEROUS_CONTENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ShieldGemma <code>harassment</code>, <code>dangerous_content</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PROFANITY</code>, <code>UNETHICAL_BEHAVIOUR</code>, <code>JAILBREAK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Granite Guardian <code>profanity</code>, <code>unethical_behavior</code>, <code>jailbreak</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OTHER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Granite Guardian’s general <code>harm</code> criterion, and any code a newer model revision introduces that
+  this release does not recognise yet</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_screening_pictures">Screening pictures</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Two of the five models read images: <strong>Llama Guard 4</strong> and <strong>ShieldGemma 2</strong>. Point the node at either
+one and image assets are classified from their pixels — no captioning step in between.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Image screening needs vLLM, not llama.cpp.</strong> llama.cpp cannot serve either multimodal guard model
+today: no vision projector has been published for Llama Guard 4, and ShieldGemma 2 has no llama.cpp
+conversion at all. Text screening works on llama.cpp with all five.</p>
+</div>
+<div class="paragraph">
+<p>If an image asset reaches a text-only model with nothing connected to <code>text</code>, the node <strong>fails that
+item</strong> rather than passing it. A content guard that quietly waves through everything it cannot read
+is worse than one that stops and tells you.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>You can also connect text <strong>and</strong> run on image assets at the same time — a caption plus the picture it
+describes, say. Both are screened and the node reports the worse of the two, which is the reading you
+want from a gate.</p>
+</div>
+<div class="paragraph">
+<p>If you would rather screen pictures with a text-only model, put <a href="../captioning/">captioning</a> or
+<a href="../vlm/">VLM</a> in front of the guard and connect its output to <code>text</code>. You are then screening the
+description rather than the image, which catches less — but it runs anywhere.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gating_a_branch_on_the_verdict">Gating a branch on the verdict</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>safe</code> is a branch, so anything connected behind it runs only for items that passed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;nodes&#34;: [
+    { &#34;id&#34;: &#34;source&#34;,  &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Incoming&#34;,
+      &#34;options&#34;: { &#34;path&#34;: &#34;/media/incoming&#34; } },
+    { &#34;id&#34;: &#34;extract&#34;, &#34;type&#34;: &#34;tika&#34;,  &#34;name&#34;: &#34;Extract text&#34; },
+    { &#34;id&#34;: &#34;guard&#34;,   &#34;type&#34;: &#34;guard&#34;, &#34;name&#34;: &#34;Screen content&#34;,
+      &#34;options&#34;: { &#34;family&#34;: &#34;LLAMA_GUARD_3&#34;, &#34;threshold&#34;: 0.6 } },
+    { &#34;id&#34;: &#34;publish&#34;, &#34;type&#34;: &#34;s3-sink&#34;, &#34;name&#34;: &#34;Publish to the public bucket&#34; }
+  ],
+  &#34;edges&#34;: [
+    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;,  &#34;sourcePort&#34;: &#34;media&#34;,
+      &#34;target&#34;: &#34;extract&#34;, &#34;targetPort&#34;: &#34;media&#34; },
+    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;extract&#34;, &#34;sourcePort&#34;: &#34;content&#34;,
+      &#34;target&#34;: &#34;guard&#34;,   &#34;targetPort&#34;: &#34;text&#34; },
+    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;guard&#34;,   &#34;sourcePort&#34;: &#34;safe&#34;,
+      &#34;target&#34;: &#34;publish&#34;, &#34;targetPort&#34;: &#34;media&#34; }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A flagged asset simply does not reach <code>publish</code>. It is still fully processed and its verdict is still
+stored, so nothing is lost — you can find every flagged asset afterwards and review it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -s -H &#34;Authorization: Bearer $TOKEN&#34; \
+  &#34;$LOOM/api/v1/assets/$ASSET/json-comps&#34; \
+  | jq &#39;.data[] | select(.schemaType == &#34;guard&#34;) | .data | {safe, score, categories}&#39;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Connecting <code>categories</code> to a <a href="../tag/">tag</a> node instead of gating gives you the softer version:
+nothing is blocked, but every flagged asset is searchable by the kind of harm that was found.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_choosing_a_threshold">Choosing a threshold</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>threshold</code> is the score at which an item is flagged, and the default of <code>0.5</code> is a starting point
+rather than a recommendation. Lower it to catch more and review more; raise it to flag only what the
+model is confident about.</p>
+</div>
+<div class="paragraph">
+<p>Run the node over a representative sample first and look at the <code>score</code> values it produces. A
+threshold picked from your own content is worth far more than one picked from a model card, because
+where the scores fall depends on what you are screening.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Watch for <code>&#34;scoreExact&#34;: false</code> in the stored verdict.</strong> All three families report their confidence
+as a probability, and the node reads it directly from the model. Some backends do not return that
+information at all — when that happens the node falls back to the model’s plain yes/no answer, scores
+it <code>1.0</code> or <code>0.0</code>, and marks the verdict inexact. Everything still works, but <code>threshold</code> has nothing
+meaningful left to compare against, so tuning it stops having any effect. If you see this, check that
+your endpoint supports returning token probabilities.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="config.png" alt="The Content Guard settings panel: Model Family" width="Model" height="Categories"/>
+</div>
+<div class="title">Figure 1. The node’s settings in the pipeline editor</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>family</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which guardrail model you are running (default <code>LLAMA_GUARD_3</code>). Selects the prompt format, the categories and the cost per item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>model</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The model id to select on the endpoint (default <code>meta-llama/Llama-Guard-3-8B</code>). Recorded with every verdict</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>categories</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The harm categories to check, using the selected family’s own codes. Leave empty to check all of them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>threshold</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The score at or above which an item is flagged (default <code>0.5</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxChars</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on the text sent to the model; longer input is truncated (default <code>8000</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxImageDim</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Longest side an image is scaled down to before it is sent (default <code>1024</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>openaiUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the OpenAI-compatible backend (default <code>http://127.0.0.1:8080/v1</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>contextWindow</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tokens the model is told it may use for one call (default <code>2048</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apiKey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer token for the endpoint. Leave empty for a local backend</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>promptTemplate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replaces the family’s built-in prompt. Leave empty unless you have a reason not to — see below</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>There is no option naming where the text comes from: the <code>text</code> port accepts any text type, so you
+draw a connection instead.</p>
+</div>
+<div class="paragraph">
+<p><code>categories</code> is a comma-separated list and must use the codes of the family you selected — <code>S1, S12</code>
+for Llama Guard, <code>hate_speech, sexually_explicit</code> for ShieldGemma, <code>violence, jailbreak</code> for Granite
+Guardian. Pick from the wrong family and the node tells you so, and names the ones it does accept.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Leave <code>promptTemplate</code> alone unless you have measured the alternative.</strong> These are classifiers, not
+chat models: each one was tuned against one specific wording, and rewriting it changes the answers in
+ways that are not obvious from reading the output. The option exists so you can adapt to a new model
+revision before MetaLoom ships support for it — not as a policy knob. To change <strong>what</strong> is screened,
+use <code>categories</code>.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over the shared delivery-complaint transcript, escalated
+into a threat — screened by Llama Guard 3.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The guard node after a run: safe false" width="label unsafe" height="score 0.6466"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The strip on the card lists what each output port carried. Opening the <code>result</code> port shows the
+verdict as a table: the score, the threshold, and every category that fired with its own confidence.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_licensing">Licensing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All five models are third-party weights you provide and operate — MetaLoom ships none of them. Llama
+Guard carries Meta’s Llama Community License, ShieldGemma the Gemma Terms of Use, and Granite
+Guardian is Apache-2.0. See <a href="../../legal/model-licenses/">Model Licenses</a> before you deploy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also">See also</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../filter/">Filter</a> — route items several ways rather than gating one branch</p>
+</li>
+<li>
+<p><a href="../tag/">Tag</a> — make the flagged categories searchable instead of blocking the asset</p>
+</li>
+<li>
+<p><a href="../sentiment/">Sentiment</a> — the other node that scores upstream text</p>
+</li>
+<li>
+<p><a href="../../legal/model-licenses/">Model Licenses</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

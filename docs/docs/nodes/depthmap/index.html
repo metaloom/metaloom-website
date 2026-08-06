@@ -204,6 +204,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/guard/">Content Guard</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/dedup/">Deduplication</a>
 				</li>
 				
@@ -569,6 +573,31 @@ need actual metres, switch to metric mode and read <code>metric.min_m</code> / <
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_it_run">Seeing it run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
+card itself. Below is a real run of this node over <code>pexels-photo-2379005.jpeg</code>, a portrait taken
+against a wall — a subject with an obvious near thing and an obvious far thing behind it.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="debug.png" alt="The depthmap node after a run" width="showing the depth map it produced and the metadata describing it"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>map</code> port carries an artifact, so the card shows it rather than its path: the head is bright
+because bright means <strong>near</strong>. <code>meta</code> carries the model, the map’s dimensions and the quantiles a
+consumer needs to read those greys; <code>flag</code> records how the node finished.</p>
+</div>
+<div class="imageblock ml-panel-shot">
+<div class="content">
+<img src="debug-detail.png" alt="The depth map opened from the card - a 16-bit grayscale estimate of the portrait"/>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
