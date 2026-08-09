@@ -75,6 +75,14 @@
 
 
 
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
 <section class="sticky-top navigation">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-dark">
@@ -145,18 +153,20 @@
 				</ul>
 
 				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+</form>
+
+
+				
 			</div>
 		</nav>
 	</div>
 </section>
-
-
-<script>
-  document.documentElement.classList.add('docs-search-js');
-  setTimeout(function () {
-    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
-  }, 2500);
-</script>
 
 
 
@@ -169,15 +179,6 @@
       
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
-          
-
-
-<form class="docs-search docs-search-rail" data-docs-search role="search" action="">
-	<label class="sr-only" for="docs-search-rail">Search the documentation</label>
-	<input type="search" id="docs-search-rail" class="docs-search-input" placeholder="Search the docs…">
-	<span class="docs-search-hint" aria-hidden="true">/</span>
-</form>
-
           
 
 
@@ -459,18 +460,6 @@
       
 
       <div class="col-lg-9">
-        
-        
-        <div class="d-lg-none">
-
-
-<form class="docs-search docs-search-narrow" data-docs-search role="search" action="">
-	<label class="sr-only" for="docs-search-narrow">Search the documentation</label>
-	<input type="search" id="docs-search-narrow" class="docs-search-input" placeholder="Search the docs…">
-	<span class="docs-search-hint" aria-hidden="true">/</span>
-</form>
-</div>
-        
         <header class="page-head">
           
           
@@ -479,8 +468,6 @@
           <h1>Nodes</h1>
           
         </header>
-
-        
 
         <div class="post-single-content docs-content docs-main-content">
           <div class="paragraph">
@@ -1152,14 +1139,6 @@ and the build and run commands.</p>
   </div>
 </section>
 
-
-<script src="/js/docs-search.min.0e9326b5ebdc33c20f80b41ad58a22fc781a28b2e113755f89be07449a0962cea037c0175f55f6a22c6e544fb5c968f5.js" integrity="sha384-DpMmtevcM8IPgLQa1Yoi/HgaKLLhE3Vfib4HRJoJYs6gN8AXX1X2oixuVE&#43;1yWj1" defer
-	data-search-index-url="/search/docs-index.json"
-	data-search-vectors-url="/search/docs-vectors.bin"
-	data-search-model-url="/plugins/ternlight/tern_engine.js"
-	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
-
-
   </div><!-- Footer -->
 
 <footer id="footer" class="site-footer">
@@ -1283,6 +1262,16 @@ and the build and run commands.</p>
 <!-- Main Script -->
 
 <script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.7592a1cdd3d3dc2a189674df22ca017dbbf2e6d9e5cc8b41f7cbee7a3fc2ca9cdfc2659845ffad0e68abaa0785d2e20f.js" integrity="sha384-dZKhzdPT3CoYlnTfIsoBfbvy5tnlzItB98vuej/CypzfwmWYRf&#43;tDmirqgeF0uIP" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
 
 <!-- Highlight Script -->
 <link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
