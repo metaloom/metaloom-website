@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Translate | MetaLoom</title>
+	<title>Move | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The translate node turns text your pipeline has already produced into another language. Like sentiment it never looks at the media itself: it has a single text input port that accepts any text type, …">
+	<meta name="description" content="Every media library eventually needs to put a file somewhere else. Duplicates you have reviewed should leave the working set. Material flagged for disposal should go to a trash folder you can still …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/nodes/translate/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/move/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Translate | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/translate/">
-    <meta property="og:description" content="The translate node turns text your pipeline has already produced into another language. Like sentiment it never looks at the media itself: it has a single text input port that accepts any text type, …">
+    <meta property="og:title" content="Move | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/move/">
+    <meta property="og:description" content="Every media library eventually needs to put a file somewhere else. Duplicates you have reviewed should leave the working set. Material flagged for disposal should go to a trash folder you can still …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Translate">
+    <meta property="og:image:alt" content="Move">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Translate | MetaLoom">
-    <meta name="twitter:description" content="The translate node turns text your pipeline has already produced into another language. Like sentiment it never looks at the media itself: it has a single text input port that accepts any text type, …">
+    <meta name="twitter:title" content="Move | MetaLoom">
+    <meta name="twitter:description" content="Every media library eventually needs to put a file somewhere else. Duplicates you have reviewed should leave the working set. Material flagged for disposal should go to a trash folder you can still …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Translate">
+    <meta name="twitter:image:alt" content="Move">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -264,7 +264,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/move/">Move</a>
+					<a href="/docs/nodes/move/" class="is-current" aria-current="page">Move</a>
 				</li>
 				
 				<li>
@@ -332,7 +332,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/translate/" class="is-current" aria-current="page">Translate</a>
+					<a href="/docs/nodes/translate/">Translate</a>
 				</li>
 				
 				<li>
@@ -442,23 +442,25 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Nodes</p>
-          <h1>Translate</h1>
+          <h1>Move</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The translate node <strong>turns text your pipeline has already produced into another language</strong>. Like
-<a href="../sentiment/">sentiment</a> it never looks at the media itself: it has a single <code>text</code> input port
-that accepts any text type, so a <a href="../whisper/">Whisper</a> transcript, <a href="../tika/">Tika</a> document
-content, an <a href="../ocr/">OCR</a> result or a <a href="../vlm/">VLM</a> answer can all be connected to it. What
-comes out is plain prose on a <code>translation</code> port, ready to be wired into <a href="../tts/">TTS</a> for
-narration or stored alongside the original.</p>
+<p>Every media library eventually needs to put a file somewhere else. Duplicates you have reviewed
+should leave the working set. Material flagged for disposal should go to a trash folder you can still
+look in tomorrow. Finished projects should move to cheaper storage. Until now none of that was a step
+you could draw into a pipeline — two nodes could move files, but only duplicates, and only into one
+folder set by whoever configured the worker.</p>
 </div>
 <div class="paragraph">
-<p>Translation runs on a language model you already operate — any OpenAI-compatible endpoint —
-so the node stays a pure client with no model runtime of its own.</p>
+<p>This node is that missing step. It relocates an asset’s file to a folder, a storage pool, a library,
+or an S3 bucket, and it records where the file went so the rest of the system keeps working.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;translate&#34;,&#34;applies&#34;:&#34;Any asset with upstream text&#34;,&#34;badge&#34;:&#34;Language model&#34;,&#34;persist&#34;:&#34;asset_json_comp (schemaType translation, one row per target language)&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;a transcript&#34;,&#34;note&#34;:&#34;the whisper transcript port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here speech transcribed by Whisper&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;translation&#34;,&#34;d&#34;:&#34;the translated prose, ready for TTS or storage&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;language&#34;,&#34;d&#34;:&#34;the language it was translated into&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the translation plus the languages, the model and how many chunks it took&#34;}]},{&#34;name&#34;:&#34;document text&#34;,&#34;note&#34;:&#34;the tika content port wired in&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;text&#34;,&#34;ct&#34;:&#34;text/*&#34;,&#34;d&#34;:&#34;whatever text you connect — here a document body extracted by Tika&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;text&#34;,&#34;l&#34;:&#34;translation&#34;,&#34;d&#34;:&#34;the translated prose, ready for TTS or storage&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;language&#34;,&#34;d&#34;:&#34;the language it was translated into&#34;},{&#34;t&#34;:&#34;json&#34;,&#34;l&#34;:&#34;result&#34;,&#34;d&#34;:&#34;the translation plus the languages, the model and how many chunks it took&#34;}]}]}"></div>
+<div class="paragraph">
+<p>It runs no model and needs nothing installed alongside it.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;move&#34;,&#34;applies&#34;:&#34;Any local file&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;asset_location (the binary record) plus a processing record&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;to a folder&#34;,&#34;note&#34;:&#34;the trash and quarantine case; needs nothing but a path&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item to relocate&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;moved&#34;,&#34;ct&#34;:&#34;scalar/boolean&#34;,&#34;d&#34;:&#34;whether the bytes actually went anywhere&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;path&#34;,&#34;d&#34;:&#34;where the file is now&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;MOVED, COPIED, ALREADY_THERE, SKIPPED, DRY_RUN or FAILED&#34;}]},{&#34;name&#34;:&#34;to storage or a bucket&#34;,&#34;note&#34;:&#34;the cold-tier case&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the item to relocate&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;moved&#34;,&#34;ct&#34;:&#34;scalar/boolean&#34;,&#34;d&#34;:&#34;whether the bytes actually went anywhere&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;path&#34;,&#34;d&#34;:&#34;an s3:// reference, or a path inside the pool&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;flag&#34;,&#34;d&#34;:&#34;how the node finished for this item&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -467,195 +469,222 @@ so the node stays a pure client with no model runtime of its own.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>translate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>move</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any asset (the text comes from an upstream node, not from the media)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any item whose file is on the worker</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code> — accepts any text type, so a transcript, a document body, an OCR result or a caption can all be wired into it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> — the item to relocate</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>translation</code> (Text), <code>language</code> (String), <code>result</code> (the structure below)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Languages</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whatever the configured model speaks; the target is named in plain words or as a language tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>moved</code> (Boolean), <code>path</code> (String), <code>flag</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An <strong>OpenAI-compatible endpoint</strong> serving the configured model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None for a folder. A connection to the server for a pool or a library. S3 credentials on the worker for a bucket</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_json_comp</code> — one row per target language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The asset’s binary record — its path, and its library and pool when you move it into one</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect1">
-<h2 id="_what_it_produces">What it produces</h2>
+<h2 id="_where_it_can_send_a_file">Where it can send a file</h2>
 <div class="sectionbody">
-<div class="listingblock">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A directory on the machine running the pipeline. The simplest target, and the only one that works when the server is unreachable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One of your configured storage pools. The file lands where the pool keeps its content, so the system can find it again.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The library’s storage, and the file is recorded as belonging to that library from then on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bucket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An S3 bucket named on the node. The one target that needs no shared filesystem at all, which is what makes it the cold-tier option.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Adding a file to a <strong>collection</strong> is a different node — see <a href="../assign/">Assign</a>. A collection is a
+grouping, not a place, so nothing is moved.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_will_not_overwrite_and_it_will_not_delete_by_accident">It will not overwrite, and it will not delete by accident</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Three deliberate refusals, because a file mover that gets these wrong destroys work that cannot be
+recovered.</p>
+</div>
+<div class="paragraph">
+<p><strong>It never overwrites.</strong> If something is already at the destination with the same name, the incoming
+file lands beside it as <code>clip_1.mp4</code>, or the item is skipped, or the step fails — whichever you chose.
+There is no &#34;overwrite&#34; setting, because a name collision in a trash folder is very often a
+completely different file that happens to share a name.</p>
+</div>
+<div class="paragraph">
+<p><strong>It only ever removes an original after checking the copy.</strong> Within one disk the file is renamed, so
+there is only ever one copy of it and nothing is deleted — the <code>flag</code> port reads <code>MOVED</code>. Across
+disks the bytes have to be written a second time, and there the node keeps the original by default
+and says so: the <code>flag</code> reads <code>COPIED</code>. Removing it is something you switch on, and even then it
+happens only after the destination has been checked to hold the same content.</p>
+</div>
+<div class="paragraph">
+<p><strong>It does not silently spend an hour copying.</strong> Moving a file within one disk is instant. Moving it
+to a different disk is a full copy of every byte, and for a 40 GB video that is a very different
+operation. The node works out which it would be <strong>before</strong> it starts, and by default declines the
+second one rather than surprising you with it. You can tell it to go ahead — it will, and it will say
+so in the log, naming both disks and the size.</p>
+</div>
+<div class="imageblock img-fluid">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  &#34;text&#34;: &#34;The customer service was a disaster.&#34;,
-  &#34;targetLanguage&#34;: &#34;en&#34;,
-  &#34;sourceLanguage&#34;: &#34;auto&#34;,
-  &#34;model&#34;: &#34;google/gemma-2-27b-it&#34;,
-  &#34;chunkCount&#34;: 3,
-  &#34;sourceChars&#34;: 18422,
-  &#34;translatedChars&#34;: 17980
-}</code></pre>
+<img src="verify-then-delete.svg" alt="The order of operations when a file crosses to another disk"/>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_one_node_one_language">One node, one language</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A translate node translates into exactly one language. For several languages, put several translate
-nodes in the pipeline and connect the same upstream text to each.</p>
-</div>
-<div class="paragraph">
-<p>That is not a limitation to work around — it is how the translations stay separately addressable.
-Each row is stored under its target language, so an asset can carry its English, German and French
-translations side by side and you can ask for the one you want:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -s -H &#34;Authorization: Bearer $TOKEN&#34; \
-  &#34;$LOOM/api/v1/assets/$ASSET/json-comps&#34; \
-  | jq &#39;.data[] | select(.schemaType == &#34;translation&#34; and .variant == &#34;en&#34;) | .data.text&#39;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Each node also runs independently, so a French model that is slow or unavailable does not hold up the
-English translation.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_long_documents">Long documents</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A feature-length transcript does not fit in a model’s context window, so the node splits it before
-sending it. The split is made at <strong>paragraph boundaries first, then sentence boundaries</strong> — never
-mid-sentence — and the answers are joined back together in order.</p>
-</div>
-<div class="paragraph">
-<p>This matters more than it may sound. A model handed half a sentence with no subject answers with half
-a sentence, and two such halves rejoined do not make a sentence in the target language. Splitting
-where a human translator would split is what keeps the output readable. <code>maxChunkChars</code> sets the
-budget per request; each chunk is one call to the model, so a longer document costs proportionally
-more.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configuration">Configuration</h2>
+<h2 id="_settings">Settings</h2>
 <div class="sectionbody">
 <div class="imageblock ml-panel-shot">
 <div class="content">
-<img src="config.png" alt="The Translate settings panel: Target Language" width="Source Language" height="Model and 5 more settings"/>
+<img src="config.png" alt="The Move settings panel: Target, Target Folder, Layout, On Conflict and 10 more settings"/>
 </div>
 <div class="title">Figure 1. The node’s settings in the pipeline editor</div>
 </div>
-<div class="paragraph">
-<p><code>TranslateNodeOptions</code>:</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;"/>
-<col style="width: 66.6667%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Option</th>
-<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>targetLanguage</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The language to translate into (default <code>en</code>). Also the key the result is stored under</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder, storage pool, library, or S3 bucket</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sourceLanguage</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The language of the input, or <code>auto</code> to let the model work it out (default <code>auto</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trash</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where a folder move puts the file. A relative path is relative to the scanned root</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>model</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The model asked to translate (default <code>google/gemma-2-27b-it</code>). Recorded with every result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Layout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mirror</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Flat</code> puts everything in one directory; <code>Mirror</code> keeps the folder structure the file already had; <code>Date</code> files it under year and month. Storage, library and bucket targets always use the system’s own layout so the file can be found again</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>openaiUrl</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base URL of the OpenAI-compatible backend (default <code>http://127.0.0.1:8080/v1</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a suffix</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a suffix, skip the item, or fail the step. Never overwrite</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>contextWindow</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tokens the model is told it may use for one call (default <code>2048</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Across disks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Skip</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Skip, copy, or fail when the destination is on another disk</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>promptTemplate</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The instruction sent with each chunk. Must contain <code>${text}</code>; <code>${targetLanguage}</code> and <code>${sourceLanguage}</code> are also filled in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Original file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep it, or remove it once the destination has been verified. Only applies to a copy across disks or to a bucket — a move within one disk is a rename, which leaves no original behind</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxChunkChars</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Longer input is split into chunks of this size (default <code>8000</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full checksum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full checksum, or size only. What has to match before the original may be removed</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxChars</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound on the total input text (default <code>200000</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update the record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record the new location on the asset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dry run</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Off</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Report what would happen and touch nothing</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_a_trash_workflow">Building a trash workflow</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>There is no option naming where the text comes from: the <code>text</code> port accepts any text type, so you
-draw a connection instead.</p>
+<p>The usual shape is three nodes: something decides, the filter routes, and this node acts.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Tag the assets you want gone — by hand in the review screen, or with a rule.</p>
+</li>
+<li>
+<p>Add a <a href="../filter/">Filter</a> node set to filter by tag, with a bucket for <code>trash</code>.</p>
+</li>
+<li>
+<p>Wire that bucket into this node’s <code>media</code> port, with the target folder you want.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Naming <code>sourceLanguage</code> when you know it is worth doing. <code>auto</code> is reliable on a paragraph of prose
-and much less so on a caption of six words, where a model can mistake one language for a closely
-related one.</p>
+<p>Start with <strong>Dry run</strong> switched on. You will see exactly which files would move and where, without
+anything being touched.</p>
+</div>
+<div class="paragraph">
+<p>The same three nodes build a quarantine workflow — only the tag and the destination change.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dubbing_translate_then_speak">Dubbing: translate, then speak</h2>
+<h2 id="_clearing_out_duplicates">Clearing out duplicates</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>translation</code> carries plain prose, and <a href="../tts/">TTS</a> accepts any text on its <code>text</code> port, so the
-two connect directly:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  &#34;nodes&#34;: [
-    { &#34;id&#34;: &#34;source&#34;,    &#34;type&#34;: &#34;filesystem-source&#34;, &#34;name&#34;: &#34;Video library&#34;,
-      &#34;options&#34;: { &#34;path&#34;: &#34;/media/video&#34; } },
-    { &#34;id&#34;: &#34;speech&#34;,    &#34;type&#34;: &#34;whisper&#34;,   &#34;name&#34;: &#34;Transcribe&#34;, &#34;timeoutMs&#34;: 3600000 },
-    { &#34;id&#34;: &#34;translate&#34;, &#34;type&#34;: &#34;translate&#34;, &#34;name&#34;: &#34;Translate to English&#34;,
-      &#34;options&#34;: { &#34;targetLanguage&#34;: &#34;en&#34; } },
-    { &#34;id&#34;: &#34;narrate&#34;,   &#34;type&#34;: &#34;tts&#34;,       &#34;name&#34;: &#34;Speak the translation&#34; }
-  ],
-  &#34;edges&#34;: [
-    { &#34;id&#34;: &#34;e1&#34;, &#34;source&#34;: &#34;source&#34;,    &#34;sourcePort&#34;: &#34;media&#34;,
-      &#34;target&#34;: &#34;speech&#34;,    &#34;targetPort&#34;: &#34;video&#34; },
-    { &#34;id&#34;: &#34;e2&#34;, &#34;source&#34;: &#34;speech&#34;,    &#34;sourcePort&#34;: &#34;transcript&#34;,
-      &#34;target&#34;: &#34;translate&#34;, &#34;targetPort&#34;: &#34;text&#34; },
-    { &#34;id&#34;: &#34;e3&#34;, &#34;source&#34;: &#34;translate&#34;, &#34;sourcePort&#34;: &#34;translation&#34;,
-      &#34;target&#34;: &#34;narrate&#34;,   &#34;targetPort&#34;: &#34;text&#34; }
-  ]
-}</code></pre>
-</div>
+<p><a href="../dedup/">Deduplication</a> finds duplicates and, for near-duplicates, waits for a person to confirm
+them. Those nodes no longer move anything themselves: they report their findings, and you wire that
+into this node. That way the destination, the conflict handling and whether the original survives are
+all visible in the pipeline instead of buried in a worker’s configuration.</p>
 </div>
 <div class="paragraph">
-<p>Set the TTS node’s own <code>language</code> to match the target language, or it will read English words with a
-German voice.</p>
+<p>Wire the <code>confirmed_dup</code> port of the dedup apply node into this node’s <code>media</code> port.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_gets_recorded">What gets recorded</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After a successful move the asset’s binary record points at the new location, and the asset’s file
+name is kept in step with it. A processing record notes what happened, so the run history shows the
+move alongside everything else that touched the asset.</p>
+</div>
+<div class="paragraph">
+<p>If the file moves to a bucket, the record holds an <code>s3://</code> reference and the file name is deliberately
+left alone — it is a local path, and pointing it at a bucket would break everything that reads it.</p>
 </div>
 </div>
 </div>
@@ -664,58 +693,41 @@ German voice.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
-card itself. Below is a real run of this node over <code>pexels-jack-sparrow-5977265.mp4</code>.</p>
+card itself. Below is a real run of this node, sending a photograph to a <code>trash</code> folder.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
-<img src="debug.png" alt="The translate node after a run" width="with the values it emitted on each port"/>
+<img src="debug.png" alt="The move node after a run, with the values it emitted on each port"/>
 </div>
 </div>
 <div class="paragraph">
-<p>The strip on the card lists what each output port carried — <code>translation</code>, <code>language</code>, <code>result</code>.</p>
+<p>The strip on the card lists what each output port carried — <code>moved</code>, <code>path</code>, <code>flag</code>. <code>path</code> is where
+the file is now, and it is the port to read when you need to know that; <code>flag</code> reads <code>MOVED</code> here
+because the destination was on the same disk, so relocating the file was a rename.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_cases">Use Cases</h2>
+<h2 id="_good_to_know">Good to know</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Subtitling and dubbing</strong> — translate a transcript, then speak it with <a href="../tts/">TTS</a>.</p>
+<p>A file already at its destination is reported as <code>ALREADY_THERE</code> and nothing happens, so re-running
+a pipeline over the same library is safe.</p>
 </li>
 <li>
-<p><strong>Multilingual search</strong> — translate every document into one common language so a single query
-reaches the whole library.</p>
+<p>Items that live in the cloud rather than on the worker are skipped. Their local copy is a cache, not
+the asset, and relocating a cache entry would be meaningless.</p>
 </li>
 <li>
-<p><strong>Cross-border archives</strong> — keep the original text and its translations on the same asset.</p>
+<p>Storage pools and libraries are configured on the server, so the machine running the pipeline needs
+to be able to reach the storage as well. If it cannot, the step fails and tells you which pool and
+which path — it will not quietly write the file somewhere the system will never look.</p>
 </li>
 <li>
-<p><strong>Accessibility</strong> — pair with <a href="../whisper/">Whisper</a> to give a foreign-language recording both a
-transcript and a translation.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_notes">Notes</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Translate prose, not JSON.</strong> An <a href="../llm/">LLM</a> prompt that returns a JSON document is typed
-<code>text/plain</code> just like a transcript is, so nothing stops you connecting it — but the model will
-translate the field names along with the values. Connect a prose port.</p>
-</li>
-<li>
-<p><strong>The model is recorded with every result</strong>, so a library translated across a model upgrade can
-still be told apart.</p>
-</li>
-<li>
-<p>Translation quality is the model’s, not the node’s. A larger model is usually the answer to
-disappointing output, ahead of rewriting the prompt.</p>
+<p>Cached checksums travel with the file, so moving an asset does not force everything downstream to
+read it again from scratch.</p>
 </li>
 </ul>
 </div>

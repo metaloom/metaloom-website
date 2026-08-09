@@ -2,35 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Artifacts | MetaLoom</title>
+	<title>Database Integrity | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Loom publishes JVM artifacts, a command line client and container deployment assets separately.
-Maven Artifacts See Maven Artifacts for the BOM and the primary client and shared model modules.">
+	<meta name="description" content="Loom keeps a catalogue: assets and the things said about them — tags, people, transcripts, tasks, comments, pipeline runs. Most of the rules that keep it coherent are enforced by the database itself, …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/artifacts/">
+<link rel="canonical" href="https://metaloom.io/docs/loom/database-integrity/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Artifacts | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/artifacts/">
-    <meta property="og:description" content="Loom publishes JVM artifacts, a command line client and container deployment assets separately.
-Maven Artifacts See Maven Artifacts for the BOM and the primary client and shared model modules.">
+    <meta property="og:title" content="Database Integrity | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/database-integrity/">
+    <meta property="og:description" content="Loom keeps a catalogue: assets and the things said about them — tags, people, transcripts, tasks, comments, pipeline runs. Most of the rules that keep it coherent are enforced by the database itself, …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Artifacts">
+    <meta property="og:image:alt" content="Database Integrity">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Artifacts | MetaLoom">
-    <meta name="twitter:description" content="Loom publishes JVM artifacts, a command line client and container deployment assets separately.
-Maven Artifacts See Maven Artifacts for the BOM and the primary client and shared model modules.">
+    <meta name="twitter:title" content="Database Integrity | MetaLoom">
+    <meta name="twitter:description" content="Loom keeps a catalogue: assets and the things said about them — tags, people, transcripts, tasks, comments, pipeline runs. Most of the rules that keep it coherent are enforced by the database itself, …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Artifacts">
+    <meta name="twitter:image:alt" content="Database Integrity">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -213,7 +210,7 @@ Maven Artifacts See Maven Artifacts for the BOM and the primary client and share
 			<ul class="docs-subtopics">
 				
 				<li>
-					<a href="/docs/loom/artifacts/" class="is-current" aria-current="page">Artifacts</a>
+					<a href="/docs/loom/artifacts/">Artifacts</a>
 				</li>
 				
 				<li>
@@ -237,7 +234,7 @@ Maven Artifacts See Maven Artifacts for the BOM and the primary client and share
 				</li>
 				
 				<li>
-					<a href="/docs/loom/database-integrity/">Database Integrity</a>
+					<a href="/docs/loom/database-integrity/" class="is-current" aria-current="page">Database Integrity</a>
 				</li>
 				
 				<li>
@@ -357,77 +354,167 @@ Maven Artifacts See Maven Artifacts for the BOM and the primary client and share
         
         <header class="page-head">
           <p class="page-eyebrow">Loom</p>
-          <h1>Artifacts</h1>
+          <h1>Database Integrity</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
-          <div class="paragraph">
-<p>Loom publishes JVM artifacts, a command line client and container deployment assets separately.</p>
-</div>
-<div class="sect1">
-<h2 id="_maven_artifacts">Maven Artifacts</h2>
+          <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>See <a href="../maven-artifacts/">Maven Artifacts</a> for the BOM and the primary client and shared model modules.</p>
+<p>Loom keeps a catalogue: assets and the things said about them — tags, people, transcripts, tasks,
+comments, pipeline runs. Most of the rules that keep it coherent are enforced by the database itself,
+which simply refuses anything that would break them. A handful cannot be, and this page is about
+those.</p>
+</div>
+<div class="paragraph">
+<p>Open <strong>Admin → Database Integrity</strong> and press <strong>Run checks</strong>. Nothing is changed by running it: the
+report reads, counts and reports, and never repairs.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_command_line_client">Command Line Client</h2>
+<h2 id="_when_to_use_it">When To Use It</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>metaloom</code> is the command line client for a Loom server. It ships in two forms from the same
-<code>io.metaloom.cli:metaloom-cli</code> module:</p>
+<p>The report is most useful when something has already gone slightly wrong and you want to know how far
+it spread. Good moments to run it:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>After importing a large batch of media, or after migrating a catalogue in from elsewhere.</p>
+</li>
+<li>
+<p>After restoring from a backup, or after any direct change to the database that did not go through
+Loom.</p>
+</li>
+<li>
+<p>After an upgrade, once the new version has been running for a while.</p>
+</li>
+<li>
+<p>When a screen shows a result that leads nowhere — a search hit that opens onto nothing, a task
+assigned to somebody who is gone.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Running it periodically on a healthy installation is fine too. On a catalogue of ordinary size it
+takes well under a second.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reading_the_report">Reading The Report</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A clean report says how many checks ran and that all of them passed. That second half matters: it is
+what tells you the answer is &#34;nothing is wrong&#34; rather than &#34;nothing was looked at&#34;.</p>
+</div>
+<div class="paragraph">
+<p>When something is found, each finding shows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Check</dt>
+<dd>
+<p>A stable identifier such as <code>DANGLING_SEARCH_DOCUMENT</code>. Quote this when asking for help; the
+wording next to it may change between versions, but the identifier will not.</p>
+</dd>
+<dt class="hdlist1">Where</dt>
+<dd>
+<p>The table and column the check looked at.</p>
+</dd>
+<dt class="hdlist1">Rows</dt>
+<dd>
+<p>How many records are affected.</p>
+</dd>
+<dt class="hdlist1">Severity</dt>
+<dd>
+<p><strong>Error</strong> means something the software will misread or fail on. <strong>Warning</strong> means something
+that looks wrong but that a person has to judge — a record with no name may simply be one nobody has
+named yet.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Expanding a row lists the identifiers of the affected records, up to a limit. When there are more
+than the list shows, it says so — the count above is always the complete figure.</p>
+</div>
+<div class="paragraph">
+<p>A check can also report <strong>Did not run</strong>. That is neither a pass nor a fail: it means the check itself
+could not complete, so nothing is known about the rule it covers. One check failing this way does not
+stop the others.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_checked">What Is Checked</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;"/>
-<col style="width: 40%;"/>
-<col style="width: 40%;"/>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Form</th>
-<th class="tableblock halign-left valign-top">Artifact</th>
-<th class="tableblock halign-left valign-top">Notes</th>
+<th class="tableblock halign-left valign-top">Group</th>
+<th class="tableblock halign-left valign-top">What it looks for</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Runnable JAR</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom-cli.jar</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Self-contained; needs a JVM. Built by <code>mvn -pl cli -am package</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dangling references</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A record pointing at something that has since been removed. Only a few kinds of reference can end
+  up this way; most are held in place by the database and cannot. The search index is the usual
+  suspect, because it is maintained separately from the records it describes.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Native binary</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metaloom</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No JVM required, ~30 MB, starts in single-digit milliseconds. Built by
-<code>cli/build-native.sh</code> with GraalVM 25.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamps</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records claiming to have been changed before they were created, dates from before the software
+  existed, or dates in the future. Usually a sign that something wrote to the database directly.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Missing values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A name or title that is required but blank. These are the fields shown as a record’s identity, so a
+  blank one produces something you can see but cannot refer to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unknown values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A field holding a value the software does not recognise — a status or a category outside the set it
+  knows. These are the findings most likely to produce an error when the record is next opened.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Row counts and constraints</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duplicates where there should be one record, and combinations of fields that should not be able to
+  occur together. The database prevents most of these; the check catches records that got in before
+  the rule did.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_it_does_not_do">What It Does Not Do</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>See <a href="../../cli/">Command Line</a> for usage.</p>
+<p>It does not repair anything. Every finding needs a decision — some are cosmetic, some mean data was
+lost, and a few are records that a person deliberately left incomplete. Automatic repair would have to
+guess which is which.</p>
+</div>
+<div class="paragraph">
+<p>It also does not check the media files themselves. Whether the bytes on disk are intact and readable
+is a separate question, answered by the consistency step in a processing pipeline.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_containers">Containers</h2>
+<h2 id="_permissions">Permissions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Loom ships as <code>metaloom/loom-server</code> (production) and <code>metaloom/loom-demo</code> (all-in-one). The AI agent’s
-coding sandbox additionally uses the <code>metaloom/loom-session-runner</code> image. See
-<a href="../containers/">Containers</a> for the Docker / Compose examples and <a href="../../deployment/">Container Images</a>
-for the full list. The agentic modules (<code>loom/agent/chat</code>, <code>loom/agent/memory</code>, <code>loom/agent/sandbox</code>)
-are part of the server image and require no separate artifact.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_helm_chart">Helm Chart</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>See <a href="../helm-chart/">Helm Chart</a> for the Kubernetes deployment entry point.</p>
+<p>Viewing the report requires the <strong>Database integrity</strong> permission, granted per role under
+<strong>Admin → Permissions</strong>. It is deliberately separate from the metrics permission: metrics are counters
+about how the instance is running, while this report names individual records, and so reveals
+something about what is stored.</p>
 </div>
 </div>
 </div>

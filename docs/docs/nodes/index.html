@@ -199,6 +199,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/assign/">Assign</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/captioning/">Captioning</a>
 				</li>
 				
@@ -260,6 +264,10 @@
 				
 				<li>
 					<a href="/docs/nodes/llm/">LLM Enrichment</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/move/">Move</a>
 				</li>
 				
 				<li>
@@ -751,6 +759,16 @@ covers both the type icons and the cardinality:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Upload produced files to an S3 bucket and register them as assets — its <code>artifacts</code> port takes <strong>many</strong></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="move/">Move</a> (<code>move</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any local file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relocate the file to a folder, a storage pool, a library or an S3 bucket — never overwriting, and only removing the original once the destination is verified</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="assign/">Assign</a> (<code>assign</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any known asset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add the asset to a collection or a library. Writes the membership only; it never touches the file</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -831,7 +849,7 @@ covers both the type icons and the cardinality:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S3-compatible object storage (AWS S3, MinIO, Ceph)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3-source</code>, <code>s3-sink</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3-source</code>, <code>s3-sink</code>, <code>move</code> (bucket target only)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Google Drive, OneDrive or SharePoint credentials</p></td>
@@ -865,6 +883,14 @@ covers both the type icons and the cardinality:</p>
 </div>
 <div class="dlist">
 <dl>
+<dt class="hdlist1">Relocation and disposal</dt>
+<dd>
+<p><a href="move/"><code>move</code></a> is the one node that changes where an asset’s bytes live — a trash folder, a
+storage pool, a library, or an S3 bucket for cold storage. It refuses to overwrite, works out whether
+a destination is on another disk <strong>before</strong> it starts copying, and only removes the original after the
+destination has been verified. <a href="assign/"><code>assign</code></a> is its counterpart for curation: it files an
+asset into a collection or a library and never touches the file at all.</p>
+</dd>
 <dt class="hdlist1">Asset hashing</dt>
 <dd>
 <p><a href="hash/"><code>md5</code>, <code>sha256</code>, <code>sha512</code>, <code>chunk-hash</code></a> run in parallel over any file. Hashes are the

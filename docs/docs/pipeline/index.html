@@ -522,6 +522,84 @@ nodes and ports, and no run is created.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="checking-a-draft">Checking a Draft Before You Save It</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A definition can be checked without being stored:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">POST /api/v1/pipelines/validate
+
+{
+  &#34;definition&#34;: {
+    &#34;nodes&#34;: [
+      { &#34;id&#34;: &#34;source&#34;, &#34;type&#34;: &#34;filesystem-source&#34;, &#34;source&#34;: true },
+      { &#34;id&#34;: &#34;sha512&#34;, &#34;type&#34;: &#34;sha512&#34; }
+    ],
+    &#34;edges&#34;: [
+      { &#34;source&#34;: &#34;source&#34;, &#34;sourcePort&#34;: &#34;media&#34;, &#34;target&#34;: &#34;sha512&#34;, &#34;targetPort&#34;: &#34;media&#34; }
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The reply is the verdict, not an error:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;valid&#34;: false,
+  &#34;errors&#34;: [
+    {
+      &#34;code&#34;: &#34;NODE_TYPE_UNKNOWN&#34;,
+      &#34;message&#34;: &#34;Unknown node type: \&#34;sha51\&#34; — not found in descriptor registry&#34;,
+      &#34;nodeId&#34;: &#34;sha512&#34;
+    },
+    {
+      &#34;code&#34;: &#34;CYCLE&#34;,
+      &#34;message&#34;: &#34;Cycle detected in pipeline graph — nodes form a circular dependency&#34;
+    }
+  ],
+  &#34;warnings&#34;: []
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Three things about it are worth knowing.</p>
+</div>
+<div class="paragraph">
+<p><strong>A rejected draft still answers <code>200</code>.</strong> You asked a question and got an answer; nothing was
+stored either way, so there is no pipeline to clean up after a failed attempt.</p>
+</div>
+<div class="paragraph">
+<p><strong>Every problem comes back at once.</strong> Saving a pipeline reports the first thing wrong with it,
+because it is deciding whether to write a version. Validating reports the whole list, so a graph
+with four independent mistakes takes one round trip to diagnose rather than four. Each error carries
+a stable <code>code</code>, and <code>nodeId</code> or <code>edgeId</code> where the problem belongs to one — which is how the editor
+marks them on the canvas.</p>
+</div>
+<div class="paragraph">
+<p><strong>It runs exactly the checks saving runs.</strong> A draft that validates is a draft that saves; that
+equivalence is the only reason the route is worth using.</p>
+</div>
+<div class="paragraph">
+<p><code>warnings</code> never block. The usual one is that no worker is currently online for one of your node
+kinds — a fact about your fleet rather than about your graph. The pipeline saves; a run started
+before that worker comes back is what would be refused.</p>
+</div>
+<div class="paragraph">
+<p>Validating requires permission to create pipelines. It is an authoring action, and read access to
+existing pipelines neither grants it nor is needed for it.</p>
+</div>
+<div class="paragraph">
+<p>The pipeline editor does this for you: it checks the canvas in the background shortly after you stop
+editing, lists whatever comes back, and refuses to save a graph the server has rejected.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="running-a-pipeline">Running a Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -978,6 +1056,64 @@ node for 99 columns is refused immediately rather than becoming a failure to fin
 <div class="paragraph">
 <p>Only a node that is currently <strong>waiting</strong> can be re-executed. Once you press Step or Continue its
 result has gone downstream, and re-running it would mean unpicking everything that already used it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_a_node_without_a_pipeline">Running a Node Without a Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Not every question is worth drawing a pipeline for. &#34;What does the vision model say about this
+photo?&#34;, &#34;what is the hash of this file?&#34;, &#34;read the text out of this page&#34; — these are questions
+about one asset, and answering them by saving a pipeline, running it, and then deleting it again
+leaves clutter behind for a result you wanted once.</p>
+</div>
+<div class="paragraph">
+<p><strong>Node runs</strong> answer them directly. You pick a node, point it at assets you have already selected, and
+Loom dispatches it to a free Cortex worker exactly as it would inside a pipeline. Nothing is added to
+your pipeline list.</p>
+</div>
+<div class="paragraph">
+<p>There are two shapes, because the work has two shapes:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Probe a single asset</dt>
+<dd>
+<p>One node against one asset, answered while you wait. If the node is slow, you
+are told so rather than left hanging, and pointed at the second form.</p>
+</dd>
+<dt class="hdlist1">Run a graph over a set</dt>
+<dd>
+<p>Several nodes over many assets. You get a job straight away and the work
+continues in the background; you can watch its progress, read partial results as they arrive, and
+stop it at any point. When it finishes you get a notification, so you can start a long pass and walk
+away.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_what_it_does_and_does_not_record">What it does and does not record</h3>
+<div class="paragraph">
+<p>By default a node run <strong>records nothing</strong>. The result comes back to you and the asset is left exactly
+as it was, which is what makes it safe to try something. If you want the outcome kept, ask for it —
+the result is then written to the asset’s processing history, marked as an ad-hoc result so it can
+never be confused with, or overwrite, what a scheduled pipeline produced.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_you_cannot_run_this_way">What you cannot run this way</h3>
+<div class="paragraph">
+<p>Nodes that <strong>produce files</strong> — thumbnails, generated images, rendered audio — are not available as node
+runs. Those nodes write their output next to themselves on the worker, and Loom cannot yet fetch it,
+so you would be told the node succeeded and handed nothing. They remain available inside a normal
+pipeline, where the file is consumed by the next node on the same worker.</p>
+</div>
+<div class="paragraph">
+<p>Running nodes this way is a separate permission from editing pipelines. An administrator can grant
+someone — or the assistant — the ability to design pipelines without the ability to spend processing
+time, or the other way round.</p>
 </div>
 </div>
 </div>

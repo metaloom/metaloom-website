@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Search Indices | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are maintained automatically and you can normally ignore them. This page is for the times you cannot: …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/loom/search-indices/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Search Indices | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/search-indices/">
+    <meta property="og:description" content="Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are maintained automatically and you can normally ignore them. This page is for the times you cannot: …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Search Indices">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Search Indices | MetaLoom">
+    <meta name="twitter:description" content="Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are maintained automatically and you can normally ignore them. This page is for the times you cannot: …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Search Indices">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
+	
+	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+<nav class="docs-topics" aria-label="Documentation topics">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/">Nodes</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/" class="is-current">Loom</a>
+			
+			<ul class="docs-subtopics">
+				
+				<li>
+					<a href="/docs/loom/artifacts/">Artifacts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/authentication/">Authentication</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/binary-storage/">Binary Storage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/chat/">Chat &amp; AI Agent</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/configuration/">Configuration</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/containers/">Containers</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/database-integrity/">Database Integrity</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/examples/">Examples</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/features/">Features</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/graphql-api/">GraphQL API</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/helm-chart/">Helm Chart</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/java-client/">Java Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/maven-artifacts/">Maven Artifacts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/metrics/">Metrics</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/python-client/">Python Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/rest-api/">REST API</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/search-indices/" class="is-current" aria-current="page">Search Indices</a>
+				</li>
+				
+			</ul>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/">Cortex</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Loom</p>
+          <h1>Search Indices</h1>
+          
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are
+maintained automatically and you can normally ignore them. This page is for the times you cannot: after
+a bulk import, after changing an embedding model, or when search is returning less than you expect.</p>
+</div>
+<div class="paragraph">
+<p>Every index on this page is a <strong>rebuildable cache</strong>. The originals live in the database, and an index
+can be emptied and reconstructed from them at any time without losing anything.</p>
+</div>
+<div class="paragraph">
+<p>Open <strong>Admin → Indices</strong> in the Loom UI to see all of them at once.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="search-indices.png" alt="The search index admin screen listing every index grouped by storage backend"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Each card is a storage area; the rows beneath it are the indices kept there. In the screenshot the
+lexical index holds 43 documents and matches the database exactly, the embedding vector index holds
+two face vectors, and the fingerprint index is switched on but has nothing in it yet because no media
+has been fingerprinted.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_indices">The Indices</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Index</th>
+<th class="tableblock halign-left valign-top">What it holds</th>
+<th class="tableblock halign-left valign-top">What it powers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lexical search documents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The searchable text of every asset: filename, path, transcripts, captions, extracted metadata, tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The search box and <code>/search</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Face embeddings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One numeric fingerprint per detected face</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;Who else appears in this photo&#34;, face clustering</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Semantic text embeddings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One numeric fingerprint per asset, describing what it is <strong>about</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning-based search, where &#34;sunset over water&#34; finds a beach clip that never uses those words</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duplicate fingerprints</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One perceptual fingerprint per media file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Near-duplicate detection and the deduplication review queue</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Face and semantic embeddings are only present if you run the corresponding pipeline nodes, and semantic
+search additionally needs an embedding service. An index that is not configured is shown as <strong>Disabled</strong>
+with the reason, rather than hidden — so you can tell &#34;switched off&#34; from &#34;broken&#34;.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reading_the_screen">Reading the Screen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each index shows two counts side by side, and their disagreement is the useful part.</p>
+</div>
+<div class="paragraph">
+<p><strong>Records</strong> is what the database holds. <strong>Indexed</strong> is what the index holds. When they match, the index is
+current.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">State</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Healthy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The index matches the database. Nothing to do.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Behind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New material is waiting to be indexed. This is normal shortly after an import and clears on its own,
+  usually within seconds. If it does not fall over several minutes, something upstream is stuck.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Drifted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The index holds more entries than the database does — leftovers from assets that were deleted while
+  the index was unavailable. Run a <strong>Delta sync</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Working</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A maintenance job is running. Its progress is shown beneath the row.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unavailable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The index is switched on but could not be opened. This is a fault worth investigating; the reason is
+  shown when you hover the state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The index is not switched on for this installation. Not a fault.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Size on disk</strong> is shown once per storage area rather than per index, because several indices share the
+same files and there is no honest way to split the figure between them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maintenance_actions">Maintenance Actions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Actions start a background job. You can leave the screen; the job keeps running and its progress
+reappears when you come back. Only one job runs per index at a time.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="search-indices-job.png" alt="A reindex running against the lexical index with a progress bar and a cancel button"/>
+</div>
+</div>
+<div class="paragraph">
+<p>While a job runs, the index switches to <strong>Working</strong>, a progress bar appears beneath it, and the action
+buttons are replaced by <strong>Cancel job</strong>. Cancelling is polite rather than abrupt: the job stops at the
+next item, and whatever it had already written stays written — these operations can always be run
+again. The bar above is deliberately indeterminate; see the note under <strong>Reindex</strong>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Reindex</dt>
+<dd>
+<p>Empties the index and rebuilds it from the database. Always safe, but it walks your whole library, so
+it can take a while — and while it runs, that index returns less than the full picture. Use it after
+changing an embedding model, after restoring a backup, or when an index has drifted badly enough that a
+delta sync is not worth it.</p>
+<div class="paragraph">
+<p>The lexical index rebuilds in a single database operation, so it cannot report a percentage and its
+progress bar simply sweeps until it finishes. The other indices are walked item by item and do show a
+real percentage.</p>
+</div>
+</dd>
+<dt class="hdlist1">Delta sync</dt>
+<dd>
+<p>Writes what is missing, refreshes what changed, and removes leftovers. Much cheaper than a reindex and
+the right first response to <strong>Behind</strong> or <strong>Drifted</strong>. This is the only action that removes leftovers — a
+reindex gets rid of them for free by starting from empty.</p>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+For semantic text embeddings, a delta sync sends every changed asset to your embedding service.
+If that service is metered, this action costs money. It is never triggered automatically by opening the
+screen.
+</td>
+</tr>
+</tbody></table>
+</div>
+</dd>
+<dt class="hdlist1">Drop</dt>
+<dd>
+<p>Empties the index without refilling it. Searches against it return nothing until you reindex. Nothing
+is lost — the source data is untouched — but it is a visible outage of that feature, so it asks for
+confirmation. Use it when retiring a superseded embedding model.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The lexical index offers only <strong>Reindex</strong>. It is kept up to date by the database itself as you work, so
+it cannot fall behind, and there is nothing to gain by emptying it.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+After a drop or a large delta sync the reported size on disk does not shrink immediately. The
+space is reclaimed in the background over the following minutes.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_permissions">Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Two permissions control this screen, so you can let someone watch without letting them act.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Permission</th>
+<th class="tableblock halign-left valign-top">Allows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_SEARCH_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Viewing the screen: sizes, backlogs, which model produced an index, and job history. Changes nothing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MANAGE_SEARCH_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starting a reindex, a delta sync or a drop.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Assign them under <strong>Admin → Permissions</strong>, or to an API key under <strong>Admin → API Keys</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The index backends are opt-in. See <a href="../configuration/">Configuration</a> for the full list; the
+relevant settings are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_PROVIDER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to <code>lucene</code> to enable face and semantic embedding indices</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_VECTOR_INDEX_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vector-index</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where those indices are stored on disk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the duplicate fingerprint index</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SIMILARITY_INDEX_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>similarity-index</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where it is stored on disk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_SEARCH_SEMANTIC_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables semantic search; also needs <code>LOOM_SEARCH_EMBED_URL</code> and <code>LOOM_SEARCH_EMBED_MODEL</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Both index directories should be on persistent storage in production. If they are lost, nothing is
+gone — but every affected index has to be rebuilt before those features work again.</p>
+</div>
+<div class="paragraph">
+<p>On Kubernetes, set these through <code>extraEnv</code> in the <a href="../helm-chart/">Helm chart</a> values.</p>
+</div>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
+
+<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
+
+<script src="/plugins/swagger/swagger.js"></script>
+
+<script src="/plugins/graphiql/react.production.min.js"></script>
+
+<script src="/plugins/graphiql/react-dom.production.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.min.js"></script>
+
+<script src="/plugins/graphiql/graphiql.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

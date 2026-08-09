@@ -15,6 +15,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every media file arrives already knowing things about itself. Who took the photograph, when, and&#xA;where. What the picture is called, what it shows, which keywords the photographer attached. Which&#xA;licence it may be published under, and who has to be credited.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Assign</title>
+      <link>https://metaloom.io/docs/nodes/assign/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/assign/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Curation is a decision, not a file operation. When you put a photo in a collection you are saying&#xA;something about it — that it belongs with these others, that it is ready to publish — and nothing&#xA;about where the photo lives on disk.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Captioning</title>
       <link>https://metaloom.io/docs/nodes/captioning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -40,7 +47,7 @@
       <link>https://metaloom.io/docs/nodes/dedup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/dedup/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to&#xA;decide that two files are &amp;#34;the same&amp;#34;:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move&#xA;anything themselves — you wire their result into a &lt;a href=&#34;../move/&#34;&gt;Move&lt;/a&gt; node, which decides where the&#xA;extra copy goes and whether the original survives. There are two ways to decide that two files are&#xA;&amp;#34;the same&amp;#34;:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Depth Map</title>
@@ -68,7 +75,7 @@
       <link>https://metaloom.io/docs/nodes/facedetect/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/facedetect/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face detection node finds faces in images and video frames and, optionally, computes &lt;strong&gt;face&#xA;embeddings&lt;/strong&gt; (vectors) that can be used for recognition and clustering. Video is processed by scanning&#xA;frames at a configurable rate.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face detection node finds faces in images and video frames, computes a &lt;strong&gt;face embedding&lt;/strong&gt; (a&#xA;vector) for each one, and &lt;strong&gt;groups those embeddings into the distinct people it believes it saw&lt;/strong&gt;.&#xA;Each group is proposed for review; a person on your team confirms who it is. Video is processed by&#xA;scanning frames at a configurable rate.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Filesystem Source</title>
@@ -125,6 +132,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/llm/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Move</title>
+      <link>https://metaloom.io/docs/nodes/move/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/move/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every media library eventually needs to put a file somewhere else. Duplicates you have reviewed&#xA;should leave the working set. Material flagged for disposal should go to a trash folder you can still&#xA;look in tomorrow. Finished projects should move to cheaper storage. Until now none of that was a step&#xA;you could draw into a pipeline — two nodes could move files, but only duplicates, and only into one&#xA;folder set by whoever configured the worker.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Object Detection</title>

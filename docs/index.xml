@@ -177,6 +177,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every media file arrives already knowing things about itself. Who took the photograph, when, and&#xA;where. What the picture is called, what it shows, which keywords the photographer attached. Which&#xA;licence it may be published under, and who has to be credited.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Assign</title>
+      <link>https://metaloom.io/docs/nodes/assign/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/assign/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Curation is a decision, not a file operation. When you put a photo in a collection you are saying&#xA;something about it — that it belongs with these others, that it is ready to publish — and nothing&#xA;about where the photo lives on disk.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Authentication</title>
       <link>https://metaloom.io/docs/loom/authentication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -254,11 +261,18 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The guard node &lt;strong&gt;screens your content against a harm taxonomy and gives you a yes/no answer with a&#xA;confidence score behind it&lt;/strong&gt;. Connect text to it — a &lt;a href=&#34;../whisper/&#34;&gt;Whisper&lt;/a&gt; transcript,&#xA;&lt;a href=&#34;../tika/&#34;&gt;Tika&lt;/a&gt; document content, an &lt;a href=&#34;../ocr/&#34;&gt;OCR&lt;/a&gt; result, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt; —&#xA;or point it at image assets, and every item comes back labelled &lt;code&gt;safe&lt;/code&gt; or &lt;code&gt;unsafe&lt;/code&gt;, with the harm&#xA;categories that fired and how sure the model was.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Database Integrity</title>
+      <link>https://metaloom.io/docs/loom/database-integrity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/database-integrity/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom keeps a catalogue: assets and the things said about them — tags, people, transcripts, tasks,&#xA;comments, pipeline runs. Most of the rules that keep it coherent are enforced by the database itself,&#xA;which simply refuses anything that would break them. A handful cannot be, and this page is about&#xA;those.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Deduplication</title>
       <link>https://metaloom.io/docs/nodes/dedup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/dedup/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to&#xA;decide that two files are &amp;#34;the same&amp;#34;:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move&#xA;anything themselves — you wire their result into a &lt;a href=&#34;../move/&#34;&gt;Move&lt;/a&gt; node, which decides where the&#xA;extra copy goes and whether the original survives. There are two ways to decide that two files are&#xA;&amp;#34;the same&amp;#34;:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Depth Map</title>
@@ -300,7 +314,7 @@
       <link>https://metaloom.io/docs/nodes/facedetect/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/facedetect/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face detection node finds faces in images and video frames and, optionally, computes &lt;strong&gt;face&#xA;embeddings&lt;/strong&gt; (vectors) that can be used for recognition and clustering. Video is processed by scanning&#xA;frames at a configurable rate.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The face detection node finds faces in images and video frames, computes a &lt;strong&gt;face embedding&lt;/strong&gt; (a&#xA;vector) for each one, and &lt;strong&gt;groups those embeddings into the distinct people it believes it saw&lt;/strong&gt;.&#xA;Each group is proposed for review; a person on your team confirms who it is. Video is processed by&#xA;scanning frames at a configurable rate.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Features</title>
@@ -443,6 +457,13 @@
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;A Cortex worker runs a lightweight monitoring HTTP server exposing &lt;strong&gt;liveness&lt;/strong&gt;, &lt;strong&gt;readiness&lt;/strong&gt; and&#xA;&lt;strong&gt;Prometheus metrics&lt;/strong&gt; endpoints, designed for Kubernetes probes, load balancers and metrics scrapers.&#xA;Loom exposes a health check on its REST API and its own Prometheus metrics endpoint on a dedicated&#xA;monitoring port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Move</title>
+      <link>https://metaloom.io/docs/nodes/move/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/nodes/move/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every media library eventually needs to put a file somewhere else. Duplicates you have reviewed&#xA;should leave the working set. Material flagged for disposal should go to a trash folder you can still&#xA;look in tomorrow. Finished projects should move to cheaper storage. Until now none of that was a step&#xA;you could draw into a pipeline — two nodes could move files, but only duplicates, and only into one&#xA;folder set by whoever configured the worker.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Object Detection</title>
       <link>https://metaloom.io/docs/nodes/objectdetect/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -525,6 +546,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/script/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The script node runs &lt;strong&gt;a small piece of code you write&lt;/strong&gt; as a step in your pipeline. It reads the&#xA;media item and the outputs of any nodes upstream of it, and produces whatever outputs you declare —&#xA;a text, a number, a list of texts, a block of JSON, a set of timeframes, or images.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Search Indices</title>
+      <link>https://metaloom.io/docs/loom/search-indices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/search-indices/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are&#xA;maintained automatically and you can normally ignore them. This page is for the times you cannot: after&#xA;a bulk import, after changing an embedding model, or when search is returning less than you expect.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Segment Anything</title>

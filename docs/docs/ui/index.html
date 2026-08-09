@@ -371,7 +371,9 @@ versions they ran with</p>
 <p><strong>Tags</strong> — manage tags grouped by collection</p>
 </li>
 <li>
-<p><strong>Workflow</strong> — fullscreen, keyboard-driven bulk review</p>
+<p><strong>Workflow</strong> — fullscreen, keyboard-driven bulk review: <a href="#rating-and-tagging">rating and tagging</a>,
+the <a href="#reviewing-duplicates">duplicate review queue</a> and
+<a href="#reviewing-detections">confirming what a model found</a></p>
 </li>
 </ul>
 </div>
@@ -394,6 +396,10 @@ versions they ran with</p>
 </li>
 <li>
 <p><strong>Spaces</strong> — tenant/project separation</p>
+</li>
+<li>
+<p><strong>Indices</strong> — the state of the search, face and duplicate indices, with reindex and sync controls.
+See <a href="../loom/search-indices/">Search Indices</a></p>
 </li>
 <li>
 <p><strong>Memory Denylist</strong> — regex guardrails for what the agent may never store</p>
@@ -577,6 +583,58 @@ never turns into an error.</p>
 <p>Search results respect your permissions. If your account cannot read a particular kind of content,
 those results are left out and a note above the results says so — rather than silently returning less
 than you asked for.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_searching_by_meaning">Searching by Meaning</h3>
+<div class="paragraph">
+<p>If your administrator has enabled it, the results page offers a second and third way to search,
+shown as <strong>Lexical</strong>, <strong>Semantic</strong> and <strong>Hybrid</strong> next to the search box. If you do not see those buttons,
+only the word matching described above is available on your installation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Lexical</strong> is the default and the one described above: it finds the words you typed.</p>
+</li>
+<li>
+<p><strong>Semantic</strong> finds material that is <em>about</em> what you typed, whether or not it uses the same words.
+Searching for <code>bicycle</code> will turn up a clip whose transcript only ever says &#34;cycling&#34;, and a
+search for <code>winter holiday</code> can surface footage described as &#34;snow, cabins and mulled wine&#34;.</p>
+</li>
+<li>
+<p><strong>Hybrid</strong> runs both and merges the two rankings. Material that both agree on rises to the top.
+This is usually the one you want: it keeps the precision of an exact word match while still
+catching the things worded differently.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A semantic result has no highlighted excerpt, because there is no matching word to highlight — it is
+marked as a meaning-based match instead. Result counts are approximate in these two modes: both
+rankings are cut off at a fixed depth, so the number shown describes the best matches rather than
+every document in the catalogue.</p>
+</div>
+<div class="paragraph">
+<p>Semantic search reads the text Loom holds about an asset — transcripts, extracted text, captions,
+tags and filenames. It cannot yet find a photo purely from what is depicted in it if nothing has ever
+been written or transcribed about that photo.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Newly added material becomes findable by meaning a short time after it is imported, because each item
+has to be processed once before it can be matched this way. Word search is available immediately. An
+administrator can see how many items are still waiting.</p>
 </div>
 </td>
 </tr>
@@ -788,15 +846,308 @@ task, tells nobody. Notifications are private — you only ever see your own.</p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_face_detection">Face Detection</h3>
+<h3 id="face-review">Face Detection</h3>
 <div class="paragraph">
-<p>The Detection view aggregates face, object and LLM detections. The <strong>Faces</strong> tab manages face clusters and
-lets you assign them to persons in the person database.</p>
+<p>The Detection view aggregates face, object and LLM detections. The <strong>Faces</strong> tab is where you turn what
+the face-detection node found into people you have named.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
 <img src="face-detection.png" alt="Face detection and cluster management"/>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_reviewing_a_group_of_faces">Reviewing a group of faces</h4>
+<div class="paragraph">
+<p>When <a href="../nodes/facedetect/">Face Detection</a> runs over an asset it sorts the faces it found into
+groups — one per person it believes is present — and leaves each group <strong>pending</strong>. Nothing is
+attributed to anybody until you say so.</p>
+</div>
+<div class="paragraph">
+<p>Each card shows how many faces are in the group and the actual cropped faces themselves, so you can
+tell at a glance whether the grouping is right before deciding anything. From there you either
+confirm the group onto a person — somebody already in your list, or a new one created on the spot —
+or reject it if it is not a person worth keeping.</p>
+</div>
+<div class="paragraph">
+<p>Confirming is a real, saved decision, not a view setting: it survives reloading the page, and it
+survives the asset being processed again. Re-running face detection updates the boxes and vectors and
+leaves your verdicts untouched, so a group you confirmed last month is still confirmed afterwards.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_what_the_grouping_does_and_does_not_mean">What the grouping does and does not mean</h4>
+<div class="paragraph">
+<p>Faces are grouped <strong>within a single asset</strong>. Confirming a group means &#34;this person appears in <strong>this</strong>
+video&#34;, not &#34;the software now recognises this person everywhere&#34;. The same person in a second video
+comes back as a separate group with no memory of the first, and you confirm it again. Recognising
+somebody across the whole library is a larger job and is not part of this yet.</p>
+</div>
+<div class="paragraph">
+<p>A person’s page lists every group confirmed to them, which is how you see where somebody appears
+across your material.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_face_images_stay_in_your_deployment">Face images stay in your deployment</h4>
+<div class="paragraph">
+<p>The cropped faces on these cards were cut by the detection node and stored by your own installation.
+Face images and the vectors derived from them are biometric data; they are never fetched from, or
+sent to, any outside service.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rating-and-tagging">Rating and Tagging at Keyboard Speed</h3>
+<div class="paragraph">
+<p><strong>Workflow → Rating</strong> and <strong>Workflow → Tagging</strong> are for working through a set of assets one keystroke
+at a time. Press <code>1</code> to <code>9</code> (and <code>0</code> for ten) to rate the asset in front of you; type a word and
+press Enter to tag it. The next asset is always one arrow key away.</p>
+</div>
+<div class="paragraph">
+<p>Both decisions are saved the moment you make them, and both are yours: your rating is your own, and
+a colleague rating the same asset does not overwrite it.</p>
+</div>
+<div class="paragraph">
+<p>The tag box offers the tags your instance already uses, so the same idea does not end up spelled
+three ways. You are not limited to that list — type a word that is not in it and it becomes a new
+tag.</p>
+</div>
+<div class="paragraph">
+<p>Two things are worth knowing about what you see on arrival:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An asset that already carries a rating or curated tags says so, so you can move past work somebody
+has already done rather than redoing it.</p>
+</li>
+<li>
+<p>Tags a pipeline attached are shown outlined, with a note of which step attached them and how sure
+it was. They have no remove button here — undoing what a pipeline decided is a deliberate act, and
+it belongs on the asset’s own page rather than one keystroke away from a review flow.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If a save fails — a lost connection, or a missing permission — the star or the chip visibly goes
+back to how it was and a message says so. A screen that looks finished really is.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Your decisions follow the <strong>file itself</strong>, not where it happens to sit. Assets are identified by
+their content, so moving a file to another folder, renaming it, or scanning it again all keep the
+rating and the tags it already had.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Decisions made here are not just a record. A pipeline can route on them: see the
+<a href="../nodes/filter/">Filter</a> node’s <strong>Rating</strong> and <strong>Tag</strong> modes for publishing what reviewers rated
+highly, and finding what nobody has looked at yet.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reviewing-duplicates">Reviewing Duplicates</h3>
+<div class="paragraph">
+<p><strong>Workflow → Dedup</strong> is the queue of near-duplicate videos that a <a href="../nodes/dedup/">deduplication</a>
+pipeline has found and nobody has decided on yet. Nothing has been moved at this point: the search
+only proposes, and your decision is what allows anything to happen to a file.</p>
+</div>
+<div class="paragraph">
+<p>Each entry shows one group. The file the system suggests keeping is framed in green at the top, and
+the candidate duplicates sit below it. For every file you get:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>its <strong>name</strong>, so you can recognise where it came from</p>
+</li>
+<li>
+<p>its <strong>size</strong> — the usual reason to disagree with the suggested keeper</p>
+</li>
+<li>
+<p>an <strong>Incomplete</strong> marker when the file looked truncated at the time it was found, which is what a
+convincing &#34;duplicate&#34; sometimes turns out to be</p>
+</li>
+<li>
+<p>a <strong>score</strong>, from 0 to 1, saying how close the match is</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A preview is shown for anything the browser can display. Most candidates are video, which has no
+preview, so those show a placeholder and you decide on the numbers.</p>
+</div>
+<div class="paragraph">
+<p>Work through the queue with the keyboard:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Confirm — the duplicates in this group may be cleared away</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>N</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reject — leave these files alone, permanently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>←</code> <code>→</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move between groups</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>F</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fullscreen</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If you disagree with which file should be kept, press <strong>Keep this one</strong> on the file you would rather
+keep. That only changes the choice; it does not decide the group, so you still confirm or reject
+afterwards.</p>
+</div>
+<div class="paragraph">
+<p>Every decision is saved as you make it. If saving fails — a lost connection, or a missing permission
+— the entry visibly goes back to undecided and a message says so, so a queue that looks finished
+really is.</p>
+</div>
+<div class="paragraph">
+<p>Rejecting a group is final in a useful way: the next deduplication run will not propose the same set
+of files again, so the queue does not refill with decisions you have already made.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Confirming a group does not itself move anything. The clean-up happens the next time a pipeline
+with the apply step runs over those files, and it re-checks the file being kept before it touches
+anything.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Opening this queue needs the <strong>Deduplication → READ_DEDUP</strong> permission, and deciding a group
+needs <strong>UPDATE_DEDUP</strong>. Both are granted in the <strong>Permissions</strong> screen under <strong>Administration</strong>.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reviewing-detections">Reviewing What a Model Found</h3>
+<div class="paragraph">
+<p><strong>Workflow → Objects</strong> is the queue of things an object-detection pipeline believes it found and
+nobody has confirmed yet. A detection model is right most of the time and confidently wrong the
+rest of it, so what it produces is a proposal until somebody says otherwise.</p>
+</div>
+<div class="paragraph">
+<p>Each box is drawn over the asset and listed below it with the class the model assigned and how sure
+it was. Select a box and decide:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Confirm — there really is one of these here</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>N</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reject — a false positive</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>↑</code> <code>↓</code> <code>Tab</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move between boxes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>←</code> <code>→</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move between assets</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Confirmed boxes turn green, rejected ones fade and are marked as such, and anything still undecided
+stays amber — so at a glance you can see how far through an asset you are.</p>
+</div>
+<div class="paragraph">
+<p>There is a third answer, and it is the useful one: the box is in the right place but the class is
+wrong. Correcting the class still counts as a confirmation, because the model did find something
+there. What the model originally said is kept alongside your correction rather than replaced — that
+record is what makes the reviewed set worth anything as training material later.</p>
+</div>
+<div class="paragraph">
+<p>A rejected detection is kept too, rather than deleted. It is the record that the model was wrong
+about this particular spot, which is also what stops the next run offering you the same box again
+as though it were new.</p>
+</div>
+<div class="paragraph">
+<p>Decisions are saved as you make them, in batches, so a fast run of keystrokes is not slowed down by
+one save per box. If saving fails, the boxes visibly go back to undecided and a message says so.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Re-running the same detection pipeline over an asset you have already reviewed does not undo
+your work — the pipeline updates its own boxes and leaves your verdicts alone. Upgrading to a
+different version of the detection model <strong>does</strong> return those boxes to the queue: the new model may
+have found something different in the same place, so an old verdict is no longer a safe answer to a
+question that has changed.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Opening this queue needs the <strong>Detection → READ_DETECTION</strong> permission, and deciding a box needs
+<strong>UPDATE_DETECTION</strong>. Both are granted in the <strong>Permissions</strong> screen under <strong>Administration</strong>.
+</td>
+</tr>
+</tbody></table>
 </div>
 </div>
 </div>

@@ -196,6 +196,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/assign/">Assign</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/captioning/">Captioning</a>
 				</li>
 				
@@ -257,6 +261,10 @@
 				
 				<li>
 					<a href="/docs/nodes/llm/">LLM Enrichment</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/move/">Move</a>
 				</li>
 				
 				<li>
@@ -544,7 +552,7 @@ connections carry every item and which carry only some.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Match</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The hints this bucket matches on, comma separated. What they mean depends on <strong>Filter by</strong> — other names for a language (<code>german, deutsch</code>), MIME patterns (<code>image/*</code>), size thresholds (<code>&lt;10MB</code>) or dates (<code>2024-01-01..2024-12-31</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hints this bucket matches on, comma separated. What they mean depends on <strong>Filter by</strong> — other names for a language (<code>german, deutsch</code>), MIME patterns (<code>image/*</code>), size thresholds (<code>&lt;10MB</code>), dates (<code>2024-01-01..2024-12-31</code>), rating conditions (<code>&gt;=8</code>) or tag names (<code>hero</code>)</p></td>
 </tr>
 </tbody>
 </table>
@@ -599,12 +607,24 @@ bottom and the first one that matches wins, so a narrow bucket above a broad one
 <td class="tableblock halign-left valign-top"><p class="tableblock">…window the item’s modification date falls into</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=2024-01-01</code>, <code>2024-01-01..2024-12-31</code>, <code>2024-03-17</code>, <code>age&lt;30d</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rating</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…range the rating reviewers gave it falls into</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=8</code>, <code>⇐2</code>, <code>4..7</code>, a bare <code>8</code> meaning exactly 8, <code>unrated</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…tag the item carries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hero</code>, <code>person/*</code>, <code>!archive</code>, <code>untagged</code></p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Only <strong>Language</strong> costs anything. The other three read the item’s own metadata, so a pipeline that
-only splits images from video, or last month’s files from last year’s, runs with no model backend at
-all — and adds no time per item.</p>
+<p>Only <strong>Language</strong> needs a model. <strong>MIME type</strong>, <strong>Size</strong> and <strong>Date</strong> read the item’s own metadata
+and add no time per item, so a pipeline that only splits images from video, or last month’s files
+from last year’s, runs with no model backend at all. <strong>Rating</strong> and <strong>Tag</strong> read what people
+recorded, so they need Metaloom reachable — Tag comes free with the item, Rating costs one lookup
+that is remembered for the rest of the run.</p>
 </div>
 <div class="sect2">
 <h3 id="_language">Language</h3>
@@ -694,6 +714,85 @@ pipeline with a message naming the bucket, rather than starting a run in which e
 lands in <code>other</code>.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_rating">Rating</h3>
+<div class="paragraph">
+<p>The rating is the one people give in the review screen, 1 to 10. This is what makes reviewing worth
+the effort: a decision a person made in a few keystrokes decides where the file goes.</p>
+</div>
+<div class="paragraph">
+<p><code>&gt;=</code>, <code>&gt;</code>, <code>⇐</code> and <code>&lt;</code> compare; <code>4..7</code> is a range that <strong>includes both ends</strong>; and a bare <code>8</code> is
+exactly 8, not &#34;up to 8&#34;. Ratings are ten whole numbers rather than a continuous scale, so an exact
+number is what people mean when they type one, and neighbouring ranges like <code>1..3</code> and <code>4..7</code>
+already fit together without a gap. The common ladder reads:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bucket</th>
+<th class="tableblock halign-left valign-top">Match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trash</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>⇐2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>review</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3..7</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keep</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=8</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>unrated</code> matches an asset nobody has rated. Nothing else does — <code>⇐2</code> means &#34;rated 2 or lower&#34;, not
+&#34;rated low or never looked at&#34;, so an un-reviewed backlog is never swept into a low-rating branch by
+accident.</p>
+</div>
+<div class="paragraph">
+<p>When several people have rated the same asset the <strong>average</strong> decides, rounded to the nearest whole
+number. Worth knowing: an average moves as more people rate, so an asset can change branch on a
+later run without anybody changing their mind. Within a single run the answer stays put.</p>
+</div>
+<div class="paragraph">
+<p>An asset Metaloom does not know about, and one whose ratings could not be read because Metaloom was
+unreachable, both go to <code>other</code> — deliberately not to <code>unrated</code>, which would send a well-reviewed
+library down the unreviewed branch during an outage. The run continues either way; one item nobody
+has ingested does not stop a job over thousands of files.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tag">Tag</h3>
+<div class="paragraph">
+<p>Tags are matched by name. An exact name (<code>hero</code>) matches that tag; a trailing <code><strong></strong></code><strong> matches a prefix,
+so <code>person/</code></strong> catches every tag in that namespace and a bare <code>*</code> means &#34;has any tag at all&#34;. A
+bucket with no hints falls back to its own id, so three buckets called <code>hero</code>, <code>archive</code> and
+<code>rejected</code> route correctly with nothing typed in.</p>
+</div>
+<div class="paragraph">
+<p>A <code>!</code> in front excludes: <code>hero, !archive</code> means &#34;tagged hero but not archive&#34;. Exclusion always
+wins, whatever else matched. A bucket that is only exclusions — <code>!reviewed</code> — matches everything
+that does not carry them, which is the &#34;not looked at yet&#34; branch. <code>untagged</code> matches an asset with
+no tags at all.</p>
+</div>
+<div class="paragraph">
+<p><strong>Tag source</strong> chooses whose tags count: <code>ANY</code>, <code>MANUAL</code> for only the tags a person attached, or
+<code>MACHINE</code> for only those a pipeline attached. That is how you route on what your team decided rather
+than on what a model guessed, or the other way round. A tag whose origin was never recorded counts
+as a person’s.</p>
+</div>
+<div class="paragraph">
+<p>As with Rating, an asset Metaloom does not know about goes to <code>other</code>.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -745,6 +844,15 @@ cheap thumbnail path on everything else.</p>
 <li>
 <p><strong>Backfill by date</strong> — process last month’s arrivals on one branch and the historical archive on
 another, so a re-run does not redo years of work.</p>
+</li>
+<li>
+<p><strong>Acting on review decisions</strong> — publish what reviewers rated 8 or higher, tag what they rated 2
+or lower for removal, and tag what nobody has looked at yet so it can be found. This is the
+<code>Review Triage</code> pipeline the demo ships.</p>
+</li>
+<li>
+<p><strong>Curated versus guessed</strong> — route on the tags your team attached with <strong>Tag source</strong> set to
+<code>MANUAL</code>, so a model’s suggestion never triggers a publishing branch.</p>
 </li>
 <li>
 <p><strong>Catching the unexpected</strong> — wire <code>other</code> to a review step and see what your library actually

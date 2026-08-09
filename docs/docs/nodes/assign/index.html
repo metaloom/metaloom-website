@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Hashing | MetaLoom</title>
+	<title>Assign | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The hashing nodes compute content hashes of a media file. They are the foundation of asset identity in MetaLoom: the SHA-512 hash is the content key used to look an asset up, avoid recomputation, and …">
+	<meta name="description" content="Curation is a decision, not a file operation. When you put a photo in a collection you are saying something about it — that it belongs with these others, that it is ready to publish — and nothing …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/nodes/hash/">
+<link rel="canonical" href="https://metaloom.io/docs/nodes/assign/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Hashing | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/nodes/hash/">
-    <meta property="og:description" content="The hashing nodes compute content hashes of a media file. They are the foundation of asset identity in MetaLoom: the SHA-512 hash is the content key used to look an asset up, avoid recomputation, and …">
+    <meta property="og:title" content="Assign | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/nodes/assign/">
+    <meta property="og:description" content="Curation is a decision, not a file operation. When you put a photo in a collection you are saying something about it — that it belongs with these others, that it is ready to publish — and nothing …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="Hashing">
+    <meta property="og:image:alt" content="Assign">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Hashing | MetaLoom">
-    <meta name="twitter:description" content="The hashing nodes compute content hashes of a media file. They are the foundation of asset identity in MetaLoom: the SHA-512 hash is the content key used to look an asset up, avoid recomputation, and …">
+    <meta name="twitter:title" content="Assign | MetaLoom">
+    <meta name="twitter:description" content="Curation is a decision, not a file operation. When you put a photo in a collection you are saying something about it — that it belongs with these others, that it is ready to publish — and nothing …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="Hashing">
+    <meta name="twitter:image:alt" content="Assign">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -196,7 +196,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/assign/">Assign</a>
+					<a href="/docs/nodes/assign/" class="is-current" aria-current="page">Assign</a>
 				</li>
 				
 				<li>
@@ -248,7 +248,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/nodes/hash/" class="is-current" aria-current="page">Hashing</a>
+					<a href="/docs/nodes/hash/">Hashing</a>
 				</li>
 				
 				<li>
@@ -442,16 +442,23 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Nodes</p>
-          <h1>Hashing</h1>
+          <h1>Assign</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The hashing nodes compute content hashes of a media file. They are the foundation of asset identity in
-MetaLoom: the SHA-512 hash is the content key used to look an asset up, avoid recomputation, and match
-against blacklists. Four kinds live in the same module and can be toggled independently.</p>
+<p>Curation is a decision, not a file operation. When you put a photo in a collection you are saying
+something about it — that it belongs with these others, that it is ready to publish — and nothing
+about where the photo lives on disk.</p>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;hash&#34;,&#34;applies&#34;:&#34;Any file&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;asset hash columns + asset_node_result ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;sha512&#34;,&#34;note&#34;:&#34;the system-wide content identity&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the file, streamed rather than loaded&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;ct&#34;:&#34;hash/sha512&#34;,&#34;d&#34;:&#34;SHA-512 of the bytes — the key every asset is resolved by&#34;}]},{&#34;name&#34;:&#34;md5&#34;,&#34;note&#34;:&#34;kind: md5&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the file, streamed rather than loaded&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;ct&#34;:&#34;hash/md5&#34;,&#34;d&#34;:&#34;MD5 of the bytes, for interchange with systems that expect it&#34;}]},{&#34;name&#34;:&#34;sha256&#34;,&#34;note&#34;:&#34;kind: sha256&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the file, streamed rather than loaded&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;ct&#34;:&#34;hash/sha256&#34;,&#34;d&#34;:&#34;SHA-256 of the bytes&#34;}]},{&#34;name&#34;:&#34;chunk-hash&#34;,&#34;note&#34;:&#34;kind: chunk-hash&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;media&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the file, streamed rather than loaded&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;ct&#34;:&#34;hash/chunk&#34;,&#34;d&#34;:&#34;a content-defined chunk hash — still matches when only part of the file changed&#34;}]}]}"></div>
+<div class="paragraph">
+<p>This node writes that decision. It adds an asset to a collection or a library, and it does not move,
+copy, rename or delete anything.</p>
+</div>
+<div class="paragraph">
+<p>It runs no model and needs nothing installed alongside it.</p>
+</div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;assign&#34;,&#34;applies&#34;:&#34;Any asset the system knows&#34;,&#34;badge&#34;:&#34;No model required&#34;,&#34;persist&#34;:&#34;Collection or library membership&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;into a collection&#34;,&#34;note&#34;:&#34;named directly, or looked up by name&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;media&#34;,&#34;d&#34;:&#34;the asset to file&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;flag&#34;,&#34;l&#34;:&#34;assigned&#34;,&#34;ct&#34;:&#34;scalar/boolean&#34;,&#34;d&#34;:&#34;whether this added a new membership&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;target&#34;,&#34;d&#34;:&#34;which collection or library it went into&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -459,46 +466,68 @@ against blacklists. Four kinds live in the same module and can be toggled indepe
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kinds</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code>, <code>sha256</code>, <code>sha512</code>, <code>chunk-hash</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>assign</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applies to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any asset the system already knows about</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Input ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> (typically the first processing step after the source)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>media</code> — the asset to file</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hash</code> — one port per kind, typed <code>hash/md5</code>, <code>hash/sha256</code>, <code>hash/sha512</code> or <code>hash/chunk</code>. The type is what downstream nodes match on, so a <a href="../dedup/">dedup</a> node never has to name the node that produced it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>assigned</code> (Boolean), <code>target</code> (String)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CPU only. Streams the file, so memory use is low regardless of file size. Reads the full file bytes from storage.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A connection to the server. No model, no sidecar, no GPU</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset</code> row hash columns + <code>asset_node_result</code> ledger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection or library membership</p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect1">
+<h2 id="_it_never_touches_the_file">It never touches the file</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>chunk-hash</code> computes a content-based chunked hash used for near-duplicate detection on partially
-modified files.</p>
+<p>This is worth stating plainly, because the node next to it in the palette does exactly the opposite.
+<a href="../move/">Move</a> relocates bytes. This one writes a single row saying &#34;this asset belongs to that
+collection&#34; and leaves the file exactly where it was, byte for byte.</p>
+</div>
+<div class="paragraph">
+<p>They are two separate nodes for that reason. A single node that sometimes filed a photo and sometimes
+relocated 40 GB of video, depending on a setting, would be one nobody could reason about — and the two
+have nothing in common when they go wrong.</p>
+</div>
+</div>
 </div>
 <div class="sect1">
-<h2 id="_configuration">Configuration</h2>
+<h2 id="_collections_and_libraries">Collections and libraries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>A collection</strong> is a grouping you make: a shortlist, a shoot, a set ready for review. An asset can be
+in as many as you like.</p>
+</div>
+<div class="paragraph">
+<p><strong>A library</strong> is where material was brought in. Adding an asset to one here records that it belongs
+there — it does not move the file into the library’s storage. If that is what you want, use
+<a href="../move/">Move</a> with a library target.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_settings">Settings</h2>
 <div class="sectionbody">
 <div class="imageblock ml-panel-shot">
 <div class="content">
-<img src="config.png" alt="The SHA-512 Hash settings panel" width="which offers only the common node fields"/>
+<img src="config.png" alt="The Assign settings panel: Target, Collection Name, On Missing and 4 more settings"/>
 </div>
 <div class="title">Figure 1. The node’s settings in the pipeline editor</div>
-</div>
-<div class="paragraph">
-<p>Per-node options (<code>HashNodeOptions</code>) enable each algorithm individually:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -508,36 +537,77 @@ modified files.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Setting</th>
 <th class="tableblock halign-left valign-top">Default</th>
-<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>md5</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">off</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compute the MD5 hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection or library</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha256</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">off</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compute the SHA-256 hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The collection, given either directly or by name. Set one or the other, not both</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">on</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compute the SHA-512 hash (the system-wide content identity)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The library, when the target is a library</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>chunkHash</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">off</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compute the chunked content hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If it does not exist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fail the step, create it, or skip the item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dry run</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Off</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Report what would be filed and write nothing</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>In online mode a hash node checks Loom first and short-circuits when the hash is already stored.</p>
+<p><strong>If it does not exist</strong> defaults to failing on purpose. A collection name that does not resolve is
+almost always a typo, and quietly doing nothing for an entire run is how a curation pipeline appears
+to work while producing an empty set.</p>
+</div>
+<div class="paragraph">
+<p>Choosing <strong>create</strong> requires the pipeline’s account to be allowed to create collections. If it is not,
+the step fails and says so, rather than blaming the data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_filing_what_a_rule_or_a_person_decided">Filing what a rule or a person decided</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The node earns its place at the end of a routing chain.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Something decides — a person rating in the review screen, a tag, or a model’s verdict.</p>
+</li>
+<li>
+<p>A <a href="../filter/">Filter</a> node routes on that decision.</p>
+</li>
+<li>
+<p>This node files the result.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For example: filter by rating, take the <code>&gt;=8</code> bucket, and assign it to a <strong>Selects</strong> collection. Or
+filter by tag, take <code>hero</code>, and assign it to the collection your website publishes from.</p>
+</div>
+<div class="paragraph">
+<p>Adding the same asset twice is harmless. Membership is a set, so a second run reports <code>assigned</code> as
+false and writes nothing — which means you can re-run a pipeline over a library you have already
+curated without duplicating anything.</p>
 </div>
 </div>
 </div>
@@ -546,34 +616,37 @@ modified files.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced, on the
-card itself. Below is a real run of this node over <code>pexels-photo-2379005.jpeg</code>.</p>
+card itself. Below is a real run of this node, filing a photograph into a <strong>Selects</strong> collection.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">
-<img src="debug.png" alt="The sha512 node after a run" width="with the values it emitted on each port"/>
+<img src="debug.png" alt="The assign node after a run, with the values it emitted on each port"/>
 </div>
 </div>
 <div class="paragraph">
-<p>The strip on the card lists what each output port carried — <code>hash</code>.</p>
+<p>The strip on the card lists what each output port carried — <code>assigned</code>, <code>target</code>. <code>assigned</code> is true
+because this was the first time that photograph went into that collection; a second run over the same
+asset reports false and writes nothing. <code>target</code> is the collection itself, which is what you wire
+onwards if a later node needs to know where the asset was filed.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_cases">Use Cases</h2>
+<h2 id="_good_to_know">Good to know</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Asset identity</strong> — resolve an asset by its SHA-512 across the platform.</p>
+<p>Assets the system has not seen yet are skipped. A membership cannot exist without the asset record,
+so there is nothing to write.</p>
 </li>
 <li>
-<p><strong>Exact deduplication</strong> — find byte-identical files (see <a href="../dedup/">Deduplication</a>).</p>
+<p>Removing an asset from a collection is not something this node does. That is a review decision, made
+in the collection screen.</p>
 </li>
 <li>
-<p><strong>Near-duplicate detection</strong> — <code>chunk-hash</code> flags files that were partially modified.</p>
-</li>
-<li>
-<p><strong>Blacklisting</strong> — match incoming media against a hash blacklist.</p>
+<p>Deleting a collection removes its memberships and leaves every asset alone. Deleting a library is
+deliberately refused while assets still belong to it.</p>
 </li>
 </ul>
 </div>

@@ -234,6 +234,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/loom/database-integrity/">Database Integrity</a>
+				</li>
+				
+				<li>
 					<a href="/docs/loom/examples/">Examples</a>
 				</li>
 				
@@ -267,6 +271,10 @@
 				
 				<li>
 					<a href="/docs/loom/rest-api/">REST API</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/search-indices/">Search Indices</a>
 				</li>
 				
 			</ul>
@@ -410,6 +418,59 @@ port. All Loom meters are prefixed <code>loom_</code>. For Cortex worker metrics
 <pre class="highlight"><code class="language-bash" data-lang="bash">LOOM_SERVER_MON_PORT=9091</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reading_the_metrics_without_prometheus">Reading the metrics without Prometheus</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The monitoring port is deliberately unauthenticated, so it is not something you want a browser or a
+script outside your network to reach. For those callers the same figures are available as JSON on
+the ordinary API port:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -H &#34;Authorization: Bearer $TOKEN&#34; http://loom.internal:8092/api/v1/metrics</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is what the built-in monitoring screen reads. It requires the <code>READ_METRIC</code> permission, and it
+serves the <code>loom_</code> meters only — the JVM and framework families stay on the scrape endpoint, where a
+Prometheus reads them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;timestamp&#34;: &#34;2026-08-09T11:24:07Z&#34;,
+  &#34;metrics&#34;: [
+    { &#34;name&#34;: &#34;loom_node_tasks_inflight&#34;, &#34;type&#34;: &#34;GAUGE&#34;, &#34;tags&#34;: {}, &#34;value&#34;: 6 },
+    { &#34;name&#34;: &#34;loom_node_tasks_dispatched_total&#34;, &#34;type&#34;: &#34;COUNTER&#34;,
+      &#34;tags&#34;: { &#34;kind&#34;: &#34;sha512&#34; }, &#34;value&#34;: 1290 },
+    { &#34;name&#34;: &#34;loom_node_task_latency_seconds&#34;, &#34;type&#34;: &#34;TIMER&#34;,
+      &#34;tags&#34;: { &#34;kind&#34;: &#34;sha512&#34;, &#34;state&#34;: &#34;completed&#34; },
+      &#34;count&#34;: 1284, &#34;sumSeconds&#34;: 412.6, &#34;maxSeconds&#34;: 3.91, &#34;meanSeconds&#34;: 0.321 }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Series are named exactly as in a scrape, suffixes included, so a name from the tables below works in
+both places. Narrow the response with <code>?prefix=loom_node_tasks_</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+This is a single instant, not a history — Loom stores no time series. To chart a rate,
+call it twice and divide the counter difference by the gap between the two <code>timestamp</code> values. For
+anything longer than a live view, scrape the monitoring port with Prometheus.
+</td>
+</tr>
+</tbody></table>
 </div>
 </div>
 </div>

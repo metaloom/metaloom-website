@@ -50,6 +50,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server is distributed as the &lt;code&gt;metaloom/loom-server&lt;/code&gt; image (JVM and &lt;code&gt;-native&lt;/code&gt; variants). For a&#xA;zero-config first run, use the all-in-one &lt;code&gt;metaloom/loom-demo&lt;/code&gt; image instead — see&#xA;&lt;a href=&#34;../../getting-started/&#34;&gt;Getting Started&lt;/a&gt;. The full image list is on &lt;a href=&#34;../../deployment/&#34;&gt;Container Images&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Database Integrity</title>
+      <link>https://metaloom.io/docs/loom/database-integrity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/database-integrity/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom keeps a catalogue: assets and the things said about them — tags, people, transcripts, tasks,&#xA;comments, pipeline runs. Most of the rules that keep it coherent are enforced by the database itself,&#xA;which simply refuses anything that would break them. A handful cannot be, and this page is about&#xA;those.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Examples</title>
       <link>https://metaloom.io/docs/loom/examples/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -111,6 +118,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/rest-api/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes its full functionality via a versioned REST API.&#xA;All endpoints are rooted at &lt;code&gt;/api/v1&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Search Indices</title>
+      <link>https://metaloom.io/docs/loom/search-indices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/search-indices/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are&#xA;maintained automatically and you can normally ignore them. This page is for the times you cannot: after&#xA;a bulk import, after changing an embedding model, or when search is returning less than you expect.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

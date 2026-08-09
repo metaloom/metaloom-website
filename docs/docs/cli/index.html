@@ -854,6 +854,79 @@ DATE        RUNS  OK  FAILED  SKIPPED
 2026-07-26  1     1   0       0</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_what_the_statuses_mean">What the statuses mean</h3>
+<div class="paragraph">
+<p>A run carries one of seven statuses:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Status</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PENDING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Created, not yet handed to a worker.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RUNNING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In progress.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PAUSED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suspended by an operator. Still live — it can be resumed or cancelled.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SUCCESS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finished with nothing failing. A run that found no media to process also lands here.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PARTIAL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finished; some media succeeded and some failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FAILED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finished with everything failing, or it never got started.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CANCELLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stopped by an operator before it finished.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>SUCCESS</code>, <code>PARTIAL</code>, <code>FAILED</code> and <code>CANCELLED</code> are final — a run in one of them will not change
+again. <code>metaloom run wait</code> returns as soon as one is reached, and exits non-zero for anything
+but <code>SUCCESS</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each media item in a run has its own state — <code>PENDING</code>, <code>RUNNING</code>, <code>SUCCESS</code>, <code>FAILED</code> or
+<code>SKIPPED</code> — and each individual node execution has one of <code>PENDING</code>, <code>RUNNING</code>, <code>COMPLETED</code>,
+<code>FAILED</code>, <code>SKIPPED</code> or <code>DEAD_LETTER</code>. <code>DEAD_LETTER</code> means the work was retried as often as it
+was allowed to be and has been given up on.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>--status</code> and <code>--state</code> only accept the values above. A value outside the list is
+reported as an error rather than answered with an empty list, so a typo cannot be mistaken for
+&#34;nothing matched&#34;.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

@@ -78,6 +78,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/nodes/metadata/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/assign/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/loom/authentication/</loc>
   </url><url>
     <loc>https://metaloom.io/author/</loc>
@@ -103,6 +105,8 @@
     <loc>https://metaloom.io/docs/loom/containers/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/guard/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/loom/database-integrity/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/dedup/</loc>
   </url><url>
@@ -166,6 +170,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/cortex/monitoring/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/nodes/move/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/nodes/objectdetect/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/ocr/</loc>
@@ -191,6 +197,8 @@
     <loc>https://metaloom.io/docs/nodes/scene-layout/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/script/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/loom/search-indices/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/sam2/</loc>
   </url><url>

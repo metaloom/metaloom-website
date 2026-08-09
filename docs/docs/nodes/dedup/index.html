@@ -7,7 +7,7 @@
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to decide that two files are &amp;#34;the same&amp;#34;:">
+	<meta name="description" content="The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move anything themselves — you wire their result into a Move node, which decides where the extra copy …">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/dedup/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Deduplication | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/dedup/">
-    <meta property="og:description" content="The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to decide that two files are &amp;#34;the same&amp;#34;:">
+    <meta property="og:description" content="The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move anything themselves — you wire their result into a Move node, which decides where the extra copy …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Deduplication">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Deduplication | MetaLoom">
-    <meta name="twitter:description" content="The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to decide that two files are &amp;#34;the same&amp;#34;:">
+    <meta name="twitter:description" content="The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move anything themselves — you wire their result into a Move node, which decides where the extra copy …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Deduplication">
 
@@ -196,6 +196,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/nodes/assign/">Assign</a>
+				</li>
+				
+				<li>
 					<a href="/docs/nodes/captioning/">Captioning</a>
 				</li>
 				
@@ -257,6 +261,10 @@
 				
 				<li>
 					<a href="/docs/nodes/llm/">LLM Enrichment</a>
+				</li>
+				
+				<li>
+					<a href="/docs/nodes/move/">Move</a>
 				</li>
 				
 				<li>
@@ -439,8 +447,10 @@
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
-<p>The deduplication nodes find duplicate media and move the extra copies aside. There are two ways to
-decide that two files are &#34;the same&#34;:</p>
+<p>The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move
+anything themselves — you wire their result into a <a href="../move/">Move</a> node, which decides where the
+extra copy goes and whether the original survives. There are two ways to decide that two files are
+&#34;the same&#34;:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -454,7 +464,7 @@ automatically: they are collected for a person to confirm first.</p>
 </li>
 </ul>
 </div>
-<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dedup&#34;,&#34;applies&#34;:&#34;Any file · Video&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;duplicate groups for review + processing ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;sha512-dedup&#34;,&#34;note&#34;:&#34;exact duplicates by content hash&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash — typically the hash port of a sha512 node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;duplicate moved&#34;,&#34;d&#34;:&#34;the extra copy is moved into dupFolder&#34;}]},{&#34;name&#34;:&#34;fingerprint-dedup&#34;,&#34;note&#34;:&#34;finds near-duplicates and submits them for review&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;fingerprint&#34;,&#34;l&#34;:&#34;fingerprint&#34;,&#34;d&#34;:&#34;the perceptual code, from the fingerprint port of a fingerprint node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;review group created&#34;,&#34;d&#34;:&#34;a duplicate group awaiting a human decision — no file is touched&#34;}]},{&#34;name&#34;:&#34;fingerprint-dedup-apply&#34;,&#34;note&#34;:&#34;carries out confirmed decisions&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash, identifying the file to check against confirmed decisions&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;confirmed duplicate moved&#34;,&#34;d&#34;:&#34;only for groups a reviewer confirmed&#34;}]}]}"></div>
+<div class="ml-nodeviz" data-nodeviz="{&#34;kind&#34;:&#34;dedup&#34;,&#34;applies&#34;:&#34;Any file · Video&#34;,&#34;badge&#34;:&#34;CPU only&#34;,&#34;persist&#34;:&#34;duplicate groups for review + processing ledger&#34;,&#34;configs&#34;:[{&#34;name&#34;:&#34;sha512-dedup&#34;,&#34;note&#34;:&#34;exact duplicates by content hash&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash — typically the hash port of a sha512 node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;duplicate&#34;,&#34;d&#34;:&#34;the redundant copy — wire this into a Move node&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;original&#34;,&#34;d&#34;:&#34;where the copy the system already knew about lives&#34;}]},{&#34;name&#34;:&#34;fingerprint-dedup&#34;,&#34;note&#34;:&#34;finds near-duplicates and submits them for review&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;fingerprint&#34;,&#34;l&#34;:&#34;fingerprint&#34;,&#34;d&#34;:&#34;the perceptual code, from the fingerprint port of a fingerprint node&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;action&#34;,&#34;l&#34;:&#34;review group created&#34;,&#34;d&#34;:&#34;a duplicate group awaiting a human decision — no file is touched&#34;}]},{&#34;name&#34;:&#34;fingerprint-dedup-apply&#34;,&#34;note&#34;:&#34;passes on confirmed decisions&#34;,&#34;inputs&#34;:[{&#34;t&#34;:&#34;hash&#34;,&#34;l&#34;:&#34;hash&#34;,&#34;d&#34;:&#34;any content hash, identifying the file to check against confirmed decisions&#34;}],&#34;outputs&#34;:[{&#34;t&#34;:&#34;image&#34;,&#34;l&#34;:&#34;confirmed_dup&#34;,&#34;d&#34;:&#34;only for groups a reviewer confirmed, and only once the keeper has been re-verified&#34;},{&#34;t&#34;:&#34;string&#34;,&#34;l&#34;:&#34;keep_path&#34;,&#34;d&#34;:&#34;where the copy being kept lives&#34;}]}]}"></div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -475,11 +485,11 @@ automatically: they are collected for a person to confirm first.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Output ports</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None — these nodes work by side effect (creating review entries, or moving files)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sha512-dedup</code> emits <code>duplicate</code> and <code>original</code>; <code>fingerprint-dedup-apply</code> emits <code>confirmed_dup</code> and <code>keep_path</code>. Both stay silent when there is nothing to act on. <code>fingerprint-dedup</code> has none — it writes review entries</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CPU only. <strong>Storage</strong>: duplicates are moved to a configured folder, so the worker needs write access there.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CPU only. Nothing is written to disk by these nodes.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Persists to</p></td>
@@ -491,8 +501,8 @@ automatically: they are collected for a person to confirm first.</p>
 <h2 id="_finding_near_duplicate_videos">Finding near-duplicate videos</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Near-duplicate detection is a three-step workflow, and the split is deliberate: nothing is moved
-until a person has agreed to it.</p>
+<p>Near-duplicate detection is a four-step workflow, and the split is deliberate: nothing is moved until
+a person has agreed to it, and the moving itself is a step you can see.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -502,12 +512,19 @@ fingerprinted video and groups the ones that match closely enough. Each group re
 <strong>keep</strong> and one or more <strong>duplicates</strong>. <strong>No file is changed at this stage.</strong></p>
 </li>
 <li>
-<p><strong>Review.</strong> The groups wait for a decision. Confirming a group approves the proposed clean-up;
-rejecting it means those files are never touched again.</p>
+<p><strong>Review.</strong> The groups queue up under <strong>Workflow → Dedup</strong>, where you work through them a keystroke
+at a time — see <a href="../../ui/#reviewing-duplicates">Reviewing duplicates</a>. Confirming a group
+approves the proposed clean-up; rejecting it means those files are never touched again. Once you
+have decided a set of files, the search will not put it back in the queue on the next run.</p>
 </li>
 <li>
-<p><strong>Apply.</strong> <code>fingerprint-dedup-apply</code> acts only on confirmed groups, and re-checks the file it is
-about to keep before moving anything.</p>
+<p><strong>Confirm.</strong> <code>fingerprint-dedup-apply</code> acts only on confirmed groups, re-checks the file that would
+be kept against what is on disk right now, and passes the redundant copy on. It touches no files.</p>
+</li>
+<li>
+<p><strong>Move.</strong> A <a href="../move/">Move</a> node takes it from there — into a trash folder, an archive bucket,
+or wherever you decided. This is the only step that changes anything on disk, and you can leave it
+in dry-run until you trust the rest.</p>
 </li>
 </ol>
 </div>
@@ -534,14 +551,30 @@ group at all when that choice looks unsafe — for example when one of the candi
 is that a clean-up can only ever discard the lesser copy.</p>
 </div>
 <div class="paragraph">
-<p>Before it moves anything, the apply step checks all over again against the files as they are on disk
-right now: the file being kept must still exist, still be complete, still be at least as large as the
-duplicate, and must not itself already be sitting in the duplicates folder. If any of that no longer
-holds, the move is skipped rather than guessed at.</p>
+<p>Before it passes anything on, the apply step checks all over again against the files as they are on
+disk right now: the file being kept must still exist, still be complete, still be at least as large as
+the duplicate, and must still hold the same content it had when the group was proposed. If any of that
+no longer holds, the item is skipped rather than guessed at, and nothing appears on its output port.</p>
+</div>
+<div class="paragraph">
+<p>That last check matters most when a review has been sitting in the queue for a while: a file that was
+replaced in place in the meantime still exists and is still the right size, but is no longer the copy
+the reviewer approved. Verifying it costs nothing when a checksum is already on record for the file,
+which is the normal case once it has been through a hash step.</p>
 </div>
 <div class="paragraph">
 <p>Both steps are safe to re-run. Re-running the search updates the same pending group instead of piling
-up new ones, and re-running the apply step skips files that have already been moved.</p>
+up new ones, and the <a href="../move/">Move</a> node at the end skips files that are already at their
+destination.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wiring_it_up">Wiring it up</h3>
+<div class="paragraph">
+<p>Connect <code>confirmed_dup</code> to the <code>media</code> port of a <a href="../move/">Move</a> node. That node decides where
+confirmed duplicates go — a trash folder you can still look in, or an archive bucket — and whether the
+original is removed once the destination has been verified. Keeping that decision in the pipeline
+rather than in a worker’s configuration is the point: it is visible to whoever drew the graph.</p>
 </div>
 </div>
 </div>
@@ -551,12 +584,12 @@ up new ones, and re-running the apply step skips files that have already been mo
 <div class="sectionbody">
 <div class="imageblock ml-panel-shot">
 <div class="content">
-<img src="config.png" alt="The Hash Deduplication settings panel: Duplicates Folder"/>
+<img src="config.png" alt="The Deduplication settings panel"/>
 </div>
 <div class="title">Figure 1. The node’s settings in the pipeline editor</div>
 </div>
 <div class="paragraph">
-<p>Exact-hash dedup and the apply step (<code>DedupNodeOptions</code>):</p>
+<p>The apply step (<code>DedupNodeOptions</code>):</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -571,11 +604,25 @@ up new ones, and re-running the apply step skips files that have already been mo
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dupFolder</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target directory that detected duplicates are moved into</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keepExcludeFolder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Never act when the file being <strong>kept</strong> is itself inside this folder. Set it to the same folder your Move node trashes into, so a copy that has already been discarded can never be used to justify discarding another. Empty by default, which turns the check off</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+These nodes used to have a <code>dupFolder</code> setting and moved files into it themselves. That setting
+is gone. If you have it in a worker configuration it is now ignored — add a <a href="../move/">Move</a> node
+to your pipeline instead, or duplicates will simply stop being cleared.
+</td>
+</tr>
+</tbody></table>
+</div>
 <div class="paragraph">
 <p>Near-duplicate search (<code>fingerprint-dedup</code>):</p>
 </div>
@@ -619,24 +666,15 @@ up new ones, and re-running the apply step skips files that have already been mo
 <h2 id="_seeing_it_run">Seeing it run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced. This one
-is the exception in the catalogue: it declares <strong>no output ports at all</strong>. What it does is move a
-file and record the fact, so there is nothing to draw on the node card — and the card correctly draws
-nothing.</p>
-</div>
-<div class="paragraph">
-<p>The place its work shows up is the node’s own Results tab, which the run detail opens:</p>
+<p>Turn on <a href="../../pipeline/#debug-mode">Debug Mode</a> and every node keeps what it produced. For a file
+that turned out to be a duplicate you will see the <code>duplicate</code> port carrying it, and <code>original</code>
+naming the copy the system already had. For a file that did not, both stay empty — which is exactly
+how the routing works: a downstream node wired to <code>duplicate</code> simply receives nothing for that item.</p>
 </div>
 <div class="imageblock ml-panel-shot">
 <div class="content">
-<img src="debug.png" alt="The dedup node’s Results tab after a real run: COMPLETED in 23ms" width="with no outputs recorded"/>
+<img src="debug.png" alt="The dedup node’s Results tab after a real run"/>
 </div>
-</div>
-<div class="paragraph">
-<p>That is a real run against a real Loom: an asset already existed for one copy of the file, a second
-copy of the same bytes was fed in, and the node matched them by hash and moved the second one into
-the duplicates folder. <code>No outputs were recorded</code> is the honest answer — the result lives on the
-filesystem and in the asset’s history, not on a port.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -645,9 +683,8 @@ filesystem and in the asset’s history, not on a port.</p>
 <div class="title">Tip</div>
 </td>
 <td class="content">
-If you want a downstream node to react to a duplicate, do not wire it to this one. Put
-<a href="../hash/">Hash</a> upstream of both and branch on what you need, or read the asset’s history back
-through the API.
+The empty case is not a failure. A pipeline that finds no duplicates should show a green run with
+silent ports, and that is what it does.
 </td>
 </tr>
 </tbody></table>
@@ -668,7 +705,7 @@ and clear out the redundant copies once approved.</p>
 </li>
 <li>
 <p><strong>Reclaiming storage safely</strong> — the review step means a large clean-up can be checked before any
-file moves.</p>
+file moves, and the Move node at the end can be left in dry-run until you are satisfied.</p>
 </li>
 </ul>
 </div>
