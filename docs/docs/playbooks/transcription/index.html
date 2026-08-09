@@ -151,11 +151,28 @@
 </section>
 
 
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+
 <section class="section docs-section">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 d-none d-lg-block">
         <div class="docs-sidebar toc-sticky-top">
+          
+
+
+<form class="docs-search docs-search-rail" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-rail">Search the documentation</label>
+	<input type="search" id="docs-search-rail" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+</form>
+
           <div class="docs-sidebar-title">On this page</div>
           <nav id="toc"></nav>
           
@@ -305,6 +322,16 @@
         </div>
       </div>
       <div class="col-lg-9">
+        
+        <div class="d-lg-none">
+
+
+<form class="docs-search docs-search-narrow" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-narrow">Search the documentation</label>
+	<input type="search" id="docs-search-narrow" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+</form>
+</div>
         
         
         
@@ -858,6 +885,14 @@ never both, they are alternatives — and the concrete content type keeps everyt
     </div>
   </div>
 </section>
+
+
+<script src="/js/docs-search.min.0e9326b5ebdc33c20f80b41ad58a22fc781a28b2e113755f89be07449a0962cea037c0175f55f6a22c6e544fb5c968f5.js" integrity="sha384-DpMmtevcM8IPgLQa1Yoi/HgaKLLhE3Vfib4HRJoJYs6gN8AXX1X2oixuVE&#43;1yWj1" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
 
   </div><!-- Footer -->
 
