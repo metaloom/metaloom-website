@@ -388,6 +388,11 @@ those.</p>
 <p>Open <strong>Admin → Database Integrity</strong> and press <strong>Run checks</strong>. Nothing is changed by running it: the
 report reads, counts and reports, and never repairs.</p>
 </div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="db-integrity-clean.png" alt="The Database Integrity screen on a healthy catalogue: a green summary" width="and every check listed with a Passed status"/>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -425,18 +430,21 @@ takes well under a second.</p>
 <h2 id="_reading_the_report">Reading The Report</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A clean report says how many checks ran and that all of them passed. That second half matters: it is
-what tells you the answer is &#34;nothing is wrong&#34; rather than &#34;nothing was looked at&#34;.</p>
+<p>The screen lists <strong>every</strong> check, grouped by what it looks for, whether or not it found anything. That
+is deliberate: a list of problems tells you what is wrong, but not what was examined, and when you
+have come here because something looks off you usually want both. The counters along the top say how
+many checks reported errors, how many reported warnings and how many passed.</p>
 </div>
 <div class="paragraph">
-<p>When something is found, each finding shows:</p>
+<p>Each row shows:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Check</dt>
 <dd>
-<p>A stable identifier such as <code>DANGLING_SEARCH_DOCUMENT</code>. Quote this when asking for help; the
-wording next to it may change between versions, but the identifier will not.</p>
+<p>The name of the check, with its identifier underneath — something like
+<code>DANGLING_SEARCH_DOCUMENT</code>. Quote the identifier when asking for help; the name above it may be
+reworded between versions, but the identifier will not.</p>
 </dd>
 <dt class="hdlist1">Where</dt>
 <dd>
@@ -444,24 +452,39 @@ wording next to it may change between versions, but the identifier will not.</p>
 </dd>
 <dt class="hdlist1">Rows</dt>
 <dd>
-<p>How many records are affected.</p>
+<p>How many records are affected. Zero for a check that passed.</p>
 </dd>
-<dt class="hdlist1">Severity</dt>
+<dt class="hdlist1">Status</dt>
 <dd>
-<p><strong>Error</strong> means something the software will misread or fail on. <strong>Warning</strong> means something
-that looks wrong but that a person has to judge — a record with no name may simply be one nobody has
-named yet.</p>
+<p><strong>Passed</strong>, or the severity of what it found. <strong>Error</strong> means something the software will
+misread or fail on. <strong>Warning</strong> means something that looks wrong but that a person has to judge — a
+record with no name may simply be one nobody has named yet.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Expanding a row lists the identifiers of the affected records, up to a limit. When there are more
-than the list shows, it says so — the count above is always the complete figure.</p>
+<p>Expanding any row explains what that check is for. On a row that found something it also lists the
+identifiers of the affected records, up to a limit; when there are more than the list shows, it says
+so — the count beside it is always the complete figure.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="db-integrity-findings.png" alt="The Database Integrity screen with findings: two checks reporting rows" width="one expanded to show the affected records"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Switch the toggle to <strong>Findings only</strong> when the catalogue gets in the way and you just want the list of
+problems. Groups whose checks all passed disappear with them.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="db-integrity-filtered.png" alt="The same report with the Findings only filter applied" width="showing four problems across three groups"/>
+</div>
 </div>
 <div class="paragraph">
 <p>A check can also report <strong>Did not run</strong>. That is neither a pass nor a fail: it means the check itself
-could not complete, so nothing is known about the rule it covers. One check failing this way does not
-stop the others.</p>
+could not complete, so nothing is known about the rule it covers, and it is counted separately from
+both the passes and the findings. One check failing this way does not stop the others.</p>
 </div>
 </div>
 </div>
