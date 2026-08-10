@@ -126,5 +126,12 @@
       <guid>https://metaloom.io/docs/loom/search-indices/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are&#xA;maintained automatically and you can normally ignore them. This page is for the times you cannot: after&#xA;a bulk import, after changing an embedding model, or when search is returning less than you expect.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
+    <item>
+      <title>Storage Usage</title>
+      <link>https://metaloom.io/docs/loom/storage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/storage/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Everything Loom holds that is not a database row is a file: the media you uploaded, the thumbnails&#xA;and face crops produced while processing it, the pictures attached to people and to accounts. This&#xA;page is about seeing how much of it there is and how much room is left.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
   </channel>
 </rss>

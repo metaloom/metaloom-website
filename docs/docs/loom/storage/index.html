@@ -2,32 +2,32 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>GraphQL API | MetaLoom</title>
+	<title>Storage Usage | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+	<meta name="description" content="Everything Loom holds that is not a database row is a file: the media you uploaded, the thumbnails and face crops produced while processing it, the pictures attached to people and to accounts. This …">
 	
 	<meta name="author" content="Jotschi">
-<link rel="canonical" href="https://metaloom.io/docs/loom/graphql-api/">
+<link rel="canonical" href="https://metaloom.io/docs/loom/storage/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="GraphQL API | MetaLoom">
-    <meta property="og:url" content="https://metaloom.io/docs/loom/graphql-api/">
-    <meta property="og:description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+    <meta property="og:title" content="Storage Usage | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/storage/">
+    <meta property="og:description" content="Everything Loom holds that is not a database row is a file: the media you uploaded, the thumbnails and face crops produced while processing it, the pictures attached to people and to accounts. This …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta property="og:image:alt" content="GraphQL API">
+    <meta property="og:image:alt" content="Storage Usage">
     <meta property="og:locale" content="en_US">
 
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="GraphQL API | MetaLoom">
-    <meta name="twitter:description" content="Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset together with its components and locations in a single request, selecting exactly the fields you …">
+    <meta name="twitter:title" content="Storage Usage | MetaLoom">
+    <meta name="twitter:description" content="Everything Loom holds that is not a database row is a file: the media you uploaded, the thumbnails and face crops produced while processing it, the pictures attached to people and to accounts. This …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
-    <meta name="twitter:image:alt" content="GraphQL API">
+    <meta name="twitter:image:alt" content="Storage Usage">
 
 
 	<meta name="generator" content="Hugo 0.161.1">
@@ -264,7 +264,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/loom/graphql-api/" class="is-current" aria-current="page">GraphQL API</a>
+					<a href="/docs/loom/graphql-api/">GraphQL API</a>
 				</li>
 				
 				<li>
@@ -296,7 +296,7 @@
 				</li>
 				
 				<li>
-					<a href="/docs/loom/storage/">Storage Usage</a>
+					<a href="/docs/loom/storage/" class="is-current" aria-current="page">Storage Usage</a>
 				</li>
 				
 			</ul>
@@ -376,78 +376,52 @@
         
         <header class="page-head">
           <p class="page-eyebrow">Loom</p>
-          <h1>GraphQL API</h1>
+          <h1>Storage Usage</h1>
           
         </header>
         <div class="post-single-content docs-main-content">
-          <div class="paragraph">
-<p>Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset
-together with its components and locations in a single request, selecting exactly the fields you
-need.</p>
-</div>
-<div class="sect1">
-<h2 id="_endpoint">Endpoint</h2>
+          <div id="preamble">
 <div class="sectionbody">
-<div class="listingblock">
+<div class="paragraph">
+<p>Everything Loom holds that is not a database row is a file: the media you uploaded, the thumbnails
+and face crops produced while processing it, the pictures attached to people and to accounts. This
+page is about seeing how much of it there is and how much room is left.</p>
+</div>
+<div class="paragraph">
+<p>Open <strong>Admin → Storage</strong>. Nothing is changed by looking: the report reads, counts and reports.</p>
+</div>
+<div class="imageblock img-fluid">
 <div class="content">
-<pre>POST http://&lt;host&gt;:8092/api/v1/graphql</pre>
+<img src="storage-overview.png" alt="The Storage screen: a summary of stored objects and space saved" width="one card per storage backend" height="and a table of usage by kind of content"/>
 </div>
-</div>
-<div class="paragraph">
-<p>The endpoint accepts a JSON body with <code>query</code>, and optional <code>operationName</code> and <code>variables</code> fields,
-and returns the standard GraphQL <code>{ &#34;data&#34;: …​, &#34;errors&#34;: …​ }</code> response shape.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_authentication_authorization">Authentication &amp; Authorization</h2>
+<h2 id="_the_two_byte_columns">The two byte columns</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The GraphQL endpoint reuses the REST authentication stack — a valid JWT bearer token (HttpOnly
-cookie or <code>Authorization</code> header) is required; unauthenticated requests are rejected with <code>401</code>
-before the query is parsed. Obtain a token via the <a href="../authentication/">Authentication</a> flow.</p>
+<p>The table gives every kind of content two sizes, and they are usually different numbers.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Claimed</dt>
+<dd>
+<p>The sum of every element’s size. If you have nine hundred face crops of 40 KB each, this
+says 36 MB. It is the figure to use when deciding what a customer or a project has accumulated.</p>
+</dd>
+<dt class="hdlist1">On disk</dt>
+<dd>
+<p>What those elements actually occupy. Loom stores content by its fingerprint, so two
+elements holding byte-identical content are stored once. If most of those nine hundred crops are
+duplicates, this column may say 4 MB.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>Authorization is enforced per field. Each resolver checks the caller’s permissions:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 66.6666%;"/>
-<col style="width: 33.3334%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Field</th>
-<th class="tableblock halign-left valign-top">Required permission</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Query.asset</code>, <code>Query.assets</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.imageComponents</code> / <code>videoComponents</code> / <code>audioComponents</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.locations</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET_LOCATION</code></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>A denied field surfaces a GraphQL error with a <code>code</code> extension (<code>UNAUTHENTICATED</code> when no
-permission context is present, <code>FORBIDDEN</code> with the missing <code>permission</code> otherwise).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_interactive_explorer_graphiql">Interactive Explorer (GraphiQL)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The GraphiQL explorer below is loaded with the Loom schema so you can browse every type and field
-via the <strong>Docs</strong> panel (top-left) and compose queries with autocomplete and validation.</p>
+<p>The gap between them is shown as <strong>Saved</strong>, and on an installation with a lot of derived material it is
+often the larger part of the total. Neither number alone is the truth: the first overstates what you
+would free by deleting things, and the second gives no sense of how much material there is.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -456,74 +430,152 @@ via the <strong>Docs</strong> panel (top-left) and compose queries with autocomp
 <div class="title">Note</div>
 </td>
 <td class="content">
-This embedded explorer is <strong>schema-only</strong> — it runs against the published static schema, so the
-<strong>Execute</strong> button does not return live data here. To run real queries, start a Loom server (for
-example the demo container) and open its built-in GraphiQL at <code>http://&lt;host&gt;:8092/graphiql</code>, which
-executes authenticated queries against <code>/api/v1/graphql</code>.
+<div class="paragraph">
+<p>The <strong>On disk</strong> column does not add up down the page. One stored file can belong to two kinds at once —
+adding a face crop to a person’s pictures deliberately keeps a single copy of the image and lets both
+refer to it. The single <strong>on disk</strong> figure in the summary at the top is the real total and is counted
+separately.</p>
+</div>
 </td>
 </tr>
 </tbody></table>
 </div>
-<div id="graphiql" style="height: 70vh;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example_queries">Example Queries</h2>
+<h2 id="_space_still_in_use_after_a_delete">Space still in use after a delete</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Fetch a single asset with all of its components and locations:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">query GetAsset($uuid: ID!) {
-  asset(uuid: $uuid) {
-    uuid
-    filename
-    mimeType
-    size
-    imageComponents { uuid dominantColor width height }
-    videoComponents { uuid source }
-    audioComponents { uuid source }
-    locations { uuid path libraryUuid mimeType }
-  }
-}</code></pre>
-</div>
+<p>The summary shows an <strong>unreferenced</strong> figure when there is one: stored files that nothing points at any
+more.</p>
 </div>
 <div class="paragraph">
-<p>List all assets with a minimal field selection:</p>
+<p>Removing a picture, a face crop or an attachment removes the record of it immediately, and it stops
+appearing everywhere in Loom. The file itself is not removed in the same step, because the same file
+may still be in use by something else — that is the flip side of storing identical content once.
+Reclaiming it is a separate piece of housekeeping.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">query ListAssets {
-  assets {
-    uuid
-    filename
-    mimeType
-    size
-  }
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>In practice this figure grows slowly and is worth watching rather than acting on. If it becomes a
+large share of your storage, that is worth raising.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_see_also">See Also</h2>
+<h2 id="_storage_backends">Storage backends</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="../rest-api/">REST API Reference</a> — the primary external API with full CRUD.</p>
-</li>
-<li>
-<p><a href="../java-client/">Java Client</a> — typed JVM HTTP client.</p>
-</li>
-<li>
-<p><a href="../python-client/">Python Client</a> — typed Python client, no third-party dependencies.</p>
-</li>
-<li>
-<p><a href="../authentication/">Authentication</a> — obtaining a bearer token.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>One card per place Loom writes to: the default storage directory, plus one for every storage pool you
+have configured.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Free space</dt>
+<dd>
+<p>How much room the volume has, and how much it has in total. The bar and the status
+label come from two thresholds you configure — see below.</p>
+</dd>
+<dt class="hdlist1">Not measurable</dt>
+<dd>
+<p>What an S3 or compatible object store reports. A bucket has no size and no free
+space, so Loom says so rather than showing a reassuring green bar for a question that was never
+asked. The number of objects and the bytes they occupy are still counted, since those come from
+Loom’s own records.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>A pool Loom cannot reach — a bucket that has been renamed, credentials that have expired — is
+reported on its own card with the reason. The rest of the report is unaffected.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_thresholds_and_what_happens_when_you_cross_them">Thresholds, and what happens when you cross them</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Two settings, both in bytes:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>LOOM_STORAGE_MIN_FREE_SPACE</code></dt>
+<dd>
+<p>The hard limit, 1 GiB by default. Once a volume has less than this
+free, Loom <strong>refuses new uploads to it</strong> with a clear error rather than filling the disk and taking the
+database down with it. The backend shows as <strong>Full</strong>.</p>
+</dd>
+<dt class="hdlist1"><code>LOOM_STORAGE_WARN_FREE_SPACE</code></dt>
+<dd>
+<p>The early warning, 5 GiB by default. Below this the backend shows as
+<strong>Low</strong> and a warning is written to the log. Nothing is refused.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Both apply to every kind of upload — media, attachments, pictures of people, account pictures. Neither
+applies to an object store, which has no capacity to run out of.</p>
+</div>
+<div class="paragraph">
+<p>Loom re-checks free space in the background every five minutes
+(<code>LOOM_STORAGE_SPACE_CHECK_INTERVAL_MS</code>) and logs a warning or an error when a backend crosses a
+threshold, so a filling disk shows up in your logs without anyone opening this screen. The same
+figures are exported as metrics — see <a href="../metrics">Metrics</a> for <code>loom_storage_free_bytes</code>,
+<code>loom_storage_watermark</code> and their siblings.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kinds_of_content">Kinds of content</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Media files</dt>
+<dd>
+<p>The originals you uploaded. Almost always the largest row.</p>
+</dd>
+<dt class="hdlist1">Asset thumbnails</dt>
+<dd>
+<p>Preview images generated during processing.</p>
+</dd>
+<dt class="hdlist1">Face crops</dt>
+<dd>
+<p>The cutout of each detected face, stored so that reviewing faces does not mean fetching
+the whole video frame every time.</p>
+</dd>
+<dt class="hdlist1">Person pictures and Person avatars</dt>
+<dd>
+<p>The pictures belonging to a person. The avatar is whichever one
+of them is shown as that person’s face; it is listed separately so you can see how much of the total
+is the gallery rather than the picture actually in use.</p>
+</dd>
+<dt class="hdlist1">Account pictures</dt>
+<dd>
+<p>Profile pictures uploaded by users on their own profile page.</p>
+</dd>
+<dt class="hdlist1">Embedding attachments</dt>
+<dd>
+<p>Data stored alongside a similarity embedding.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>A future release may add a kind; it will appear as a new row rather than being folded into an
+existing one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_who_can_see_it">Who can see it</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Reading this screen needs the <code>READ_STORAGE</code> permission. It is granted to the administrator role by
+default. It is deliberately separate from the permission to <strong>edit</strong> storage pools: seeing how full a
+volume is and being able to repoint it at a different bucket are different things to trust somebody
+with.</p>
+</div>
+<div class="paragraph">
+<p>See also <a href="binary-storage">Binary Storage</a> for where the bytes go and how to choose between disk
+and S3 per library.</p>
 </div>
 </div>
 </div>
