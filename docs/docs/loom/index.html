@@ -7,7 +7,7 @@
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="MetaLoom // Loom is the media asset management server at the heart of the MetaLoom platform. It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for managing digital media assets …">
+	<meta name="description" content="MetaLoom // Loom is the media asset management server at the heart of the MetaLoom platform. It exposes a REST API over HTTP, a GraphQL API, and a gRPC API for managing digital media assets and all …">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/loom/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Loom | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/loom/">
-    <meta property="og:description" content="MetaLoom // Loom is the media asset management server at the heart of the MetaLoom platform. It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for managing digital media assets …">
+    <meta property="og:description" content="MetaLoom // Loom is the media asset management server at the heart of the MetaLoom platform. It exposes a REST API over HTTP, a GraphQL API, and a gRPC API for managing digital media assets and all …">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Loom">
     <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
     <meta name="twitter:title" content="Loom | MetaLoom">
-    <meta name="twitter:description" content="MetaLoom // Loom is the media asset management server at the heart of the MetaLoom platform. It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for managing digital media assets …">
+    <meta name="twitter:description" content="MetaLoom // Loom is the media asset management server at the heart of the MetaLoom platform. It exposes a REST API over HTTP, a GraphQL API, and a gRPC API for managing digital media assets and all …">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Loom">
 
@@ -283,6 +283,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/loom/mcp/">MCP Server</a>
+				</li>
+				
+				<li>
 					<a href="/docs/loom/metrics/">Metrics</a>
 				</li>
 				
@@ -296,6 +300,10 @@
 				
 				<li>
 					<a href="/docs/loom/search-indices/">Search Indices</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/sharing/">Sharing</a>
 				</li>
 				
 				<li>
@@ -388,7 +396,7 @@
         <div class="post-single-content docs-content docs-main-content">
           <div class="paragraph">
 <p>MetaLoom // <strong>Loom</strong> is the media asset management server at the heart of the MetaLoom platform.
-It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for managing digital media assets and all related entities.</p>
+It exposes a REST API over HTTP, a GraphQL API, and a gRPC API for managing digital media assets and all related entities.</p>
 </div>
 <div class="sect1">
 <h2 id="_components">Components</h2>
@@ -400,6 +408,12 @@ It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for man
 </li>
 <li>
 <p><strong>GraphQL API</strong> — Flexible, nested queries over the asset model, with an interactive explorer. See <a href="graphql-api">GraphQL API</a>.</p>
+</li>
+<li>
+<p><strong>gRPC API</strong> — Binary RPC over HTTP/2 on its own port, for integrations that want a generated client. Coordinates for the Java client are in <a href="maven-artifacts">Maven Artifacts</a>.</p>
+</li>
+<li>
+<p><strong>MCP Server</strong> — Connect Claude Desktop, an IDE or your own AI agent to your library over the Model Context Protocol. See <a href="mcp">MCP Server</a>.</p>
 </li>
 <li>
 <p><strong>Java Client</strong> — Typed HTTP client for JVM applications. See <a href="java-client">Java Client Usage</a>.</p>
@@ -424,6 +438,9 @@ It exposes a REST API over HTTP, a GraphQL API, and a gRPC API (planned) for man
 </li>
 <li>
 <p><strong>Storage Usage</strong> — How much space each kind of content uses, and how full each storage backend is. See <a href="storage">Storage Usage</a>.</p>
+</li>
+<li>
+<p><strong>Sharing</strong> — Send a link to somebody without a Loom account, and collect their feedback on it. See <a href="sharing">Sharing</a>.</p>
 </li>
 <li>
 <p><strong>Artifacts</strong> — Maven coordinates, containers and the Helm chart. See <a href="artifacts">Artifacts</a>.</p>

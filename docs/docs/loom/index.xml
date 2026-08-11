@@ -99,6 +99,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Loom artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_bom_pom&#34;&gt;BOM POM&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Use the BOM to align versions across Loom and Cortex modules:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>MCP Server</title>
+      <link>https://metaloom.io/docs/loom/mcp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/mcp/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom speaks the &lt;strong&gt;Model Context Protocol (MCP)&lt;/strong&gt; — the open protocol AI clients use to reach the&#xA;tools and data of another system. Point Claude Desktop, an MCP-capable IDE or your own agent at&#xA;Loom, and the assistant can search your media library, read an asset’s metadata, explain a&#xA;processing pipeline, design a new one, and run a node against a file — all with the permissions of&#xA;the account whose token it was given.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Metrics</title>
       <link>https://metaloom.io/docs/loom/metrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -125,6 +132,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/search-indices/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom keeps several indices so that searching, face matching and duplicate detection are fast. They are&#xA;maintained automatically and you can normally ignore them. This page is for the times you cannot: after&#xA;a bulk import, after changing an embedding model, or when search is returning less than you expect.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Sharing</title>
+      <link>https://metaloom.io/docs/loom/sharing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/sharing/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Not everyone who needs to see your material should need an account. A &lt;strong&gt;share link&lt;/strong&gt; is a single URL&#xA;you can send to a client, a colleague at another company, or anyone else outside your Loom&#xA;installation. They open it in a browser and see exactly what you shared — one file, or a whole&#xA;collection — with nothing else around it.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Storage Usage</title>

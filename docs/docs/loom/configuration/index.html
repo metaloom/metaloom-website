@@ -280,6 +280,10 @@
 				</li>
 				
 				<li>
+					<a href="/docs/loom/mcp/">MCP Server</a>
+				</li>
+				
+				<li>
 					<a href="/docs/loom/metrics/">Metrics</a>
 				</li>
 				
@@ -293,6 +297,10 @@
 				
 				<li>
 					<a href="/docs/loom/search-indices/">Search Indices</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/sharing/">Sharing</a>
 				</li>
 				
 				<li>
@@ -584,6 +592,63 @@ Environment variables take precedence over values in <code>loom.yml</code>.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_cortex_worker_presence">Cortex worker presence</h3>
+<div class="paragraph">
+<p>Cortex workers heartbeat over the processor WebSocket. A worker whose host dies, is
+partitioned or freezes may leave a half-open connection behind: the socket never closes,
+so without a timeout Loom would keep the worker online and keep sending it work. Loom
+therefore expires a worker that has gone silent, marks it offline, and immediately
+re-places whatever it was running on another worker. A worker that comes back simply
+re-registers; its saved node restrictions are untouched.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_PROCESSOR_EXPIRY_ENABLED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expire workers that stop heartbeating. Set to <code>false</code> when debugging a worker locally — a worker paused on a breakpoint stops heartbeating</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_PROCESSOR_HEARTBEAT_INTERVAL_MS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How often a worker is expected to report in; also how often Loom checks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_PROCESSOR_MISSED_HEARTBEATS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>6</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reports a worker may miss before it is expired. With the defaults that is 60 seconds of silence</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Raise <code>LOOM_PROCESSOR_MISSED_HEARTBEATS</code> rather than lowering it on a congested
+network. Expiring a worker that was only briefly unreachable is safe but costs duplicated
+work, because the tasks it was running are handed to another worker while it may still be
+finishing them.
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_storage">Storage</h3>
