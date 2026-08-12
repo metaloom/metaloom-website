@@ -48,10 +48,6 @@
 	
 	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
 	
-	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
-	
-	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
-	
 
 	<!-- Main Stylesheet -->
 	
@@ -381,6 +377,10 @@ versions they ran with</p>
 outside your installation (see <a href="../loom/sharing/">Sharing</a>)</p>
 </li>
 <li>
+<p><strong>Remixes</strong> — group the versions of one piece of work into a single card in the asset grid
+(see <a href="../loom/remixes/">Remixes</a>)</p>
+</li>
+<li>
 <p><strong>Tasks</strong> — a Kanban-style task board with priority, status, due dates and per-asset tasks</p>
 </li>
 <li>
@@ -519,7 +519,7 @@ The memory view lets an administrator browse and edit those notes; the agent see
 </div>
 </div>
 <div class="sect1">
-<h2 id="assets">Search</h2>
+<h2 id="search">Search</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The search box sits at the top of the left navigation and is available from every screen. Unlike the
@@ -676,7 +676,7 @@ search outage never takes the rest of the application with it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_assets">Assets</h2>
+<h2 id="assets">Assets</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The asset browser shows every asset with search, status and type filters and switchable grid/list and
@@ -1050,9 +1050,15 @@ convincing &#34;duplicate&#34; sometimes turns out to be</p>
 </li>
 </ul>
 </div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="workflow-dedup.png" alt="The deduplication queue: the file suggested for keeping framed in green with its size and score\" width="and the candidate duplicate below it"/>
+</div>
+</div>
 <div class="paragraph">
-<p>A preview is shown for anything the browser can display. Most candidates are video, which has no
-preview, so those show a placeholder and you decide on the numbers.</p>
+<p>A preview is shown for anything the browser can display — a still for a picture, and a frame from
+the clip itself for video. Audio and documents have no preview, so those show a placeholder and you
+decide on the numbers.</p>
 </div>
 <div class="paragraph">
 <p>Work through the queue with the keyboard:</p>
@@ -1087,6 +1093,11 @@ preview, so those show a placeholder and you decide on the numbers.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The same two decisions sit under the group as <strong>Confirm Dedup</strong> and <strong>Reject</strong> buttons, which is what you
+use when the cursor is in a text field — the keyboard shortcuts deliberately stand down while you are
+typing, so they cannot decide a group behind your back.</p>
+</div>
 <div class="paragraph">
 <p>If you disagree with which file should be kept, press <strong>Keep this one</strong> on the file you would rather
 keep. That only changes the choice; it does not decide the group, so you still confirm or reject
@@ -1495,23 +1506,13 @@ but no group grants nothing.</p>
 
 <script src="/plugins/toc/toc.js"></script>
 
-<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
-
-<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
-
-<script src="/plugins/swagger/swagger.js"></script>
-
-<script src="/plugins/graphiql/react.production.min.js"></script>
-
-<script src="/plugins/graphiql/react-dom.production.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.js"></script>
-
 <script src="/plugins/nodeviz/nodeviz.js"></script>
 
 <script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
 
 
 <!-- Main Script -->

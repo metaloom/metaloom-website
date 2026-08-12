@@ -48,10 +48,6 @@
 	
 	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
 	
-	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
-	
-	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
-	
 
 	<!-- Main Stylesheet -->
 	
@@ -289,6 +285,10 @@
 				
 				<li>
 					<a href="/docs/loom/python-client/">Python Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/remixes/">Remixes</a>
 				</li>
 				
 				<li>
@@ -728,6 +728,17 @@ succeed; where two are listed, <strong>both</strong> are required. Roles are edi
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_COLLECTION</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list_remixes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists remixes - named groups of assets that are versions of one another, such as an original video
+  and the cuts made from it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_REMIX</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>get_remix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loads one remix and the assets in it, each with its role: the original, or something made from it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_REMIX</code>, <code>READ_ASSET</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>asset_statistics</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Aggregate figures for the library: how many assets, how much storage, and the split across images,
   video, audio and documents.</p></td>
@@ -1058,23 +1069,13 @@ key rather than changing a person’s account when you want it to stop.</p>
 
 <script src="/plugins/toc/toc.js"></script>
 
-<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
-
-<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
-
-<script src="/plugins/swagger/swagger.js"></script>
-
-<script src="/plugins/graphiql/react.production.min.js"></script>
-
-<script src="/plugins/graphiql/react-dom.production.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.js"></script>
-
 <script src="/plugins/nodeviz/nodeviz.js"></script>
 
 <script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
 
 
 <!-- Main Script -->

@@ -120,6 +120,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Python client is a synchronous binding for the Loom REST API. It is built entirely&#xA;on the Python standard library and has no third-party dependencies, so it drops into a&#xA;processing script or a container without pulling anything else in.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Remixes</title>
+      <link>https://metaloom.io/docs/loom/remixes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/loom/remixes/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The same piece of work rarely exists as one file. There is the footage that came off the camera, the&#xA;cut somebody made from it, the still pulled out of that cut, the version re-encoded for the web. All&#xA;different files, all the same thing.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>REST API</title>
       <link>https://metaloom.io/docs/loom/rest-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

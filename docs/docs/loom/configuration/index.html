@@ -48,10 +48,6 @@
 	
 	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
 	
-	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
-	
-	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
-	
 
 	<!-- Main Stylesheet -->
 	
@@ -289,6 +285,10 @@
 				
 				<li>
 					<a href="/docs/loom/python-client/">Python Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/remixes/">Remixes</a>
 				</li>
 				
 				<li>
@@ -1061,6 +1061,42 @@ table and deployment (backends, Kubernetes RBAC, the runner image). Key switches
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_demo_content">Demo content</h3>
+<div class="paragraph">
+<p>A fresh, empty database is populated with example content on first start — a space, some
+collections and libraries, a few pipelines, and a set of assets to browse. This setting decides
+where the pictures and clips behind those assets come from.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_DEMO_CONTENT_DIR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(unset)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directory holding the example media (<code>images/</code>, <code>videos/</code>, <code>persons/</code>, <code>users/</code>). When unset, <code>/demo-content</code> and <code>./demo-content</code> are tried in that order</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The demo container ships this material and points the setting at it, which is why its asset browser
+shows photographs and plays video. On a plain server the directory is not present and the example
+images are drawn at start-up instead, so the screens still have something in them. Either way the
+example content only ever appears in a database that was empty to begin with — it is never added to
+one that already holds assets.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1193,23 +1229,13 @@ over the REST API and has its own configuration file.</p>
 
 <script src="/plugins/toc/toc.js"></script>
 
-<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
-
-<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
-
-<script src="/plugins/swagger/swagger.js"></script>
-
-<script src="/plugins/graphiql/react.production.min.js"></script>
-
-<script src="/plugins/graphiql/react-dom.production.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.js"></script>
-
 <script src="/plugins/nodeviz/nodeviz.js"></script>
 
 <script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
 
 
 <!-- Main Script -->

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Remixes | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="The same piece of work rarely exists as one file. There is the footage that came off the camera, the cut somebody made from it, the still pulled out of that cut, the version re-encoded for the web. …">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/loom/remixes/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Remixes | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/loom/remixes/">
+    <meta property="og:description" content="The same piece of work rarely exists as one file. There is the footage that came off the camera, the cut somebody made from it, the still pulled out of that cut, the version re-encoded for the web. …">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Remixes">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Remixes | MetaLoom">
+    <meta name="twitter:description" content="The same piece of work rarely exists as one file. There is the footage that came off the camera, the cut somebody made from it, the still pulled out of that cut, the version re-encoded for the web. …">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Remixes">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+</form>
+
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+<nav class="docs-topics" aria-label="Documentation topics">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/">Nodes</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/" class="is-current">Loom</a>
+			
+			<ul class="docs-subtopics">
+				
+				<li>
+					<a href="/docs/loom/artifacts/">Artifacts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/authentication/">Authentication</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/binary-storage/">Binary Storage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/chat/">Chat &amp; AI Agent</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/configuration/">Configuration</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/containers/">Containers</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/database-integrity/">Database Integrity</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/examples/">Examples</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/features/">Features</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/graphql-api/">GraphQL API</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/helm-chart/">Helm Chart</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/java-client/">Java Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/maven-artifacts/">Maven Artifacts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/mcp/">MCP Server</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/metrics/">Metrics</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/python-client/">Python Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/remixes/" class="is-current" aria-current="page">Remixes</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/rest-api/">REST API</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/search-indices/">Search Indices</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/sharing/">Sharing</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/storage/">Storage Usage</a>
+				</li>
+				
+			</ul>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/">Cortex</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        
+        
+        
+        <header class="page-head">
+          <p class="page-eyebrow">Loom</p>
+          <h1>Remixes</h1>
+          
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The same piece of work rarely exists as one file. There is the footage that came off the camera, the
+cut somebody made from it, the still pulled out of that cut, the version re-encoded for the web. All
+different files, all the same thing.</p>
+</div>
+<div class="paragraph">
+<p>A <strong>remix</strong> is a named group that holds them together. You give it a name, you say which file is the
+original, and from then on the group sits in your asset browser as a single card you can open.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_a_remix_is_not">What a remix is not</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Remixes sit alongside two things Loom already does, and it is worth being clear about the
+difference.</p>
+</div>
+<div class="paragraph">
+<p>A <strong>collection</strong> organises assets by topic — the autumn campaign, the product shots, everything from
+the trade fair. The files in a collection have nothing to do with one another beyond belonging to
+the same piece of work. A remix says something much stronger: these files <strong>are</strong> one another, in
+different forms.</p>
+</div>
+<div class="paragraph">
+<p><strong>Duplicate detection</strong> finds files that are byte-for-byte the same, or near enough that one of them
+should probably go. A remix is the opposite situation — the files are genuinely different and all of
+them are worth keeping. Nothing is ever deleted because of a remix.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_seeing_your_remixes">Seeing your remixes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Remixes appear at the front of the asset grid, before your files. They are drawn differently — a
+dashed border, a stacked card, and a count of what is inside — so you can tell at a glance which
+cards are groups and which are files.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="remix-grid.png" alt="The asset browser" width="with two remix cards at the start of the grid ahead of the individual assets"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The assets inside a remix still appear in the grid on their own, as they always did. Putting a file
+in a remix does not hide it or move it anywhere.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opening_one">Opening one</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Click a remix card and it opens over the grid, showing everything inside it. You do not lose your
+place — close it and you are exactly where you were.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="remix-open.png" alt="An opened remix showing its three member assets" width="with the original outlined and labelled"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The original is outlined and labelled. Hover any other member and you can promote it to be the
+original instead, or take it out of the group. Click a member’s picture to jump to that asset’s own
+page.</p>
+</div>
+<div class="paragraph">
+<p>The address bar carries the opened remix, so you can bookmark it or paste it to a colleague and they
+will land on the same group.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Renaming is done in place — click the name at the top of the panel, type, and press Enter.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_finding_one">Finding one</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Remixes are searchable. Type into the search box above the asset grid and the remix band narrows to
+the groups that match, alongside the assets that match.</p>
+</div>
+<div class="paragraph">
+<p>A remix matches on its name, on its description, and on <strong>the filenames of the assets inside it</strong> —
+which is usually how you actually look for one. You rarely remember what you called a group, but you
+do remember that the drone footage is in it.</p>
+</div>
+<div class="paragraph">
+<p>To see nothing but remixes, choose <strong>Remixes</strong> from the type filter beside the search box. The asset
+grid steps aside and only the groups are left.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="remix-filter.png" alt="The asset browser with the type filter set to Remixes" width="showing only the two remix cards"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The main <a href="../../ui/#search">search screen</a> can filter to remixes too — tick <strong>Remixes</strong> in its type
+row. A remix hit there opens the group over the asset grid, the same as clicking its card.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_one_from_a_selection">Building one from a selection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The usual way to make a remix is to pick the files first. Press <strong>Select</strong> above the grid, tick the
+assets that belong together, then open the <strong>⋮</strong> menu in the selection bar and choose <strong>Combine into
+remix</strong>.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="remix-combine.png" alt="The selection bar with three assets selected and the overflow menu open" width="showing Combine into remix"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Give the group a name and it is created with everything you selected already in it.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="remix-create.png" alt="The dialog asking for a name for the new remix"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Afterwards, open the remix and mark whichever file is the original.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_a_single_asset">Adding a single asset</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you are already looking at one file and want to file it with others, use the actions menu on
+the asset page and choose <strong>Add to remix…</strong>. Pick an existing remix from the list, or type a name that
+is not in the list to start a new one containing this asset.</p>
+</div>
+<div class="paragraph">
+<p>An asset’s remixes are shown as chips near its name, next to its collections. Clicking one takes you
+back to the grid with that remix open.</p>
+</div>
+<div class="paragraph">
+<p>Adding a file that is already in the remix does nothing and reports no error, so you can re-submit a
+selection without checking it first.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_happens_when_things_are_deleted">What happens when things are deleted</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Deleting a remix removes only the group. Every file in it is untouched and stays exactly where it
+was.</p>
+</div>
+<div class="paragraph">
+<p>Deleting a file removes it from any remix it was in. If the file happened to be the original, the
+remix survives and simply no longer names one — losing the source footage should not also lose the
+record of everything that was made from it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_permissions">Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Remixes are governed separately from the assets in them, so somebody can curate groups without being
+able to change the files themselves.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Permission</th>
+<th class="tableblock halign-left valign-top">Allows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_REMIX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">See remixes and open them. Listing what is inside one also needs <code>READ_ASSET</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CREATE_REMIX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make new remixes. Also needs <code>READ_ASSET</code>, since a new remix names the assets that go into it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UPDATE_REMIX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rename a remix, change which file is the original, and add or remove members.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE_REMIX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete a remix.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_beyond_the_browser">Beyond the browser</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Everything above is available through the API, so remixes can be built and read by scripts as well
+as by hand — see <a href="../rest-api/">REST API</a> for <code>/remixes</code> and its member routes, and
+<a href="../python-client/">Python Client</a> for the typed equivalents.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../chat/">AI agent</a> can also see them: ask it what versions of a file exist, or which groups
+an asset belongs to, and it will read the remixes through its tools.</p>
+</div>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.7592a1cdd3d3dc2a189674df22ca017dbbf2e6d9e5cc8b41f7cbee7a3fc2ca9cdfc2659845ffad0e68abaa0785d2e20f.js" integrity="sha384-dZKhzdPT3CoYlnTfIsoBfbvy5tnlzItB98vuej/CypzfwmWYRf&#43;tDmirqgeF0uIP" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

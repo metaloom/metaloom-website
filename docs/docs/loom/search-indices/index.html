@@ -48,10 +48,6 @@
 	
 	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
 	
-	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
-	
-	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
-	
 
 	<!-- Main Stylesheet -->
 	
@@ -289,6 +285,10 @@
 				
 				<li>
 					<a href="/docs/loom/python-client/">Python Client Usage</a>
+				</li>
+				
+				<li>
+					<a href="/docs/loom/remixes/">Remixes</a>
 				</li>
 				
 				<li>
@@ -682,6 +682,23 @@ relevant settings are:</p>
 <p>Both index directories should be on persistent storage in production. If they are lost, nothing is
 gone — but every affected index has to be rebuilt before those features work again.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+To see the duplicate index working on the demo container, start it with
+<code>LOOM_SIMILARITY_ENABLED=true</code>, then open <strong>Admin → Indices</strong> and run a <strong>Reindex</strong> on the fingerprint
+row. The demo database ships fingerprints for its videos, including one pair that is the same footage
+at two resolutions, so the duplicate review queue and the near-duplicate lookup both have something
+real to show. The reindex is needed because the fingerprints were seeded straight into the database
+while the index was switched off.
+</td>
+</tr>
+</tbody></table>
+</div>
 <div class="paragraph">
 <p>On Kubernetes, set these through <code>extraEnv</code> in the <a href="../helm-chart/">Helm chart</a> values.</p>
 </div>
@@ -804,23 +821,13 @@ gone — but every affected index has to be rebuilt before those features work a
 
 <script src="/plugins/toc/toc.js"></script>
 
-<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
-
-<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
-
-<script src="/plugins/swagger/swagger.js"></script>
-
-<script src="/plugins/graphiql/react.production.min.js"></script>
-
-<script src="/plugins/graphiql/react-dom.production.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.js"></script>
-
 <script src="/plugins/nodeviz/nodeviz.js"></script>
 
 <script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
 
 
 <!-- Main Script -->

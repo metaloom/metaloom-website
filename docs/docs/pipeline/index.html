@@ -48,10 +48,6 @@
 	
 	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
 	
-	<link rel="stylesheet" href="/plugins/swagger/swagger-ui.css">
-	
-	<link rel="stylesheet" href="/plugins/graphiql/graphiql.min.css">
-	
 
 	<!-- Main Stylesheet -->
 	
@@ -422,6 +418,13 @@ heavy node kinds to specific hardware — Loom routes each task to a worker that
 <div class="paragraph">
 <p>Pipelines are <strong>versioned</strong>: every save creates a new immutable <code>pipeline_version</code>; older versions can
 be viewed and restored. See <a href="../loom/rest-api/">REST API</a> for the endpoints.</p>
+</div>
+<div class="paragraph">
+<p>Saving is always something you ask for — the editor never writes your canvas away on its own. Because
+of that, edits you have not saved live only in your browser, and the editor asks before anything can
+take them away: picking another pipeline, moving to another screen, or reloading the tab all stop on a
+confirmation while there are unsaved changes. Cancel it and you are back on your canvas with the edit
+intact.</p>
 </div>
 </div>
 </div>
@@ -927,8 +930,9 @@ picture, so a crop taken from a 512-pixel preview would be barely thirty pixels 
 <div class="paragraph">
 <p>The caption under the picture is worth reading on a video. Detection runs on <strong>sampled frames</strong>, so
 the ten thumbnails below the picture are ten detections spread across several moments, while the
-boxes drawn on the picture are only the ones measured against <strong>this</strong> frame. <code>face_count</code> therefore
-counts detections, not distinct people — two people can easily account for all ten.</p>
+boxes drawn on the picture are only the ones measured against <strong>this</strong> frame. <code>face_count</code> counts
+neither: it is the number of <strong>distinct subjects</strong> the node clustered those detections into, which is
+two. Ten crops, ten detections, two people.</p>
 </div>
 </div>
 <div class="sect3">
@@ -944,9 +948,9 @@ clip. Below is the same node’s output over the same footage, painted in as the
 <p>Two things are worth watching for.</p>
 </div>
 <div class="paragraph">
-<p><strong>Boxes appear and then dissolve.</strong> Nothing is tracking anyone. The node samples every fifth frame, so
-between two samples there is simply no new answer, and a box that fades out is saying &#34;this is the
-most recent thing reported here&#34; rather than following a face across the picture.</p>
+<p><strong>Boxes appear and then dissolve.</strong> Nothing is tracking anyone. The node samples every fifteenth
+frame, so between two samples there is simply no new answer, and a box that fades out is saying
+&#34;this is the most recent thing reported here&#34; rather than following a face across the picture.</p>
 </div>
 <div class="paragraph">
 <p><strong>Long stretches have nothing at all.</strong> The node keeps only the sharpest faces it finds, so a clip
@@ -1263,23 +1267,13 @@ implementing a worker in Python.</p>
 
 <script src="/plugins/toc/toc.js"></script>
 
-<script src="/plugins/swagger/swagger-ui-bundle.js"></script>
-
-<script src="/plugins/swagger/swagger-ui-standalone-preset.js"></script>
-
-<script src="/plugins/swagger/swagger.js"></script>
-
-<script src="/plugins/graphiql/react.production.min.js"></script>
-
-<script src="/plugins/graphiql/react-dom.production.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.min.js"></script>
-
-<script src="/plugins/graphiql/graphiql.js"></script>
-
 <script src="/plugins/nodeviz/nodeviz.js"></script>
 
 <script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
 
 
 <!-- Main Script -->
