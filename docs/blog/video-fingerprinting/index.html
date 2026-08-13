@@ -2,21 +2,22 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Video Fingerprinting | MetaLoom</title>
+	
+	<title>Video Fingerprinting · Blog | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="In this post I want to share my experiments on how to generate video fingerprints.">
+	<meta name="description" content="Experiments in generating perceptual video fingerprints, stage by stage, from a source frame to the hex value that identifies the footage.">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/blog/video-fingerprinting/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Video Fingerprinting | MetaLoom">
+    <meta property="og:title" content="Video Fingerprinting · Blog | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/blog/video-fingerprinting/">
-    <meta property="og:description" content="In this post I want to share my experiments on how to generate video fingerprints.">
+    <meta property="og:description" content="Experiments in generating perceptual video fingerprints, stage by stage, from a source frame to the hex value that identifies the footage.">
     <meta property="og:image" content="https://metaloom.io/blog/video-fingerprinting/photo-1585079374502-415f8516dcc3.webp">
     <meta property="og:image:alt" content="Video Fingerprinting">
     <meta property="og:locale" content="en_US">
@@ -26,8 +27,8 @@
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Video Fingerprinting | MetaLoom">
-    <meta name="twitter:description" content="In this post I want to share my experiments on how to generate video fingerprints.">
+    <meta name="twitter:title" content="Video Fingerprinting · Blog | MetaLoom">
+    <meta name="twitter:description" content="Experiments in generating perceptual video fingerprints, stage by stage, from a source frame to the hex value that identifies the footage.">
     <meta name="twitter:image" content="https://metaloom.io/blog/video-fingerprinting/photo-1585079374502-415f8516dcc3.webp">
     <meta name="twitter:image:alt" content="Video Fingerprinting">
 
@@ -54,6 +55,12 @@
 	<!-- Main Stylesheet -->
 	
 	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
 
 	
 	
@@ -157,6 +164,10 @@
 	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
 	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
 	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </form>
 
 
@@ -165,6 +176,20 @@
 		</nav>
 	</div>
 </section>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+	<div class="container">
+		<ol class="breadcrumb-trail">
+			<li class="breadcrumb-crumb">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/blog/">Blog</a>
+			</li>
+			<li class="breadcrumb-crumb breadcrumb-current" aria-current="page">Video Fingerprinting</li>
+		</ol>
+	</div>
+</nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://metaloom.io/","name":"Home","position":1},{"@type":"ListItem","item":"https://metaloom.io/blog/","name":"Blog","position":2},{"@type":"ListItem","item":"https://metaloom.io/blog/video-fingerprinting/","name":"Video Fingerprinting","position":3}]}</script>
 
 
 
@@ -205,7 +230,7 @@
             <time datetime="2021-06-21">21 June 2021</time>
             <span>4 min read</span>
           </p>
-          <p class="page-lead">In this post I want to share my experiments on how to generate video fingerprints.</p>
+          <p class="page-lead">Experiments in generating perceptual video fingerprints, stage by stage, from a source frame to the hex value that identifies the footage.</p>
         </header>
 
         
@@ -349,7 +374,7 @@ In order to speedup the process some of the frames after a taken frame will be o
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="stage-1.jpg" alt="stage 1"/>
+<img src="stage-1.jpg" alt="The unmodified source frame at 512x512: a cartoon squirrel climbing a tree trunk" width="with a green meadow and pink blossom behind it"/>
 </div>
 <div class="title">Figure 1. Source frame</div>
 </div>
@@ -363,7 +388,7 @@ Resize to 16x16 pixel</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="stage-2.jpg" alt="stage 2"/>
+<img src="stage-2.jpg" alt="The same frame in greyscale at 16x16" width="blurred and normalised — the tree is a dark band on the left" height="the sky a bright blur on the right"/>
 </div>
 <div class="title">Figure 2. Reduced</div>
 </div>
@@ -375,7 +400,7 @@ Resize to 16x16 pixel</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="stage-3.jpg" alt="stage 3"/>
+<img src="stage-3.jpg" alt="The 16x16 greyscale frame after normalisation: the same shapes with the bright areas pulled back and the contrast spread across the full grey range"/>
 </div>
 <div class="title">Figure 3. Normalized</div>
 </div>
@@ -387,7 +412,7 @@ Resize to 16x16 pixel</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="stage-4.jpg" alt="stage 4"/>
+<img src="stage-4.jpg" alt="The frame stacked with its predecessor: the two 16x16 greyscale images averaged into one" width="so moving detail smears and the static trunk and horizon stay put"/>
 </div>
 <div class="title">Figure 4. Stacked</div>
 </div>
@@ -399,7 +424,7 @@ Resize to 16x16 pixel</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="stage-5.jpg" alt="stage 5"/>
+<img src="stage-5.jpg" alt="The stacked frame after a second normalisation" width="which pulls back the bright spots stacking created"/>
 </div>
 <div class="title">Figure 5. Normalized</div>
 </div>
@@ -411,7 +436,7 @@ Resize to 16x16 pixel</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="stage-6.jpg" alt="stage 6"/>
+<img src="stage-6.jpg" alt="The finished 16x16 mask reduced to one bit per pixel: pure black and white blocks" width="which read straight off as the bits of the fingerprint"/>
 </div>
 <div class="title">Figure 6. Result</div>
 </div>
@@ -508,6 +533,7 @@ The main aspect is that fourier transformation is applied to the audio data to p
 					<li><a href="/features/">Features</a></li>
 					<li><a href="/announcements/">Announcements</a></li>
 					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
 				</ul>
 			</nav>
 
@@ -525,6 +551,7 @@ The main aspect is that fourier transformation is applied to the audio data to p
 			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
 				<h2 data-toc-skip>Project</h2>
 				<ul>
+					<li><a href="/team/">The team</a></li>
 					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
 					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
 					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
@@ -596,12 +623,12 @@ The main aspect is that fourier transformation is applied to the audio data to p
 
 <!-- Main Script -->
 
-<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
 
 <!-- Documentation Search -->
 
 
-<script src="/js/docs-search.min.7592a1cdd3d3dc2a189674df22ca017dbbf2e6d9e5cc8b41f7cbee7a3fc2ca9cdfc2659845ffad0e68abaa0785d2e20f.js" integrity="sha384-dZKhzdPT3CoYlnTfIsoBfbvy5tnlzItB98vuej/CypzfwmWYRf&#43;tDmirqgeF0uIP" defer
+<script src="/js/docs-search.min.07ac24fb312ea703226e6ebbfec8420bede9a524aa48a217d08209874a0907d4a197a969353adbb87d0abcb51fbd36e0.js" integrity="sha384-B6wk&#43;zEupwMibm67/shCC&#43;3ppSSqSKIX0IIJh0oJB9Shl6lpNTrbuH0KvLUfvTbg" defer
 	data-search-index-url="/search/docs-index.json"
 	data-search-vectors-url="/search/docs-vectors.bin"
 	data-search-model-url="/plugins/ternlight/tern_engine.js"

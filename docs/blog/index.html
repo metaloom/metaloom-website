@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
+	
 	<title>Blog | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
@@ -53,6 +54,12 @@
 	<!-- Main Stylesheet -->
 	
 	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
 
 	
 	
@@ -156,6 +163,10 @@
 	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
 	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
 	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </form>
 
 
@@ -164,6 +175,8 @@
 		</nav>
 	</div>
 </section>
+
+
 
 
 
@@ -196,7 +209,7 @@
     <span class="blog-card-body">
       <time class="blog-card-date" datetime="2021-06-21">21 June 2021</time>
       <span class="blog-card-title">Video Fingerprinting</span>
-      <span class="blog-card-summary">In this post I want to share my experiments on how to generate video fingerprints.</span>
+      <span class="blog-card-summary">Experiments in generating perceptual video fingerprints, stage by stage, from a source frame to the hex value that identifies the footage.</span>
       <span class="blog-card-more">Read more <span aria-hidden="true">&rarr;</span></span>
     </span>
   </a>
@@ -212,7 +225,7 @@
     <span class="blog-card-body">
       <time class="blog-card-date" datetime="2021-05-19">19 May 2021</time>
       <span class="blog-card-title">Day4 - Vert.x jOOQ PoC</span>
-      <span class="blog-card-summary">In this post I want to walk you through a PoC I created that covers database handling with Vert.x and jOOQ.</span>
+      <span class="blog-card-summary">A reactive database layer proof of concept — why jOOQ over the alternatives, and what the reactive route costs when transactions are involved.</span>
       <span class="blog-card-more">Read more <span aria-hidden="true">&rarr;</span></span>
     </span>
   </a>
@@ -228,7 +241,7 @@
     <span class="blog-card-body">
       <time class="blog-card-date" datetime="2021-05-17">17 May 2021</time>
       <span class="blog-card-title">Day3 - Vert.x Dagger PoC</span>
-      <span class="blog-card-summary">This post explains a Vert.x Dagger proof of concept.</span>
+      <span class="blog-card-summary">A proof of concept combining Eclipse Vert.x with Dagger dependency injection across Maven modules.</span>
       <span class="blog-card-more">Read more <span aria-hidden="true">&rarr;</span></span>
     </span>
   </a>
@@ -244,7 +257,7 @@
     <span class="blog-card-body">
       <time class="blog-card-date" datetime="2021-05-16">16 May 2021</time>
       <span class="blog-card-title">Day2 - Project Setup</span>
-      <span class="blog-card-summary">Let's talk about the project setup.</span>
+      <span class="blog-card-summary">The tooling behind the project, and a disclaimer about tooling arguments in general.</span>
       <span class="blog-card-more">Read more <span aria-hidden="true">&rarr;</span></span>
     </span>
   </a>
@@ -260,7 +273,7 @@
     <span class="blog-card-body">
       <time class="blog-card-date" datetime="2021-05-13">13 May 2021</time>
       <span class="blog-card-title">Day1 - Project Design</span>
-      <span class="blog-card-summary">In this post I would like to share how I approach the design for Loom.</span>
+      <span class="blog-card-summary">Designing the project — the building blocks carried over from Mesh, and the decision to hand-write the schema and the spec rather than generate them from code.</span>
       <span class="blog-card-more">Read more <span aria-hidden="true">&rarr;</span></span>
     </span>
   </a>
@@ -276,7 +289,7 @@
     <span class="blog-card-body">
       <time class="blog-card-date" datetime="2021-05-12">12 May 2021</time>
       <span class="blog-card-title">Day0 - Let there be Loom</span>
-      <span class="blog-card-summary">What is Loom? This post will address all these questions.</span>
+      <span class="blog-card-summary">The first post: what Loom is, what MetaLoom is, and why a headless media asset management server was worth starting.</span>
       <span class="blog-card-more">Read more <span aria-hidden="true">&rarr;</span></span>
     </span>
   </a>
@@ -322,6 +335,7 @@
 					<li><a href="/features/">Features</a></li>
 					<li><a href="/announcements/">Announcements</a></li>
 					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
 				</ul>
 			</nav>
 
@@ -339,6 +353,7 @@
 			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
 				<h2 data-toc-skip>Project</h2>
 				<ul>
+					<li><a href="/team/">The team</a></li>
 					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
 					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
 					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
@@ -410,12 +425,12 @@
 
 <!-- Main Script -->
 
-<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
 
 <!-- Documentation Search -->
 
 
-<script src="/js/docs-search.min.7592a1cdd3d3dc2a189674df22ca017dbbf2e6d9e5cc8b41f7cbee7a3fc2ca9cdfc2659845ffad0e68abaa0785d2e20f.js" integrity="sha384-dZKhzdPT3CoYlnTfIsoBfbvy5tnlzItB98vuej/CypzfwmWYRf&#43;tDmirqgeF0uIP" defer
+<script src="/js/docs-search.min.07ac24fb312ea703226e6ebbfec8420bede9a524aa48a217d08209874a0907d4a197a969353adbb87d0abcb51fbd36e0.js" integrity="sha384-B6wk&#43;zEupwMibm67/shCC&#43;3ppSSqSKIX0IIJh0oJB9Shl6lpNTrbuH0KvLUfvTbg" defer
 	data-search-index-url="/search/docs-index.json"
 	data-search-vectors-url="/search/docs-vectors.bin"
 	data-search-model-url="/plugins/ternlight/tern_engine.js"

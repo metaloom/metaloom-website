@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
+	
 	<title>404 Page not found | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
@@ -54,6 +55,18 @@
 	<link rel="stylesheet" href="/css/main.min.css" media="screen">
 
 	
+	
+
+	
+	
+	
+	<link rel="stylesheet" href="/css/404.min.css" media="screen">
+	
+	
+
+	
+	
+	<meta name="robots" content="noindex">
 	
 
 	<!--Favicon-->
@@ -155,6 +168,10 @@
 	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
 	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
 	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </form>
 
 
@@ -165,18 +182,44 @@
 </section>
 
 
-<section class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h1>404</h1>
-        <h2>Page Not Found</h2>
-				<a class="btn btn-main" href="/">Back to home</a>
-      </div>
-    </div>
-  </div>
-</section>
 
+
+<main class="nf-page">
+  
+  <div class="nf-bg" aria-hidden="true">
+    <span class="nf-wash nf-wash-teal"></span>
+    <span class="nf-wash nf-wash-blue"></span>
+    <canvas class="nf-canvas" data-nf-graph></canvas>
+  </div>
+
+  <div class="nf-inner">
+    <p class="nf-code">404</p>
+    <h1 class="nf-title">Lost the thread</h1>
+    <p class="nf-note">
+      Every page on this site is indexed, embedded and searchable — and this one is not any of
+      those, because it does not exist. For a project whose entire job is finding things you have
+      lost, we would rather you did not dwell on it.
+    </p>
+    <p class="nf-sub">
+      Try the search in the header — it reads the whole documentation without ever asking a
+      server — or pick up one of these threads:
+    </p>
+
+    <div class="nf-actions">
+      <a class="nf-btn nf-btn-primary" href="/">Home</a>
+      <a class="nf-btn nf-btn-ghost" href="/docs/">Documentation</a>
+      <a class="nf-btn nf-btn-ghost" href="/tour/">Take the tour</a>
+    </div>
+
+    <p class="nf-hint">
+      Landed here from a link on metaloom.io? That is a broken thread on our side —
+      <a href="https://discord.gg/3Dy2SxKUtw" rel="noopener">tell us on Discord</a>.
+    </p>
+  </div>
+</main>
+
+
+<script src="/js/404.min.beff9b06786f6660ed33c092842a213b90621c1a3ca7d30c7ac7d0d47b10d87f783099e26490ebcd1a35824652e49900.js" integrity="sha384-vv&#43;bBnhvZmDtM8CShCohO5BiHBo8p9MMesfQ1HsQ2H94MJniZJDrzRo1gkZS5JkA" defer></script>
 
   </div><!-- Footer -->
 
@@ -202,6 +245,7 @@
 					<li><a href="/features/">Features</a></li>
 					<li><a href="/announcements/">Announcements</a></li>
 					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
 				</ul>
 			</nav>
 
@@ -219,6 +263,7 @@
 			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
 				<h2 data-toc-skip>Project</h2>
 				<ul>
+					<li><a href="/team/">The team</a></li>
 					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
 					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
 					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
@@ -290,12 +335,12 @@
 
 <!-- Main Script -->
 
-<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
 
 <!-- Documentation Search -->
 
 
-<script src="/js/docs-search.min.7592a1cdd3d3dc2a189674df22ca017dbbf2e6d9e5cc8b41f7cbee7a3fc2ca9cdfc2659845ffad0e68abaa0785d2e20f.js" integrity="sha384-dZKhzdPT3CoYlnTfIsoBfbvy5tnlzItB98vuej/CypzfwmWYRf&#43;tDmirqgeF0uIP" defer
+<script src="/js/docs-search.min.07ac24fb312ea703226e6ebbfec8420bede9a524aa48a217d08209874a0907d4a197a969353adbb87d0abcb51fbd36e0.js" integrity="sha384-B6wk&#43;zEupwMibm67/shCC&#43;3ppSSqSKIX0IIJh0oJB9Shl6lpNTrbuH0KvLUfvTbg" defer
 	data-search-index-url="/search/docs-index.json"
 	data-search-vectors-url="/search/docs-vectors.bin"
 	data-search-model-url="/plugins/ternlight/tern_engine.js"

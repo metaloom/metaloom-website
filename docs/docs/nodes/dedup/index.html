@@ -2,21 +2,22 @@
 <html lang="en-us">
 <head>
 	<meta charset="utf-8">
-	<title>Deduplication | MetaLoom</title>
+	
+	<title>Deduplication · Nodes | MetaLoom</title>
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<meta name="description" content="The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move anything themselves — you wire their result into a Move node, which decides where the extra copy …">
+	<meta name="description" content="Finds the copies you did not know you had, and says which one is redundant.">
 	
 	<meta name="author" content="Jotschi">
 <link rel="canonical" href="https://metaloom.io/docs/nodes/dedup/">
 
     <meta property="og:site_name" content="MetaLoom">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Deduplication | MetaLoom">
+    <meta property="og:title" content="Deduplication · Nodes | MetaLoom">
     <meta property="og:url" content="https://metaloom.io/docs/nodes/dedup/">
-    <meta property="og:description" content="The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move anything themselves — you wire their result into a Move node, which decides where the extra copy …">
+    <meta property="og:description" content="Finds the copies you did not know you had, and says which one is redundant.">
     <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
     <meta property="og:image:alt" content="Deduplication">
     <meta property="og:locale" content="en_US">
@@ -24,8 +25,8 @@
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@metaloom">
-    <meta name="twitter:title" content="Deduplication | MetaLoom">
-    <meta name="twitter:description" content="The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move anything themselves — you wire their result into a Move node, which decides where the extra copy …">
+    <meta name="twitter:title" content="Deduplication · Nodes | MetaLoom">
+    <meta name="twitter:description" content="Finds the copies you did not know you had, and says which one is redundant.">
     <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
     <meta name="twitter:image:alt" content="Deduplication">
 
@@ -52,6 +53,12 @@
 	<!-- Main Stylesheet -->
 	
 	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
 
 	
 	
@@ -155,6 +162,10 @@
 	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
 	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
 	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </form>
 
 
@@ -163,6 +174,23 @@
 		</nav>
 	</div>
 </section>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+	<div class="container">
+		<ol class="breadcrumb-trail">
+			<li class="breadcrumb-crumb">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/docs/">Documentation</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/docs/nodes/">Nodes</a>
+			</li>
+			<li class="breadcrumb-crumb breadcrumb-current" aria-current="page">Deduplication</li>
+		</ol>
+	</div>
+</nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://metaloom.io/","name":"Home","position":1},{"@type":"ListItem","item":"https://metaloom.io/docs/","name":"Documentation","position":2},{"@type":"ListItem","item":"https://metaloom.io/docs/nodes/","name":"Nodes","position":3},{"@type":"ListItem","item":"https://metaloom.io/docs/nodes/dedup/","name":"Deduplication","position":4}]}</script>
 
 
 <section class="section docs-section">
@@ -452,12 +480,9 @@
       </div>
       <div class="col-lg-9">
         
-        
-        
         <header class="page-head">
-          <p class="page-eyebrow">Nodes</p>
           <h1>Deduplication</h1>
-          
+          <p class="page-lead">Finds the copies you did not know you had, and says which one is redundant.</p>
         </header>
         <div class="post-single-content docs-main-content">
           <div class="paragraph">
@@ -766,6 +791,7 @@ file moves, and the Move node at the end can be left in dry-run until you are sa
 					<li><a href="/features/">Features</a></li>
 					<li><a href="/announcements/">Announcements</a></li>
 					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
 				</ul>
 			</nav>
 
@@ -783,6 +809,7 @@ file moves, and the Move node at the end can be left in dry-run until you are sa
 			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
 				<h2 data-toc-skip>Project</h2>
 				<ul>
+					<li><a href="/team/">The team</a></li>
 					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
 					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
 					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
@@ -854,12 +881,12 @@ file moves, and the Move node at the end can be left in dry-run until you are sa
 
 <!-- Main Script -->
 
-<script src="/js/script.min.2ba3a0d879605d6e914bfa7c76cef6acde80fdf3964b0e4181bb0097c695fc54cfaa1ccce1146d1795bfa2632de44c48.js" integrity="sha384-K6Og2HlgXW6RS/p8ds72rN6A/fOWSw5BgbsAl8aV/FTPqhzM4RRtF5W/omMt5ExI"></script>
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
 
 <!-- Documentation Search -->
 
 
-<script src="/js/docs-search.min.7592a1cdd3d3dc2a189674df22ca017dbbf2e6d9e5cc8b41f7cbee7a3fc2ca9cdfc2659845ffad0e68abaa0785d2e20f.js" integrity="sha384-dZKhzdPT3CoYlnTfIsoBfbvy5tnlzItB98vuej/CypzfwmWYRf&#43;tDmirqgeF0uIP" defer
+<script src="/js/docs-search.min.07ac24fb312ea703226e6ebbfec8420bede9a524aa48a217d08209874a0907d4a197a969353adbb87d0abcb51fbd36e0.js" integrity="sha384-B6wk&#43;zEupwMibm67/shCC&#43;3ppSSqSKIX0IIJh0oJB9Shl6lpNTrbuH0KvLUfvTbg" defer
 	data-search-index-url="/search/docs-index.json"
 	data-search-vectors-url="/search/docs-vectors.bin"
 	data-search-model-url="/plugins/ternlight/tern_engine.js"
