@@ -136,6 +136,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -203,7 +210,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -417,7 +432,9 @@
 </li>
 <li>
 <p>A PostgreSQL database — an external managed one (recommended) or the loom chart’s optional bundled
-Postgres</p>
+Postgres. <strong>Version 18 or newer</strong>: Loom’s schema generates primary keys with the built-in
+<code>uuidv7()</code> function, and the migration refuses to run on an older server rather than failing
+halfway through.</p>
 </li>
 </ul>
 </div>

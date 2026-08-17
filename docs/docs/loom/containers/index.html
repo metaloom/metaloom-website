@@ -136,6 +136,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -203,7 +210,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -444,7 +459,7 @@ zero-config first run, use the all-in-one <code>metaloom/loom-demo</code> image 
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">version: &#34;3.8&#34;
 services:
   postgres:
-    image: postgres:16
+    image: postgres:18
     environment:
       POSTGRES_DB: loom
       POSTGRES_USER: postgres
@@ -462,6 +477,20 @@ services:
       LOOM_DB_PASSWORD: secret
       LOOM_INITIAL_PASSWORD: admin123</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+PostgreSQL <strong>18 or newer</strong> is required. Loom’s schema generates primary keys with the built-in
+<code>uuidv7()</code> function, so that new elements appear at the end of a list rather than in a random
+position. On an older server the database migration stops with an explicit version error.
+</td>
+</tr>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>To add processing, run one or more <a href="../../cortex/containers/">Cortex workers</a> pointed at this Loom

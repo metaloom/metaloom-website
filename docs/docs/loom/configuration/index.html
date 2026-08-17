@@ -136,6 +136,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -203,7 +210,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -1010,8 +1025,97 @@ endpoints:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>(on)</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Auto-title a chat after the first exchange</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_CONTEXT_RESERVE_TOKENS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2048</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tokens held back from the window so the model always has room to answer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_HISTORY_MAX_MESSAGES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hard cap on replayed messages. <code>0</code> lets the context budget decide</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_COMPACTION_THRESHOLD_MESSAGES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>20</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New messages after which the conversation summary is refreshed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_COMPACTION_MAX_CHARS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4096</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum length of that summary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_FANOUT_MAX_ITEMS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>25</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Items the agent may process in one parallel batch</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_FANOUT_CONCURRENCY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many of those run at the same time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_FANOUT_CHILD_MAX_CHARS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1024</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much of each per-item answer is kept</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOOM_AI_MAX_LLM_CALLS_PER_RUN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>64</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total model calls one message may cost</p></td>
+</tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Questions that span many items.</strong> Asked to summarize fifty transcripts or find the themes across a
+quarter of uploads, the agent processes the items in parallel batches — each one read on its own, then
+the answers combined. This is what lets it answer over more material than fits in a single context.</p>
+</div>
+<div class="paragraph">
+<p><code>LOOM_AI_FANOUT_CONCURRENCY</code> trades speed against load on your model server; raise it only if the
+server has headroom. <code>LOOM_AI_MAX_LLM_CALLS_PER_RUN</code> is the safety net on what a single message can
+cost — if you see the agent stopping early on large batches with a note about reaching its limit, that
+is the setting to raise.</p>
+</div>
+<div class="paragraph">
+<p>The agent always reports how many items succeeded and how many failed, so a partial answer is never
+presented as a complete one.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Long conversations look after themselves.</strong> A chat is replayed to the model in full on every
+message, so a long one eventually outgrows <code>LOOM_AI_CONTEXT_WINDOW</code>. Rather than failing, Loom keeps
+the most recent exchanges verbatim and folds the older ones into a running summary it writes once
+and reuses. The agent is always told when this has happened, so it can ask you to repeat something
+instead of quietly forgetting it.</p>
+</div>
+<div class="paragraph">
+<p>If the agent seems to lose the thread of a long conversation, raise <code>LOOM_AI_CONTEXT_WINDOW</code> (if your
+model server supports a larger one) before touching the compaction settings — more room means fewer
+exchanges get summarized at all.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_coding_sandbox">Coding Sandbox</h3>

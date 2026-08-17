@@ -75,7 +75,7 @@
       <link>https://metaloom.io/docs/loom/graphql-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/graphql-api/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset&#xA;together with its components and locations in a single request, selecting exactly the fields you&#xA;need.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset&#xA;together with its components and locations in a single request, selecting exactly the fields you&#xA;need. The same API also answers cross-entity search queries, so a client never has to list and&#xA;filter on its own.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Helm Chart</title>

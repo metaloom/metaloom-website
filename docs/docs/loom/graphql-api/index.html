@@ -142,6 +142,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -209,7 +216,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -422,7 +437,8 @@
           <div class="paragraph">
 <p>Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset
 together with its components and locations in a single request, selecting exactly the fields you
-need.</p>
+need. The same API also answers cross-entity search queries, so a client never has to list and
+filter on its own.</p>
 </div>
 <div class="sect1">
 <h2 id="_endpoint">Endpoint</h2>
@@ -472,6 +488,10 @@ before the query is parsed. Obtain a token via the <a href="../authentication/">
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Asset.locations</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET_LOCATION</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Query.search</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_SEARCH</code>, plus the read permission of each entity type searched</p></td>
 </tr>
 </tbody>
 </table>
@@ -542,6 +562,54 @@ executes authenticated queries against <code>/api/v1/graphql</code>.
   }
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Search across everything at once — assets, transcripts, tags, people, collections and more — and
+select only the fields you want to render:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">query Search($q: String!) {
+  search(q: $q, types: [ASSET, TRANSCRIPT], limit: 10) {
+    totalHits
+    warnings
+    hits {
+      entityType
+      entityUuid
+      assetUuid
+      title
+      subtitle
+      score
+      highlights
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A few things worth knowing about <code>search</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Entity types you are not allowed to read are dropped from the query rather than failing it. Every
+dropped type is named in <code>warnings</code>, so an incomplete answer is never mistaken for an empty one.
+If you may read none of the types you asked for, the query is rejected instead.</p>
+</li>
+<li>
+<p><code>highlights</code> is only computed when you select it — the highlighter re-reads the matched documents,
+so you do not pay for snippets you did not ask for.</p>
+</li>
+<li>
+<p>WARNING: <code>highlights</code> fragments are <strong>not</strong> safe HTML. Matches are wrapped in <code>&lt;b&gt;</code> markers and the
+surrounding text comes through verbatim from user-supplied filenames, tags and transcripts. Parse
+the fragments and re-render the matches yourself; never insert them into a page as markup.</p>
+</li>
+<li>
+<p>Asking for a mode the server cannot serve returns an error naming the reason, rather than quietly
+answering with a different one.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

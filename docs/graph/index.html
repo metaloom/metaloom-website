@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	
+	<title>MetaLoom // Graph | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="It stores nodes, relationships and attributes in compact, purpose-built binary files, optimised for SSD. The defining design constraint:">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/graph/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MetaLoom // Graph | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/graph/">
+    <meta property="og:description" content="It stores nodes, relationships and attributes in compact, purpose-built binary files, optimised for SSD. The defining design constraint:">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="MetaLoom // Graph">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="MetaLoom // Graph | MetaLoom">
+    <meta name="twitter:description" content="It stores nodes, relationships and attributes in compact, purpose-built binary files, optimised for SSD. The defining design constraint:">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="MetaLoom // Graph">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</form>
+
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+
+
+
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      
+
+      <div class="col-lg-10">
+        <header class="page-head page-head-center">
+          <h1>MetaLoom // Graph</h1>
+          <p class="page-lead">A native-code backed graph database for Java, built on the Foreign Function and Memory API.</p>
+          
+        </header>
+
+        
+        <div class="post-single-content docs-content docs-main-content">
+          <div class="paragraph">
+<p>It stores nodes, relationships and attributes in compact, purpose-built binary files, optimised for SSD.
+The defining design constraint:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><strong>An element id decodes arithmetically into the exact file and byte offset of its record.</strong>
+Reading an element by id costs zero index probes and zero extra seeks.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>No lookup. No probe. No seek beyond the one the read itself performs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">long byteOffset = dataStart(kind) + (long) slot(id) * stride(kind);</code></pre>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_it_is">What it is</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 75%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Durability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A write-ahead log. Every commit is fsynced <em>before</em> it touches a data file, so uncommitted data cannot reach disk and recovery is a single redo pass.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Query language</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An <a href="/graph/cypher/">openCypher subset</a> that reads and writes, in its own module, plus a single-jar server and a React and D3 browser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Transactions</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>begin</code> / <code>commit</code> / <code>rollback</code>, plus auto-commit for single operations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Isolation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One writer at a time; many concurrent readers. A reader gets <strong>MVCC snapshot isolation</strong> — a view fixed at one instant across many reads, while the writer keeps committing. Reads take no lock and scale to 10x at 32 threads. <strong>No concurrent writers.</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Indexes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Label and property B+trees, declared composite indexes, unique constraints, and an HNSW index for nearest-neighbour search over vector properties.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Space reclamation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reclaim()</code> punches all-free pages and breaks no ids. <code>compact()</code> relocates records to close holes within pages, rewrites every internal reference, and pulls the high water marks down.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Native layer</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rust via FFM. <strong>io_uring is 12.4x</strong> over a <code>pread</code> loop on 64 scattered reads — the one capability the JVM cannot approach.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Operations</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/metrics/">Prometheus metrics</a>, a <a href="/graph/operations/">slow query log</a>, <a href="/graph/deployment/">container images and a Helm chart</a>, and an <a href="/graph/mcp/">MCP server</a> so an agent can query the graph.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_it_is_not">What it is not</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stated plainly, because a database page that implies capabilities the system lacks is a liability.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>No concurrent writers.</strong> Writers serialise on one lock. That is a property of the storage engine, not a
+configuration, and it is why the Helm chart refuses more than one replica.</p>
+</li>
+<li>
+<p><strong>No backup mechanism.</strong> A cold copy of a stopped store is the only correct procedure today.</p>
+</li>
+<li>
+<p><strong>No authentication on any port.</strong> Not the HTTP port, not the binary port, not the monitoring port.</p>
+</li>
+<li>
+<p><strong>No <code>OPTIONAL MATCH</code></strong>, and several other openCypher constructs — <a href="/graph/cypher/">each refused by name at
+parse time</a> rather than silently doing something else.</p>
+</li>
+<li>
+<p><strong>No repair tool</strong> for a store that fails <code>verify</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_at_scale">At scale</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ten million nodes and twenty million random relationships load in <strong>11 to 25 minutes</strong> and occupy <strong>6.1 GiB</strong>.
+Reopening the finished store takes 1 ms; <code>nodeLabel</code> runs at 4.2M/s over it and <code>neighbours</code> at 1.1M/s.</p>
+</div>
+<div class="paragraph">
+<p>The load figure is a range because it was measured four times with the same command and the edge phase varied 2.5x
+across the runs while the resulting store stayed identical to the byte. <a href="/graph/benchmarks/">The benchmarks page</a>
+has every run and what is known about the spread.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_where_to_go_next">Where to go next</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/architecture/">Architecture</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ids, segments, records, and how the address function works</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/cypher/">Query language</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The openCypher subset, and what is deliberately not in it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/browser/">Browser</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The built-in Cypher editor and graph view</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/api/">API and wire protocol</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The embedded Java API and the binary streaming port</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/operations/">Operations</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sizing, tuning, configuration, the slow query log, security posture</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/metrics/">Metrics</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Prometheus catalogue and the alert rules it implies</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/mcp/">MCP server</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Letting an AI client query the graph</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/deployment/">Deployment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container images and the Helm chart</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="/graph/benchmarks/">Benchmarks</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Measured numbers, with their caveats</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/team/">The team</a></li>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.88935d076ed57583385f6426bdce1b3c4916ece849648bacd00b28b726fd0df655a57caf5739f05fd5fc6f400897fc95.js" integrity="sha384-iJNdB27VdYM4X2Qmvc4bPEkW7OhJZIus0Asotyb9DfZVpXyvVznwX9X8b0AIl/yV" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MetaLoom // Graph on MetaLoom</title>
+    <link>https://metaloom.io/graph/</link>
+    <description>Recent content in MetaLoom // Graph on MetaLoom</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://metaloom.io/graph/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>API and wire protocol</title>
+      <link>https://metaloom.io/graph/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/api/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_embedded&#34;&gt;Embedded&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every line below runs as a test, so the documentation cannot drift from the API.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>https://metaloom.io/graph/architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/architecture/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_the_addressing_invariant&#34;&gt;The addressing invariant&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every element id decodes arithmetically into the file and byte offset of its record. That single rule shapes&#xA;everything else, and any design that would introduce a mandatory indirection between &amp;#34;I have an id&amp;#34; and &amp;#34;I know the&#xA;byte offset&amp;#34; is out of scope.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Benchmarks</title>
+      <link>https://metaloom.io/graph/benchmarks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/benchmarks/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Everything here was measured rather than estimated, on an AMD Ryzen 9 9900X with 62 GiB of RAM and an overlay&#xA;filesystem on NVMe, under Java 25 with the default 8 KiB pages and &lt;code&gt;FSYNC_ON_COMMIT&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Browser</title>
+      <link>https://metaloom.io/graph/browser/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/browser/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The server ships a browser UI in the same jar. No separate deployment, no separate build: start the server and open&#xA;the HTTP port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Deployment</title>
+      <link>https://metaloom.io/graph/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/deployment/</guid>
+      <description>&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mvn -o clean package -DskipTests&#xA;container/build-containers.sh jvm            # or: native, or: both&#xA;docker run --rm -e GRAPH_DEMO=true -p 8080:8080 -p 8082:8082 metaloom/graph-server:latest&#xA;&#xA;helm install g helm/metaloom-graph --set graph.demo=true&#xA;helm/test/run.sh --build                     # the whole thing on a throwaway k3d cluster&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>MCP server</title>
+      <link>https://metaloom.io/graph/mcp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/mcp/</guid>
+      <description>&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;java -jar graph-server.jar --mcp --demo /tmp/demo      # loopback:8083, read-only&#xA;npx @modelcontextprotocol/inspector                     # → http://127.0.0.1:8083/mcp/sse&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Two transports, HTTP+SSE and WebSocket, both speaking JSON-RPC 2.0 at protocol revision &lt;code&gt;2025-03-26&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Metrics</title>
+      <link>https://metaloom.io/graph/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/metrics/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_the_endpoints&#34;&gt;The endpoints&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;curl localhost:8082/metrics        # the scrape&#xA;curl localhost:8082/health         # liveness  — 200 while the process is up&#xA;curl localhost:8082/ready          # readiness — 503 once shutdown has begun&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Operations</title>
+      <link>https://metaloom.io/graph/operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/operations/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_configuration&#34;&gt;Configuration&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Three sources, and &lt;strong&gt;a command line flag beats an environment variable beats a default&lt;/strong&gt;. The flag wins so that a shell&#xA;which exported &lt;code&gt;GRAPH_ALLOW_WRITE&lt;/code&gt; for one server cannot silently change what a second one started in the same shell&#xA;does. The environment exists because a container image cannot be reconfigured without rebuilding its &lt;code&gt;CMD&lt;/code&gt;, and a&#xA;Helm chart has environment variables and not an argument vector.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Query language</title>
+      <link>https://metaloom.io/graph/cypher/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/cypher/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The query language lives in its own module, which depends on the storage engine’s public API and nothing inside it.&#xA;That is deliberate: the engine’s specification says a query language is not a goal &lt;em&gt;of the storage layer&lt;/em&gt;, and the&#xA;module boundary is what keeps that literally true.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

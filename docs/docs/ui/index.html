@@ -136,6 +136,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -200,7 +207,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -586,6 +601,12 @@ queries the whole installation: asset filenames and metadata, transcript text, t
 names, annotations, people and libraries, all in a single pass.</p>
 </div>
 <div class="paragraph">
+<p>The two boxes that search media — the one above the asset browser and the one above a library — are
+the same search, simply narrowed: they look through everything in the catalogue, or everything in
+that library, rather than through the assets that happen to be on screen. So a term finds the same
+material wherever you type it.</p>
+</div>
+<div class="paragraph">
 <p>Start typing and suggestions appear after the second character. Press <strong>Enter</strong> to open the full results
 page, where each hit shows what kind of thing it is and a short excerpt with your search terms
 highlighted. Transcript hits carry the timecode where the phrase was spoken. Selecting a result takes
@@ -745,6 +766,83 @@ card-size views. Videos, images, audio and documents are all represented.</p>
 <img src="assets.png" alt="Asset browser"/>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_narrowing_and_ordering_a_list">Narrowing and ordering a list</h3>
+<div class="paragraph">
+<p>The toolbar above the assets — and above the collections, in the same shape — lets you cut the list
+down and choose how it reads:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Collection</strong> shows only the assets that belong to one collection.</p>
+</li>
+<li>
+<p><strong>Created by</strong> shows only what a particular person added.</p>
+</li>
+<li>
+<p><strong>Type</strong> narrows to video, image, audio or documents.</p>
+</li>
+<li>
+<p><strong>Sort by</strong> orders the list by <strong>Name</strong>, <strong>Created</strong> or <strong>Last edited</strong>, and the arrow beside it switches
+between ascending and descending.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Filters combine, so picking a collection and a person shows the assets that are in that collection
+<strong>and</strong> were added by that person. The <strong>Clear filters</strong> chip beside the count resets them; your chosen
+order stays, since that is how you are reading the list rather than a restriction on it.</p>
+</div>
+<div class="paragraph">
+<p>Sorting and filtering are applied by the server across the whole catalogue, not just the part
+already on screen — so ordering a collection of fifty thousand assets by name really does start at
+the beginning of the alphabet, and the <strong>Showing X of Y</strong> footer keeps counting the full match.</p>
+</div>
+<div class="paragraph">
+<p>Lists are ordered oldest-first by default. That is deliberate: something you have just created turns
+up at the end of the list, where you would look for it, instead of somewhere in the middle.</p>
+</div>
+<div class="paragraph">
+<p>The same toolbar appears on collections, tags, libraries, asset pools, tasks, skills, chat sessions
+and the administration tables, with the filters each screen can usefully offer — tasks add <strong>Status</strong>
+and <strong>Priority</strong>, users add <strong>Enabled</strong>, skills add <strong>Enabled</strong> and, in the shared library, <strong>Created by</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Every screen that lists things has a search box, including the ones you might not think to look on:
+the chat rail on the home screen, the upload queue, the node pickers in the pipeline editor, and the
+storage, index and integrity pages under <strong>Administration</strong>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+A video or audio transcript has its own <strong>Find in transcript</strong> box. It highlights every match and
+dims the sections without one, rather than hiding them — the section timeline stays intact so you
+can still see where in the recording you are.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Typing in the search box switches the asset browser over to full-text search, which ranks results by
+relevance. The sort and creator controls step aside while a search term is active, because relevance
+is the ordering at that point — clear the box to go back to browsing.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
 <div class="paragraph">
 <p>Opening an asset reveals the detail view: media preview, a timeline with markers, tags and metadata, and
 tabs for comments, annotations and reactions.</p>
@@ -752,6 +850,7 @@ tabs for comments, annotations and reactions.</p>
 <div class="imageblock img-fluid">
 <div class="content">
 <img src="asset-detail.png" alt="Asset detail view"/>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -846,6 +945,14 @@ the page until they have been sent — so the application warns you before that 
 <p>Assets can be organised into libraries. The library view provides a per-library selector and an asset
 grid that previews the stored image binaries; formats a browser cannot decode — video, audio,
 documents — keep their type icon.</p>
+</div>
+<div class="paragraph">
+<p>The box above the grid searches the whole of the selected library, not only the assets already
+loaded into the page, and it counts the matches for you. The term you typed is part of the address,
+so a filtered library can be sent to a colleague as a link and the browser’s Back button returns you
+to the unfiltered view. Switching library re-runs the same term against the one you switched to. If
+your installation has search turned off, the box still narrows what is on screen and says that it is
+only doing that.</p>
 </div>
 <div class="imageblock img-fluid">
 <div class="content">

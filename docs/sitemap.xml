@@ -28,6 +28,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/cortex/</loc>
   </url><url>
+    <loc>https://metaloom.io/graph/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/ui/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/playbooks/</loc>
@@ -72,6 +74,10 @@
   </url><url>
     <loc>https://metaloom.io/docs/legal/ai-disclosure/</loc>
   </url><url>
+    <loc>https://metaloom.io/graph/api/</loc>
+  </url><url>
+    <loc>https://metaloom.io/graph/architecture/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/cortex/artifacts/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/artifacts/</loc>
@@ -84,7 +90,11 @@
   </url><url>
     <loc>https://metaloom.io/author/</loc>
   </url><url>
+    <loc>https://metaloom.io/graph/benchmarks/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/loom/binary-storage/</loc>
+  </url><url>
+    <loc>https://metaloom.io/graph/browser/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/captioning/</loc>
   </url><url>
@@ -109,6 +119,8 @@
     <loc>https://metaloom.io/docs/loom/database-integrity/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/dedup/</loc>
+  </url><url>
+    <loc>https://metaloom.io/graph/deployment/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/depthmap/</loc>
   </url><url>
@@ -162,6 +174,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/loom/maven-artifacts/</loc>
   </url><url>
+    <loc>https://metaloom.io/graph/mcp/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/loom/mcp/</loc>
   </url><url>
     <loc>https://metaloom.io/tour/</loc>
@@ -171,6 +185,8 @@
     <loc>https://metaloom.io/docs/cortex/metrics/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/metrics/</loc>
+  </url><url>
+    <loc>https://metaloom.io/graph/metrics/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/legal/model-licenses/</loc>
   </url><url>
@@ -184,11 +200,15 @@
   </url><url>
     <loc>https://metaloom.io/docs/nodes/onedrive-source/</loc>
   </url><url>
+    <loc>https://metaloom.io/graph/operations/</loc>
+  </url><url>
     <loc>https://metaloom.io/pipeline-editor/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/python-client/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/quality/</loc>
+  </url><url>
+    <loc>https://metaloom.io/graph/cypher/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/remixes/</loc>
   </url><url>

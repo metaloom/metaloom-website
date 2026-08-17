@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	
+	<title>Benchmarks · MetaLoom // Graph | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="Measured numbers at ten million nodes, with the caveats that make them honest.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/graph/benchmarks/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Benchmarks · MetaLoom // Graph | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/graph/benchmarks/">
+    <meta property="og:description" content="Measured numbers at ten million nodes, with the caveats that make them honest.">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Benchmarks">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Benchmarks · MetaLoom // Graph | MetaLoom">
+    <meta name="twitter:description" content="Measured numbers at ten million nodes, with the caveats that make them honest.">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Benchmarks">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</form>
+
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+	<div class="container">
+		<ol class="breadcrumb-trail">
+			<li class="breadcrumb-crumb">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/graph/">MetaLoom // Graph</a>
+			</li>
+			<li class="breadcrumb-crumb breadcrumb-current" aria-current="page">Benchmarks</li>
+		</ol>
+	</div>
+</nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://metaloom.io/","name":"Home","position":1},{"@type":"ListItem","item":"https://metaloom.io/graph/","name":"MetaLoom // Graph","position":2},{"@type":"ListItem","item":"https://metaloom.io/graph/benchmarks/","name":"Benchmarks","position":3}]}</script>
+
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="MetaLoom // Graph">
+	<div class="docs-sidebar-title">MetaLoom // Graph</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/graph/api/">API and wire protocol</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/architecture/">Architecture</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/benchmarks/" class="is-current" aria-current="page">Benchmarks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/browser/">Browser</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/deployment/">Deployment</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/mcp/">MCP server</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/metrics/">Metrics</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/operations/">Operations</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/cypher/">Query language</a>
+			
+		</li>
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <header class="page-head">
+          <h1>Benchmarks</h1>
+          <p class="page-lead">Measured numbers at ten million nodes, with the caveats that make them honest.</p>
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>Everything here was measured rather than estimated, on an AMD Ryzen 9 9900X with 62 GiB of RAM and an overlay
+filesystem on NVMe, under Java 25 with the default 8 KiB pages and <code>FSYNC_ON_COMMIT</code>.</p>
+</div>
+<div class="sect1">
+<h2 id="_ten_million_nodes_twenty_million_relationships">Ten million nodes, twenty million relationships</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The two columns are an A/B taken back to back: the adjacency block was a page per node, and became a run of 512-byte
+cells that doubles as the node fills. <strong>Nothing else changed between the two runs.</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Page-sized block</th>
+<th class="tableblock halign-left valign-top">Cell-based block</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10,000,000 nodes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">83 s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>90 s</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20,000,000 edges</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2,470 s — 41 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>563 s — 9.4 minutes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>4.4x faster</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">42 min 48 s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>10 min 54 s</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3.9x faster</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On disk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">61 GiB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>6.2 GiB</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>9.8x smaller</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">of which adjacency</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">59 GiB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3.7 GiB</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>16x smaller</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bytes per node</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6,530</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>656</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>10x</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reopen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 ms</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1 ms</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>neighbours(OUT)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">18,911 /s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1,203,825 /s</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>64x</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The nodes were never the story. The edges were, and the number that explained everything else was <strong>7,618,146
+adjacency blocks</strong> — one 8 KiB block for 76 percent of the nodes in the graph. There are still 7,618,146 of them;
+each is now 512 bytes.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>The absolute times are not reproducible, and the ratios are what this table is about.</strong></p>
+</div>
+<div class="paragraph">
+<p>The same command has been run four times. Two later runs produced a store <strong>identical to the byte</strong> with an edge phase
+2.5x slower than the run above, for reasons that have not been attributed — a shared machine over hours. Quoting
+&#34;loads in 11 minutes&#34; as a property of the software would be quoting the best of four runs of something with a 2.5x
+spread.</p>
+</div>
+<div class="paragraph">
+<p>The honest figure for a load of this size is <strong>11 to 25 minutes</strong>.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_against_the_predecessor">Against the predecessor</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Before</th>
+<th class="tableblock halign-left valign-top">Now</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1080 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node with two properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~1144 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">128 B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directed adjacency entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0 to 1.3 B, from degree 3 upwards</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reads to enumerate d neighbours</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 for d ≤ 2, one per ~8000 otherwise</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Memory mappings for N accesses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 per segment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Durability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fsync before any data page is touched</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Space returned after mass deletion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hole punching, plus compaction to over 0.94 liveness</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_native_layer">The native layer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rust via the Foreign Function and Memory API, with <code>cargo test</code> and <code>clippy -D warnings</code> running inside <code>mvn test</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Capability</th>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">io_uring on 64 scattered reads</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>12.4x</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The one capability the JVM cannot approach</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adjacency delta+varint codec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.38x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real, and small</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRC32C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>7.8x slower</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JVM’s intrinsic wins outright</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Two of those three are the reason the native layer is a capability rather than a policy: every one of them has a
+pure-Java fallback, and the build routes around a missing toolchain.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tried_on_something_real_and_the_recommendation_was_no">Tried on something real, and the recommendation was no</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The engine was built into MetaLoom as an index over the asset relationship graph — behind an interface, alongside
+Postgres, with a differential check that both return the same answers. They do, through insertions, deletions, a
+rebuild and a compaction.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6669%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nodes / edges</th>
+<th class="tableblock halign-left valign-top">Obvious SQL</th>
+<th class="tableblock halign-left valign-top">Tuned SQL</th>
+<th class="tableblock halign-left valign-top">This engine</th>
+<th class="tableblock halign-left valign-top">vs tuned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1,000 / 8,000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1,684 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">388 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">165 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2.4x</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10,000 / 80,000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14,204 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">303 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">127 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2.4x</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50,000 / 400,000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">126,755 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">456 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">193 µs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2.4x</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Against the obvious SQL, this engine looks <strong>657x faster</strong> at the largest size — and that number is an artefact of the
+comparison rather than a property of the engine: the naive query degrades from 1.7 ms to 127 ms across a 50x increase
+while the tuned one is flat. Against the query written properly, it is <strong>2.4x faster</strong>, consistently.</p>
+</div>
+<div class="paragraph">
+<p><strong>Only the second number is a reason to do anything</strong>, and 2.4x was not enough to justify a second storage system
+alongside Postgres. The recommendation was, and remains, <strong>not to adopt</strong>.</p>
+</div>
+<div class="paragraph">
+<p>That is a result rather than a failure to reach one — and publishing the 657x without the 2.4x would be the one way
+to make this page dishonest.</p>
+</div>
+</div>
+</div>
+
+        </div>
+
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/graph/">Graph overview</a>
+            <a class="ml-btn ml-btn-ghost" href="/docs/">All documentation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/team/">The team</a></li>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.88935d076ed57583385f6426bdce1b3c4916ece849648bacd00b28b726fd0df655a57caf5739f05fd5fc6f400897fc95.js" integrity="sha384-iJNdB27VdYM4X2Qmvc4bPEkW7OhJZIus0Asotyb9DfZVpXyvVznwX9X8b0AIl/yV" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

@@ -156,6 +156,20 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;AI-assisted code generation was used in building MetaLoom.&lt;/strong&gt; This page states when that started,&#xA;what it covers, and what it does not change. It exists because you should not have to reverse-engineer&#xA;the provenance of a codebase you are considering deploying.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>API and wire protocol</title>
+      <link>https://metaloom.io/graph/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/api/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_embedded&#34;&gt;Embedded&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every line below runs as a test, so the documentation cannot drift from the API.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>https://metaloom.io/graph/architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/architecture/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_the_addressing_invariant&#34;&gt;The addressing invariant&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every element id decodes arithmetically into the file and byte offset of its record. That single rule shapes&#xA;everything else, and any design that would introduce a mandatory indirection between &amp;#34;I have an id&amp;#34; and &amp;#34;I know the&#xA;byte offset&amp;#34; is out of scope.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Artifacts</title>
       <link>https://metaloom.io/docs/cortex/artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -191,11 +205,25 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom uses JWT (JSON Web Token) bearer tokens for API authentication.&#xA;OAuth2 integration is also available.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Benchmarks</title>
+      <link>https://metaloom.io/graph/benchmarks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/benchmarks/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Everything here was measured rather than estimated, on an AMD Ryzen 9 9900X with 62 GiB of RAM and an overlay&#xA;filesystem on NVMe, under Java 25 with the default 8 KiB pages and &lt;code&gt;FSYNC_ON_COMMIT&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Binary Storage</title>
       <link>https://metaloom.io/docs/loom/binary-storage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/binary-storage/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Every asset in Loom has two halves: the &lt;strong&gt;record&lt;/strong&gt; — filename, hashes, tags, everything a pipeline&#xA;worked out about it — and the &lt;strong&gt;bytes&lt;/strong&gt; themselves. This page is about the bytes: where they go, how&#xA;you put them there, and how you get them back.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Browser</title>
+      <link>https://metaloom.io/graph/browser/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/browser/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The server ships a browser UI in the same jar. No separate deployment, no separate build: start the server and open&#xA;the HTTP port.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Captioning</title>
@@ -273,6 +301,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/dedup/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The deduplication nodes find duplicate media and tell you which copy is redundant. They do not move&#xA;anything themselves — you wire their result into a &lt;a href=&#34;../move/&#34;&gt;Move&lt;/a&gt; node, which decides where the&#xA;extra copy goes and whether the original survives. There are two ways to decide that two files are&#xA;&amp;#34;the same&amp;#34;:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Deployment</title>
+      <link>https://metaloom.io/graph/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/deployment/</guid>
+      <description>&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mvn -o clean package -DskipTests&#xA;container/build-containers.sh jvm            # or: native, or: both&#xA;docker run --rm -e GRAPH_DEMO=true -p 8080:8080 -p 8082:8082 metaloom/graph-server:latest&#xA;&#xA;helm install g helm/metaloom-graph --set graph.demo=true&#xA;helm/test/run.sh --build                     # the whole thing on a throwaway k3d cluster&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Depth Map</title>
@@ -356,7 +391,7 @@
       <link>https://metaloom.io/docs/loom/graphql-api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/graphql-api/</guid>
-      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset&#xA;together with its components and locations in a single request, selecting exactly the fields you&#xA;need.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Loom exposes a GraphQL API for flexible, nested queries over the asset data model — fetch an asset&#xA;together with its components and locations in a single request, selecting exactly the fields you&#xA;need. The same API also answers cross-entity search queries, so a client never has to list and&#xA;filter on its own.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Hashing</title>
@@ -429,6 +464,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;All Loom artifacts are published under the &lt;code&gt;io.metaloom&lt;/code&gt; group.&lt;/p&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_bom_pom&#34;&gt;BOM POM&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Use the BOM to align versions across Loom and Cortex modules:&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>MCP server</title>
+      <link>https://metaloom.io/graph/mcp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/mcp/</guid>
+      <description>&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;java -jar graph-server.jar --mcp --demo /tmp/demo      # loopback:8083, read-only&#xA;npx @modelcontextprotocol/inspector                     # → http://127.0.0.1:8083/mcp/sse&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Two transports, HTTP+SSE and WebSocket, both speaking JSON-RPC 2.0 at protocol revision &lt;code&gt;2025-03-26&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>MCP Server</title>
       <link>https://metaloom.io/docs/loom/mcp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -448,6 +490,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/loom/metrics/</guid>
       <description>&lt;div id=&#34;preamble&#34;&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The Loom server exposes a &lt;strong&gt;Prometheus scrape endpoint&lt;/strong&gt; at &lt;code&gt;GET /metrics&lt;/code&gt; on a dedicated monitoring&#xA;port. All Loom meters are prefixed &lt;code&gt;loom_&lt;/code&gt;. For Cortex worker metrics see&#xA;&lt;a href=&#34;../../cortex/metrics/&#34;&gt;Cortex Metrics&lt;/a&gt;; for health and readiness endpoints see&#xA;&lt;a href=&#34;../../cortex/monitoring/&#34;&gt;Monitoring API&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Metrics</title>
+      <link>https://metaloom.io/graph/metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/metrics/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_the_endpoints&#34;&gt;The endpoints&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;curl localhost:8082/metrics        # the scrape&#xA;curl localhost:8082/health         # liveness  — 200 while the process is up&#xA;curl localhost:8082/ready          # readiness — 503 once shutdown has begun&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Model Licenses</title>
@@ -492,6 +541,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The OneDrive source is a &lt;strong&gt;source node&lt;/strong&gt; — the entry point of a pipeline. Instead of processing a&#xA;media item, it &lt;strong&gt;enumerates&lt;/strong&gt; files from OneDrive and feeds each one into the graph. A SharePoint&#xA;document library is the same thing as far as this node is concerned, so team sites work too.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Operations</title>
+      <link>https://metaloom.io/graph/operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/operations/</guid>
+      <description>&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_configuration&#34;&gt;Configuration&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Three sources, and &lt;strong&gt;a command line flag beats an environment variable beats a default&lt;/strong&gt;. The flag wins so that a shell&#xA;which exported &lt;code&gt;GRAPH_ALLOW_WRITE&lt;/code&gt; for one server cannot silently change what a second one started in the same shell&#xA;does. The environment exists because a container image cannot be reconfigured without rebuilding its &lt;code&gt;CMD&lt;/code&gt;, and a&#xA;Helm chart has environment variables and not an argument vector.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Python Client Usage</title>
       <link>https://metaloom.io/docs/loom/python-client/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -504,6 +560,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/quality/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The quality node measures &lt;strong&gt;perceptual quality metrics&lt;/strong&gt; of an image or video — resolution,&#xA;blurriness (via a Laplacian measure) and bitrate — so low-quality assets can be flagged or filtered.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Query language</title>
+      <link>https://metaloom.io/graph/cypher/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/graph/cypher/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The query language lives in its own module, which depends on the storage engine’s public API and nothing inside it.&#xA;That is deliberate: the engine’s specification says a query language is not a goal &lt;em&gt;of the storage layer&lt;/em&gt;, and the&#xA;module boundary is what keeps that literally true.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Remixes</title>

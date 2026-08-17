@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	
+	<title>API and wire protocol · MetaLoom // Graph | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="The embedded Java API, and the binary streaming port for reading a result as it is produced.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/graph/api/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="API and wire protocol · MetaLoom // Graph | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/graph/api/">
+    <meta property="og:description" content="The embedded Java API, and the binary streaming port for reading a result as it is produced.">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="API and wire protocol">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="API and wire protocol · MetaLoom // Graph | MetaLoom">
+    <meta name="twitter:description" content="The embedded Java API, and the binary streaming port for reading a result as it is produced.">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="API and wire protocol">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/studio">Studio</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/pipeline-editor">Pipeline Editor</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item is-active">
+						<a class="nav-link" aria-current="page" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/announcements">Announcements</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/docs">Docs</a>
+					</li>
+					
+				</ul>
+
+				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</form>
+
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+	<div class="container">
+		<ol class="breadcrumb-trail">
+			<li class="breadcrumb-crumb">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/graph/">MetaLoom // Graph</a>
+			</li>
+			<li class="breadcrumb-crumb breadcrumb-current" aria-current="page">API and wire protocol</li>
+		</ol>
+	</div>
+</nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://metaloom.io/","name":"Home","position":1},{"@type":"ListItem","item":"https://metaloom.io/graph/","name":"MetaLoom // Graph","position":2},{"@type":"ListItem","item":"https://metaloom.io/graph/api/","name":"API and wire protocol","position":3}]}</script>
+
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="MetaLoom // Graph">
+	<div class="docs-sidebar-title">MetaLoom // Graph</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/graph/api/" class="is-current" aria-current="page">API and wire protocol</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/architecture/">Architecture</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/benchmarks/">Benchmarks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/browser/">Browser</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/deployment/">Deployment</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/mcp/">MCP server</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/metrics/">Metrics</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/operations/">Operations</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/graph/cypher/">Query language</a>
+			
+		</li>
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <header class="page-head">
+          <h1>API and wire protocol</h1>
+          <p class="page-lead">The embedded Java API, and the binary streaming port for reading a result as it is produced.</p>
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div class="sect1">
+<h2 id="_embedded">Embedded</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every line below runs as a test, so the documentation cannot drift from the API.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">try (GraphStore store = GraphStore.open(Path.of(&#34;/data/mygraph&#34;))) {
+
+    long person;
+    long vehicle;
+
+    // One transaction for a bulk load: durability costs an fsync per commit, so batching matters.
+    try (Transaction txn = store.begin()) {
+        person = store.createNode(&#34;Person&#34;, Properties.of()
+            .set(&#34;name&#34;, &#34;Wes Anderson&#34;)
+            .set(&#34;born&#34;, 1969));
+
+        vehicle = store.createNode(&#34;Vehicle&#34;, Properties.of().set(&#34;name&#34;, &#34;VW Beetle&#34;));
+
+        // A property-free edge: 16 bytes in total, and no relationship record at all.
+        store.createEdge(person, &#34;OWNS&#34;, vehicle);
+
+        // An edge that carries properties gets a record and a stable id.
+        store.createRelationship(person, &#34;DROVE&#34;, vehicle,
+            Properties.of().set(&#34;since&#34;, Instant.parse(&#34;2019-04-01T00:00:00Z&#34;)));
+
+        txn.commit();
+    }
+
+    for (Edge edge : store.neighbours(person, Direction.OUT, Set.of(&#34;OWNS&#34;))) {
+        System.out.println(store.nodeProperties(edge.neighbourId()).getString(&#34;name&#34;));
+    }
+
+    // A read view fixes what every read on this thread sees, however much the writer commits
+    // underneath it. Close it: an open view holds versions in memory until it does.
+    try (ReadTransaction view = store.beginRead()) {
+        List&lt;Edge&gt; before = store.traverse(person, Direction.OUT, null, 3);
+        store.createEdge(person, &#34;OWNS&#34;, store.createNode(&#34;Vehicle&#34;));
+        assert store.traverse(person, Direction.OUT, null, 3).equals(before);
+    }
+
+    store.verify(VerifyLevel.FULL);
+
+    // Give space back. reclaim() moves nothing and keeps every id valid; compact() closes holes
+    // *inside* pages and is the only thing in the engine that invalidates an id.
+    store.reclaim();
+    CompactionReport report = store.compact();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A read view is <strong>thread-confined</strong>. Holding one across an asynchronous boundary is the one thing that will silently
+give you a wrong answer rather than an exception: <code>Snapshot.close()</code> does not check its owner, and a foreign thread
+reads current committed data outside the snapshot without complaining.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_binary_streaming_port">The binary streaming port</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The HTTP route materialises a whole result as JSON, which is right for a browser and wrong for a million rows. The
+binary port encodes and flushes rows <strong>as the engine produces them</strong>, so the encoded payload is never built in full and
+a client never waits for the last row to see the first.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">try (GraphClient client = GraphClient.connect(vertx, ClientOptions.of(&#34;localhost&#34;, 8081)).await();
+     RowStream stream = client.query(&#34;MATCH (a:Airport) RETURN a.code&#34;, Map.of()).await()) {
+    for (Row row : stream) {
+        System.out.println(row.getString(0));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The client jar carries <strong>neither the storage engine nor the query engine</strong> — there is a test that fails if either ever
+appears on its classpath. A client that had to carry a storage engine to read a row would be a strange thing to ship,
+and one that pulled in FFM would need a native-access grant from every application that used it.</p>
+</div>
+<div class="sect2">
+<h3 id="_four_bounds_on_a_slow_client">Four bounds on a slow client</h3>
+<div class="paragraph">
+<p>The failure being prevented is not &#34;the server runs out of memory&#34;. A slow client pins a worker thread <strong>and</strong> a read
+view; the open view holds back reclamation, so retention grows with write volume times duration; and past its
+retention budget the store abandons <strong>the oldest</strong> view, which need not be the slow client’s. One misbehaving reader
+breaks a well-behaved one.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Bounded concurrency — refused rather than queued, because a client waiting on a queued query cannot tell a busy
+server from a stuck one.</p>
+</li>
+<li>
+<p>A hard wall-clock deadline no client behaviour can extend, which is also the bound on view age.</p>
+</li>
+<li>
+<p>No unbounded park anywhere in the producer.</p>
+</li>
+<li>
+<p>A retention watchdog that abandons the oldest stream <strong>before the store has to</strong>, so the client gets a typed error
+naming the reason.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>maxConcurrentStreams × (writeQueueMaxBytes + socketSendBufferBytes)</code> is the most the server can be holding for
+clients that have stopped reading. Those three settings are validated together, because they are not independent
+knobs — they are the factors of one number, and that number is how you size the server.</p>
+</div>
+<div class="paragraph">
+<p>The port binds loopback by default. It has no authentication.</p>
+</div>
+</div>
+</div>
+</div>
+
+        </div>
+
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/graph/">Graph overview</a>
+            <a class="ml-btn ml-btn-ghost" href="/docs/">All documentation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/team/">The team</a></li>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.e3e76a8095cd132615990b3bce1ceee1ad6f53134d20ff9985ca97b0a8704ba8d60332f69270f37cd554a99646d42b90.js" integrity="sha384-4&#43;dqgJXNEyYVmQs7zhzu4a1vUxNNIP&#43;ZhcqXsKhwS6jWAzL2knDzfNVUqZZG1CuQ"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.88935d076ed57583385f6426bdce1b3c4916ece849648bacd00b28b726fd0df655a57caf5739f05fd5fc6f400897fc95.js" integrity="sha384-iJNdB27VdYM4X2Qmvc4bPEkW7OhJZIus0Asotyb9DfZVpXyvVznwX9X8b0AIl/yV" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>

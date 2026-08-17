@@ -142,6 +142,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -209,7 +216,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -554,6 +569,160 @@ JWT obtained from <code>POST /api/v1/login</code> or an API token from the
 (CORS) for in-page calls to succeed.</p>
 </div>
 <div id="swagger-ui"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_listing_sorting_and_filtering">Listing, sorting and filtering</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every collection route (<code>/assets</code>, <code>/collections</code>, <code>/users</code>, …) answers with <code>{ data, _metainfo }</code>
+and accepts the same four query parameters.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 66.6668%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>25</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page size. A bare <code>GET /api/v1/assets</code> returns a <strong>page</strong>, not the collection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>from</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seek cursor: the uuid to continue <strong>after</strong>. Take it from <code>_metainfo.lastUuid</code> of the previous page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Column to order by — <code>name</code>, <code>created</code>, <code>edited</code>, and per type also <code>username</code>, <code>firstname</code>,
+  <code>lastname</code>, <code>email</code>, <code>sha512</code>, <code>md5</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dir</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asc</code> or <code>desc</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Primary keys are time-ordered (UUIDv7), so the default order is the order elements were created in:
+a new element appears at the end of the list rather than in an unpredictable position.</p>
+</div>
+<div class="listingblock">
+<div class="title">List the assets most recently edited first</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -H &#34;Authorization: Bearer $TOKEN&#34; \
+  &#34;https://loom.example.com/api/v1/assets?sort=edited&amp;dir=desc&amp;limit=50&#34;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_filtering">Filtering</h3>
+<div class="paragraph">
+<p><code>filter</code> takes one or more terms in the form <code>field[eq]=value</code>, several of them separated by commas
+in a <strong>single</strong> <code>filter</code> parameter. Terms are combined with AND.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Available on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exact name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collections, tags, libraries, persons, and assets (matched against the filename)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>creator</code> / <code>editor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user uuid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anything with a creator — assets, collections, tags, libraries, tasks, …</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>collection</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collection uuid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assets — returns the members of that collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exact username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assets</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">state name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline runs and run items</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">Assets in one collection, created by one user, oldest first</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -H &#34;Authorization: Bearer $TOKEN&#34; \
+  --data-urlencode &#34;filter=collection[eq]=$COLLECTION_UUID,creator[eq]=$USER_UUID&#34; \
+  --data-urlencode &#34;sort=created&#34; \
+  --get &#34;https://loom.example.com/api/v1/assets&#34;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>creator</code> takes a <strong>uuid</strong>, not a username, so a filter kept in a bookmark or a saved view survives
+the user being renamed. Every element response carries <code>status.creator.uuid</code>.</p>
+</div>
+<div class="paragraph">
+<p>Filters match exactly — there is no &#34;contains&#34;. For text search across the catalogue use
+<a href="../search-indices/">the search endpoints</a>, which rank by relevance.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When you page a <strong>sorted</strong> listing, <code>from</code> must name a row that still exists — resuming needs that
+row’s value in the sort column. If the element has been deleted in the meantime the request answers
+<code>400</code>; start the listing again. The default (unsorted) order has no such restriction.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

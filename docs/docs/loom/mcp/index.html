@@ -136,6 +136,13 @@
 					
 					
 					<li class="nav-item">
+						<a class="nav-link" href="/graph">Graph</a>
+					</li>
+					
+					
+					
+					
+					<li class="nav-item">
 						<a class="nav-link" href="/announcements">Announcements</a>
 					</li>
 					
@@ -203,7 +210,15 @@
           
 
 
-<nav class="docs-topics" aria-label="Documentation topics">
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
 	<div class="docs-sidebar-title">Documentation</div>
 	<ul>
 		
@@ -734,7 +749,9 @@ succeed; where two are listed, <strong>both</strong> are required. Roles are edi
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>search_assets</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a page of assets with filename, MIME type, size and hash.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ranked search across the library. The term is matched against filenames, paths, transcripts,
+  extracted document text, captions, detected labels and tags; results can be narrowed by MIME type,
+  library or tag, and paged through.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
 </tr>
 <tr>
@@ -744,7 +761,8 @@ succeed; where two are listed, <strong>both</strong> are required. Roles are edi
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>search_transcript</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Searches transcripts and extracted document text.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Searches spoken content. Each match comes back with the passage, the asset it belongs to and the
+  offset into the media, so the answer can point at the moment something was said.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
 </tr>
 <tr>
@@ -778,10 +796,36 @@ succeed; where two are listed, <strong>both</strong> are required. Roles are edi
 <div class="title">Note</div>
 </td>
 <td class="content">
-Two of these are narrower today than their names suggest. <code>search_assets</code> returns a page of
-the library but does not yet apply the query and MIME-type filters, and <code>search_transcript</code> reports
-that full-text search is not available yet rather than returning matches. <code>asset_statistics</code> covers
-the whole library; it does not yet narrow to a single collection.
+Both search tools use the same search index as the search screen in the web UI, so an assistant
+and a person searching for the same words see the same ranking. Both need a search term - there is no
+&#34;list everything&#34; call; use <code>asset_statistics</code> for a library-wide overview. If search is switched off
+for your deployment, the tools say so instead of answering with an empty result.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>asset_statistics</code> covers the whole library; it does not yet narrow to a single collection.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+A tool call is allowed or refused as a whole, based on the permissions your role grants. The
+tools cannot trim a <strong>result</strong> down to the part of the library a particular person may see, so anyone
+who can call <code>search_assets</code> can find anything the index holds. Grant MCP access accordingly.
 </td>
 </tr>
 </tbody></table>
