@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	
+	<title>Loom — the media asset server | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="Loom is the media asset server at the heart of MetaLoom: it holds your libraries and every result the engine produces, and hands them back over REST, GraphQL, gRPC and MCP.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/loom/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Loom — the media asset server | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/loom/">
+    <meta property="og:description" content="Loom is the media asset server at the heart of MetaLoom: it holds your libraries and every result the engine produces, and hands them back over REST, GraphQL, gRPC and MCP.">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="MetaLoom // Loom">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Loom — the media asset server | MetaLoom">
+    <meta name="twitter:description" content="Loom is the media asset server at the heart of MetaLoom: it holds your libraries and every result the engine produces, and hands them back over REST, GraphQL, gRPC and MCP.">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="MetaLoom // Loom">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+	
+	
+	<link rel="stylesheet" href="/css/product.min.css" media="screen">
+	
+	
+	
+
+	
+	
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li class="nav-item nav-has-menu is-active">
+						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
+							Products<span class="nav-caret" aria-hidden="true"></span>
+						</button>
+						<div class="nav-menu" id="nav-menu-products">
+							<ul class="nav-menu-list">
+								
+								
+								
+								<li>
+									<a class="nav-menu-link is-current" aria-current="page" href="/loom">
+										<span class="nav-menu-name">MetaLoom // Loom</span>
+										<span class="nav-menu-note">The asset server — APIs, storage, search, UI</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/cortex">
+										<span class="nav-menu-name">MetaLoom // Cortex</span>
+										<span class="nav-menu-note">The processing engine and its 45 node kinds</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/graph">
+										<span class="nav-menu-name">MetaLoom // Graph</span>
+										<span class="nav-menu-note">Native-code graph database for Java</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/studio">
+										<span class="nav-menu-name">MetaLoom // Studio</span>
+										<span class="nav-menu-note">Self-hosted commercial edition</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/cloud">
+										<span class="nav-menu-name">MetaLoom // Cloud</span>
+										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li class="nav-item nav-has-menu">
+						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-docs">
+							Docs<span class="nav-caret" aria-hidden="true"></span>
+						</button>
+						<div class="nav-menu" id="nav-menu-docs">
+							<ul class="nav-menu-list">
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/docs">
+										<span class="nav-menu-name">All documentation</span>
+										<span class="nav-menu-note">Reference, playbooks and the node catalogue</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/docs/getting-started">
+										<span class="nav-menu-name">Getting Started</span>
+										<span class="nav-menu-note">From a container to a first pipeline</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/pipeline-editor">
+										<span class="nav-menu-name">Pipeline Editor</span>
+										<span class="nav-menu-note">Build and simulate a graph in the browser</span>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li class="nav-item nav-has-menu">
+						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-blog">
+							Blog<span class="nav-caret" aria-hidden="true"></span>
+						</button>
+						<div class="nav-menu" id="nav-menu-blog">
+							<ul class="nav-menu-list">
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/blog">
+										<span class="nav-menu-name">All posts</span>
+										<span class="nav-menu-note">Design notes from the build log</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/announcements">
+										<span class="nav-menu-name">Announcements</span>
+										<span class="nav-menu-note">Releases and what is in them</span>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/team">Team</a>
+					</li>
+					
+					
+				</ul>
+
+				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</form>
+
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+
+
+<main class="pr-page" data-reveal-scope>
+  
+<script>
+  document.documentElement.classList.add('reveal-js');
+  setTimeout(function () {
+    if (!window.__revealReady) document.documentElement.classList.remove('reveal-js');
+  }, 2500);
+</script>
+
+
+  
+  
+  
+  <section class="pr-hero" id="top">
+    
+    <div class="pr-hero-media">
+      <img src="/images/scenery/hero-threads_hu_1f535c1c0fdecdb3.webp"
+           srcset="/images/scenery/hero-threads_hu_e022d87d4374037b.webp 900w, /images/scenery/hero-threads_hu_1f535c1c0fdecdb3.webp 1920w"
+           sizes="100vw" alt="" aria-hidden="true" fetchpriority="high">
+      <div class="pr-hero-veil"></div>
+      <div class="pr-hero-fade" aria-hidden="true"></div>
+    </div>
+    <div class="pr-wrap pr-hero-inner">
+      <p class="pr-eyebrow reveal">MetaLoom // Loom</p>
+      <h1 class="pr-hero-title reveal" data-reveal-delay="1">The server that<br>remembers everything.</h1>
+      <p class="pr-hero-lead reveal" data-reveal-delay="2">Loom is the media asset server at the heart of MetaLoom. It holds the files — or just points at where they already live — keeps everything the engine discovers about them, and hands it all back over a REST, GraphQL, gRPC or MCP interface.</p>
+      <div class="pr-actions reveal" data-reveal-delay="3">
+        
+        <a class="pr-btn pr-btn-primary" href="/docs/loom/">Read the docs</a>
+        
+        
+        <a class="pr-btn pr-btn-ghost" href="/docs/getting-started/">Get started in a container</a>
+        
+      </div>
+      
+      <p class="pr-status reveal" data-reveal-delay="4"><span class="pr-status-dot" aria-hidden="true"></span>Apache 2.0 · 1.0.0 in development, nothing tagged as a release yet</p>
+      
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section class="pr-factsband">
+    <div class="pr-wrap">
+      <dl class="pr-facts">
+        
+        <div class="pr-fact reveal" data-reveal-delay="0">
+          <dt>License</dt>
+          <dd>Apache 2.0</dd>
+        </div>
+        
+        <div class="pr-fact reveal" data-reveal-delay="1">
+          <dt>Interfaces</dt>
+          <dd>REST · GraphQL · gRPC · MCP</dd>
+        </div>
+        
+        <div class="pr-fact reveal" data-reveal-delay="2">
+          <dt>Built on</dt>
+          <dd>Java 25 · Vert.x 5 · PostgreSQL</dd>
+        </div>
+        
+        <div class="pr-fact reveal" data-reveal-delay="3">
+          <dt>Runs on</dt>
+          <dd>One container, or Kubernetes</dd>
+        </div>
+        
+      </dl>
+    </div>
+  </section>
+  
+
+  
+  
+  <section class="pr-section" id="what-it-is">
+    <div class="pr-wrap pr-split">
+      <div class="pr-split-text">
+        <p class="pr-eyebrow reveal">What it is</p>
+        <h2 class="pr-title reveal">One system of record<br>for the whole archive.</h2>
+        <p class="pr-lead reveal">Loom owns the library: the assets, the people, the tags, the permissions, the pipelines and every result a processing node has ever produced. Cortex does the analysis and Graph answers questions about how things relate — but what is true about a file is true because Loom says so.</p>
+        
+        <ul class="pr-points">
+          
+          <li class="reveal" data-reveal-delay="0">
+            <b>Files stay where they are</b>
+            <span>Reference a directory in place or upload into managed storage — on disk or an S3-compatible bucket, chosen per library.</span>
+          </li>
+          
+          <li class="reveal" data-reveal-delay="1">
+            <b>Results land on the asset</b>
+            <span>Transcripts, detections, embeddings, captions, hashes and thumbnails are written back against the file they describe, with a ledger of which node produced them.</span>
+          </li>
+          
+          <li class="reveal" data-reveal-delay="2">
+            <b>It dispatches the work</b>
+            <span>The pipeline graph lives here. Loom pushes one task at a time to whichever Cortex worker is allowed to run that node kind.</span>
+          </li>
+          
+          <li class="reveal" data-reveal-delay="3">
+            <b>Nothing leaves the building</b>
+            <span>There is no phone-home and no metering. A Loom install works with no route to the internet at all.</span>
+          </li>
+          
+        </ul>
+        
+      </div>
+      <div class="pr-split-art reveal">
+        
+
+<div class="pr-art pr-art-platform">
+
+  <p class="pr-plat-band">Open source · Apache 2.0 · runs on your hardware</p>
+
+  <div class="pr-plat-row pr-plat-core">
+    
+    
+    <div class="pr-plat-tile is-active">
+      <b>Loom</b>
+      <span class="pr-plat-role">Asset server</span>
+      <span class="pr-plat-note">API · storage · search · UI</span>
+      <span class="pr-plat-here">You are here<span class="sr-only"> — this page</span></span>
+    </div>
+    
+    
+    
+    <a class="pr-plat-tile" href="/cortex/">
+      <b>Cortex</b>
+      <span class="pr-plat-role">Processing engine</span>
+      <span class="pr-plat-note">45 node kinds · GPU-friendly</span>
+    </a>
+    
+    
+    
+    <a class="pr-plat-tile" href="/graph/">
+      <b>Graph</b>
+      <span class="pr-plat-role">Graph database</span>
+      <span class="pr-plat-note">Native code · openCypher</span>
+    </a>
+    
+    
+  </div>
+
+  
+  <div class="pr-plat-edges" aria-hidden="true">
+    <span class="pr-plat-edge"><i class="pr-plat-pip"></i></span>
+  </div>
+
+  <p class="pr-plat-band pr-plat-band-alt">Ways to run it</p>
+
+  <div class="pr-plat-row pr-plat-delivery">
+    <div class="pr-plat-tile pr-plat-tile-sm">
+      <b>Self-hosted</b>
+      <span class="pr-plat-note">Free, unmetered, air-gap capable</span>
+    </div>
+    
+    
+    <a class="pr-plat-tile pr-plat-tile-sm pr-plat-tile-com" href="/studio/">
+      <b>Studio</b>
+      <span class="pr-plat-note">Commercial edition · support</span>
+    </a>
+    
+    
+    
+    <a class="pr-plat-tile pr-plat-tile-sm pr-plat-tile-com" href="/cloud/">
+      <b>Cloud</b>
+      <span class="pr-plat-note">Hosted by us · in planning</span>
+    </a>
+    
+    
+  </div>
+
+  <p class="pr-art-foot">Loom is the only component the outside world talks to. Everything else registers with it.</p>
+</div>
+
+      </div>
+    </div>
+  </section>
+  
+
+  
+  
+  <section class="pr-section pr-capabilities" id="capabilities">
+    <div class="pr-wrap">
+      <div class="pr-section-head">
+        <p class="pr-eyebrow reveal">What it does</p>
+        <h2 class="pr-title reveal">An asset manager, not a file browser.</h2>
+        <p class="pr-lead reveal">The parts that make an archive searchable rather than merely stored.</p>
+      </div>
+      <div class="pr-cards">
+        
+        <article class="pr-card reveal" data-reveal-delay="0">
+          <i class="ti-layout-grid2" aria-hidden="true"></i>
+          <h3>Assets, libraries and people</h3>
+          <p>Libraries, collections, tags, ratings, reactions, users, groups and roles — with the person model that face clustering fills in as it goes.</p>
+          
+          <a class="pr-link" href="/docs/loom/features/">The entity model <span aria-hidden="true">&rarr;</span></a>
+          
+        </article>
+        
+        <article class="pr-card reveal" data-reveal-delay="1">
+          <i class="ti-search" aria-hidden="true"></i>
+          <h3>Search and vector indices</h3>
+          <p>Full-text search and nearest-neighbour search over embeddings, backed by Elasticsearch, Lucene or Qdrant, with tooling to inspect, reindex and resync each one.</p>
+          
+          <a class="pr-link" href="/docs/loom/search-indices/">Search indices <span aria-hidden="true">&rarr;</span></a>
+          
+        </article>
+        
+        <article class="pr-card reveal" data-reveal-delay="2">
+          <i class="ti-comments" aria-hidden="true"></i>
+          <h3>Chat and the AI agent</h3>
+          <p>A conversational assistant over your own library — sessions, skills, memory, and an optional sandbox where it can write and run code against what it finds.</p>
+          
+          <a class="pr-link" href="/docs/loom/chat/">Chat &amp; AI agent <span aria-hidden="true">&rarr;</span></a>
+          
+        </article>
+        
+        <article class="pr-card reveal" data-reveal-delay="3">
+          <i class="ti-share" aria-hidden="true"></i>
+          <h3>Pipelines and dispatch</h3>
+          <p>Author a graph in the editor, run it against a library, and watch each node&#39;s result come back — including breakpoints and a debugger for a run that went wrong.</p>
+          
+          <a class="pr-link" href="/docs/pipeline/">Pipeline mechanism <span aria-hidden="true">&rarr;</span></a>
+          
+        </article>
+        
+        <article class="pr-card reveal" data-reveal-delay="4">
+          <i class="ti-harddrive" aria-hidden="true"></i>
+          <h3>Binary storage</h3>
+          <p>Disk or S3-compatible object storage per library, content-addressed, with a report of how much space each kind of content is using and how full each backend is.</p>
+          
+          <a class="pr-link" href="/docs/loom/binary-storage/">Binary storage <span aria-hidden="true">&rarr;</span></a>
+          
+        </article>
+        
+        <article class="pr-card reveal" data-reveal-delay="5">
+          <i class="ti-shield" aria-hidden="true"></i>
+          <h3>Authentication and permissions</h3>
+          <p>JWT bearer tokens, optional OAuth2, API keys, and per-entity permissions expressed as roles and groups rather than as a flag on a user.</p>
+          
+          <a class="pr-link" href="/docs/loom/authentication/">Authentication <span aria-hidden="true">&rarr;</span></a>
+          
+        </article>
+        
+      </div>
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section class="pr-section pr-surfaces" id="surfaces">
+    
+    <div class="pr-bg-media" aria-hidden="true">
+      <img src="/images/scenery/grid-lights_hu_5c617c6cb92b1327.webp" alt="" loading="lazy">
+      <div class="pr-bg-veil"></div>
+    </div>
+    <div class="pr-wrap">
+      <div class="pr-section-head">
+        <p class="pr-eyebrow reveal">Ways in</p>
+        <h2 class="pr-title reveal">Six front doors to the same library.</h2>
+        <p class="pr-lead reveal">Every one of them is generated from the same model, so nothing is a second-class interface.</p>
+      </div>
+      <dl class="pr-surface-grid">
+        
+        <div class="pr-surface reveal" data-reveal-delay="0">
+          <dt>REST API</dt>
+          <dd>Full CRUD over every entity, with a published OpenAPI document and an explorer you can drive from the docs page.</dd>
+        </div>
+        
+        <div class="pr-surface reveal" data-reveal-delay="1">
+          <dt>GraphQL API</dt>
+          <dd>Nested queries over the asset model when one round trip should answer a whole screen. The schema and a GraphiQL explorer ship with the docs.</dd>
+        </div>
+        
+        <div class="pr-surface reveal" data-reveal-delay="2">
+          <dt>gRPC API</dt>
+          <dd>Binary RPC over HTTP/2 on its own port, for integrations that want a generated client.</dd>
+        </div>
+        
+        <div class="pr-surface reveal" data-reveal-delay="3">
+          <dt>MCP server</dt>
+          <dd>Connect Claude Desktop, an IDE or your own agent to the library over the Model Context Protocol.</dd>
+        </div>
+        
+        <div class="pr-surface reveal" data-reveal-delay="4">
+          <dt>Java &amp; Python clients</dt>
+          <dd>Typed clients for both, kept in step with the REST surface by a parity test rather than by hand.</dd>
+        </div>
+        
+        <div class="pr-surface reveal" data-reveal-delay="5">
+          <dt>Web UI, desktop and CLI</dt>
+          <dd>The same server, driven from a browser, a desktop build or a shell — including the pipeline editor and the debugger.</dd>
+        </div>
+        
+      </dl>
+    </div>
+  </section>
+  
+
+  
+  
+  <section class="pr-section pr-docs" id="documentation">
+    <div class="pr-wrap">
+      <div class="pr-section-head">
+        <p class="pr-eyebrow reveal">Where to next</p>
+        <h2 class="pr-title reveal">Run it, then wire it up.</h2>
+      </div>
+      <div class="pr-cards pr-cards-3">
+        
+        <a class="pr-doc-card reveal" data-reveal-delay="0" href="/docs/getting-started/">
+          <h3>Getting Started</h3>
+          <p>From a container and a database to a first library with a pipeline running against it.</p>
+          <span class="pr-doc-more">Start here <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        
+        <a class="pr-doc-card reveal" data-reveal-delay="1" href="/docs/loom/rest-api/">
+          <h3>REST API reference</h3>
+          <p>Every endpoint, its payloads and an explorer, generated from the server itself.</p>
+          <span class="pr-doc-more">Open the reference <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        
+        <a class="pr-doc-card reveal" data-reveal-delay="2" href="/docs/loom/configuration/">
+          <h3>Configuration</h3>
+          <p>The YAML file and every environment variable, including storage, search and the agent.</p>
+          <span class="pr-doc-more">Configure Loom <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        
+      </div>
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section class="pr-section pr-cta" id="next">
+    <div class="pr-bg-media" aria-hidden="true">
+      <img src="/images/scenery/neon-lines_hu_c3de8294acab7e8e.webp" alt="" loading="lazy">
+      <div class="pr-bg-veil"></div>
+    </div>
+    <div class="pr-wrap pr-cta-inner">
+      <p class="pr-eyebrow reveal">Loom</p>
+      <h2 class="pr-title reveal">It runs today.</h2>
+      <p class="pr-lead reveal">1.0.0 is not tagged and the interfaces can still move, but the demo container starts, seeds a library and gives you a UI to look at it with. That is the fastest way to find out whether this is what you want.</p>
+      <div class="pr-actions reveal">
+        
+        <a class="pr-btn pr-btn-primary"
+           href="/docs/getting-started/">Getting started</a>
+        
+        <a class="pr-btn pr-btn-ghost"
+           href="/tour/">See what it looks like</a>
+        
+        <a class="pr-btn pr-btn-ghost"
+           href="https://discord.gg/3Dy2SxKUtw" rel="noopener">Join the Discord</a>
+        
+      </div>
+      <p class="pr-cta-note reveal">MetaLoom is Apache 2.0 and stays that way. The commercial edition adds identity, storage and support around it — it takes nothing out.</p>
+    </div>
+  </section>
+  
+
+</main>
+
+
+
+<script src="/js/reveal.min.18964114a6d192251fbf48609c768ce23ee9ec216abaad0b28e5b41e5cd45f2c6912cdf62d5e82063eeccd507af1454b.js" integrity="sha384-GJZBFKbRkiUfv0hgnHaM4j7p7CFquq0LKOW0HlzUXyxpEs32LV6CBj7szVB68UVL" defer></script>
+
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/cloud/">MetaLoom Cloud</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/team/">The team</a></li>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.f4d88e76eab5c4787a2d81e09b37f8c6307f1aa875fb440de5362fca6b089c31bfd7473e3aa21c8ba22ae3cd0afcad15.js" integrity="sha384-9NiOduq1xHh6LYHgmzf4xjB/Gqh1&#43;0QN5TYvymsInDG/10c&#43;OqIci6Iq480K/K0V"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.88935d076ed57583385f6426bdce1b3c4916ece849648bacd00b28b726fd0df655a57caf5739f05fd5fc6f400897fc95.js" integrity="sha384-iJNdB27VdYM4X2Qmvc4bPEkW7OhJZIus0Asotyb9DfZVpXyvVznwX9X8b0AIl/yV" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>
