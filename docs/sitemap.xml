@@ -38,6 +38,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/deployment/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/lumen/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/legal/</loc>
   </url><url>
     <loc>https://metaloom.io/announcements/</loc>
@@ -170,6 +172,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/nodes/llm/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/lumen/concepts/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/cortex/maven-artifacts/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/loom/maven-artifacts/</loc>
@@ -183,6 +187,8 @@
     <loc>https://metaloom.io/cortex/</loc>
   </url><url>
     <loc>https://metaloom.io/loom/</loc>
+  </url><url>
+    <loc>https://metaloom.io/lumen/</loc>
   </url><url>
     <loc>https://metaloom.io/tour/</loc>
   </url><url>
@@ -222,6 +228,8 @@
   </url><url>
     <loc>https://metaloom.io/docs/rest/</loc>
   </url><url>
+    <loc>https://metaloom.io/docs/lumen/container/</loc>
+  </url><url>
     <loc>https://metaloom.io/docs/nodes/s3-sink/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/s3-source/</loc>
@@ -251,6 +259,8 @@
     <loc>https://metaloom.io/team/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/tts/</loc>
+  </url><url>
+    <loc>https://metaloom.io/docs/lumen/web-ui/</loc>
   </url><url>
     <loc>https://metaloom.io/docs/nodes/thumbnail/</loc>
   </url><url>

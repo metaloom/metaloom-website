@@ -132,6 +132,9 @@
 					
 					
 					
+					
+					
+					
 					<li class="nav-item nav-has-menu">
 						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
 							Products<span class="nav-caret" aria-hidden="true"></span>
@@ -181,6 +184,15 @@
 									<a class="nav-menu-link" href="/cloud">
 										<span class="nav-menu-name">MetaLoom // Cloud</span>
 										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/lumen">
+										<span class="nav-menu-name">MetaLoom // Lumen</span>
+										<span class="nav-menu-note">Spatial media engine — commercial</span>
 									</a>
 								</li>
 								
@@ -548,6 +560,15 @@
 		
 		<li>
 			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/lumen/">Lumen</a>
 			
 		</li>
 		
@@ -1568,6 +1589,91 @@ engine and delegated to registered Cortex workers — see <a href="../../pipelin
 </table>
 </div>
 <div class="sect2">
+<h3 id="_problem_reports">Problem Reports</h3>
+<div class="paragraph">
+<p><code>/api/v1/failure-reports</code> collects what users report as broken from the UI, joined to the server log
+by the trace ID of the request that failed.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 50.0001%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/failure-reports</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Submit a report. Only <code>action</code> is required</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/failure-reports</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List reports (paged)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/failure-reports/&lt;uuid&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load one report</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/failure-reports/&lt;uuid&gt;/screenshot</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Download the attached screenshot</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/failure-reports/&lt;uuid&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triage: <code>NEW</code>, <code>ACKNOWLEDGED</code> or <code>RESOLVED</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/failure-reports/&lt;uuid&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete a report and its screenshot</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Submitting a report requires authentication and no permission.</strong> That is deliberate: a permission to
+report a failure would, wherever it went ungranted, turn the one response to a breakage into a <code>403</code>.
+Reading, triaging and deleting need <code>READ_FAILURE_REPORT</code>, <code>UPDATE_FAILURE_REPORT</code> and
+<code>DELETE_FAILURE_REPORT</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Only <code>action</code> — what was being attempted, in your own vocabulary — is mandatory. Everything
+describing the failing request is optional, because failures that produced no response at all are
+worth reporting too:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  &#34;action&#34;: &#34;createPerson&#34;,
+  &#34;traceId&#34;: &#34;9f2c41ab7d0e4c6fa1b83e5d72c09148&#34;,
+  &#34;httpMethod&#34;: &#34;POST&#34;,
+  &#34;path&#34;: &#34;/api/v1/persons&#34;,
+  &#34;statusCode&#34;: 500,
+  &#34;errorMessage&#34;: &#34;Internal Server Error&#34;,
+  &#34;route&#34;: &#34;/detection&#34;,
+  &#34;text&#34;: &#34;I filled in the name and pressed Create. The dialog closed but the person is not there.&#34;,
+  &#34;screenshot&#34;: &#34;data:image/png;base64,...&#34;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A screenshot may be sent as a data URL or as bare base64, up to <strong>5 MB</strong> decoded, and must be a PNG,
+JPEG or WebP — the image type is determined from the bytes, not from what the request claims. An
+oversized image answers <code>413</code>. The <code>userAgent</code> recorded on a report is taken from the request headers
+rather than the body, so it reflects what the server observed.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_further_endpoints">Further Endpoints</h3>
 <div class="paragraph">
 <p>Additional endpoints exist for: <code>attachments</code>, <code>tasks</code>, <code>comments</code>, <code>reactions</code>,
@@ -1601,14 +1707,24 @@ only your own entries; another user’s notification answers <code>404</code>.</
 <h2 id="_error_responses">Error Responses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All errors return the HTTP status code plus a JSON body carrying a human readable <code>message</code>:</p>
+<p>All errors return the HTTP status code plus a JSON body carrying a human readable <code>message</code> and the
+<code>traceId</code> of the request:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  &#34;message&#34;: &#34;Cannot find asset with uuid &#39;abc&#39;&#34;
+  &#34;message&#34;: &#34;Cannot find asset with uuid &#39;abc&#39;&#34;,
+  &#34;traceId&#34;: &#34;9f2c41ab7d0e4c6fa1b83e5d72c09148&#34;
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><strong>Every</strong> response — successful or not — also carries the same value in an <code>X-Trace-Id</code> header, and the
+server writes it into the log line for the failure. Quote it when reporting a problem and the exact
+request can be found with certainty rather than by guessing from timestamps. If your client already
+has an identifier of its own, send it as <code>X-Trace-Id</code> and it will be used, provided it is at most 64
+characters of letters, digits, <code>-</code>, <code>_</code> or <code>.</code>; anything else is replaced with a freshly generated
+one.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

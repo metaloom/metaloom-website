@@ -450,6 +450,13 @@
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The LLM node sends asset metadata to a &lt;strong&gt;Large Language Model&lt;/strong&gt; and stores the model’s response as&#xA;enrichment — for example a classification, a set of suggested tags, or a description. Multiple prompts&#xA;can be configured, and &lt;strong&gt;each prompt adds its own output port&lt;/strong&gt;, so downstream nodes connect to the&#xA;one answer they care about rather than to the node as a whole.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Lumen Concepts</title>
+      <link>https://metaloom.io/docs/lumen/concepts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/lumen/concepts/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This page explains what happens between &amp;#34;here is a clip&amp;#34; and &amp;#34;here is a place you can search,&#xA;orbit and merge further captures into&amp;#34;. Nothing here requires operating the system; it is the&#xA;mental model the rest of the documentation builds on.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>Maven Artifacts</title>
       <link>https://metaloom.io/docs/cortex/maven-artifacts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -590,6 +597,13 @@
       <description>&lt;div class=&#34;admonitionblock tip&#34;&gt;&#xA;&lt;table&gt;&#xA;&lt;tbody&gt;&lt;tr&gt;&#xA;&lt;td class=&#34;icon&#34;&gt;&#xA;&lt;div class=&#34;title&#34;&gt;Tip&lt;/div&gt;&#xA;&lt;/td&gt;&#xA;&lt;td class=&#34;content&#34;&gt;&#xA;&lt;div class=&#34;title&#34;&gt;Try the example&lt;/div&gt;&#xA;&lt;a href=&#34;https://demo.metaloom.io/api/v1/demo/assets&#34; class=&#34;bare&#34;&gt;https://demo.metaloom.io/api/v1/demo/assets&lt;/a&gt;&#xA;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;sect1&#34;&gt;&#xA;&lt;h2 id=&#34;_api_endpoints&#34;&gt;API endpoints&lt;/h2&gt;&#xA;&lt;div class=&#34;sectionbody&#34;&gt;&#xA;&lt;table class=&#34;tableblock frame-all grid-all stretch&#34;&gt;&#xA;&lt;colgroup&gt;&#xA;&lt;col style=&#34;width: 50%;&#34;/&gt;&#xA;&lt;col style=&#34;width: 50%;&#34;/&gt;&#xA;&lt;/colgroup&gt;&#xA;&lt;thead&gt;&#xA;&lt;tr&gt;&#xA;&lt;th class=&#34;tableblock halign-left valign-top&#34;&gt;Description&lt;/th&gt;&#xA;&lt;th class=&#34;tableblock halign-left valign-top&#34;&gt;API endpoint&lt;/th&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/thead&gt;&#xA;&lt;tbody&gt;&#xA;&lt;tr&gt;&#xA;&lt;td class=&#34;tableblock halign-left valign-top&#34;&gt;&lt;p class=&#34;tableblock&#34;&gt;Get the asset with the given UUID.&lt;/p&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;tableblock halign-left valign-top&#34;&gt;&lt;p class=&#34;tableblock&#34;&gt;&lt;code&gt;&lt;code&gt;GET /api/v1/:projectName/assets/:assetUuid&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;&lt;/td&gt;&#xA;&lt;/tr&gt;&#xA;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;div class=&#34;listingblock&#34;&gt;&#xA;&lt;div class=&#34;content&#34;&gt;&#xA;&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{&#xA;&#x9;&amp;#34;uuid&amp;#34;: &amp;#34;b5f26d5f-4ab0-4f99-a2f1-7be9f20e7a15&amp;#34;,&#xA;&#x9;&amp;#34;filename&amp;#34;: &amp;#34;sample.mp4&amp;#34;&#xA;}&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
+      <title>Running Lumen</title>
+      <link>https://metaloom.io/docs/lumen/container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/lumen/container/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Lumen ships as a single container image that carries the server, the reconstruction pipeline and&#xA;the web console. The only host requirements are a container engine (Docker or Podman), an NVIDIA&#xA;GPU and the NVIDIA container toolkit.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
       <title>S3 Sink</title>
       <link>https://metaloom.io/docs/nodes/s3-sink/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -679,6 +693,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://metaloom.io/docs/nodes/tts/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The TTS node &lt;strong&gt;generates narration audio from text&lt;/strong&gt;. Unlike the analysis nodes, which describe a&#xA;property of the media itself, TTS has a single &lt;code&gt;text&lt;/code&gt; input port that accepts any text type — connect&#xA;an &lt;a href=&#34;../llm/&#34;&gt;LLM&lt;/a&gt; summary, a &lt;a href=&#34;../captioning/&#34;&gt;caption&lt;/a&gt;, or a translated&#xA;&lt;a href=&#34;../whisper/&#34;&gt;transcript&lt;/a&gt; to it — and synthesizes speech, attaching the audio to the asset.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>The Lumen Web Console</title>
+      <link>https://metaloom.io/docs/lumen/web-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/lumen/web-ui/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The web console is bundled into the Lumen server itself — one process, no separate deployment. It&#xA;is deliberately transparent: every panel shows not just a result but the machinery behind it — the&#xA;vector space that was searched, the admission threshold, where each candidate fell relative to it —&#xA;so an operator can tell a correct &amp;#34;no match&amp;#34; from a broken one.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Thumbnail</title>

@@ -126,6 +126,9 @@
 					
 					
 					
+					
+					
+					
 					<li class="nav-item nav-has-menu">
 						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
 							Products<span class="nav-caret" aria-hidden="true"></span>
@@ -175,6 +178,15 @@
 									<a class="nav-menu-link" href="/cloud">
 										<span class="nav-menu-name">MetaLoom // Cloud</span>
 										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/lumen">
+										<span class="nav-menu-name">MetaLoom // Lumen</span>
+										<span class="nav-menu-note">Spatial media engine — commercial</span>
 									</a>
 								</li>
 								
@@ -622,6 +634,15 @@
 		
 		
 		<li>
+			<a href="/docs/lumen/">Lumen</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
 			<a href="/docs/legal/">Legal &amp; Licensing</a>
 			
 		</li>
@@ -702,7 +723,10 @@ licensed and may therefore be used commercially. Both speak the same contract �
 <div class="title">Figure 1. The node’s settings in the pipeline editor</div>
 </div>
 <div class="paragraph">
-<p>Set these in the panel above, or in the node’s <code>options</code> block in a pipeline definition:</p>
+<p>Set these in the panel above, or in the node’s <code>options</code> block in a pipeline definition. The
+result-affecting options (<code>mode</code>, <code>prompt</code>, <code>width</code>/<code>height</code>, <code>strength</code>, <code>steps</code>, <code>seed</code>) apply per
+node instance, so two <code>imagegen</code> nodes in one pipeline can render two different prompts side by
+side; <code>host</code>/<code>port</code> are worker settings:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

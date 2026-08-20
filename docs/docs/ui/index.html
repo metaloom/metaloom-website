@@ -126,6 +126,9 @@
 					
 					
 					
+					
+					
+					
 					<li class="nav-item nav-has-menu">
 						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
 							Products<span class="nav-caret" aria-hidden="true"></span>
@@ -175,6 +178,15 @@
 									<a class="nav-menu-link" href="/cloud">
 										<span class="nav-menu-name">MetaLoom // Cloud</span>
 										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/lumen">
+										<span class="nav-menu-name">MetaLoom // Lumen</span>
+										<span class="nav-menu-note">Spatial media engine — commercial</span>
 									</a>
 								</li>
 								
@@ -451,6 +463,15 @@
 		
 		<li>
 			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/lumen/">Lumen</a>
 			
 		</li>
 		
@@ -1672,6 +1693,53 @@ but no group grants nothing.</p>
 <div class="imageblock img-fluid">
 <div class="content">
 <img src="api-keys.png" alt="API key management"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_problem_reports">Problem Reports</h3>
+<div class="paragraph">
+<p><strong>Problem reports</strong> is the inbox for everything users have reported as broken.</p>
+</div>
+<div class="paragraph">
+<p>When something fails anywhere in the UI, the message that appears carries a <strong>Report</strong> button. Pressing
+it opens a short form that already knows what was being attempted, which request failed, and what the
+server answered. The person reporting only has to add the part the server cannot know: what they
+expected to happen instead. They can also attach a screenshot — the browser asks which window or tab
+to share, the captured image is shown back before anything is sent, and it can be enlarged to check
+it before submitting.</p>
+</div>
+<div class="paragraph">
+<p>Every report carries a <strong>trace ID</strong>. This is the single most useful field on the screen: the same
+identifier appears in the Loom server log next to the failure, so a report and its stack trace can be
+matched with certainty rather than by guessing from timestamps. It is also shown to the person
+reporting, with a copy button, so they can quote it in a support ticket without submitting anything
+at all.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Anybody signed in can submit a report.</strong> Reporting a failure needs no permission at all — deliberately,
+because the users most likely to run into a problem are often the ones with the fewest permissions.</p>
+</div>
+<div class="paragraph">
+<p><strong>Reading the inbox does need one</strong>: <code>READ_FAILURE_REPORT</code>, granted to the administrator role by
+default. Reports can carry a screenshot of whatever was on somebody’s screen, so seeing them is a
+separate decision. <code>UPDATE_FAILURE_REPORT</code> allows triage (<strong>New</strong>, <strong>Acknowledged</strong>, <strong>Resolved</strong>) and
+<code>DELETE_FAILURE_REPORT</code> allows removing a report and its screenshot.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Screenshots are stored in the database alongside the report rather than in a storage pool. That is
+deliberate: an unreachable storage backend is one of the things worth reporting, and a report that
+had to write to storage first would fail exactly when it was most needed.</p>
 </div>
 </div>
 </div>

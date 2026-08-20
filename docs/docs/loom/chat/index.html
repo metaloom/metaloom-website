@@ -126,6 +126,9 @@
 					
 					
 					
+					
+					
+					
 					<li class="nav-item nav-has-menu">
 						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
 							Products<span class="nav-caret" aria-hidden="true"></span>
@@ -175,6 +178,15 @@
 									<a class="nav-menu-link" href="/cloud">
 										<span class="nav-menu-name">MetaLoom // Cloud</span>
 										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/lumen">
+										<span class="nav-menu-name">MetaLoom // Lumen</span>
+										<span class="nav-menu-note">Spatial media engine — commercial</span>
 									</a>
 								</li>
 								
@@ -550,6 +562,15 @@
 		
 		
 		<li>
+			<a href="/docs/lumen/">Lumen</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
 			<a href="/docs/legal/">Legal &amp; Licensing</a>
 			
 		</li>
@@ -619,7 +640,7 @@ the results back to the model.</p>
 retry — a run is resilient to a single failing tool.</p>
 </div>
 <div class="paragraph">
-<p>Built-in domain tools include <code>search_assets</code>, <code>get_asset</code>, <code>search_transcript</code>, <code>list_collections</code>,
+<p>Built-in domain tools include <code>find_assets</code>, <code>search_assets</code>, <code>get_asset</code>, <code>search_transcript</code>, <code>list_collections</code>,
 <code>asset_statistics</code>, <code>list_pipelines</code> and <code>get_pipeline</code>. Results carry structured <strong>references</strong>
 (asset · collection · task · comment · pipeline · annotation), which the UI renders as clickable
 chips inside the conversation — and, for some results, a <strong>diagram</strong> the chat draws inline (see
@@ -664,7 +685,78 @@ chips inside the conversation — and, for some results, a <strong>diagram</stro
 </div>
 </div>
 <div class="sect1">
-<h2 id="pipeline-diagrams">Building a Pipeline by Asking</h2>
+<h2 id="pipeline-diagrams">Finding Assets by Asking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ask for what you are looking for in the way you would ask a colleague, and the assistant searches the
+catalogue for it:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>&#34;Find me the assets Emily uploaded yesterday for the campaign project&#34;</strong></p>
+</li>
+<li>
+<p><strong>&#34;Which videos mention the harbour?&#34;</strong></p>
+</li>
+<li>
+<p><strong>&#34;Show me the images tagged approved from last week&#34;</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You do not need to know anyone’s user id, any project id, or today’s date. Names are looked up as
+part of the search: <strong>&#34;Emily&#34;</strong> becomes the right person, <strong>&#34;the campaign project&#34;</strong> the right project,
+<strong>&#34;yesterday&#34;</strong> the right day in your calendar. The assistant tells you what it searched for — <strong>&#34;created
+by Emily Editor, since yesterday, in Campaign&#34;</strong> — so you can see whether it understood you before you
+trust the list.</p>
+</div>
+<div class="paragraph">
+<p>A question does not need search words at all. <strong>&#34;Everything Emily added yesterday&#34;</strong> has none — it is
+made entirely of who and when — and that works exactly as well as a question with a keyword in it.</p>
+</div>
+<div class="paragraph">
+<p>What is searched is everything Loom knows about a file, not just its name: transcripts, text
+extracted from documents, captions, detected objects and tags are all included. So <strong>&#34;the video where
+they talk about the harbour&#34;</strong> finds it even though &#34;harbour&#34; appears nowhere in the filename.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Ask for the timecode — <strong>&#34;where in that video?&#34;</strong> — and the assistant answers with the position in
+the clip rather than only the file.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_when_it_cannot_find_a_name">When It Cannot Find a Name</h3>
+<div class="paragraph">
+<p>If nobody matches the name you used, the assistant says so and stops. It does not quietly search
+without that part of your question, because a list of <strong>everyone’s</strong> files presented as one person’s
+would be worse than no answer. If two people match, it asks which one you meant.</p>
+</div>
+<div class="paragraph">
+<p>The same applies to an empty result: <strong>&#34;no assets matched&#34;</strong> names the filters it used, so you can tell
+&#34;there are none&#34; apart from &#34;the search was narrower than you meant&#34;.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_permissions">Permissions</h3>
+<div class="paragraph">
+<p>Searching the catalogue this way needs the ordinary <strong>Read search</strong> and <strong>Read assets</strong> permissions —
+the same two that let a person use the search screen. Results are limited to what the account asking
+is allowed to see; the assistant cannot look past its own permissions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_a_pipeline_by_asking">Building a Pipeline by Asking</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The assistant can do more than describe a pipeline — it can build one. Ask for what you want
@@ -697,7 +789,7 @@ diagram in the conversation (see below), which is the quickest way to check that
 </tbody></table>
 </div>
 <div class="sect2">
-<h3 id="_permissions">Permissions</h3>
+<h3 id="_permissions_2">Permissions</h3>
 <div class="paragraph">
 <p>Letting the assistant write pipelines is granted separately from letting a person edit them in the
 pipeline editor, so you can allow one without the other. Three permissions cover it, all in the

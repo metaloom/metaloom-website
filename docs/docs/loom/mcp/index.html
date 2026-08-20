@@ -126,6 +126,9 @@
 					
 					
 					
+					
+					
+					
 					<li class="nav-item nav-has-menu">
 						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
 							Products<span class="nav-caret" aria-hidden="true"></span>
@@ -175,6 +178,15 @@
 									<a class="nav-menu-link" href="/cloud">
 										<span class="nav-menu-name">MetaLoom // Cloud</span>
 										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/lumen">
+										<span class="nav-menu-name">MetaLoom // Lumen</span>
+										<span class="nav-menu-note">Spatial media engine — commercial</span>
 									</a>
 								</li>
 								
@@ -550,6 +562,15 @@
 		
 		
 		<li>
+			<a href="/docs/lumen/">Lumen</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
 			<a href="/docs/legal/">Legal &amp; Licensing</a>
 			
 		</li>
@@ -873,7 +894,7 @@ assets are in the library?&#34;</strong>, which the assistant answers with <code
 <h2 id="_what_the_tools_do">What the Tools Do</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Twenty-one tools in total. The permission column is the one your role must grant for the call to
+<p>Twenty-two tools in total. The permission column is the one your role must grant for the call to
 succeed; where two are listed, <strong>both</strong> are required. Roles are edited on the ACL screens — see
 <a href="../features/">Features</a>.</p>
 </div>
@@ -899,6 +920,16 @@ succeed; where two are listed, <strong>both</strong> are required. Roles are edi
   extracted document text, captions, detected labels and tags; results can be narrowed by MIME type,
   library or tag, and paged through.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_ASSET</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find_assets</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search the library by the whole question rather than by a term alone: what the file contains, who
+  created it, when, and which project, library, collection or tags it belongs to. Names and dates are
+  given as words — <strong>Emily</strong>, <strong>the campaign project</strong>, <strong>yesterday</strong> — and are resolved on the server, so a
+  caller never needs an id or today’s date. A name that matches nothing, or more than one thing, stops
+  the call and says so rather than silently searching wider. A search term is optional: filters on
+  their own are a valid question.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>READ_SEARCH</code> + <code>READ_ASSET</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>get_asset</code></p></td>

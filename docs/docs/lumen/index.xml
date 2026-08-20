@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lumen on MetaLoom</title>
+    <link>https://metaloom.io/docs/lumen/</link>
+    <description>Recent content in Lumen on MetaLoom</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://metaloom.io/docs/lumen/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lumen Concepts</title>
+      <link>https://metaloom.io/docs/lumen/concepts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/lumen/concepts/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;This page explains what happens between &amp;#34;here is a clip&amp;#34; and &amp;#34;here is a place you can search,&#xA;orbit and merge further captures into&amp;#34;. Nothing here requires operating the system; it is the&#xA;mental model the rest of the documentation builds on.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Running Lumen</title>
+      <link>https://metaloom.io/docs/lumen/container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/lumen/container/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;Lumen ships as a single container image that carries the server, the reconstruction pipeline and&#xA;the web console. The only host requirements are a container engine (Docker or Podman), an NVIDIA&#xA;GPU and the NVIDIA container toolkit.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>The Lumen Web Console</title>
+      <link>https://metaloom.io/docs/lumen/web-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://metaloom.io/docs/lumen/web-ui/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;&#xA;&lt;p&gt;The web console is bundled into the Lumen server itself — one process, no separate deployment. It&#xA;is deliberately transparent: every panel shows not just a result but the machinery behind it — the&#xA;vector space that was searched, the admission threshold, where each candidate fell relative to it —&#xA;so an operator can tell a correct &amp;#34;no match&amp;#34; from a broken one.&lt;/p&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

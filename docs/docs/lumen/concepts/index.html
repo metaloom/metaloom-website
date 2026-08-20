@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	
+	<title>Lumen Concepts · Lumen | MetaLoom</title>
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="description" content="How a video becomes a navigable scene: the frame gate, pose recovery and optimisation, static/dynamic decomposition — and the versioned store that keeps and serves the result.">
+	
+	<meta name="author" content="Jotschi">
+<link rel="canonical" href="https://metaloom.io/docs/lumen/concepts/">
+
+    <meta property="og:site_name" content="MetaLoom">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lumen Concepts · Lumen | MetaLoom">
+    <meta property="og:url" content="https://metaloom.io/docs/lumen/concepts/">
+    <meta property="og:description" content="How a video becomes a navigable scene: the frame gate, pose recovery and optimisation, static/dynamic decomposition — and the versioned store that keeps and serves the result.">
+    <meta property="og:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta property="og:image:alt" content="Lumen Concepts">
+    <meta property="og:locale" content="en_US">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metaloom">
+    <meta name="twitter:title" content="Lumen Concepts · Lumen | MetaLoom">
+    <meta name="twitter:description" content="How a video becomes a navigable scene: the frame gate, pose recovery and optimisation, static/dynamic decomposition — and the versioned store that keeps and serves the result.">
+    <meta name="twitter:image" content="https://metaloom.io/images/og-default.jpg">
+    <meta name="twitter:image:alt" content="Lumen Concepts">
+
+
+	<meta name="generator" content="Hugo 0.161.1">
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="/plugins/fontawesome5/css/all.min.css">
+	
+	<link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+	<link rel="stylesheet" href="/plugins/toc/bootstrap-toc.min.css">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="/css/main.min.css" media="screen">
+
+	
+	
+
+	
+	
+
+	
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+
+
+<script>
+  document.documentElement.classList.add('docs-search-js');
+  setTimeout(function () {
+    if (!window.__docsSearchReady) document.documentElement.classList.remove('docs-search-js');
+  }, 2500);
+</script>
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="/" aria-label="MetaLoom">
+				
+				<img src="/images/logo_word_big.svg" alt="MetaLoom" height="34">
+				
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+
+			
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li class="nav-item nav-has-menu">
+						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-products">
+							Products<span class="nav-caret" aria-hidden="true"></span>
+						</button>
+						<div class="nav-menu" id="nav-menu-products">
+							<ul class="nav-menu-list">
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/loom">
+										<span class="nav-menu-name">MetaLoom // Loom</span>
+										<span class="nav-menu-note">The asset server — APIs, storage, search, UI</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/cortex">
+										<span class="nav-menu-name">MetaLoom // Cortex</span>
+										<span class="nav-menu-note">The processing engine and its 45 node kinds</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/graph">
+										<span class="nav-menu-name">MetaLoom // Graph</span>
+										<span class="nav-menu-note">Native-code graph database for Java</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/studio">
+										<span class="nav-menu-name">MetaLoom // Studio</span>
+										<span class="nav-menu-note">Self-hosted commercial edition</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/cloud">
+										<span class="nav-menu-name">MetaLoom // Cloud</span>
+										<span class="nav-menu-note">Hosted MetaLoom — in planning</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/lumen">
+										<span class="nav-menu-name">MetaLoom // Lumen</span>
+										<span class="nav-menu-note">Spatial media engine — commercial</span>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tour">Tour</a>
+					</li>
+					
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/features">Features</a>
+					</li>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li class="nav-item nav-has-menu is-active">
+						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-docs">
+							Docs<span class="nav-caret" aria-hidden="true"></span>
+						</button>
+						<div class="nav-menu" id="nav-menu-docs">
+							<ul class="nav-menu-list">
+								
+								
+								
+								<li>
+									<a class="nav-menu-link is-current" aria-current="page" href="/docs">
+										<span class="nav-menu-name">All documentation</span>
+										<span class="nav-menu-note">Reference, playbooks and the node catalogue</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/docs/getting-started">
+										<span class="nav-menu-name">Getting Started</span>
+										<span class="nav-menu-note">From a container to a first pipeline</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/pipeline-editor">
+										<span class="nav-menu-name">Pipeline Editor</span>
+										<span class="nav-menu-note">Build and simulate a graph in the browser</span>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li class="nav-item nav-has-menu">
+						<button class="nav-link nav-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu-blog">
+							Blog<span class="nav-caret" aria-hidden="true"></span>
+						</button>
+						<div class="nav-menu" id="nav-menu-blog">
+							<ul class="nav-menu-list">
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/blog">
+										<span class="nav-menu-name">All posts</span>
+										<span class="nav-menu-note">Design notes from the build log</span>
+									</a>
+								</li>
+								
+								
+								
+								<li>
+									<a class="nav-menu-link" href="/announcements">
+										<span class="nav-menu-name">Announcements</span>
+										<span class="nav-menu-note">Releases and what is in them</span>
+									</a>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+					
+					
+					
+					
+					
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/team">Team</a>
+					</li>
+					
+					
+				</ul>
+
+				
+
+
+<form class="docs-search docs-search-nav" data-docs-search role="search" action="">
+	<label class="sr-only" for="docs-search-nav">Search the documentation</label>
+	<input type="search" id="docs-search-nav" class="docs-search-input" placeholder="Search the docs…">
+	<span class="docs-search-hint" aria-hidden="true">/</span>
+	
+	<button type="button" class="docs-search-close" aria-label="Close search">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</form>
+
+
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+	<div class="container">
+		<ol class="breadcrumb-trail">
+			<li class="breadcrumb-crumb">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/docs/">Documentation</a>
+			</li>
+			<li class="breadcrumb-crumb">
+				<a href="/docs/lumen/">Lumen</a>
+			</li>
+			<li class="breadcrumb-crumb breadcrumb-current" aria-current="page">Lumen Concepts</li>
+		</ol>
+	</div>
+</nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://metaloom.io/","name":"Home","position":1},{"@type":"ListItem","item":"https://metaloom.io/docs/","name":"Documentation","position":2},{"@type":"ListItem","item":"https://metaloom.io/docs/lumen/","name":"Lumen","position":3},{"@type":"ListItem","item":"https://metaloom.io/docs/lumen/concepts/","name":"Lumen Concepts","position":4}]}</script>
+
+
+<section class="section docs-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="docs-sidebar toc-sticky-top">
+          <div class="docs-sidebar-title">On this page</div>
+          <nav id="toc"></nav>
+          
+
+
+
+
+
+	
+	
+	
+
+
+<nav class="docs-topics" aria-label="Documentation">
+	<div class="docs-sidebar-title">Documentation</div>
+	<ul>
+		
+		
+		
+		
+		<li>
+			<a href="/docs/getting-started/">Getting Started</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/pipeline/">Pipeline Mechanism</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/nodes/">Nodes</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/operation/">Operation</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/loom/">Loom</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cortex/">Cortex</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/ui/">Loom UI</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/playbooks/">Playbooks</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/cli/">Command Line</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/deployment/">Container Images</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/lumen/" class="is-current">Lumen</a>
+			
+			<ul class="docs-subtopics">
+				
+				<li>
+					<a href="/docs/lumen/concepts/" class="is-current" aria-current="page">Lumen Concepts</a>
+				</li>
+				
+				<li>
+					<a href="/docs/lumen/container/">Running Lumen</a>
+				</li>
+				
+				<li>
+					<a href="/docs/lumen/web-ui/">The Lumen Web Console</a>
+				</li>
+				
+			</ul>
+			
+		</li>
+		
+		
+		
+		
+		
+		<li>
+			<a href="/docs/legal/">Legal &amp; Licensing</a>
+			
+		</li>
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+</nav>
+
+
+        </div>
+      </div>
+      <div class="col-lg-9">
+        
+        <header class="page-head">
+          <h1>Lumen Concepts</h1>
+          <p class="page-lead">How a video becomes a navigable scene: the frame gate, pose recovery and optimisation, static/dynamic decomposition — and the versioned store that keeps and serves the result.</p>
+        </header>
+        <div class="post-single-content docs-main-content">
+          <div class="paragraph">
+<p>This page explains what happens between &#34;here is a clip&#34; and &#34;here is a place you can search,
+orbit and merge further captures into&#34;. Nothing here requires operating the system; it is the
+mental model the rest of the documentation builds on.</p>
+</div>
+<div class="sect1">
+<h2 id="_from_video_to_a_scene">From video to a scene</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Decode and gate.</strong> Frames are decoded by the GPU’s hardware video engine directly into GPU
+memory — no round trip through the CPU. Before anything is copied further, a <strong>frame gate</strong> scores
+every frame for sharpness and exposure on the decoder’s own output surface. Blurred or badly
+exposed frames are rejected immediately. The gate is not cosmetic: everything downstream grows
+faster than linearly with frame count, and a bad frame that survives contributes wrong evidence to
+the pose solve — so a frame rejected early is worth many rejected late.</p>
+</div>
+<div class="paragraph">
+<p><strong>Pose recovery.</strong> The kept frames go through structure-from-motion, which recovers where the
+camera stood and how it was oriented for every frame, together with a sparse first sketch of the
+scene’s geometry.</p>
+</div>
+<div class="paragraph">
+<p><strong>Optimisation.</strong> A differentiable renderer then trains the scene: millions of anisotropic 3D
+Gaussian primitives are adjusted, step after step, until rendering them from the recovered camera
+poses reproduces the footage. A held-out set of frames is never trained on, so the reported
+reconstruction quality measures generalisation rather than memorisation. A typical scene trains
+in minutes on a single modern GPU and carries hundreds of thousands to millions of primitives.</p>
+</div>
+<div class="paragraph">
+<p><strong>Commit.</strong> The finished primitives are quantised into a compact fixed-size record and committed
+to the scene’s log in the store. Captures queue behind a single GPU worker — reconstruction is
+minutes of exclusive GPU work, so concurrent submissions wait rather than collide.</p>
+</div>
+<div class="imageblock img-fluid">
+<div class="content">
+<img src="how-it-works.png" alt="The How it works tab listing each pipeline stage with its evidence"/>
+</div>
+<div class="title">Figure 1. The console’s pipeline view — every stage with the measurement behind it</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decomposition">Decomposition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A capture of a real place mixes things that should not share a fate: the room itself, the people
+moving through it, and reconstruction fill that belongs to neither. Lumen separates a scene into
+<strong>branches</strong> — static structure, dynamic content and generated fill — so the permanent geometry of
+a place can be stored, compared and merged independently of whatever happened to be moving through
+it during one visit. Primitives can additionally be labelled by semantic class, so a scene can be
+taken apart by <strong>what</strong> things are, not only by where they are.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_store">The store</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Scenes are kept the way a database keeps rows, not the way a filesystem keeps exports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A write-ahead log of quantised primitives.</strong> Every primitive is a small fixed-size record;
+every change is an append. The full history of a scene is replayable, and any scene can be read
+<strong>as of</strong> any commit in its past — time travel is a read parameter, not a restore job.</p>
+</li>
+<li>
+<p><strong>Spatial ordering.</strong> Primitives are stored along a space-filling curve, so the primitives that
+are near each other in the world are near each other on disk, and a spatial slice of a scene is
+a short sequential read instead of a full scan.</p>
+</li>
+<li>
+<p><strong>Compaction.</strong> The log holds every version ever written; immutable, checksummed segments hold
+the live state. Compaction keeps the two within a constant factor of each other — measured on a
+real scene it brought write amplification from 44× down to 1.1×, and a full-scene read from
+seconds of log replay to around a hundred milliseconds.</p>
+</li>
+<li>
+<p><strong>Level-of-detail pyramid.</strong> Coarser levels merge primitives while conserving their optical
+mass, so a distant or bandwidth-constrained reader gets a faithful sketch instead of a truncated
+scene.</p>
+</li>
+<li>
+<p><strong>Published tiers.</strong> A scene advances through named quality rungs — a fast preview first, the
+converged result later. A published tier is a copy, not a bookmark: it stays readable in one
+sequential read regardless of what compaction later does to the log.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retrieval_and_the_refusal_that_makes_it_honest">Retrieval, and the refusal that makes it honest</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every scene is indexed by descriptors computed from its gated keyframes and from rendered views,
+in a joint image-text embedding space. That gives four ways in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Text → place.</strong> Describe a place in words; scenes are ranked by similarity, and the admission
+threshold is calibrated against measured score distributions — so a place the corpus does not
+contain is <strong>refused</strong>, with the score that refused it, rather than answered with the closest
+wrong scene.</p>
+</li>
+<li>
+<p><strong>Photo → place.</strong> A photograph finds the scene it was taken in.</p>
+</li>
+<li>
+<p><strong>Scene → words.</strong> A stored scene is rendered from the viewpoints its capture actually used and
+described by a vision-language model — the description comes from the reconstruction, not from
+the original footage.</p>
+</li>
+<li>
+<p><strong>Capture → identity.</strong> When a new capture claims to show a known venue, the claim is checked
+<strong>geometrically</strong>: image pairs must verify structurally, not merely look similar. Only a verified
+capture may merge into a venue’s scene; an unverified one is quarantined with its evidence.
+Merging is what lets many independent visits — different people, different days — fuse into one
+place that localises better than any single capture.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="docs-foot">
+          <p>Looking for something else?</p>
+          <div class="docs-foot-actions">
+            <a class="ml-btn ml-btn-primary" href="/docs/">All documentation</a>
+            <a class="ml-btn ml-btn-ghost" href="/features/">Feature overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div><!-- Footer -->
+
+<footer id="footer" class="site-footer">
+	<div class="container">
+
+		<div class="row site-footer-main">
+			<div class="col-lg-4 col-md-12 site-footer-brand">
+				<a href="/" class="site-footer-logo">
+					<img src="/images/logo_word_big.svg" alt="MetaLoom" height="38" />
+				</a>
+				<p class="site-footer-tagline">Open source media asset management. It transcribes, detects, describes and indexes your media — on hardware you control.</p>
+				<a class="site-footer-status" href="/announcements/metaloom-1-0-0/">
+					<span class="site-footer-status-dot" aria-hidden="true"></span>1.0.0 — not released yet
+				</a>
+			</div>
+
+			<nav class="col-lg-2 col-md-4 col-6 site-footer-col" aria-label="Explore">
+				<h2 data-toc-skip>Explore</h2>
+				<ul>
+					<li><a href="/tour/">Product tour</a></li>
+					<li><a href="/studio/">MetaLoom Studio</a></li>
+					<li><a href="/cloud/">MetaLoom Cloud</a></li>
+					<li><a href="/features/">Features</a></li>
+					<li><a href="/announcements/">Announcements</a></li>
+					<li><a href="/blog/">Blog</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-6 site-footer-col" aria-label="Documentation">
+				<h2 data-toc-skip>Documentation</h2>
+				<ul>
+					<li><a href="/docs/getting-started/">Getting started</a></li>
+					<li><a href="/docs/nodes/">Processing nodes</a></li>
+					<li><a href="/docs/loom/rest-api/">REST API</a></li>
+					<li><a href="/docs/deployment/">Container images</a></li>
+					<li><a href="/docs/cli/">Command line</a></li>
+				</ul>
+			</nav>
+
+			<nav class="col-lg-3 col-md-4 col-12 site-footer-col" aria-label="Project">
+				<h2 data-toc-skip>Project</h2>
+				<ul>
+					<li><a href="/team/">The team</a></li>
+					<li><a href="/docs/legal/">Legal &amp; Licensing</a></li>
+					<li><a href="/docs/legal/model-licenses/">Model Licenses</a></li>
+					<li><a href="/docs/legal/ai-disclosure/">AI Disclosure</a></li>
+					<li><a href="/docs/legal/impressum/">Impressum</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="site-footer-bottom">
+			<p class="site-footer-copy">
+				© 2021–2026 Johannes Schüth · Vienna, Austria ·
+				<a href="/docs/legal/">Apache&nbsp;2.0</a>
+			</p>
+			<ul class="site-footer-social list-inline">
+				
+				<li class="list-inline-item">
+					<a href="https://discord.gg/3Dy2SxKUtw" aria-label="Discord" rel="noopener">
+						<i class="fab fa-discord" aria-hidden="true"></i><span>Discord</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="https://github.com/metaloom" aria-label="GitHub" rel="noopener">
+						<i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span>
+					</a>
+				</li>
+				
+				<li class="list-inline-item">
+					<a href="mailto:hello@metaloom.io" aria-label="hello@metaloom.io">
+						<i class="ti-email" aria-hidden="true"></i><span>hello@metaloom.io</span>
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="/plugins/toc/bootstrap-toc.min.js"></script>
+
+<script src="/plugins/toc/toc.js"></script>
+
+<script src="/plugins/nodeviz/nodeviz.js"></script>
+
+<script src="/plugins/detectionplayer/detectionplayer.js"></script>
+
+
+
+<!-- Page JS Plugins -->
+
+
+<!-- Main Script -->
+
+<script src="/js/script.min.f4d88e76eab5c4787a2d81e09b37f8c6307f1aa875fb440de5362fca6b089c31bfd7473e3aa21c8ba22ae3cd0afcad15.js" integrity="sha384-9NiOduq1xHh6LYHgmzf4xjB/Gqh1&#43;0QN5TYvymsInDG/10c&#43;OqIci6Iq480K/K0V"></script>
+
+<!-- Documentation Search -->
+
+
+<script src="/js/docs-search.min.88935d076ed57583385f6426bdce1b3c4916ece849648bacd00b28b726fd0df655a57caf5739f05fd5fc6f400897fc95.js" integrity="sha384-iJNdB27VdYM4X2Qmvc4bPEkW7OhJZIus0Asotyb9DfZVpXyvVznwX9X8b0AIl/yV" defer
+	data-search-index-url="/search/docs-index.json"
+	data-search-vectors-url="/search/docs-vectors.bin"
+	data-search-model-url="/plugins/ternlight/tern_engine.js"
+	data-search-wasm-url="/plugins/ternlight/tern_engine_bg.wasm"></script>
+
+
+<!-- Highlight Script -->
+<link rel="stylesheet" href="/plugins/highlight/styles/obsidian.css">
+<script src="/plugins/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+
+
+
+</body>
+
+</html>
